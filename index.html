@@ -2444,7 +2444,7 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 <script>
 /* About (desktop): the block fits the screen below the header; "About me" sits on the same top line as the name */
 (()=>{const sec=document.getElementById('about'),hd=document.querySelector('.header'),name=document.querySelector('.ab2__head').firstElementChild,ttl=document.querySelector('.ab2__title'),body=document.querySelector('.ab2__body');if(!sec||!ttl)return;
-  const cap=e=>{let y=0,n=e;while(n&&n!==sec){y+=n.offsetTop;n=n.offsetParent}const c=getComputedStyle(e),fs=parseFloat(c.fontSize),lh=parseFloat(c.lineHeight)||fs*1.2;return y+parseFloat(c.paddingTop)+(lh-fs*.68)/2};  // layout position, unaffected by reveal transforms
+  const cap=e=>{let y=0,n=e;while(n&&n!==sec){y+=n.offsetTop;n=n.offsetParent}const c=getComputedStyle(e),fs=parseFloat(c.fontSize),lh=parseFloat(c.lineHeight)||fs*1.2;const x=(cap.cx||(cap.cx=document.createElement('canvas').getContext('2d')));x.font=c.fontStyle+' '+c.fontWeight+' '+c.fontSize+' '+c.fontFamily;const m=x.measureText('H');const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent;return y+parseFloat(c.paddingTop)+(lh-(fa+fd))/2+fa-m.actualBoundingBoxAscent};  // exact top of the capitals  // layout position, unaffected by reveal transforms
   const fit=()=>{if(innerWidth<=900){sec.style.removeProperty('--hdr');body.style.paddingTop='';return}
     sec.style.setProperty('--hdr',hd.offsetHeight+'px');body.style.setProperty('padding-top','40px','important');
     const d=cap(name)-cap(ttl);
