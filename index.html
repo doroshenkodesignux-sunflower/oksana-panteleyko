@@ -1375,6 +1375,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 @media (max-width:900px){.svc__left{padding-top:0!important}.svc{padding-top:0!important}.who__stick{padding-bottom:101px!important}}
 @media (max-width:900px){.aw__track{height:440vh!important}}
 @media (min-width:901px){.hero__lead{left:calc(var(--u) * 473)!important;translate:-50% 0}}
+@media (min-width:901px){.ab2{height:calc(100vh - var(--hdr,0px))!important;height:calc(100svh - var(--hdr,0px))!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2436,6 +2437,16 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 /* About stats labels: all three on one line if they all fit, otherwise all three on two lines; phones always two */
 (()=>{const st=document.querySelector('.ab2__stats');if(!st)return;
   const fit=()=>{st.classList.remove('two');if(innerWidth<=900||[...st.querySelectorAll('.stat')].reduce((w,e)=>w+e.offsetWidth,0)+2+4*24>st.clientWidth)st.classList.add('two')};
+  addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
+</script>
+<script>
+/* About (desktop): the block fits the screen below the header; "About me" sits on the same top line as the name */
+(()=>{const sec=document.getElementById('about'),hd=document.querySelector('.header'),name=document.querySelector('.ab2__head').firstElementChild,ttl=document.querySelector('.ab2__title'),body=document.querySelector('.ab2__body');if(!sec||!ttl)return;
+  const cap=e=>{const g=document.createRange();g.selectNodeContents(e);const r=g.getClientRects()[0];const fs=parseFloat(getComputedStyle(e).fontSize);return r.top+(r.height-fs*.68)/2};
+  const fit=()=>{if(innerWidth<=900){sec.style.removeProperty('--hdr');body.style.paddingTop='';return}
+    sec.style.setProperty('--hdr',hd.offsetHeight+'px');body.style.setProperty('padding-top','40px','important');
+    const tf=ttl.style.transform;ttl.style.transform='none';const d=cap(name)-cap(ttl);ttl.style.transform=tf;
+    body.style.setProperty('padding-top',Math.max(0,40+d)+'px','important')};
   addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
 </script>
 </body>
