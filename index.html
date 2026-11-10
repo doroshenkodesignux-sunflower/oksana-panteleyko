@@ -1403,6 +1403,20 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 @media (max-width:900px){.svc__item .svc__btn2{order:3;margin-top:8px!important}}
 .svc__para{display:block;height:.8em}
 @media (min-width:901px){.svc__inner>.svc__groups{margin-top:32px!important}}
+/* contact form: which service — one row of single-choice chips, pre-selected from the service button clicked */
+.cta__svc{border:0;margin:16px 0 0;padding:0;min-width:0;text-align:left;width:100%}
+.cta__svc legend{padding:0;margin:0 0 8px;font:500 12px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#7A8A99}
+.cta__chips{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin-right:-20px;padding-right:20px;-webkit-mask:linear-gradient(90deg,#000 85%,transparent);mask:linear-gradient(90deg,#000 85%,transparent)}
+.cta__chips::-webkit-scrollbar{display:none}
+.cta__chips label{flex:0 0 auto}
+.cta__chips span{white-space:nowrap}
+.cta__chips label{position:relative;cursor:pointer}
+.cta__chips input{position:absolute;opacity:0;pointer-events:none}
+.cta__chips span{display:block;padding:8px 12px;background:#E9EEF2;color:var(--ink);font:400 14px/18px var(--sans);transition:background .3s,color .3s}
+.cta__chips label:hover span{background:#D6E3EE}
+.cta__chips input:checked+span{background:var(--ink);color:#fff}
+.cta__chips input:focus-visible+span{outline:1px solid var(--ink);outline-offset:2px}
+@media (max-width:900px) and (max-height:760px){form.cta__card{padding-top:24px!important;padding-bottom:24px!important}.cta__fields{gap:10px!important}.cta__svc{margin-top:12px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1701,6 +1715,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Phone number</span><input type="tel" name="phone" autocomplete="tel" placeholder=" "></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
+      <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design &amp; Renovation</span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
     </form>
   </div>
@@ -1802,6 +1817,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Phone number</span><input type="tel" name="phone" autocomplete="tel" placeholder=" "></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
+      <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design &amp; Renovation</span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
     </form>
   </div>
@@ -2477,6 +2493,13 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
     const d=cap(name)-cap(ttl);
     body.style.setProperty('padding-top',Math.max(0,40+d)+'px','important')};
   addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
+</script>
+<script>
+/* service buttons pre-select the matching chip in the request forms (the visitor can still change it) */
+(()=>{const map=['Concept','Design & Renovation','Consultation','Rebranding'];
+  document.addEventListener('click',e=>{const b=e.target.closest('.svc__btn:not(.svc__btn2)');if(!b)return;
+    const items=[...document.querySelectorAll('.svc__item')],i=items.indexOf(b.closest('.svc__item'));if(i<0||!map[i])return;
+    document.querySelectorAll('.cta__chips input[value="'+map[i]+'"]').forEach(r=>r.checked=true)},true)})();
 </script>
 </body>
 </html>
