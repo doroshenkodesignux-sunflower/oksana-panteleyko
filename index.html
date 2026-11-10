@@ -1347,6 +1347,24 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .ab2__media{aspect-ratio:auto!important;height:calc(228px + 100vw * 1.4)!important;max-height:max(100svh,700px)}
  .ab2__sign{width:min(62%,260px)!important}
 }
+/* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
+.aw__bar{display:none}
+@media (max-width:900px){
+ .aw{--awtop:max(120px,15vh);--awph:min(450px,calc(100svh - var(--awtop) - 36px - 230px))}
+ .aw__word{display:none!important}
+ .aw__bar{display:block;position:absolute;z-index:4;left:16px;right:16px;top:var(--awtop);height:3px;background:#D9D9D9}
+ .aw__bar i{display:block;height:100%;width:25%;background:var(--ink);transition:width .9s cubic-bezier(.76,0,.24,1)}
+ .aw__photo{inset:auto!important;left:16px!important;right:16px!important;top:calc(var(--awtop) + 36px)!important;height:var(--awph)!important;clip-path:none!important;overflow:hidden}
+ .aw__photo img{transform:none!important}
+ .aw__info{inset:auto!important;left:16px!important;right:16px!important;top:calc(var(--awtop) + 36px + var(--awph) + 40px)!important;display:block!important}
+ .aw__card{width:100%!important;max-width:none!important;display:grid!important;grid-template-columns:auto 1fr;align-items:center;column-gap:18px;row-gap:32px;
+   padding:0!important;background:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;text-align:left!important;opacity:1!important;transform:none!important}
+ .aw__badge{width:clamp(80px,24vw,96px)!important}
+ .aw__name{display:contents!important}
+ .aw__line{font:500 clamp(20px,6.2vw,24px)/1.25 'Cormorant',serif!important;text-transform:uppercase;white-space:normal!important;text-wrap:balance;margin:0;color:var(--ink)}
+ .aw__sign{display:none!important}
+ .aw__link{grid-column:1 / -1;width:100%!important;margin:0!important;font-size:15px!important}
+}
 </style>
 </head>
 <body class="preloading">
@@ -1660,6 +1678,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   <div class="aw__track">
     <div class="aw__stick" id="awStick">
       <h2 class="aw__word" id="awWord">Awards</h2>
+      <div class="aw__bar" aria-hidden="true"><i id="awBar"></i></div>
       <div class="aw__photo" id="awPhoto"></div>
       <div class="aw__info" id="awInfo">
         <div class="aw__card">
@@ -2060,7 +2079,7 @@ let awActive=-1, awTop=null, awT1=0, awT2=0;
    from a slight zoom; the current one drifts up, swells a touch and dims — like turning a page in a printed book.
    Scrolling back plays it in reverse. The card stays still and simply updates halfway through. */
 const AW_EASE='cubic-bezier(.76,0,.24,1)', AW_T=1200;
-function showAward(i,instant,dir=1){const A=AWARDS[i], im=awImgs[i];
+function showAward(i,instant,dir=1){const A=AWARDS[i], im=awImgs[i];const bar=document.getElementById('awBar');if(bar)bar.style.width=((i+1)/AWARDS.length*100)+'%';
   clearTimeout(awT1);clearTimeout(awT2);
   const reset=x=>{x.style.transition='none';x.style.clipPath='';x.style.filter='';x.style.translate='';x.style.scale=''};
   if(instant||!awTop){awImgs.forEach(x=>{reset(x);x.style.opacity=x===im?1:0;x.style.zIndex=x===im?1:0});awTop=im;
@@ -2086,7 +2105,7 @@ function onAwards(){
   if(f<1){const t=sm(clamp(f));w=lerp(dot[0],por[0],t);h=lerp(dot[1],por[1],t)}
   else{const t=sm(clamp(f-1));w=lerp(por[0],W,t);h=lerp(por[1],H,t)}
   const ix=Math.max(0,(W-w)/2), iy=Math.max(0,(H-h)/2);
-  awPhoto.style.clipPath=`inset(${iy.toFixed(1)}px ${ix.toFixed(1)}px ${iy.toFixed(1)}px ${ix.toFixed(1)}px)`;
+  awPhoto.style.clipPath=mob?'none':`inset(${iy.toFixed(1)}px ${ix.toFixed(1)}px ${iy.toFixed(1)}px ${ix.toFixed(1)}px)`;
   awWord.style.transform=`scale(${(1+clamp(f-1)*.12).toFixed(4)})`;
   // which award, with a short cross-fade around each boundary
   const act=Math.max(0,Math.min(3,Math.round(f-2)));                 // nearest award stop
