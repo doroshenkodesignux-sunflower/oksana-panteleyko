@@ -1322,6 +1322,13 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .ab2 .stat b{font-size:clamp(44px,13vw,64px)!important}
  .ab2 .stat p{white-space:normal;font-size:12px!important}
 }
+/* phone About: the name no longer covers the face — name and roles sit at the bottom of the photo on a soft shade; no signature on phones */
+@media (max-width:900px){
+ .ab2__head{top:auto!important;bottom:28px}
+ .ab2__sign{display:none!important}
+ .ab2__media::after{background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.45) 100%)!important}
+ .ab2__photo{object-position:50% 25%!important}
+}
 </style>
 </head>
 <body class="preloading">
