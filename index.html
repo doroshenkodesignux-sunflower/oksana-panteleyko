@@ -2125,10 +2125,10 @@ const awStopY=i=>{const r=awTrack.getBoundingClientRect();return r.top+scrollY+(
 let awLock=0;
 function awF(){const r=awTrack.getBoundingClientRect();return clamp(-r.top/Math.max(1,r.height-innerHeight))*6}
 const awPhoneMove=(y,dur)=>{const H=document.documentElement,y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-  awLock=t0+dur+80;H.style.overflow='hidden';if(window.lenis)lenis.stop();
-  const fin=()=>{H.style.overflow='';scrollTo(0,y);if(window.lenis){lenis.start();lenis.scrollTo(y,{immediate:true,force:true})}};
-  const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(k<1)requestAnimationFrame(st);else fin()};requestAnimationFrame(st);
-  setTimeout(()=>{if(H.style.overflow==='hidden')fin()},dur+400)};
+  awLock=t0+dur+80;let done=0;
+  const fin=()=>{if(done)return;done=1;scrollTo(0,y);if(window.lenis)lenis.scrollTo(y,{immediate:true,force:true})};
+  const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(done)return;if(k<1)requestAnimationFrame(st);else fin()};requestAnimationFrame(st);
+  setTimeout(fin,dur+400)};
 function awStep(dir){const f=awF(), cur=Math.max(0,Math.min(3,Math.round(f-2)));
   if(f<1.5||f>5.5)return false;                                      // outside the award stops: normal scroll
   const at=2+cur;let next=dir>0?(f<at-.05?cur:cur+1):(f>at+.05?cur:cur-1);   // first settle on the nearest stop, then move
