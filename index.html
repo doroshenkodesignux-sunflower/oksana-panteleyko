@@ -1394,9 +1394,12 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 /* Services: the card button runs the full width of the card content */
 .svc__btn{display:flex!important;width:auto!important;max-width:none!important;justify-content:space-between}
 /* secondary service button: outlined, sits under the main one, same width */
-.svc__btn2{background:transparent!important;color:var(--ink)!important;border:1px solid var(--ink)!important;margin-top:12px!important}
-.svc__btn2:hover{background:var(--ink)!important;color:#fff!important}
-@media (max-width:900px){.svc__item .svc__btn2{order:3;margin-top:12px!important}}
+.svc__btn2{background:transparent!important;color:var(--ink)!important;border:1px solid var(--ink)!important;margin-top:8px!important;transition:color .4s,border-color .4s}
+.svc__btn2{isolation:isolate}
+.svc__btn2::before{background:#84B7DB!important;opacity:1!important;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)!important}
+.svc__btn2:hover::before{clip-path:circle(150% at var(--ex,50%) var(--ey,50%))!important}
+.svc__btn2:hover{color:#fff!important;border-color:#84B7DB!important}
+@media (max-width:900px){.svc__item .svc__btn2{order:3;margin-top:8px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
