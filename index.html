@@ -1373,6 +1373,8 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .svc__item{border-bottom:0!important;padding-bottom:0!important}
  .svc__item:not(:last-child){margin-bottom:20px!important;padding-bottom:20px!important;border-bottom:1px solid var(--line)!important}}
 @media (max-width:900px){.svc__left{padding-top:0!important}.svc{padding-top:0!important}.who__stick{padding-bottom:101px!important}}
+@media (max-width:900px){.aw__track{height:440vh!important}}
+@media (min-width:901px){.hero__lead{left:calc(var(--u) * 473)!important;translate:-50% 0}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2105,6 +2107,7 @@ let awActive=-1, awTop=null, awT1=0, awT2=0;
 /* project change (awwwards-style "slide-over"): the next photo is revealed from the bottom edge while it settles
    from a slight zoom; the current one drifts up, swells a touch and dims — like turning a page in a printed book.
    Scrolling back plays it in reverse. The card stays still and simply updates halfway through. */
+const AW_NATIVE=true;   // phones: plain native scroll, the award follows the scroll position
 const AW_EASE='cubic-bezier(.76,0,.24,1)', AW_T=1200;
 function showAward(i,instant,dir=1){const A=AWARDS[i], im=awImgs[i];const bar=document.getElementById('awBar');if(bar)bar.style.width=((i+1)/AWARDS.length*100)+'%';
   clearTimeout(awT1);clearTimeout(awT2);
@@ -2135,7 +2138,7 @@ function onAwards(){
   awPhoto.style.clipPath=mob?'none':`inset(${iy.toFixed(1)}px ${ix.toFixed(1)}px ${iy.toFixed(1)}px ${ix.toFixed(1)}px)`;
   awWord.style.transform=`scale(${(1+clamp(f-1)*.12).toFixed(4)})`;
   // which award, with a short cross-fade around each boundary
-  const act=Math.max(0,Math.min(3,Math.round(f-2)));                 // nearest award stop
+  const act=mob&&AW_NATIVE?Math.max(0,Math.min(3,Math.floor(f/1.5))):Math.max(0,Math.min(3,Math.round(f-2)));                 // nearest award stop
   awImgs[0].style.transform=f<2?`scale(${(1.18-.18*sm(clamp(f/2))).toFixed(4)})`:'';     // zoom only while the first photo opens
   {const k=sm(clamp((f-1.75)/.3)), c=awInfo.firstElementChild;c.style.setProperty('--in',k.toFixed(3));0}  // frosted glass card fades in, blur grows
   if(act!==awActive){const first=awActive<0, dir=act>awActive?1:-1;awActive=act;showAward(act,first,dir)}
@@ -2180,12 +2183,12 @@ let awGest=0;addEventListener('touchstart',e=>{awTY=e.touches[0].clientY;awGest=
 const awGlide=(y,dur)=>{if(innerWidth<=900){awPhoneMove(y,dur);return}const y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;awLock=t0+dur+80;
   if(window.lenis){lenis.scrollTo(y,{duration:dur/1000,easing:ease,lock:true,force:true});return}
   const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
-addEventListener('touchmove',e=>{if(awTY===null||innerWidth>900)return;const r=awTrack.getBoundingClientRect(),f=awF(),dy=awTY-e.touches[0].clientY,dir=dy>0?1:-1;
+addEventListener('touchmove',e=>{if(awTY===null||innerWidth>900||AW_NATIVE)return;const r=awTrack.getBoundingClientRect(),f=awF(),dy=awTY-e.touches[0].clientY,dir=dy>0?1:-1;
   const inIntro=r.top<=2&&f<1.85;if(!inIntro&&!(dir<0&&Math.abs(f-2)<.05))return;
   if(dir<0&&f<.05)return;                                             // at the very start going up: leave normally
   e.preventDefault();if(performance.now()<awLock||Math.abs(dy)<24)return;
   const y=dir>0?awStopY(0):r.top+scrollY;awGlide(y,dir>0?1800:1200);awTY=e.touches[0].clientY},{passive:false});
-addEventListener('touchmove',e=>{if(awTY===null)return;const f=awF();if(f<1.85||f>5.15)return;
+addEventListener('touchmove',e=>{if(awTY===null||(AW_NATIVE&&innerWidth<=900))return;const f=awF();if(f<1.85||f>5.15)return;
   const dy=awTY-e.touches[0].clientY, cur=Math.round(f-2), dir=dy>0?1:-1;
   if((dir>0&&cur>=3&&Math.abs(f-5)<.05)||(dir<0&&cur<=0&&Math.abs(f-2)<.05))return;
   e.preventDefault();if(Math.abs(dy)<24||awGest)return;awGest=1;awTY=e.touches[0].clientY;if(performance.now()>=awLock){awStepStart=performance.now();awStep(dir)}else awQueued=dir},{passive:false});
