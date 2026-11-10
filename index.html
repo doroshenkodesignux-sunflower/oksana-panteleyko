@@ -2352,7 +2352,7 @@ function size(){SW=stage.clientWidth;SH=stage.clientHeight;ren.setSize(SW,SH,fal
   const b=box.getBoundingClientRect(), s=stage.getBoundingClientRect();
   R=Math.max(80,Math.min(b.height,SW*.94)/2*.9);                    // globe radius in px: fits the free area under the title
   let cy=b.top-s.top+b.height/2+(SW<=900?-30:0);
-  if(SW>900){const lb=document.querySelector('.loc__list').getBoundingClientRect().bottom-s.top, const top=lb+40, bot=SH-90;R=Math.max(120,Math.min((bot-top)/2,SW*.4));cy=(top+bot)/2}   // 40px under the country list, 90px above the screen bottom
+  if(SW>900){const lb=document.querySelector('.loc__list').getBoundingClientRect().bottom-s.top, top=lb+40, bot=SH-90;R=Math.max(120,Math.min((bot-top)/2,SW*.4));cy=(top+bot)/2}   // 40px under the country list, 90px above the screen bottom
   const  t=Math.tan(FOV*Math.PI/360), dist=(SH/2)/(R*t);
   cam.position.set(0,0,dist);cam.setViewOffset(SW,SH,0,(SH/2-cy),SW,SH);cam.updateProjectionMatrix();   // shift so the globe sits in its box
   const halfH=dist*t, halfW=halfH*SW/SH;mat.uniforms.uSpread.value.set(halfW*1.05,halfH*1.25,1.2);      // dust fills the whole screen
