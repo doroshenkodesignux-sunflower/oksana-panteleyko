@@ -1237,7 +1237,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 @media (max-width:900px){
  .menu{padding-top:max(76px,11vh)!important}
  .menu__nav{display:flex;flex-direction:column;gap:clamp(6px,1.5vh,16px)}
- .menu__nav a{font-size:clamp(22px,min(11vw,3.8vh),40px)!important;line-height:1.05!important;padding:2px 0}
+ .menu__nav a{font-size:clamp(22px,min(11vw,3.8vh),40px)!important;line-height:1.05!important;padding:2px 0;letter-spacing:0!important}
 }
 @media (max-width:900px) and (max-height:740px){   /* short phones: tighter contacts so the whole menu still fits */
  .menu{padding-top:72px!important}
@@ -1332,9 +1332,8 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 /* About photo, all devices: the name + roles live in a top band (same tone as the top of the photo); the photo starts BELOW it,
    so the text can never sit on the face. Signature is pinned to the bottom centre. */
 .ab2__media{background:#62676A}
-.ab2__photo{top:var(--band)!important;height:calc(100% - var(--band))!important;object-position:50% 0!important;
-  -webkit-mask:linear-gradient(180deg,transparent 0,#000 70px);mask:linear-gradient(180deg,transparent 0,#000 70px)}
-.ab2__media::after{background:linear-gradient(180deg,rgba(0,0,0,0) 75%,rgba(0,0,0,.22))!important}
+.ab2__photo{top:0!important;height:100%!important;object-position:50% 0!important;-webkit-mask:none;mask:none}
+.ab2__media::after{background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.5))!important}
 .ab2__head{top:var(--headtop)!important;bottom:auto!important}
 .ab2__sign{display:block!important;left:50%!important;translate:-50% 0;bottom:var(--signb)!important}
 @media (min-width:901px){
@@ -1347,6 +1346,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .ab2__media{aspect-ratio:auto!important;height:calc(228px + 100vw * 1.4)!important;max-height:max(100svh,700px)}
  .ab2__sign{width:min(62%,260px)!important}
 }
+@media (max-width:900px){.menu__nav a{letter-spacing:0!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
