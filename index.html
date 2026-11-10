@@ -242,12 +242,12 @@ body.menu-open .header{background:#E9EEF2;box-shadow:inset 0 -1px 0 rgba(0,0,0,.
   .socials svg{width:24px}
 }
 
-/* ---------- who: desktop scales with the 1920 Figma frame ---------- */
-@media (min-width:901px) and (min-height:780px){
+/* ---------- who: desktop scales with the 1920 Figma frame, fitted to both width and height ---------- */
+@media (min-width:901px){
   .serv__stick{padding-top:calc(100vw / 1920 * 100)}
   .flip{width:min(1040px,58vw);height:min(580px,calc(100vh - 100vw / 1920 * 100 - 64px))}
-  .who{--u:calc(100vw / 1920)}
-  .who__stick{padding:110px 40px 40px;gap:calc(var(--u) * 50)}
+  .who{--u:min(calc(100vw / 1920),calc(100vh / 1080))}
+  .who__stick{padding:max(90px,calc(100vh / 1080 * 110)) 40px 40px;gap:calc(var(--u) * 50)}
   .who .h2{font-size:calc(var(--u) * 72);line-height:calc(var(--u) * 80);letter-spacing:calc(var(--u) * -1.44)}
   .who__row{height:min(calc(var(--u) * 680),calc(100vh - 150px - var(--u) * 130))}
   .wcard{padding:calc(var(--u) * 32)}
@@ -272,7 +272,7 @@ body.menu-open .header{background:#E9EEF2;box-shadow:inset 0 -1px 0 rgba(0,0,0,.
 .type{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);margin:0 -1px -1px 0;font:500 14px/18px var(--sans);color:var(--ink);white-space:nowrap}
 .type svg{width:20px;height:20px;flex:none;color:var(--ink)}
 .wcard.open .wcard__inner>*:nth-child(4){transition-delay:.25s}
-@media (min-width:901px) and (min-height:780px){
+@media (min-width:901px){
   .wcard{position:relative}
   .types{position:absolute;top:calc(var(--u) * 32);right:calc(var(--u) * 32);width:calc(((50cqw - var(--u) * 64 - 2px) - var(--u) * 32) / 2)}
   .type{padding:calc(var(--u) * 12) calc(var(--u) * 16);gap:calc(var(--u) * 10);font-size:14px;line-height:18px}
@@ -284,14 +284,14 @@ body.menu-open .header{background:#E9EEF2;box-shadow:inset 0 -1px 0 rgba(0,0,0,.
 .offer svg{width:20px;height:20px;flex:none}
 .offer b{display:flex;align-items:center;gap:8px;font:600 20px/24px var(--serif);text-transform:uppercase;white-space:nowrap;letter-spacing:.01em}
 .offer span{padding-left:0;font:400 14px/18px var(--sans);color:#7A90A0;white-space:nowrap}
-@media (min-width:901px) and (min-height:780px){
+@media (min-width:901px){
   .offer{position:absolute;top:calc(var(--u) * 32);right:calc(var(--u) * 32);width:calc(((50cqw - var(--u) * 64 - 2px) - var(--u) * 32) / 2)}
 }
 @media (max-width:900px){ .offer{order:-1} }
 
-/* ---------- hero: desktop scales 1:1 with the 1920 Figma frame ---------- */
-@media (min-width:901px) and (min-height:780px){
-  .hero{--u:calc(100vw / 1920);height:calc(var(--u) * 1080);min-height:0;max-height:none}
+/* ---------- hero: desktop keeps the 1920×1080 Figma composition, scaled to fit BOTH the width and the height of the screen ---------- */
+@media (min-width:901px){
+  .hero{--u:min(calc(100vw / 1920),calc(100vh / 1080));height:100vh;height:100svh;min-height:0;max-height:none}
   .hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
     background:linear-gradient(90deg,rgba(255,255,255,.62) 0%,rgba(255,255,255,.42) 28%,rgba(255,255,255,.12) 46%,rgba(255,255,255,0) 58%),
                linear-gradient(180deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 30%)}
@@ -1258,6 +1258,24 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .wcard .tag,.who .wcard .tag{font-size:13px!important;line-height:16px!important;padding:6px 9px!important;margin:0!important}
  .wcard .cols{gap:16px!important}
 }
+/* desktop: the light band behind the header no longer blurs the hero title or the face */
+@media (min-width:901px){.header::before{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;inset:0 0 -40px 0!important;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,0))!important;-webkit-mask:none!important;mask:none!important}}
+/* desktop/tablet-landscape: the card row takes the free height of the screen (capped at the design size), so content never spills out */
+@media (min-width:901px){
+ .who__stick{display:flex;flex-direction:column;justify-content:center}
+ .who__row{height:auto!important;flex:1 1 auto;min-height:0;max-height:max(calc(var(--u) * 680),560px)}
+}
+/* services: fitted to the screen height too, so the open service and the whole list always fit */
+@media (min-width:901px){
+ .svc{--u:min(calc(100vw / 1920),calc(100vh / 1080))!important}
+ .svc__left{padding-top:max(96px,calc(var(--u) * 140))!important;padding-bottom:clamp(24px,4vh,64px)!important}
+ .svc__title{margin-bottom:clamp(20px,3.5vh,64px)!important}
+ .svc__head{padding:clamp(10px,1.9vh,26px) 0!important}
+ .svc__inner>p{margin-bottom:clamp(10px,1.6vh,18px)!important}
+ .svc__btn{margin-top:clamp(14px,2.6vh,40px)!important;margin-bottom:clamp(14px,2.6vh,40px)!important;height:clamp(44px,5.6vh,56px)!important}
+}
+/* tall/portrait screens wider than a phone (e.g. iPad Pro upright): keep the hero composition centred vertically */
+@media (min-width:901px){.hero__inner{top:max(0px,calc((100vh - var(--u) * 1080) / 2))!important;bottom:auto!important;height:calc(var(--u) * 1080)}}
 </style>
 </head>
 <body class="preloading">
