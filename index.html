@@ -2444,10 +2444,10 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 <script>
 /* About (desktop): the block fits the screen below the header; "About me" sits on the same top line as the name */
 (()=>{const sec=document.getElementById('about'),hd=document.querySelector('.header'),name=document.querySelector('.ab2__head').firstElementChild,ttl=document.querySelector('.ab2__title'),body=document.querySelector('.ab2__body');if(!sec||!ttl)return;
-  const cap=e=>{const g=document.createRange();g.selectNodeContents(e);const r=g.getClientRects()[0];const fs=parseFloat(getComputedStyle(e).fontSize);return r.top+(r.height-fs*.68)/2};
+  const cap=e=>{let y=0,n=e;while(n&&n!==sec){y+=n.offsetTop;n=n.offsetParent}const c=getComputedStyle(e),fs=parseFloat(c.fontSize),lh=parseFloat(c.lineHeight)||fs*1.2;return y+parseFloat(c.paddingTop)+(lh-fs*.68)/2};  // layout position, unaffected by reveal transforms
   const fit=()=>{if(innerWidth<=900){sec.style.removeProperty('--hdr');body.style.paddingTop='';return}
     sec.style.setProperty('--hdr',hd.offsetHeight+'px');body.style.setProperty('padding-top','40px','important');
-    const tf=ttl.style.transform;ttl.style.transform='none';const d=cap(name)-cap(ttl);ttl.style.transform=tf;
+    const d=cap(name)-cap(ttl);
     body.style.setProperty('padding-top',Math.max(0,40+d)+'px','important')};
   addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
 </script>
