@@ -1347,6 +1347,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .ab2__sign{width:min(62%,260px)!important}
 }
 @media (max-width:900px){.menu__nav a{letter-spacing:0!important}}
+@media (max-width:900px){.loc__stage{padding-top:152px!important}.loc__list{margin-top:60px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2314,7 +2315,7 @@ let SW=1,SH=1,R=1;
 function size(){SW=stage.clientWidth;SH=stage.clientHeight;ren.setSize(SW,SH,false);cam.aspect=SW/SH;
   const b=box.getBoundingClientRect(), s=stage.getBoundingClientRect();
   R=Math.max(80,Math.min(b.height,SW*.94)/2*.9);                    // globe radius in px: fits the free area under the title
-  const cy=b.top-s.top+b.height/2, t=Math.tan(FOV*Math.PI/360), dist=(SH/2)/(R*t);
+  const cy=b.top-s.top+b.height/2+(SW<=900?40:0), t=Math.tan(FOV*Math.PI/360), dist=(SH/2)/(R*t);
   cam.position.set(0,0,dist);cam.setViewOffset(SW,SH,0,(SH/2-cy),SW,SH);cam.updateProjectionMatrix();   // shift so the globe sits in its box
   const halfH=dist*t, halfW=halfH*SW/SH;mat.uniforms.uSpread.value.set(halfW*1.05,halfH*1.25,1.2);      // dust fills the whole screen
   mat.uniforms.uSize.value=R/190*DPR}
