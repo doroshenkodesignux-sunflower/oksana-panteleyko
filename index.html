@@ -1351,6 +1351,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 @media (min-width:901px){.ab2__body{padding-top:40px!important}.ab2__head h2,.ab2__head>*:first-child{margin-top:0!important}}
 .ab2__list li{text-wrap:balance}
 @media (min-width:1100px){.ab2__list:not(.wrap) li{white-space:nowrap}}
+.ab2__stats p{white-space:nowrap}.ab2__stats.two p span{display:block}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1671,9 +1672,9 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     </ul>
     <a class="lnk about__cv ab2__cv rv" href="#" download>Download CV <i></i></a>
     <div class="ab2__stats">
-      <div class="stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p>Years of experience</p></div>
-      <div class="stat rv" style="--d:.15s"><b><span data-to="150">0</span><sup>+</sup></b><p>Completed projects</p></div>
-      <div class="stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p>Countries worldwide</p></div>
+      <div class="stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p><span>Years of</span> <span>experience</span></p></div>
+      <div class="stat rv" style="--d:.15s"><b><span data-to="150">0</span><sup>+</sup></b><p><span>Completed</span> <span>projects</span></p></div>
+      <div class="stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p><span>Countries</span> <span>worldwide</span></p></div>
     </div>
   </div>
 </section>
@@ -2405,6 +2406,12 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 (()=>{const ul=document.querySelector('.ab2__list');if(!ul)return;
   const fit=()=>{ul.style.fontSize='';ul.classList.remove('wrap');if(innerWidth<1100)return;const base=parseFloat(getComputedStyle(ul.children[0]).fontSize);
     const need=Math.max(...[...ul.children].map(l=>l.scrollWidth/l.clientWidth));ul.classList.remove('wrap');if(need>1){const f=base/need*.99;if(f>=13)ul.style.fontSize=f+'px';else ul.classList.add('wrap')}};
+  addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
+</script>
+<script>
+/* About stats labels: all three on one line if they all fit, otherwise all three on two lines; phones always two */
+(()=>{const st=document.querySelector('.ab2__stats');if(!st)return;
+  const fit=()=>{st.classList.remove('two');if(innerWidth<=900||[...st.querySelectorAll('p')].some(p=>p.scrollWidth>p.clientWidth+1))st.classList.add('two')};
   addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
 </script>
 </body>
