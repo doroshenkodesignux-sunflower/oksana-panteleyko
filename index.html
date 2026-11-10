@@ -1376,7 +1376,13 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 @media (max-width:900px){.aw__track{height:440vh!important}}
 @media (min-width:901px){.hero__lead{left:calc(var(--u) * 473)!important;translate:-50% 0}}
 @media (min-width:901px){.ab2{height:calc(100vh - var(--hdr,0px))!important;height:calc(100svh - var(--hdr,0px))!important}}
-@media (min-width:901px){.loc{padding-bottom:60px!important}}
+/* Locations (desktop): the block runs past the screen (150px above the title / below the globe in the page),
+   while title + countries + globe all fit inside the screen with small margins to its edges */
+@media (min-width:901px){
+ .loc{padding-top:max(0px,calc(150px - var(--hdrH,72px) - max(24px,4vh)))!important;padding-bottom:calc(150px - max(40px,6vh))!important}
+ .loc__stage{padding-top:calc(var(--hdrH,72px) + max(24px,4vh))!important;padding-bottom:0!important}
+ .loc__list{margin-top:max(20px,4vh)!important}
+}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2352,7 +2358,7 @@ function size(){SW=stage.clientWidth;SH=stage.clientHeight;ren.setSize(SW,SH,fal
   const b=box.getBoundingClientRect(), s=stage.getBoundingClientRect();
   R=Math.max(80,Math.min(b.height,SW*.94)/2*.9);                    // globe radius in px: fits the free area under the title
   let cy=b.top-s.top+b.height/2+(SW<=900?-30:0);
-  if(SW>900){const lb=document.querySelector('.loc__list').getBoundingClientRect().bottom-s.top, top=lb+40, bot=SH-90;R=Math.max(120,Math.min((bot-top)/2,SW*.4));cy=(top+bot)/2}   // 40px under the country list, 90px above the screen bottom
+  if(SW>900){const lb=document.querySelector('.loc__list').getBoundingClientRect().bottom-s.top, top=lb+Math.max(40,SH*.1), bot=SH-Math.max(40,SH*.06);R=Math.max(120,Math.min((bot-top)/2,SW*.4));cy=(top+bot)/2}   // fills the screen under the country list, small margin to the screen bottom
   const  t=Math.tan(FOV*Math.PI/360), dist=(SH/2)/(R*t);
   cam.position.set(0,0,dist);cam.setViewOffset(SW,SH,0,(SH/2-cy),SW,SH);cam.updateProjectionMatrix();   // shift so the globe sits in its box
   const halfH=dist*t, halfW=halfH*SW/SH;mat.uniforms.uSpread.value.set(halfW*1.05,halfH*1.25,1.2);      // dust fills the whole screen
@@ -2446,7 +2452,7 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 /* About (desktop): the block fits the screen below the header; "About me" sits on the same top line as the name */
 (()=>{const sec=document.getElementById('about'),hd=document.querySelector('.header'),name=document.querySelector('.ab2__head').firstElementChild,ttl=document.querySelector('.ab2__title'),body=document.querySelector('.ab2__body');if(!sec||!ttl)return;
   const cap=e=>{let y=0,n=e;while(n&&n!==sec){y+=n.offsetTop;n=n.offsetParent}const c=getComputedStyle(e),fs=parseFloat(c.fontSize),lh=parseFloat(c.lineHeight)||fs*1.2;const x=(cap.cx||(cap.cx=document.createElement('canvas').getContext('2d')));x.font=c.fontStyle+' '+c.fontWeight+' '+c.fontSize+' '+c.fontFamily;const m=x.measureText('H');const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent;return y+parseFloat(c.paddingTop)+(lh-(fa+fd))/2+fa-m.actualBoundingBoxAscent};  // exact top of the capitals  // layout position, unaffected by reveal transforms
-  const fit=()=>{if(innerWidth<=900){sec.style.removeProperty('--hdr');body.style.paddingTop='';return}
+  const fit=()=>{document.documentElement.style.setProperty('--hdrH',hd.offsetHeight+'px');if(innerWidth<=900){sec.style.removeProperty('--hdr');body.style.paddingTop='';return}
     sec.style.setProperty('--hdr',hd.offsetHeight+'px');body.style.setProperty('padding-top','40px','important');
     const d=cap(name)-cap(ttl);
     body.style.setProperty('padding-top',Math.max(0,40+d)+'px','important')};
