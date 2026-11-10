@@ -1417,6 +1417,10 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 .cta__chips input:checked+span{background:var(--ink);color:#fff}
 .cta__chips input:focus-visible+span{outline:1px solid var(--ink);outline-offset:2px}
 @media (max-width:900px) and (max-height:760px){form.cta__card{padding-top:24px!important;padding-bottom:24px!important}.cta__fields{gap:10px!important}.cta__svc{margin-top:12px!important}}
+.cta__hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.cta__status{margin:12px 0 0;min-height:0;font:400 14px/1.4 var(--sans);color:var(--ink);text-align:left}
+.cta__status:empty{display:none}
+.cta__status.err{color:#B3261E}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1705,7 +1709,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 <section class="cta" id="contact">
   <div class="cta__media"><img src="assets/proj-azur.jpg" alt="" id="ctaImg"></div>
   <div class="cta__wrap">
-    <form class="cta__card" onsubmit="event.preventDefault()">
+    <form class="cta__card" data-request novalidate>
       <div class="cta__head">
         <h2>Leave a Request</h2>
         <p>Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.</p>
@@ -1716,7 +1720,9 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
       <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design &amp; Renovation</span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
+      <label class="cta__hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
+      <p class="cta__status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -1807,7 +1813,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 <section class="cta cta2" id="request">
   <div class="cta__media"><img src="assets/award-2.jpg" alt="" id="cta2Img"></div>
   <div class="cta__wrap">
-    <form class="cta__card cta2__card" onsubmit="event.preventDefault()">
+    <form class="cta__card cta2__card" data-request novalidate>
       <div class="cta__head">
         <h2>Leave a Request</h2>
         <p>Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.</p>
@@ -1818,7 +1824,9 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
       <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design &amp; Renovation</span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
+      <label class="cta__hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
+      <p class="cta__status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
@@ -2500,6 +2508,23 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
   document.addEventListener('click',e=>{const b=e.target.closest('.svc__btn:not(.svc__btn2)');if(!b)return;
     const items=[...document.querySelectorAll('.svc__item')],i=items.indexOf(b.closest('.svc__item'));if(i<0||!map[i])return;
     document.querySelectorAll('.cta__chips input[value="'+map[i]+'"]').forEach(r=>r.checked=true)},true)})();
+</script>
+<script>
+/* request forms → Cloudflare Worker → Telegram group (+ email). Paste the worker address below once it is deployed. */
+const REQUEST_URL='';
+document.querySelectorAll('form[data-request]').forEach((f,k)=>{
+  const st=f.querySelector('.cta__status'),btn=f.querySelector('.cta__btn');
+  f.addEventListener('submit',async e=>{e.preventDefault();st.className='cta__status';
+    const v=n=>(f.elements[n]&&f.elements[n].value||'').trim();
+    if(!v('name')||!/^\S+@\S+\.\S+$/.test(v('email'))){st.classList.add('err');st.textContent='Please add your name and a valid email.';return}
+    if(!REQUEST_URL){st.classList.add('err');st.textContent='The form is not connected yet — please write to hello@panteleyko.com.';return}
+    const sel=f.querySelector('.cta__chips input:checked');
+    btn.disabled=true;st.textContent='Sending…';
+    try{const r=await fetch(REQUEST_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name:v('name'),phone:v('phone'),email:v('email'),service:sel?sel.value:'',website:v('website'),page:k?'bottom form':'top form'})});
+      if(!r.ok)throw 0;f.reset();st.textContent='Thank you! I’ll get back to you shortly.'}
+    catch(_){st.classList.add('err');st.textContent='Something went wrong — please try again or write to hello@panteleyko.com.'}
+    finally{btn.disabled=false}})});
 </script>
 </body>
 </html>
