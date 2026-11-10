@@ -1355,7 +1355,16 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 .ab2__stats{display:flex!important;justify-content:space-between;align-items:stretch}.ab2 .stat{padding:0!important;border:0!important;flex:0 0 auto}
 .ab2__sep{flex:0 0 1px;background:var(--line);align-self:stretch}
 @media (max-width:900px){.svc__list,.svc__left{border-top:0!important}.svc__list>li:first-child,.svc__item:first-child{border-top:0!important}}
-@media (max-width:900px){.svc__left h2{margin-bottom:82px!important}.svc__item:first-child .svc__head{padding-top:0!important}}
+@media (max-width:900px){.svc__left h2{margin-bottom:80px!important}
+ /* phone order inside each service: photo, title, description, button */
+ .svc__item{display:flex!important;flex-direction:column}
+ .svc__item .svc__body,.svc__item .svc__inner{display:contents!important}
+ .svc__mphoto{order:-1;margin:0!important}
+ .svc__item .svc__head{order:0;padding-top:24px!important}
+ .svc__item .svc__inner>p{order:1}
+ .svc__item .svc__tags{display:none!important}
+ .svc__item .svc__btn{order:2}
+ .svc__item:not(:last-child){margin-bottom:60px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
