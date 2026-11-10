@@ -1724,7 +1724,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
       <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design<i class="cta__long"> &amp; Renovation</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
-      <label class="cta__hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
     </form>
@@ -1828,7 +1828,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
       <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design<i class="cta__long"> &amp; Renovation</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
-      <label class="cta__hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
     </form>
@@ -2525,7 +2525,7 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
     const sel=f.querySelector('.cta__chips input:checked');
     btn.disabled=true;st.textContent='Sending…';
     try{const r=await fetch(REQUEST_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name:v('name'),phone:v('phone'),email:v('email'),service:sel?sel.value:'',website:v('website'),page:k?'bottom form':'top form'})});
+        body:JSON.stringify({name:v('name'),phone:v('phone'),email:v('email'),service:sel?sel.value:'',website:v('hp_x7'),page:k?'bottom form':'top form'})});
       if(!r.ok)throw 0;f.reset();st.textContent='Thank you! I’ll get back to you shortly.'}
     catch(_){st.classList.add('err');st.textContent='Something went wrong — please try again or write to hello@panteleyko.com.'}
     finally{btn.disabled=false}})});
