@@ -1352,6 +1352,8 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 .ab2__list li{text-wrap:balance}
 @media (min-width:1100px){.ab2__list:not(.wrap) li{white-space:nowrap}}
 .ab2__stats p{white-space:nowrap}.ab2__stats.two p span{display:block}
+.ab2__stats{display:flex!important;justify-content:space-between;align-items:stretch}.ab2 .stat{padding:0!important;border:0!important;flex:0 0 auto}
+.ab2__sep{flex:0 0 1px;background:var(--line);align-self:stretch}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1673,8 +1675,8 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     <a class="lnk about__cv ab2__cv rv" href="#" download>Download CV <i></i></a>
     <div class="ab2__stats">
       <div class="stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p><span>Years of</span> <span>experience</span></p></div>
-      <div class="stat rv" style="--d:.15s"><b><span data-to="150">0</span><sup>+</sup></b><p><span>Completed</span> <span>projects</span></p></div>
-      <div class="stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p><span>Countries</span> <span>worldwide</span></p></div>
+      <i class="ab2__sep" aria-hidden="true"></i><div class="stat rv" style="--d:.15s"><b><span data-to="150">0</span><sup>+</sup></b><p><span>Completed</span> <span>projects</span></p></div>
+      <i class="ab2__sep" aria-hidden="true"></i><div class="stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p><span>Countries</span> <span>worldwide</span></p></div>
     </div>
   </div>
 </section>
@@ -2411,7 +2413,7 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 <script>
 /* About stats labels: all three on one line if they all fit, otherwise all three on two lines; phones always two */
 (()=>{const st=document.querySelector('.ab2__stats');if(!st)return;
-  const fit=()=>{st.classList.remove('two');if(innerWidth<=900||[...st.querySelectorAll('p')].some(p=>p.scrollWidth>p.clientWidth+1))st.classList.add('two')};
+  const fit=()=>{st.classList.remove('two');if(innerWidth<=900||[...st.querySelectorAll('.stat')].reduce((w,e)=>w+e.offsetWidth,0)+2+4*24>st.clientWidth)st.classList.add('two')};
   addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
 </script>
 </body>
