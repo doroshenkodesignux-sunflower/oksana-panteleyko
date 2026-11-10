@@ -1393,6 +1393,10 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 .who .type,.who .offer{background:#E9EEF2!important;border:0!important;margin:0!important}
 /* Services: the card button runs the full width of the card content */
 .svc__btn{display:flex!important;width:auto!important;max-width:none!important;justify-content:space-between}
+/* secondary service button: outlined, sits under the main one, same width */
+.svc__btn2{background:transparent!important;color:var(--ink)!important;border:1px solid var(--ink)!important;margin-top:12px!important}
+.svc__btn2:hover{background:var(--ink)!important;color:#fff!important}
+@media (max-width:900px){.svc__item .svc__btn2{order:3;margin-top:12px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1859,7 +1863,7 @@ const SERV = [
   {img:'consult-cafe.jpg', tc:'#fae3e6', t:'Expert<br>Consultations', p:'Not sure about a big design or property decision? Let’s talk it through. I’ll give you an honest take on the risks and the options, so you can move forward with confidence.',
    tags:['Second Opinion','Design Audit','Project Review','Layout Review','Investment Property Review','Renovation Strategy'], b:'Book a consultation'},
   {img:'brand-alberti.webp', tc:'#dfe4ee', t:'Brand & Space<br>Transformation', p:'When your business needs a complete refresh — not just a renovation or a new logo — I assemble a team of specialists to run the entire process turnkey. You get one cohesive result where your space, visual identity and digital presence speak the same language — without having to coordinate multiple contractors yourself.',
-   tags:['Interior Renovation','Branding','Website Design'], b:'Transform my brand'}
+   tags:['Interior Renovation','Branding','Website Design'], b2:'Explore Didi Brand Atelier', b2h:'#', b:'Transform my brand'}
 ];
 
 
@@ -1982,7 +1986,7 @@ const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p c
   const tagsHTML=s=>s.groups?'<div class="svc__groups">'+s.groups.map(([g,ts])=>`<div class="svc__group"><p class="svc__gt">${g}</p><div class="svc__tags">${ts.map(t=>`<span>${t}</span>`).join('')}</div></div>`).join('')+'</div>'
     :`<div class="svc__tags">${s.tags.map(t=>`<span>${t}</span>`).join('')}</div>`;
   list.innerHTML=SERV.map((s,i)=>`<li class="svc__item"><button class="svc__head" aria-expanded="false"><span class="svc__num">0${i+1}</span><span class="svc__name">${s.t.replace('<br>',' ')}</span><i class="svc__plus"></i></button>
-    <div class="svc__body"><div class="svc__inner"><img class="svc__mphoto" src="assets/${s.img}" alt="" loading="lazy"><p>${s.p}</p>${tagsHTML(s)}<a class="btn btn--dark svc__btn" href="#contact">${s.b} <span class="plus"></span></a></div></div></li>`).join('');
+    <div class="svc__body"><div class="svc__inner"><img class="svc__mphoto" src="assets/${s.img}" alt="" loading="lazy"><p>${s.p}</p>${tagsHTML(s)}<a class="btn btn--dark svc__btn" href="#contact">${s.b} <span class="plus"></span></a>${s.b2?`<a class="btn svc__btn svc__btn2" href="${s.b2h}" target="_blank" rel="noopener">${s.b2} <span class="plus"></span></a>`:''}</div></div></li>`).join('');
   media.innerHTML=SERV.map(s=>`<img src="assets/${s.img}" alt="">`).join('');
   const items=[...list.children], imgs=[...media.children];let cur=-1;
   const open=i=>{if(i===cur)return;const prev=cur;cur=i;items.forEach((it,k)=>{it.classList.toggle('on',k===i);it.firstElementChild.setAttribute('aria-expanded',k===i)});imgs.forEach((im,k)=>{im.classList.toggle('was',k===prev);im.classList.toggle('on',k===i)})};
