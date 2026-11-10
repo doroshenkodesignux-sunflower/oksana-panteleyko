@@ -1329,6 +1329,24 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .ab2__media::after{background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.45) 100%)!important}
  .ab2__photo{object-position:50% 25%!important}
 }
+/* About photo, all devices: the name + roles live in a top band (same tone as the top of the photo); the photo starts BELOW it,
+   so the text can never sit on the face. Signature is pinned to the bottom centre. */
+.ab2__media{background:#62676A}
+.ab2__photo{top:var(--band)!important;height:calc(100% - var(--band))!important;object-position:50% 0!important;
+  -webkit-mask:linear-gradient(180deg,transparent 0,#000 70px);mask:linear-gradient(180deg,transparent 0,#000 70px)}
+.ab2__media::after{background:linear-gradient(180deg,rgba(0,0,0,0) 75%,rgba(0,0,0,.22))!important}
+.ab2__head{top:var(--headtop)!important;bottom:auto!important}
+.ab2__sign{display:block!important;left:50%!important;translate:-50% 0;bottom:var(--signb)!important}
+@media (min-width:901px){
+ .ab2{--headtop:calc(var(--u) * 130);--band:calc(var(--u) * 330);--signb:calc(var(--u) * 40)}
+ .ab2__sign{width:calc(var(--u) * 470)!important}
+ .ab2__photo{object-position:50% 15%!important}
+}
+@media (max-width:900px){
+ .ab2{--headtop:92px;--band:228px;--signb:20px;--abname:clamp(34px,10vw,44px)!important}
+ .ab2__media{aspect-ratio:auto!important;height:calc(228px + 100vw * 1.4)!important;max-height:max(100svh,700px)}
+ .ab2__sign{width:min(62%,260px)!important}
+}
 </style>
 </head>
 <body class="preloading">
