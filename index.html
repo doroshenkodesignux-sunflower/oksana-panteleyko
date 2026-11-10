@@ -2515,7 +2515,7 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 </script>
 <script>
 /* request forms → Cloudflare Worker → Telegram group (+ email). Paste the worker address below once it is deployed. */
-const REQUEST_URL='';
+const REQUEST_URL='https://panteleyko-requests.doroshenko-design-ux.workers.dev';
 document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   const st=f.querySelector('.cta__status'),btn=f.querySelector('.cta__btn');
   f.addEventListener('submit',async e=>{e.preventDefault();st.className='cta__status';
