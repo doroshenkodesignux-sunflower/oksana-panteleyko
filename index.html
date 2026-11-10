@@ -1337,7 +1337,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 .ab2__head{top:var(--headtop)!important;bottom:auto!important}
 .ab2__sign{display:block!important;left:50%!important;translate:-50% 0;bottom:var(--signb)!important}
 @media (min-width:901px){
- .ab2{--headtop:calc(var(--u) * 130);--band:calc(var(--u) * 330);--signb:calc(var(--u) * 40)}
+ .ab2{--headtop:40px;--band:calc(var(--u) * 330);--signb:calc(var(--u) * 40)}
  .ab2__sign{width:calc(var(--u) * 470)!important}
  .ab2__photo{object-position:50% 15%!important}
 }
@@ -1348,6 +1348,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 }
 @media (max-width:900px){.menu__nav a{letter-spacing:0!important}}
 @media (max-width:900px){.loc__stage{padding-top:152px!important}.loc__list{margin-top:60px!important}}
+@media (min-width:901px){.ab2__body{padding-top:40px!important}.ab2__head h2,.ab2__head>*:first-child{margin-top:0!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
