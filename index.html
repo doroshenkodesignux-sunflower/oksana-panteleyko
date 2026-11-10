@@ -2122,13 +2122,18 @@ addEventListener('resize',()=>{fitWord();onAwards()});
 const awStopY=i=>{const r=awTrack.getBoundingClientRect();return r.top+scrollY+(2+i)/6*(r.height-innerHeight)};
 let awLock=0;
 function awF(){const r=awTrack.getBoundingClientRect();return clamp(-r.top/Math.max(1,r.height-innerHeight))*6}
+const awPhoneMove=(y,dur)=>{const H=document.documentElement,y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+  awLock=t0+dur+80;H.style.overflow='hidden';if(window.lenis)lenis.stop();
+  const fin=()=>{H.style.overflow='';scrollTo(0,y);if(window.lenis){lenis.start();lenis.scrollTo(y,{immediate:true,force:true})}};
+  const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(k<1)requestAnimationFrame(st);else fin()};requestAnimationFrame(st);
+  setTimeout(()=>{if(H.style.overflow==='hidden')fin()},dur+400)};
 function awStep(dir){const f=awF(), cur=Math.max(0,Math.min(3,Math.round(f-2)));
   if(f<1.5||f>5.5)return false;                                      // outside the award stops: normal scroll
   const at=2+cur;let next=dir>0?(f<at-.05?cur:cur+1):(f>at+.05?cur:cur-1);   // first settle on the nearest stop, then move
   if(next<0||next>3)return false;                                    // past the first/last award: let the page move on
   awLock=performance.now()+AW_T+80;
   const y=awStopY(Math.max(0,Math.min(3,next)));
-  window.lenis?lenis.scrollTo(y,{duration:AW_T/1000,easing:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,lock:true,force:true}):scrollTo({top:y,behavior:'smooth'});
+  innerWidth<=900?awPhoneMove(y,AW_T):window.lenis?lenis.scrollTo(y,{duration:AW_T/1000,easing:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,lock:true,force:true}):scrollTo({top:y,behavior:'smooth'});
   return true}
 /* wheel: every new gesture (a mouse-wheel notch or a fresh trackpad swipe) = exactly one award.
    Trackpad inertia is a stream of events <~60ms apart, so it never counts as a new gesture. */
@@ -2148,7 +2153,7 @@ let awTY=null;
 let awGest=0;addEventListener('touchstart',e=>{awTY=e.touches[0].clientY;awGest=0},{passive:true});
 /* phone: the opening plays by itself — one swipe into the block glides to the first award (the photo grows on its own),
    one swipe up from the first award glides back to the start; after that, one swipe = one award */
-const awGlide=(y,dur)=>{const y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;awLock=t0+dur+80;
+const awGlide=(y,dur)=>{if(innerWidth<=900){awPhoneMove(y,dur);return}const y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;awLock=t0+dur+80;
   if(window.lenis){lenis.scrollTo(y,{duration:dur/1000,easing:ease,lock:true,force:true});return}
   const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
 addEventListener('touchmove',e=>{if(awTY===null||innerWidth>900)return;const r=awTrack.getBoundingClientRect(),f=awF(),dy=awTY-e.touches[0].clientY,dir=dy>0?1:-1;
@@ -2180,7 +2185,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
   track.innerHTML=APPROACH.map(([t,d])=>`<article class="appr__slide"><h3>${t}</h3><p>${d}</p></article>`).join('');
   const slides=[...track.children], [pv,nx]=document.querySelectorAll('.arrows[data-for="appr"] .arrow');let i=0;
   const go=k=>{i=Math.max(0,Math.min(slides.length-1,k));const x=slides[i].offsetLeft-slides[0].offsetLeft;track.style.transform=`translateX(${-x}px)`;
-    slides.forEach((s,n)=>{s.classList.toggle('on',n===i);s.classList.toggle('past',n<i)});if(innerWidth<=900){track.style.alignItems='flex-start';track.parentElement.style.transition='height .5s var(--ease)';track.parentElement.style.height=slides[i].offsetHeight+'px'}else{track.parentElement.style.height=''}pv.disabled=i===0;nx.disabled=i===slides.length-1;
+    slides.forEach((s,n)=>{s.classList.toggle('on',n===i);s.classList.toggle('past',n<i)});track.style.alignItems='';track.parentElement.style.transition='';track.parentElement.style.height='';pv.disabled=i===0;nx.disabled=i===slides.length-1;
     document.getElementById('apprNum').textContent=String(i+1).padStart(2,'0');document.getElementById('apprBar').style.width=((i+1)/slides.length*100)+'%'};
   pv.onclick=()=>go(i-1);nx.onclick=()=>go(i+1);addEventListener('resize',()=>go(i));go(0)})();
 (()=>{const sec=document.querySelector('.tst'), who=document.getElementById('tstWho'), q=document.getElementById('tstQuote'), num=document.getElementById('tstNum');
