@@ -1383,6 +1383,11 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .loc__stage{padding-top:calc(var(--hdrH,72px) + max(24px,4vh))!important;padding-bottom:0!important}
  .loc__list{margin-top:max(20px,4vh)!important}
 }
+@media (max-width:900px){
+ /* project "Explore project" = same as the Awards one: full width, 15px, one thin line, air above */
+ .prj .ln:has(>.lnk){padding:0!important;margin:32px 0 0!important;width:100%!important}
+ .prj .ln>.lnk{font-size:15px!important;padding:0 0 6px!important;width:100%!important;border-bottom:0!important}
+}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
