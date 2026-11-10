@@ -1362,9 +1362,14 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
  .svc__mphoto{order:-1;margin:0!important}
  .svc__item .svc__head{order:0;padding-top:24px!important}
  .svc__item .svc__inner>p{order:1}
- .svc__item .svc__tags{order:1}
+ .svc__item .svc__tags,.svc__item .svc__groups{order:1}
+ .svc__item .svc__groups{display:flex!important;flex-direction:column!important;gap:24px!important;margin:0!important}
+ .svc__item .svc__group .svc__tags{margin:0!important}
+ .svc__gt{margin:0 0 12px!important}
+ .svc__item .svc__inner>p{margin:16px 0 24px!important}
+ .svc__item .svc__head{padding-bottom:0!important}
  .svc__num{display:none!important}.svc__item .svc__head{grid-template-columns:1fr!important}
- .svc__item .svc__btn{order:2;margin-bottom:0!important}
+ .svc__item .svc__btn{order:2;margin:32px 0 0!important}
  .svc__item{border-bottom:0!important;padding-bottom:0!important}
  .svc__item:not(:last-child){margin-bottom:20px!important;padding-bottom:20px!important;border-bottom:1px solid var(--line)!important}}
 @media (max-width:900px){.svc__left{padding-top:0!important}.svc{padding-top:0!important}.who__stick{padding-bottom:101px!important}}
