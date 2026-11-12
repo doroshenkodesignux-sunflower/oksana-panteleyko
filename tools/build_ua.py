@@ -180,7 +180,7 @@ T = [
  ("s:'National University O.M. Beketov|Kharkiv, Ukraine'", "s:'ХНУМГ ім. О.М. Бекетова|Харків, Україна'", 1),
  ("t:'SBID Accredited Designer'", "t:'Акредитований дизайнер SBID'", 1),
  ("s:'The Society of British & International Interior Design|London, UK'", "s:'The Society of British & International Interior Design|Лондон, Велика Британія'", 1),
- ("s:'HoReCa · Project Design & Marketing|Milan, Italy'", "s:'HoReCa · проєктний дизайн і маркетинг|Мілан, Італія'", 1),
+ ("s:'HoReCa · Project Design & Marketing|Milan, Italy'", "s:'HoReCa · дизайн і маркетинг|Мілан, Італія'", 1),
 
  # ---------- locations ----------
  ('<h2 class="loc__h">Project Locations</h2>', '<h2 class="loc__h">Локації проєктів</h2>', 1),
