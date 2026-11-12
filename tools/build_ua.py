@@ -210,6 +210,7 @@ T = [
   "['Спокійна комунікація','Психологічна освіта допомагає мені вести проєкти спокійно й зрозуміло, навіть коли все складно.']", 1),
 
  # ---------- testimonials (placeholders) ----------
+ ('<span class="lockup__serif">My approach</span>', '<span class="lockup__serif">Мій підхід</span>', 1),
  ('<h2 class="tst__label">Testimonials</h2>', '<h2 class="tst__label">Відгуки</h2>', 1),
  ('<p class="tst__prev">What my clients say</p>', '<p class="tst__prev">Що кажуть клієнти</p>', 1),
  ("['Owner,\\nBeauty Salon “So. Shell”','Oksana understood our brand from the very first meeting. She asked about our clients, our daily routine and the mood we wanted people to leave with — and then turned all of it into a space. The salon now feels exactly like us, and our clients notice it every single day.']",
