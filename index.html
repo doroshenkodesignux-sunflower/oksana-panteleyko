@@ -1554,7 +1554,7 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 .totop.dark{background:rgba(29,22,22,.85)!important;border:1px solid rgba(255,255,255,.45)!important;color:#fff!important}
 /* Brand & Space gallery: photos cross-fade softly; a thin segmented line shows progress */
 .gal{position:absolute;inset:0;overflow:hidden}
-.gal img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover;opacity:0!important;transform:scale(1.06)!important;clip-path:none!important;transition:opacity 1.4s cubic-bezier(.4,0,.2,1),transform 5s linear!important;z-index:0!important}
+.gal img{position:absolute!important;inset:0;width:100%!important;height:100%!important;object-fit:cover;opacity:0!important;transform:scale(1.06)!important;clip-path:none!important;transition:opacity 1.4s cubic-bezier(.4,0,.2,1),transform 3s cubic-bezier(.2,.6,.3,1)!important;z-index:0!important}
 .gal img.prev{opacity:1!important;z-index:1!important;transform:scale(1)!important}
 .gal img.cur{opacity:1!important;z-index:2!important;transform:scale(1)!important}
 .gal__bar{position:absolute;left:24px;right:24px;bottom:22px;z-index:3;display:flex;gap:6px}
@@ -2173,7 +2173,7 @@ const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p c
     };
   addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);open(0);onS();
   /* galleries run only while visible (desktop: only while their service is open) */
-  document.querySelectorAll('.svc .gal').forEach(g=>{const ph=[...g.querySelectorAll('img')], seg=[...g.querySelectorAll('.gal__bar i')], D=3800;let k=0,t0=0,run=false,raf=0;
+  document.querySelectorAll('.svc .gal').forEach(g=>{const ph=[...g.querySelectorAll('img')], seg=[...g.querySelectorAll('.gal__bar i')], D=2000;let k=0,t0=0,run=false,raf=0;
     const paint=()=>seg.forEach((s,j)=>{s.classList.toggle('done',j<k);s.classList.toggle('now',j===k);s.firstChild.style.transform=j===k?'':''});
     const go=n=>{ph[k].classList.remove('cur');ph[k].classList.add('prev');const old=ph[k];setTimeout(()=>old.classList.remove('prev'),1400);k=(n+ph.length)%ph.length;ph[k].classList.add('cur');t0=performance.now();paint()};
     const loop=t=>{if(!run)return;const p=Math.min(1,(t-t0)/D);seg[k].firstChild.style.transform=`scaleX(${p})`;if(p>=1){seg[k].firstChild.style.transform='';go(k+1)}raf=requestAnimationFrame(loop)};
@@ -2400,7 +2400,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
 (()=>{const b=document.getElementById('toTop'), c=document.getElementById('about');
   const name=document.getElementById('ftrName'), by=document.querySelector('.ftr__by'), copy=document.querySelector('.ftr__copy');
   const hit=(a,r)=>a.left<r.right&&a.right>r.left&&a.top<r.bottom&&a.bottom>r.top;
-  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',innerWidth<=900?ftr.getBoundingClientRect().top<innerHeight*.8:document.getElementById('services').getBoundingClientRect().top<innerHeight*.6);   // desktop: from Services onward
+  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',innerWidth<=900?ftr.getBoundingClientRect().top<innerHeight*.8:document.getElementById('approach').getBoundingClientRect().top<innerHeight*.6);   // desktop: from My Approach onward
     // never cover the footer name or the credits: if the resting spot would touch them, sit just above the name
     b.style.bottom='';if(innerWidth<=900){const y=by.getBoundingClientRect();if(y.bottom<innerHeight-16){b.style.bottom=(innerHeight-y.bottom)+'px'};return}
     const r=b.getBoundingClientRect(), pad=10, box={left:r.left-pad,right:r.right+pad,top:r.top-pad,bottom:r.bottom+pad};
