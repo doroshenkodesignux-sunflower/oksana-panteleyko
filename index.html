@@ -1488,8 +1488,8 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 .awx,.loc,.ftr{background:#1D1616!important}
 .header.dark.glass{background:rgba(29,22,22,.35)!important}
 .totop.dark{background:rgba(29,22,22,.7)!important}
-.awx__echo p{position:absolute;left:50%;top:50%;margin:0!important;font-size:clamp(24px,3.5vw,68px)!important;color:rgba(255,255,255,.12)!important;filter:blur(2.5px)!important;opacity:0}
-@media (max-width:900px){.awx__echo p{font-size:clamp(18px,6.4vw,30px)!important}}
+.awx__echo p:nth-child(n){position:absolute;left:50%;top:50%;transition:none!important;margin:0!important;font-size:clamp(24px,3.5vw,68px)!important;color:rgba(255,255,255,.12)!important;filter:blur(2.5px)!important;opacity:0}
+@media (max-width:900px){.awx__echo p:nth-child(n){font-size:clamp(18px,6.4vw,30px)!important}}
 /* all dark buttons: same chocolate as the dark blocks */
 .btn--ink,.btn--dark,.header.light .btn--light,.header.light .burger,.cta__btn,.about__cv,.svc__btn:not(.svc__btn2),.arrow:hover:not(:disabled),.socials a:hover,.cts__social a:hover,.cta__chips input:checked+span{background:#1D1616!important}
 .cta__fields label.invalid input{border-bottom-color:#C8443B!important}.cta__fields label.invalid>span{color:#C8443B!important}
@@ -2258,12 +2258,13 @@ const AWX=[
   /* background titles: one continuous column of all titles gliding up softly */
   echoBox.innerHTML=AWX.map(a=>`<p>${esc(a.y?`${a.t} — ${a.y}`:a.t)}</p>`).join('');const echo=[...echoBox.children];
   let eTarget=0,eCur=0,eRun=0;
-  const eDraw=()=>{eCur+=(eTarget-eCur)*.07;if(Math.abs(eTarget-eCur)<.001)eCur=eTarget;
+  const eDraw=()=>{eCur+=(eTarget-eCur)*.06;if(Math.abs(eTarget-eCur)<.001)eCur=eTarget;
     const step=Math.max(70,Math.min(200,innerHeight*.21));
     echo.forEach((e,k)=>{const d=k-eCur,a=Math.abs(d);
-      const op=a<.55?0:a<1?(a-.55)/.45:a<2.6?1:Math.max(0,1-(a-2.6)/.6);
-      e.style.opacity=(op*(a<1.5?1:.65)).toFixed(3);
-      e.style.transform=`translate(-50%,-50%) translateY(${(d*step).toFixed(1)}px) translateX(${((k%2?1:-1)*(eCur/AWX.length-.5)*4).toFixed(2)}vw) scale(${(a<1.5?1:.84)})`});
+      const sm=x=>x<=0?0:x>=1?1:x*x*(3-2*x);
+      const op=sm((a-.35)/.75)*(1-sm((a-1.9)/1.1))*(1-.35*sm((a-1)/1));
+      e.style.opacity=op.toFixed(3);
+      e.style.transform=`translate(-50%,-50%) translateY(${(d*step).toFixed(1)}px) scale(${(1.05-.12*Math.min(a,2.5)).toFixed(3)})`});
     if(eCur!==eTarget)eRun=requestAnimationFrame(eDraw);else eRun=0};
   const kick=()=>{if(!eRun)eRun=requestAnimationFrame(eDraw)};
   addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
