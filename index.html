@@ -1495,6 +1495,12 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 .cta__fields label.invalid input{border-bottom-color:#C8443B!important}.cta__fields label.invalid>span{color:#C8443B!important}
 .cta__err{position:absolute;right:12px;top:22px;font:400 12px/1 var(--sans);font-style:normal;color:#C8443B;pointer-events:none}
 .cta__status.err{color:#C8443B!important}
+form.cta__card{position:relative}
+.cta__done{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:clamp(24px,4vw,64px);text-align:center;background:#fff;opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility .6s}
+.cta__done h2{margin:0}
+.cta__done p{margin:0;font:400 16px/1.6 var(--sans);color:#555}
+.cta__done .btn{width:100%;max-width:420px;height:56px;margin-top:16px}
+form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1797,6 +1803,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
+      <div class="cta__done cta__head" role="dialog" aria-live="polite"><h2>Thank you!</h2><p>Your request has been received.<br>I’ll get in touch with you shortly.</p><button type="button" class="btn btn--dark cta__btn cta__home">Back to home page <span class="plus"></span></button></div>
     </form>
   </div>
 </section>
@@ -1896,6 +1903,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Submit a request <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
+      <div class="cta__done cta__head" role="dialog" aria-live="polite"><h2>Thank you!</h2><p>Your request has been received.<br>I’ll get in touch with you shortly.</p><button type="button" class="btn btn--dark cta__btn cta__home">Back to home page <span class="plus"></span></button></div>
     </form>
   </div>
 </section>
@@ -2535,6 +2543,7 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 const REQUEST_URL='https://panteleyko-requests.doroshenko-design-ux.workers.dev';
 document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   const st=f.querySelector('.cta__status'),btn=f.querySelector('.cta__btn');
+  f.querySelector('.cta__home').addEventListener('click',()=>{f.classList.remove('sent');window.lenis?lenis.scrollTo(0,{duration:1.2,force:true}):scrollTo({top:0,behavior:'smooth'})});
   f.querySelectorAll('.cta__fields input').forEach(i=>i.addEventListener('input',()=>{const l=i.closest('label');if(l.classList.contains('invalid')){l.classList.remove('invalid');const m=l.querySelector('.cta__err');if(m)m.textContent='';if(!f.querySelector('label.invalid'))st.textContent=''}}));
   f.addEventListener('submit',async e=>{e.preventDefault();st.className='cta__status';
     const v=n=>(f.elements[n]&&f.elements[n].value||'').trim();
@@ -2545,7 +2554,7 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
     btn.disabled=true;st.textContent='Sending…';
     try{const r=await fetch(REQUEST_URL,{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({name:v('name'),phone:v('phone'),email:v('email'),service:sel?sel.value:'',website:v('hp_x7'),page:k?'bottom form':'top form'})});
-      if(!r.ok)throw 0;f.reset();st.textContent='Thank you! I’ll get back to you shortly.'}
+      if(!r.ok)throw 0;f.reset();f.querySelectorAll('label.filled').forEach(l=>l.classList.remove('filled'));st.textContent='';f.classList.add('sent');f.querySelector('.cta__done .btn').focus({preventScroll:true})}
     catch(_){st.classList.add('err');st.textContent='Something went wrong — please try again or write to hello@panteleyko.com.'}
     finally{btn.disabled=false}})});
 </script>
