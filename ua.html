@@ -1581,7 +1581,7 @@ p,li,blockquote,figcaption{text-wrap:pretty}
 .loc__list:hover button:not(:hover){color:rgba(255,255,255,.92)}
 .loc__stage.focus .loc__list button:not(.on){color:rgba(255,255,255,.4)!important}
 .loc__stage.focus .loc__list button.on{color:#fff!important}
-.hero__lead,.hero__lead span{color:var(--ink)!important;opacity:1!important}
+.hero__lead,.hero__lead span{color:var(--ink)!important}
 /* project cards: location only, no description */
 .pcard__meta p{display:none!important}
 /* Ukrainian version: Cyrillic capitals run a little wider */
@@ -1591,6 +1591,8 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .offer{width:max-content!important;max-width:none!important}
 .offer b,.offer span{white-space:nowrap!important}
 @media (max-width:900px){.offer{max-width:100%!important}.offer b{white-space:normal!important}}
+#jumpVeil{position:fixed;inset:0;z-index:250;background:#fff;opacity:0;pointer-events:none;transition:opacity .22s ease}
+#jumpVeil.on{opacity:1}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2632,9 +2634,13 @@ frame();
 <script>/* every CTA button lands on the form card of the nearest request block, fully revealed */
 document.addEventListener('click',e=>{const a=e.target.closest('a[href="#contact"],a[href="#request"]');if(!a||a.closest('.menu__nav'))return;
   e.preventDefault();e.stopPropagation();const sec=document.querySelector(a.getAttribute('href')), f=sec.querySelector('form');
-  const go=(d,done)=>{const r=f.getBoundingClientRect(), y=Math.max(0,scrollY+r.top-Math.max(0,(innerHeight-r.height)/2));
-    window.lenis?lenis.scrollTo(y,{duration:d,force:true,onComplete:done}):scrollTo({top:y,behavior:'smooth'})};
-  go(1.6,()=>{const r=f.getBoundingClientRect();if(Math.abs(r.top-Math.max(0,(innerHeight-r.height)/2))>4)go(.6)})},true);</script>
+  // a quick soft fade instead of scrolling through every block: fade out, jump straight to the form, fade in
+  const jump=()=>{const r=f.getBoundingClientRect(), y=Math.max(0,scrollY+r.top-Math.max(0,(innerHeight-r.height)/2));
+    window.lenis?lenis.scrollTo(y,{immediate:true,force:true}):scrollTo(0,y)};
+  let v=document.getElementById('jumpVeil');if(!v){v=document.createElement('div');v.id='jumpVeil';document.body.append(v)}
+  v.classList.add('on');
+  const off=()=>{const r=f.getBoundingClientRect();return Math.abs(r.top-Math.max(0,(innerHeight-r.height)/2))};
+  setTimeout(()=>{let n=0;const settle=()=>{jump();dispatchEvent(new Event('scroll'));if(++n<12&&off()>3)setTimeout(settle,50);else setTimeout(()=>v.classList.remove('on'),40)};settle()},220)},true);</script>
 <script>/* wrap each button label so it can roll like MENU */
 document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>span').forEach(b=>{const t=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(!t)return;
   const w=t.textContent.trim(),r=document.createElement('span');r.className='roll';r.innerHTML='<span></span><span aria-hidden="true"></span>';r.children[0].textContent=w;r.children[1].textContent=w;
