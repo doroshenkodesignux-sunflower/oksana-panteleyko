@@ -17,7 +17,7 @@ src = (ROOT / 'index.html').read_text(encoding='utf-8')
 T = [
  # ---------- document ----------
  ('<html lang="en">', '<html lang="uk">', 1),
- ('<title>Oksana Panteleyko — Interior Architect</title>', '<title>Оксана Пантелейко — архітекторка інтер’єрів</title>', 1),
+ ('<title>Oksana Panteleyko — Interior Architect</title>', '<title>Оксана Пантелейко — архітектор інтер’єрів</title>', 1),
 
  # ---------- language switch ----------
  ('<a href="ua.html" class="lang__on" lang="uk">UA</a><i></i><a href="index.html" lang="en" aria-current="true">EN</a>',
@@ -61,8 +61,8 @@ T = [
  ('<p>SBID finalist projects</p>', '<p>Проєкти — фіналісти SBID</p>', 1),
  ('<p>Countries with projects</p>', '<p>Країн із проєктами</p>', 1),
  ('<p>Completed projects</p>', '<p>Завершених проєктів</p>', 1),
- ('<p>SBID Accredited Design <br>Professional, London</p>', '<p>Акредитована фахівчиня <br>SBID, Лондон</p>', 1),
- ('<p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p>', '<p>Фіналістка SBID London <br>Awards 2022 і 2025.</p>', 1),
+ ('<p>SBID Accredited Design <br>Professional, London</p>', '<p>Акредитований спеціаліст <br>SBID, Лондон</p>', 1),
+ ('<p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p>', '<p>Фіналіст SBID London <br>Awards 2022 і 2025.</p>', 1),
  ('<p>Milano Business School — <br>HoReCa Segment.</p>', '<p>Milano Business School — <br>сегмент HoReCa.</p>', 1),
  ('Download CV <i', 'Завантажити CV <i', 1),
  ('>Download CV<', '>Завантажити CV<', 1),
@@ -179,7 +179,7 @@ T = [
  ("s:'Residence \"French House\"'", "s:'Резиденція «French House»'", 1),
  ("t:'Master of Architecture'", "t:'Магістр архітектури'", 1),
  ("s:'National University O.M. Beketov|Kharkiv, Ukraine'", "s:'ХНУМГ ім. О.М. Бекетова|Харків, Україна'", 1),
- ("t:'SBID Accredited Designer'", "t:'Акредитована дизайнерка SBID'", 1),
+ ("t:'SBID Accredited Designer'", "t:'Акредитований дизайнер SBID'", 1),
  ("s:'The Society of British & International Interior Design|London, UK'", "s:'The Society of British & International Interior Design|Лондон, Велика Британія'", 1),
  ("s:'HoReCa · Project Design & Marketing|Milan, Italy'", "s:'HoReCa · проєктний дизайн і маркетинг|Мілан, Італія'", 1),
 
