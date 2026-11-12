@@ -2229,11 +2229,11 @@ const AWX=[
   {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence French House',link:true,r:7},
   {img:'dipl-master.jpg',t:'Master of Architecture',s:'O.M. Beketov National University, Kharkiv, Ukraine',doc:true,ny:.335,r:-4},
   {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,tall:true,ny:.395,r:4},
-  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,lift:.08,r:-4}];
+  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,under:true,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
   const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
-  pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
+  pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
     <div class="awx__sub"><span>${esc(a.s)}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
@@ -2250,6 +2250,7 @@ const AWX=[
     const h=S[k].querySelector('.awx__t').getBoundingClientRect(),sb=S[k].querySelector('.awx__sub').getBoundingClientRect();
     const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.035+10;
     const tT=h.top-st.top,sB=sb.bottom-st.top;let d=0;
+    if(a.under){p.style.top=((h.top-st.top+h.height*.72+ph*.035)-y0).toFixed(1)+'px';return}
     if(y0+band>tT&&y0-band<sB){const up=(tT-band)-y0,dn=(sB+band)-y0;d=Math.abs(up)<=Math.abs(dn)?up:dn}
     const pd=Math.max(-innerHeight*.05,Math.min(innerHeight*.05,d));p.style.top=lf;S[k].style.top=(-d).toFixed(1)+'px'})};
   P.forEach(p=>{const im=p.querySelector('img');im.complete?0:im.addEventListener('load',fit)});
