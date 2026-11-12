@@ -1596,6 +1596,30 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* About lead: lines turn from grey to dark one by one as you scroll */
 .abx__lead .w{color:#D6D1CF;transition:color .8s ease}
 .abx__lead .w.on{color:var(--ink)}
+/* very narrow phones (iPhone SE 1st gen, small Androids): headings and button labels shrink a little so nothing spills sideways */
+@media (max-width:340px){.btn.svc__btn2{font-size:11.5px!important}}
+@media (max-width:374px){.cts__title,.appr__title{font-size:11.5vw!important}.cts__intro{min-width:0}.btn{font-size:12.5px!important;letter-spacing:.02em!important}.lnk{letter-spacing:.02em!important}}
+/* short laptop screens (1280×720 and similar): forms stay within the screen under the header */
+@media (min-width:901px) and (max-height:740px){.cta__fields{gap:6px!important}form.cta__card .cta__head p{margin-top:8px!important}}
+/* very short desktop windows (≤650px high): trim secondary details so each block still fits the screen */
+@media (min-width:901px) and (max-height:680px){.wcard .tags{display:none!important}}
+@media (min-width:901px) and (max-height:650px){
+  form.cta__card .cta__head p{display:none!important}
+  .cta__fields input{height:48px!important;padding-top:20px!important}
+  .svc__inner .svc__tags,.svc__inner .svc__groups{display:none!important}
+}
+/* desktop browsers on short laptop screens (1366×768, 1280×720 with tabs and toolbars): the request form stays fully in view */
+@media (min-width:901px) and (max-height:820px){
+  form.cta__card{padding-top:clamp(20px,4vh,40px)!important;padding-bottom:clamp(20px,4vh,40px)!important;gap:clamp(14px,2.6vh,24px)!important}
+  .cta__head h2{font-size:clamp(30px,6vh,48px)!important}
+  .cta__fields{gap:4px!important;margin-top:4px!important}
+  .cta__fields input{height:50px!important;padding-top:22px!important}
+  .cta__fields span{top:18px!important}
+  .cta__chips span{padding:6px 10px!important}
+  .cta__btn{height:50px!important;margin-top:0!important}
+}
+/* phones: the hero always fits the visible screen (Safari/Chrome bars included), down to ~520px tall */
+@media (max-width:900px){.hero{min-height:520px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2638,11 +2662,12 @@ frame();
 document.addEventListener('click',e=>{const a=e.target.closest('a[href="#contact"],a[href="#request"]');if(!a||a.closest('.menu__nav'))return;
   e.preventDefault();e.stopPropagation();const sec=document.querySelector(a.getAttribute('href')), f=sec.querySelector('form');
   // a quick soft fade instead of scrolling through every block: fade out, jump straight to the form, fade in
-  const jump=()=>{const r=f.getBoundingClientRect(), y=Math.max(0,scrollY+r.top-Math.max(0,(innerHeight-r.height)/2));
+  const hd=document.querySelector('.header'), gapTop=()=>{const H=(hd?hd.offsetHeight:0), r=f.getBoundingClientRect();return r.height>innerHeight-H-16?H+8:Math.max(H+8,(innerHeight-r.height)/2)};   // taller than the screen: start just below the header
+  const jump=()=>{const r=f.getBoundingClientRect(), y=Math.max(0,scrollY+r.top-gapTop());
     window.lenis?lenis.scrollTo(y,{immediate:true,force:true}):scrollTo(0,y)};
   let v=document.getElementById('jumpVeil');if(!v){v=document.createElement('div');v.id='jumpVeil';document.body.append(v)}
   v.classList.add('on');
-  const off=()=>{const r=f.getBoundingClientRect();return Math.abs(r.top-Math.max(0,(innerHeight-r.height)/2))};
+  const off=()=>Math.abs(f.getBoundingClientRect().top-gapTop());
   setTimeout(()=>{let n=0;const settle=()=>{jump();dispatchEvent(new Event('scroll'));if(++n<12&&off()>3)setTimeout(settle,50);else setTimeout(()=>v.classList.remove('on'),40)};settle()},220)},true);</script>
 <script>/* wrap each button label so it can roll like MENU */
 document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>span').forEach(b=>{const t=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(!t)return;

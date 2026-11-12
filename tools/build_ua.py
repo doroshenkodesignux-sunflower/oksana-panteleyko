@@ -140,7 +140,7 @@ T = [
   "p:'Вагаєтеся щодо важливого рішення в дизайні чи нерухомості? Обговорімо його. Я чесно покажу ризики й можливості, щоб Ви ухвалили рішення впевнено.'", 1),
  ("tags:['Second Opinion','Design Audit','Project Review','Layout Review','Property Investment Check','Renovation Plan']",
   "tags:['Друга думка','Дизайн-аудит','Рев’ю проєкту','Аналіз планування','Перевірка інвестиції','План ремонту']", 1),
- ("b:'Book a consultation'", "b:'Записатися на консультацію'", 1),
+ ("b:'Book a consultation'", "b:'Замовити консультацію'", 1),
  ("p:'A full refresh, done turnkey: interior, brand identity and website, created together so your space and brand speak one language.<span class=\"svc__para\"></span>See more branding work at DiDi Brand Atelier.'",
   "p:'Повне оновлення під ключ: інтер’єр, айдентика бренду й сайт, створені разом, щоб простір і бренд говорили однією мовою.<span class=\"svc__para\"></span>Більше робіт із брендингу — на сайті DiDi Brand Atelier.'", 1),
  ("tags:['Interior Renovation','Branding','Website Design']", "tags:['Оновлення інтер’єру','Брендинг','Дизайн сайту']", 1),
