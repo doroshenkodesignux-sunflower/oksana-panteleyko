@@ -1573,6 +1573,9 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 @media (min-width:901px){.svc__title{margin:0 0 80px!important}}
 @media (min-width:901px) and (max-height:860px){.svc__title{margin-bottom:clamp(28px,calc(100vh - 780px),80px)!important}}
 @media (max-width:900px){.svc__title{margin-bottom:80px!important}}
+/* no hanging words: service texts use the full column and balanced lines; all other paragraphs avoid lone last words */
+.svc__inner>p{max-width:none!important;text-wrap:balance!important}
+p,li,blockquote,figcaption{text-wrap:pretty}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
