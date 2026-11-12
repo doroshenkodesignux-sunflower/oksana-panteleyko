@@ -1638,6 +1638,8 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* awards captions with a phone-specific line break (desktop: name / city; phone: two balanced lines) */
 .awx__mbr,.awx__mcm{display:none}.awx__sub i{font-style:normal}
 @media (max-width:900px){.awx__mbr{display:inline}.awx__dsp,.awx__dbr{display:none}.awx__mcm{display:inline}}
+/* Who cards on phones: a label sits close to its own text (12px) and clearly apart from the block before it (32px) */
+@media (max-width:900px){.wcard .cols{gap:32px!important;margin:8px 0!important}.wcard .cols h4{margin-bottom:12px!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
