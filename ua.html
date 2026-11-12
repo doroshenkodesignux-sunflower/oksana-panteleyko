@@ -1620,6 +1620,8 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 }
 /* phones: the hero always fits the visible screen (Safari/Chrome bars included), down to ~520px tall */
 @media (max-width:900px){.hero{min-height:520px!important}}
+/* phones: "Explore project" sits just above the slide counter, not under the caption */
+@media (max-width:900px){.awx__copy{position:static!important}.awx__link{position:absolute!important;left:var(--pad);right:var(--pad);width:auto!important;bottom:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) / 2 + 40px);z-index:3}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2391,7 +2393,8 @@ const AWX=[
     const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
     eTarget=Math.min(AWX.length-.5,Math.max(-.5,f-.5));kick()};
   /* keep Oksana's name on each diploma clear of the title: smallest shift above the title or below the caption */
-  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;const lf=(-(a.lift||0)*innerHeight).toFixed(1)+'px';p.style.top=lf;
+  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;if(innerWidth<=900){p.style.top='0px';return}   /* phones: diplomas stay centred */
+    const lf=(-(a.lift||0)*innerHeight).toFixed(1)+'px';p.style.top=lf;
     const h=S[k].querySelector('.awx__t').getBoundingClientRect(),sb=S[k].querySelector('.awx__sub').getBoundingClientRect();
     const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.035+10;
     const tT=h.top-st.top,sB=sb.bottom-st.top;let d=0;
