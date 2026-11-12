@@ -1478,6 +1478,9 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 }
 /* awards pagination ends before the back-to-top button and sits on its centre line */
 @media (min-width:901px){.awx__foot{right:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) + 32px)!important;bottom:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) / 2 - 6px)!important}}
+/* header logo: pure black on light blocks, white on dark ones (matches the preloader hand-off) */
+.header:not(.dark) .header__logo{filter:brightness(0)!important}
+.header.dark .header__logo{filter:brightness(0) invert(1)!important}
 /* chocolate: Awards, Locations (globe) and footer */
 .awx,.loc,.ftr{background:#1D1616!important}
 .header.dark.glass{background:rgba(29,22,22,.35)!important}
@@ -2035,7 +2038,8 @@ window.writeTitle=()=>{const svg=document.querySelector('.hero__script svg');if(
     const ease='cubic-bezier(.76,0,.24,1)',D=1250;
     body.classList.remove('preloading');document.querySelector('.header__logo').style.visibility='hidden';
     writeTitle();
-    svg.animate([{transform:'none',color:'#fff'},{color:'#fff',offset:.35},{transform:`translate(${dx}px,${dy}px) scale(${s})`,color:'#1b5d8d'}],{duration:D,easing:ease,fill:'forwards'});
+    const hdr=document.querySelector('.header'),endC=hdr.classList.contains('dark')?'#fff':(getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#000');   // white on dark blocks, black on light ones
+    svg.animate([{transform:'none',color:'#fff'},{color:'#fff',offset:.35},{transform:`translate(${dx}px,${dy}px) scale(${s})`,color:endC}],{duration:D,easing:ease,fill:'forwards'});
     pre.querySelector('.pre__bg').animate([{opacity:1},{opacity:0}],{duration:D*.8,delay:D*.12,easing:'cubic-bezier(.4,0,.2,1)',fill:'forwards'});
     setTimeout(()=>{document.querySelector('.header__logo').style.visibility='';pre.remove()},D+30);
   });
