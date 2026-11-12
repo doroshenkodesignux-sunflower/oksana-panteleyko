@@ -2232,12 +2232,12 @@ const AWX=[
     echoBox.style.transform=`translateY(${(-(Math.min(1,f-ci)-.5)*Math.min(90,innerHeight*.1)).toFixed(1)}px)`;
     echo.forEach((e,k)=>e.style.transform=`translateX(${((k%2?1:-1)*(p-.5)*4).toFixed(2)}vw)`)};
   /* keep Oksana's name on each diploma clear of the title: smallest shift above the title or below the caption */
-  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;p.style.top='0px';
+  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;p.style.top='0px';S[k].style.position='relative';S[k].style.top='0px';
     const h=S[k].querySelector('.awx__t').getBoundingClientRect(),sb=S[k].querySelector('.awx__sub').getBoundingClientRect();
-    const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.05+Math.max(14,innerHeight*.02);
+    const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.035+10;
     const tT=h.top-st.top,sB=sb.bottom-st.top;let d=0;
     if(y0+band>tT&&y0-band<sB){const up=(tT-band)-y0,dn=(sB+band)-y0;d=Math.abs(up)<=Math.abs(dn)?up:dn}
-    p.style.top=d.toFixed(1)+'px'})};
+    const pd=Math.max(-innerHeight*.05,Math.min(innerHeight*.05,d));p.style.top=pd.toFixed(1)+'px';S[k].style.top=(pd-d).toFixed(1)+'px'})};
   P.forEach(p=>{const im=p.querySelector('img');im.complete?0:im.addEventListener('load',fit)});
   addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,50);
   addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
