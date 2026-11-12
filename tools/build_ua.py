@@ -255,6 +255,11 @@ for en, ua, n in sorted(T, key=lambda t: -len(t[0])):
 
 # both pages point search engines to each other
 
+# Ukrainian typography: short words (з, і, в, на, до…) never hang at the end of a line — glue them to the next word
+import re
+SHORT = r'(?:[взуіїйаоя]|та|на|до|за|по|не|що|як|із|зі|чи|ці|це|ми|ви|Ви|від|для|без|під|над|при)'
+for _ in range(2):   # twice, so chains like «і з» are glued too
+    out = re.sub(r'(?<=[\s>«(])(' + SHORT + r') (?=[^\s<])', '\\1\u00a0', out, flags=re.I)
 # a dash never starts a line: glue it to the word before it
 out = out.replace(' — ', '\u00a0— ')
 
