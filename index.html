@@ -1488,6 +1488,8 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 .awx,.loc,.ftr{background:#1D1616!important}
 .header.dark.glass{background:rgba(29,22,22,.35)!important}
 .totop.dark{background:rgba(29,22,22,.7)!important}
+.awx__echo p{position:absolute;left:50%;top:50%;margin:0!important;font-size:clamp(24px,3.5vw,68px)!important;color:rgba(255,255,255,.12)!important;filter:blur(2.5px)!important;opacity:0}
+@media (max-width:900px){.awx__echo p{font-size:clamp(18px,6.4vw,30px)!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2216,7 +2218,7 @@ const AWX=[
   {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,tall:true,ny:.395,r:4},
   {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
-  const echoBox=stage.querySelector('.awx__echo'),echo=[...echoBox.children],num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
+  const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
@@ -2225,21 +2227,31 @@ const AWX=[
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
     S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('past',k<i)});
-    const L=k=>{const a=AWX[k];return a?(a.y?`${a.t} — ${a.y}`:a.t):''};[i-2,i-1,i+1,i+2].forEach((k,n)=>echo[n].textContent=L(k));
+    
     num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
   const on=()=>{const r=track.getBoundingClientRect();if(r.bottom<-innerHeight||r.top>innerHeight*2)return;
     const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
-    echoBox.style.transform=`translateY(${(-(Math.min(1,f-ci)-.5)*Math.min(90,innerHeight*.1)).toFixed(1)}px)`;
-    echo.forEach((e,k)=>e.style.transform=`translateX(${((k%2?1:-1)*(p-.5)*4).toFixed(2)}vw)`)};
+    eTarget=Math.min(AWX.length-.5,Math.max(-.5,f-.5));kick()};
   /* keep Oksana's name on each diploma clear of the title: smallest shift above the title or below the caption */
   const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;p.style.top='0px';S[k].style.position='relative';S[k].style.top='0px';
     const h=S[k].querySelector('.awx__t').getBoundingClientRect(),sb=S[k].querySelector('.awx__sub').getBoundingClientRect();
     const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.035+10;
     const tT=h.top-st.top,sB=sb.bottom-st.top;let d=0;
     if(y0+band>tT&&y0-band<sB){const up=(tT-band)-y0,dn=(sB+band)-y0;d=Math.abs(up)<=Math.abs(dn)?up:dn}
-    const pd=Math.max(-innerHeight*.05,Math.min(innerHeight*.05,d));p.style.top=pd.toFixed(1)+'px';S[k].style.top=(pd-d).toFixed(1)+'px'})};
+    const pd=Math.max(-innerHeight*.05,Math.min(innerHeight*.05,d));p.style.top='0px';S[k].style.top=(-d).toFixed(1)+'px'})};
   P.forEach(p=>{const im=p.querySelector('img');im.complete?0:im.addEventListener('load',fit)});
   addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,50);
+  /* background titles: one continuous column of all titles gliding up softly */
+  echoBox.innerHTML=AWX.map(a=>`<p>${esc(a.y?`${a.t} — ${a.y}`:a.t)}</p>`).join('');const echo=[...echoBox.children];
+  let eTarget=0,eCur=0,eRun=0;
+  const eDraw=()=>{eCur+=(eTarget-eCur)*.07;if(Math.abs(eTarget-eCur)<.001)eCur=eTarget;
+    const step=Math.max(70,Math.min(200,innerHeight*.21));
+    echo.forEach((e,k)=>{const d=k-eCur,a=Math.abs(d);
+      const op=a<.55?0:a<1?(a-.55)/.45:a<2.6?1:Math.max(0,1-(a-2.6)/.6);
+      e.style.opacity=(op*(a<1.5?1:.65)).toFixed(3);
+      e.style.transform=`translate(-50%,-50%) translateY(${(d*step).toFixed(1)}px) translateX(${((k%2?1:-1)*(eCur/AWX.length-.5)*4).toFixed(2)}vw) scale(${(a<1.5?1:.84)})`});
+    if(eCur!==eTarget)eRun=requestAnimationFrame(eDraw);else eRun=0};
+  const kick=()=>{if(!eRun)eRun=requestAnimationFrame(eDraw)};
   addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
   /* desktop: one wheel gesture = one slide */
   let lock=0,last=0;addEventListener('wheel',e=>{if(innerWidth<=900)return;const r=track.getBoundingClientRect();if(r.top>1||r.bottom<innerHeight-1)return;
