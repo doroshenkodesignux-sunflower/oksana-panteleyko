@@ -150,7 +150,7 @@ T = [
  # ---------- request forms ----------
  ('<h2>Leave a Request</h2>', '<h2>Залиште заявку</h2>', 0),
  ('<p>Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.</p>',
-  '<p>Залиште свої контакти, і я невдовзі зв’яжуся з Вами, щоб обговорити проєкт або консультацію.</p>', 0),
+  '<p>Залиште свої контакти, і я зв’яжусь із Вами найближчим часом, щоб обговорити Ваш проєкт або консультацію.</p>', 0),
  ('<span>Name</span>', '<span>Ім’я</span>', 0),
  ('<span>Phone number</span>', '<span>Номер телефону</span>', 0),
  ('<legend>What can I help with?</legend>', '<legend>Чим я можу допомогти?</legend>', 0),
@@ -161,7 +161,7 @@ T = [
  ('<span>Not sure yet</span>', '<span>Ще не знаю</span>', 0),
  ('Submit a request <span', 'Надіслати заявку <span', 0),
  ('<h2>Thank you!</h2><p>Your request has been received.<br>I’ll get in touch with you shortly.</p>',
-  '<h2>Дякую!</h2><p>Вашу заявку отримано.<br>Я зв’яжуся з Вами найближчим часом.</p>', 0),
+  '<h2>Дякую!</h2><p>Вашу заявку отримано.<br>Я зв’яжусь із Вами найближчим часом.</p>', 0),
  ('Back to home page <span', 'На головну <span', 0),
  ("'Required field'", "'Обов’язкове поле'", 0),
  ("'Enter a valid phone number'", "'Введіть коректний номер'", 0),
