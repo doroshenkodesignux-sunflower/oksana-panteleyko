@@ -1526,9 +1526,7 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 .abx__foot{align-items:end;row-gap:28px}
 .abx__item span{display:block;margin-bottom:10px;font:600 clamp(14px,calc(var(--u) * 20),20px)/1.4 var(--sans);opacity:.3}
 .abx__item p{margin:0;max-width:none;text-wrap:balance;font:600 clamp(14px,calc(var(--u) * 20),20px)/1.4 var(--sans)}
-.abx__cv{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1.5px solid #1D1616;font:600 clamp(13px,calc(var(--u) * 16),16px)/1.5 var(--sans);text-transform:uppercase;color:#1D1616;text-decoration:none}
-.abx__cv i{font:400 clamp(40px,calc(var(--u) * 64),64px)/.5 var(--serif);font-style:normal;transition:transform .5s var(--ease)}
-.abx__cv:hover i{transform:rotate(90deg)}
+.abx__cv{width:100%}
 /* short desktop screens: everything still fits one screen */
 @media (min-width:901px) and (max-height:820px){.abx{padding-block:72px}.abx__stat b{font-size:clamp(64px,17vh,150px)!important}.abx{gap:clamp(32px,5vh,80px)}}
 /* tablets */
@@ -1596,7 +1594,7 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .abx__foot .rv{transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
 .abx__foot .rv.in{transform:none}
 /* About lead: lines turn from grey to dark one by one as you scroll */
-.abx__lead .w{color:#C9C4C2;transition:color .5s ease}
+.abx__lead .w{color:#D6D1CF;transition:color .8s ease}
 .abx__lead .w.on{color:var(--ink)}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
@@ -1838,7 +1836,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 <section class="abx" id="about">
   <div class="abx__top">
     <h2 class="abx__label rv">About me</h2>
-    <p class="abx__lead rv" style="--d:.1s">For over 18 years I’ve been creating spaces where people feel at ease — and want to come back to. Each project starts with your main goal, not the decor, and is built to hold its value for years. I guide it from the first idea to the finished space.</p>
+    <p class="abx__lead">For over 18 years I’ve been creating spaces where people feel at ease — and want to come back to. Each project starts with your main goal, not the decor, and is built to hold its value for years. I guide it from the first idea to the finished space.</p>
   </div>
   <div class="abx__stats">
     <div class="stat abx__stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p>Years of experience</p></div>
@@ -1850,7 +1848,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     <div class="abx__item rv" style="--d:.1s"><span>02</span><p>SBID Accredited Design <br>Professional, London</p></div>
     <div class="abx__item rv" style="--d:.35s"><span>01</span><p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p></div>
     <div class="abx__item rv" style="--d:.6s"><span>03</span><p>Milano Business School — <br>HoReCa Segment.</p></div>
-    <a class="abx__cv rv" style="--d:.9s" href="#" download>Download CV <i aria-hidden="true">+</i></a>
+    <a class="lnk abx__cv rv" style="--d:.9s" href="#" download>Download CV <i></i></a>
   </div>
 </section>
 
@@ -2715,7 +2713,7 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   const wrap=n=>{[...n.childNodes].forEach(c=>{if(c.nodeType===3){const f=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t))f.append(t);else{const s=document.createElement('span');s.className='w';s.textContent=t;f.append(s)}});c.replaceWith(f)}else if(c.nodeType===1)wrap(c)})};
   wrap(p);const W=[...p.querySelectorAll('.w')];let lines=[];
   const measure=()=>{const m=new Map();W.forEach(w=>{const k=Math.round(w.offsetTop);if(!m.has(k))m.set(k,[]);m.get(k).push(w)});lines=[...m.keys()].sort((a,b)=>a-b).map(k=>m.get(k))};
-  const on=()=>{const r=p.getBoundingClientRect(),vh=innerHeight;const k=Math.min(1,Math.max(0,(vh*.9-r.top)/(vh*.55)));const lit=Math.round(k*lines.length);lines.forEach((l,i)=>l.forEach(w=>w.classList.toggle('on',i<lit)))};
+  const on=()=>{const r=p.getBoundingClientRect(),vh=innerHeight;const k=Math.min(1,Math.max(0,(vh*.8-r.top)/(vh*.6)));/* starts low on the screen, done near the top */const lit=Math.round(k*lines.length);lines.forEach((l,i)=>l.forEach(w=>w.classList.toggle('on',i<lit)))};
   measure();on();addEventListener('scroll',on,{passive:true});addEventListener('resize',()=>{measure();on()});document.fonts&&document.fonts.ready.then(()=>{measure();on()})})();</script>
 </body>
 </html>
