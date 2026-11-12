@@ -1634,7 +1634,7 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.wcard__title{font-size:calc(var(--h2) * .78)!important;line-height:1.08!important}}
 /* awards title line break: hidden on desktop; on phones "SBID AWARDS / FINALIST 2025", centred */
 .awx__br{display:none}
-@media (max-width:900px){.awx__copy{grid-template-columns:minmax(0,1fr)!important}.awx__t{display:block!important;text-align:center!important;width:100%}.awx__t .awx__br{display:block}.awx__t .awx__m{margin:0 .12em}.awx__slide{text-align:center}.awx__echo{display:none!important}}
+@media (max-width:900px){.awx__copy{grid-template-columns:minmax(0,1fr)!important}.awx__t{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;justify-content:center!important;align-items:baseline!important;column-gap:.25em!important;row-gap:0!important;text-align:center!important;width:100%}.awx__t .awx__br{display:block;flex-basis:100%;height:0}.awx__t .awx__m{margin:0}.awx__slide{text-align:center}.awx__echo{display:none!important}}
 /* awards captions with a phone-specific line break (desktop: name / city; phone: two balanced lines) */
 .awx__mbr,.awx__mcm{display:none}.awx__sub i{font-style:normal}
 @media (max-width:900px){.awx__mbr{display:inline}.awx__dsp,.awx__dbr{display:none}.awx__mcm{display:inline}}
@@ -2421,7 +2421,7 @@ const AWX=[
   const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
-  copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' Finalist','</span></span><br class="awx__br"><span class="awx__m"><span>Finalist'):esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
+  copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' Finalist','</span></span><i class="awx__br"></i><span class="awx__m"><span>Finalist'):esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
     <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
