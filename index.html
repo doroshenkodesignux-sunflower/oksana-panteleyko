@@ -1501,6 +1501,14 @@ form.cta__card{position:relative}
 .cta__done p{margin:0;font:400 16px/1.6 var(--sans);color:#555}
 .cta__done .btn{width:100%;max-width:420px;height:56px;margin-top:16px}
 form.cta__card.sent .cta__done{opacity:1;visibility:visible}
+/* globe pins: the hovered one grows with soft ripples, the rest step back */
+.pin i{position:relative;transition:transform .5s var(--ease),opacity .5s}
+.pin.on i{transform:scale(1.5)}
+.pin.on i::before,.pin.on i::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1px solid rgba(233,238,242,.7);animation:pinRing 2s cubic-bezier(.2,.6,.3,1) infinite}
+.pin.on i::after{animation-delay:1s}
+@keyframes pinRing{from{transform:scale(1);opacity:.9}to{transform:scale(4.5);opacity:0}}
+.loc__pins.dim .pin:not(.on) i{opacity:.3;transform:scale(.75)}
+.pin.on{background:rgba(29,22,22,.92)!important}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2399,8 +2407,8 @@ for(let i=0;i<N;i++){const y=1-2*(i+.5)/N, r=Math.sqrt(1-y*y), th=i*2.3999632297
 const geo=new THREE.BufferGeometry();
 geo.setAttribute('position',new THREE.Float32BufferAttribute(tgt,3));geo.setAttribute('aStart',new THREE.Float32BufferAttribute(st,3));geo.setAttribute('aRnd',new THREE.Float32BufferAttribute(rnd,1));geo.setAttribute('aC',new THREE.Float32BufferAttribute(cid,1));
 const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
-  uniforms:{uHi:{value:-1},uHiA:{value:0},uP:{value:0},uSize:{value:1},uT:{value:0},uSpread:{value:new THREE.Vector3(4,2.5,1.5)},uInv:{value:new THREE.Matrix4()}},
-  vertexShader:`attribute vec3 aStart;attribute float aRnd;attribute float aC;uniform float uP,uSize,uT,uHi,uHiA;uniform vec3 uSpread;uniform mat4 uInv;varying float vA;varying float vH;
+  uniforms:{uM:{value:new THREE.Vector3(0,0,1)},uMA:{value:0},uHi:{value:-1},uHiA:{value:0},uP:{value:0},uSize:{value:1},uT:{value:0},uSpread:{value:new THREE.Vector3(4,2.5,1.5)},uInv:{value:new THREE.Matrix4()}},
+  vertexShader:`attribute vec3 aStart;attribute float aRnd;attribute float aC;uniform float uP,uSize,uT,uHi,uHiA;uniform vec3 uSpread;uniform mat4 uInv;uniform vec3 uM;uniform float uMA;varying float vA;varying float vH;
     mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
     void main(){
       float k=clamp((uP-aRnd*.45)/.55,0.,1.);float e=k*k*k*(k*(k*6.-15.)+10.);            // late, smooth landing per dot
@@ -2408,24 +2416,37 @@ const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
       vec3 d=aStart*uSpread;d.xz=rot(uT*(.05+aRnd*.08)+aRnd*6.28)*d.xz*vec2(1.,.6);d.y+=sin(uT*.4+aRnd*30.)*.06;
       vec3 dust=(uInv*vec4(d,1.)).xyz;
       // swirl: while gathering, dots orbit the globe on a spiral before they settle
-      vec3 p=mix(dust,position,e);float sw=(1.-e)*(2.2+aRnd*2.5);p.xz=rot(sw)*p.xz;p*=1.+(1.-e)*.35*sin(aRnd*12.+uT*.8)*(1.-e);
+      float fl=smoothstep(.955,.997,dot(normalize(position),uM))*uMA*e;
+      vec3 p=mix(dust,position*(1.+fl*.035),e);float sw=(1.-e)*(2.2+aRnd*2.5);p.xz=rot(sw)*p.xz;p*=1.+(1.-e)*.35*sin(aRnd*12.+uT*.8)*(1.-e);
       vec4 mv=modelViewMatrix*vec4(p,1.);gl_Position=projectionMatrix*mv;
       vec3 n=normalize((modelViewMatrix*vec4(position,0.)).xyz);
       vA=mix(.35+.55*aRnd*aRnd,mix(.10,1.,smoothstep(-.25,.35,n.z))*(.55+.45*aRnd),e);
       vH=(abs(aC-uHi)<.5?uHiA:0.)*e;vA=max(vA,vH*mix(.25,1.,smoothstep(-.25,.35,n.z)));
-      gl_PointSize=uSize*(1.+aRnd*.9+vH*.6)*(3./-mv.z)*mix(1.7,1.,e);}`,
+      vA=min(1.,vA+fl*.55);gl_PointSize=uSize*(1.+aRnd*.9+vH*.6+fl*.9)*(3./-mv.z)*mix(1.7,1.,e);}`,
   fragmentShader:`varying float vA;varying float vH;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;gl_FragColor=vec4(mix(vec3(.93,.89,.83),vec3(.52,.72,.86),vH),vA*smoothstep(.5,.15,d));}`});
 const dots=new THREE.Points(geo,mat), globe=new THREE.Group();globe.add(dots);
 const core=new THREE.Mesh(new THREE.SphereGeometry(.975,64,64),new THREE.MeshBasicMaterial({color:0x1D1616,transparent:true,opacity:0,depthWrite:true}));core.renderOrder=0;dots.renderOrder=1;globe.add(core);
 const scene=new THREE.Scene();scene.add(globe);
 /* blue outline of each country, drawn just above the dots */
 const lineMat=new THREE.LineBasicMaterial({color:0x84B7DB,transparent:true,opacity:0,depthTest:true});
+const pinV0=PLACES.map(P=>toXYZ(P.lat,P.lon,1));
 const outlines=CN.map((n,k)=>{const pts=[];const ring=r=>{for(let i=0;i<r.length-1;i++){const a=r[i],b=r[i+1];if(Math.abs(a[0]-b[0])>180)continue;
       const st=Math.max(1,Math.ceil(Math.max(Math.abs(a[0]-b[0]),Math.abs(a[1]-b[1]))/1.5));
       for(let s2=0;s2<st;s2++){const t0=s2/st,t1=(s2+1)/st;pts.push(toXYZ(a[1]+(b[1]-a[1])*t0,a[0]+(b[0]-a[0])*t0,1.006),toXYZ(a[1]+(b[1]-a[1])*t1,a[0]+(b[0]-a[0])*t1,1.006))}}};
     if(REGION[k]){const R0=REGION[k],r=[];for(let i=0;i<=48;i++){const t=i/48*2*Math.PI;r.push([R0.lon+R0.r*Math.cos(t)/Math.cos(R0.lat*Math.PI/180),R0.lat+R0.r*Math.sin(t)])}ring(r)}
     else{const f=cmap.feats[k];if(f){const gm=f.geometry, polys=gm.type==='Polygon'?[gm.coordinates]:gm.coordinates;polys.forEach(pl=>pl.forEach(ring))}if(k===UA)ring(CRIMEA)}
     const ls=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts),lineMat);ls.visible=false;ls.renderOrder=2;globe.add(ls);return ls});
+/* flight arcs from Nice to every other place: drawn one after another once the globe has formed, with a soft comet running along each */
+const HOME=0, arcN=64, arcMat=new THREE.LineBasicMaterial({color:0xBFD9EC,transparent:true,opacity:.5,depthTest:true});
+const arcs=PLACES.map((P,i)=>{if(i===HOME||P.n==='Monaco')return null;const a=pinV0[HOME].clone().normalize(),b=pinV0[i].clone().normalize(),ang=a.angleTo(b),pts=[];
+  for(let j=0;j<=arcN;j++){const t=j/arcN,v=new THREE.Vector3().copy(a).multiplyScalar(Math.sin((1-t)*ang)).addScaledVector(b,Math.sin(t*ang)).divideScalar(Math.sin(ang));v.multiplyScalar(1.012+Math.sin(Math.PI*t)*Math.min(.32,.06+ang*.22));pts.push(v)}
+  const g=new THREE.BufferGeometry().setFromPoints(pts);g.setDrawRange(0,0);const ln=new THREE.Line(g,arcMat);ln.renderOrder=3;globe.add(ln);
+  const cg=new THREE.BufferGeometry().setFromPoints([pts[0].clone()]);const cm=new THREE.PointsMaterial({color:0xffffff,size:5,sizeAttenuation:false,transparent:true,opacity:0,depthTest:true});
+  const cp=new THREE.Points(cg,cm);cp.renderOrder=4;globe.add(cp);return {g,pts,cg,cm,ph:Math.random()}}).filter(Boolean);
+let arcT0=-1;
+const arcTick=t=>{if(arcT0<0){if(mat.uniforms.uP.value>.97)arcT0=t;else return}
+  arcs.forEach((A,k)=>{const lt=t-arcT0-k*.35, pr=Math.min(1,Math.max(0,lt/1.4)), e=1-Math.pow(1-pr,3);A.g.setDrawRange(0,Math.round(e*(arcN+1)));
+    if(pr>=1){const c=((t*.28+A.ph)%1), j=Math.min(arcN,Math.floor(c*arcN));A.cg.attributes.position.array.set([A.pts[j].x,A.pts[j].y,A.pts[j].z]);A.cg.attributes.position.needsUpdate=true;A.cm.opacity=Math.sin(Math.PI*c)*.9}})};
 const FOV=30, cam=new THREE.PerspectiveCamera(FOV,1,.1,80);
 const ren=new THREE.WebGLRenderer({canvas,antialias:false,alpha:true,powerPreference:'high-performance'});const DPR=Math.min(1.5,devicePixelRatio);ren.setPixelRatio(DPR);
 let SW=1,SH=1,R=1;
@@ -2445,7 +2466,13 @@ canvas.addEventListener('pointerdown',e=>{dragging=true;lx=e.clientX;ly=e.client
 canvas.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-lx,dy=e.clientY-ly;lx=e.clientX;ly=e.clientY;vy=dx*.005;yaw+=vy;pitch=Math.max(-.6,Math.min(.9,pitch+dy*.004))});
 const stop=()=>{dragging=false;idle=performance.now()};canvas.addEventListener('pointerup',stop);canvas.addEventListener('pointercancel',stop);
 let hiNow=-1;
-const setOn=i=>{btns.forEach((b,k)=>b.classList.toggle('on',k===i));pins.forEach((p,k)=>p.classList.toggle('on',k===i));
+/* the globe leans slightly toward the cursor (with inertia); land dots under the cursor lift and brighten */
+let tx=0,ty2=0,tX=0,tY=0,mIn=false;const mLoc=new THREE.Vector3(0,0,1);
+stage.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const b=stage.getBoundingClientRect();tX=((e.clientX-b.left)/b.width-.5)*2;tY=((e.clientY-b.top)/b.height-.5)*2;
+  const c=canvas.getBoundingClientRect();ndc.set((e.clientX-c.left)/c.width*2-1,-((e.clientY-c.top)/c.height)*2+1);ray.setFromCamera(ndc,cam);
+  if(ray.ray.intersectSphere(sph,hit)){invG.copy(globe.matrixWorld).invert();mLoc.copy(hit).applyMatrix4(invG).normalize();mIn=true}else mIn=false});
+stage.addEventListener('pointerleave',()=>{tX=0;tY=0;mIn=false});
+const setOn=i=>{pinsEl.classList.toggle('dim',i>=0&&(hovering||!!focus));btns.forEach((b,k)=>b.classList.toggle('on',k===i));pins.forEach((p,k)=>p.classList.toggle('on',k===i));
   if(i!==hiNow){hiNow=i;mat.uniforms.uHiA.value=0;if(i>=0)mat.uniforms.uHi.value=i;outlines.forEach((o,k)=>o.visible=k===i);lineMat.opacity=0}};
 /* hover on the globe itself: find the country under the cursor */
 const ray=new THREE.Raycaster(), ndc=new THREE.Vector2(), sph=new THREE.Sphere(new THREE.Vector3(),1), hit=new THREE.Vector3(), invG=new THREE.Matrix4();
@@ -2479,7 +2506,10 @@ function frame(){requestAnimationFrame(frame);
   pSm+=(target-pSm)*.045;mat.uniforms.uP.value=pSm;core.material.opacity=.6*Math.max(0,(pSm-.6)/.4);
   if(focus){yaw+=(focus.y-yaw)*.06;pitch+=(focus.p-pitch)*.06}
   else if(!dragging){vy*=.95;yaw+=vy+(performance.now()-idle>1500?.0016:0);pitch+=(.32-pitch)*.01}
-  globe.rotation.set(pitch,yaw,0,'XYZ');globe.updateMatrixWorld();
+  tx+=(tX-tx)*.04;ty2+=(tY-ty2)*.04;
+  globe.rotation.set(pitch+ty2*.1,yaw+tx*.16,0,'XYZ');globe.updateMatrixWorld();
+  mat.uniforms.uM.value.lerp(mLoc,.25).normalize();mat.uniforms.uMA.value+=((mIn&&!dragging?1:0)-mat.uniforms.uMA.value)*.08;
+  arcTick(t);
   inv.copy(globe.matrixWorld).invert();mat.uniforms.uInv.value.copy(inv);
   if(hiNow>=0){mat.uniforms.uHiA.value+=(1-mat.uniforms.uHiA.value)*.12;lineMat.opacity+=(.95-lineMat.opacity)*.12}
   ren.render(scene,cam);
