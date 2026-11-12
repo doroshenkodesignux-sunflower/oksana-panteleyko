@@ -99,7 +99,7 @@ T = [
  ("tags:['Brand Space','Customer Journey','Zoning','Functionality','Renovation Plan','Budget Control']",
   "tags:['Простір бренду','Шлях клієнта','Зонування','Функціональність','План ремонту','Контроль бюджету']", 1),
  ("[['villa','Villas'],['apartment','Apartments'],['residence','Residences'],['penthouse','Penthouses']]",
-  "[['villa','Вілли'],['apartment','Апартаменти'],['residence','Резиденції'],['penthouse','Пентхауси']]", 1),
+  "[['villa','Вілла'],['apartment','Апартаменти'],['residence','Резиденція'],['penthouse','Пентхаус']]", 1),
  ("tags:['Personal Concept','Smart Layout','Calm Atmosphere','Natural Materials','Lighting Scenarios','Custom Furniture','Clever Storage','Budget Control']",
   "tags:['Персональна концепція','Продумане планування','Спокійна атмосфера','Натуральні матеріали','Сценарії освітлення','Меблі на замовлення','Розумне зберігання','Контроль бюджету']", 1),
  ("tags:['Portfolio & Resume','Social Media','Finding Clients']", "tags:['Портфоліо й резюме','Соцмережі','Пошук клієнтів']", 1),
