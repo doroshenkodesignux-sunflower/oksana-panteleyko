@@ -1630,6 +1630,24 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.who .wcard.open::before{display:none!important}}   /* phones: no progress line on top of each card */
 /* phones: "Services" is a big Cormorant heading like the other section titles */
 @media (max-width:900px){.svc__title{font:600 var(--h2)/1.05 var(--serif)!important;text-transform:uppercase!important;letter-spacing:-.01em!important;color:var(--ink)!important;white-space:normal}}
+/* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
+   title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
+@media (max-width:900px){
+  .awx{--top:calc(var(--hdrH,72px) + 20px);--pagerH:44px;--copyH:150px;--linkH:86px}
+  .awx__foot{top:var(--top)!important;bottom:auto!important;left:var(--pad)!important;right:var(--pad)!important}
+  .awx__pics{top:calc(var(--top) + var(--pagerH))!important;bottom:calc(var(--linkH) + var(--copyH) + 24px)!important;left:0!important;right:0!important}
+  .awx__pic{--avail:calc(100svh - var(--top) - var(--pagerH) - var(--linkH) - var(--copyH) - 56px);width:min(66vw,calc(var(--avail) / 1.25))!important}
+  .awx__pic--doc{width:min(80vw,calc(var(--avail) * 1.3))!important}
+  .awx__pic--tall{width:min(56vw,calc(var(--avail) / 1.43))!important}
+  .awx__copy{position:absolute!important;left:var(--pad)!important;right:var(--pad)!important;bottom:var(--linkH)!important;top:auto!important;max-width:none!important;align-items:end}
+  .awx__slide{width:100%!important;max-width:none!important}
+  .awx__t{font-size:clamp(28px,8.4vw,38px)!important;line-height:1.02!important;gap:0!important}
+  .awx__t .awx__dash{display:none}
+  .awx__sub{margin-top:12px!important;gap:0!important}
+  .awx__sub span{font-size:11.5px!important;letter-spacing:.12em!important;line-height:1.5!important;color:rgba(255,255,255,.62)!important}
+  .awx__link{bottom:calc(24px - var(--linkH))!important;left:0!important;right:0!important}
+  .awx__pic::after{background:rgba(10,10,10,.12)!important}
+}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
