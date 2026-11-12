@@ -2229,7 +2229,7 @@ const AWX=[
   {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence French House',link:true,r:7},
   {img:'dipl-master.jpg',t:'Master of Architecture',s:'O.M. Beketov National University, Kharkiv, Ukraine',doc:true,ny:.335,r:-4},
   {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,tall:true,ny:.395,r:4},
-  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,r:-4}];
+  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,lift:.08,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
   const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
@@ -2246,12 +2246,12 @@ const AWX=[
     const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
     eTarget=Math.min(AWX.length-.5,Math.max(-.5,f-.5));kick()};
   /* keep Oksana's name on each diploma clear of the title: smallest shift above the title or below the caption */
-  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;p.style.top='0px';S[k].style.position='relative';S[k].style.top='0px';
+  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;const lf=(-(a.lift||0)*innerHeight).toFixed(1)+'px';p.style.top=lf;S[k].style.position='relative';S[k].style.top='0px';
     const h=S[k].querySelector('.awx__t').getBoundingClientRect(),sb=S[k].querySelector('.awx__sub').getBoundingClientRect();
     const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.035+10;
     const tT=h.top-st.top,sB=sb.bottom-st.top;let d=0;
     if(y0+band>tT&&y0-band<sB){const up=(tT-band)-y0,dn=(sB+band)-y0;d=Math.abs(up)<=Math.abs(dn)?up:dn}
-    const pd=Math.max(-innerHeight*.05,Math.min(innerHeight*.05,d));p.style.top='0px';S[k].style.top=(-d).toFixed(1)+'px'})};
+    const pd=Math.max(-innerHeight*.05,Math.min(innerHeight*.05,d));p.style.top=lf;S[k].style.top=(-d).toFixed(1)+'px'})};
   P.forEach(p=>{const im=p.querySelector('img');im.complete?0:im.addEventListener('load',fit)});
   addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,50);
   /* background titles: one continuous column of all titles gliding up softly */
