@@ -2188,7 +2188,7 @@ const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p c
     const was=items.map(it=>it.classList.contains('on'));items.forEach((it,k)=>it.classList.toggle('on',k===3));
     const sr=stick.getBoundingClientRect(), lb=[...items[3].querySelectorAll('.btn')].pop().getBoundingClientRect(), br=bar.getBoundingClientRect();
     const mr=media.getBoundingClientRect(), barY=mr.bottom-(parseFloat(getComputedStyle(bar).bottom)+bar.offsetHeight/2);   // untransformed (the photo slot may be mid-zoom)
-    const gap=Math.max(16,barY-lb.bottom);
+    const gap=Math.min(80,Math.max(16,barY-lb.bottom));   // 80px under the label; less only when the screen is too short
     items.forEach((it,k)=>it.classList.toggle('on',was[k]));void list.offsetHeight;bodies.forEach(b=>b.style.transition='');
     ttl.style.setProperty('margin-bottom',gap.toFixed(1)+'px','important')};
   addEventListener('resize',fitGap);document.fonts&&document.fonts.ready.then(fitGap);addEventListener('load',fitGap);setTimeout(fitGap,300);
