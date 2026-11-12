@@ -2216,7 +2216,7 @@ const AWX=[
   {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,tall:true,ny:.395,r:4},
   {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
-  const echo=[...stage.querySelectorAll('.awx__echo p')],num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
+  const echoBox=stage.querySelector('.awx__echo'),echo=[...echoBox.children],num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
@@ -2225,10 +2225,11 @@ const AWX=[
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
     S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('past',k<i)});
-    const a=AWX[i],line=a.y?`${a.t} — ${a.y}`:a.t;echo.forEach(e=>e.textContent=line);
+    const L=k=>{const a=AWX[k];return a?(a.y?`${a.t} — ${a.y}`:a.t):''};[i-2,i-1,i+1,i+2].forEach((k,n)=>echo[n].textContent=L(k));
     num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
   const on=()=>{const r=track.getBoundingClientRect();if(r.bottom<-innerHeight||r.top>innerHeight*2)return;
-    const p=clamp(-r.top/Math.max(1,r.height-innerHeight));show(Math.min(AWX.length-1,Math.floor(p*AWX.length)));
+    const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
+    echoBox.style.transform=`translateY(${(-(Math.min(1,f-ci)-.5)*Math.min(90,innerHeight*.1)).toFixed(1)}px)`;
     echo.forEach((e,k)=>e.style.transform=`translateX(${((k%2?1:-1)*(p-.5)*4).toFixed(2)}vw)`)};
   /* keep Oksana's name on each diploma clear of the title: smallest shift above the title or below the caption */
   const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;p.style.top='0px';
