@@ -1576,6 +1576,10 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 /* no hanging words: service texts use the full column and balanced lines; all other paragraphs avoid lone last words */
 .svc__inner>p{max-width:none!important;text-wrap:balance!important}
 p,li,blockquote,figcaption{text-wrap:pretty}
+/* globe: one focus look whether you hover a country name or a place on the planet */
+.loc__list:hover button:not(:hover){color:rgba(255,255,255,.92)}
+.loc__stage.focus .loc__list button:not(.on){color:rgba(255,255,255,.4)!important}
+.loc__stage.focus .loc__list button.on{color:#fff!important}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2563,7 +2567,7 @@ stage.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const
   const c=canvas.getBoundingClientRect();ndc.set((e.clientX-c.left)/c.width*2-1,-((e.clientY-c.top)/c.height)*2+1);ray.setFromCamera(ndc,cam);
   if(ray.ray.intersectSphere(sph,hit)){invG.copy(globe.matrixWorld).invert();mLoc.copy(hit).applyMatrix4(invG).normalize();mIn=true}else mIn=false});
 stage.addEventListener('pointerleave',()=>{tX=0;tY=0;mIn=false});
-const setOn=i=>{pinsEl.classList.toggle('dim',i>=0&&(hovering||!!focus));btns.forEach((b,k)=>b.classList.toggle('on',k===i));pins.forEach((p,k)=>p.classList.toggle('on',k===i));
+const setOn=i=>{const f=i>=0&&(hovering||!!focus);pinsEl.classList.toggle('dim',f);stage.classList.toggle('focus',f);btns.forEach((b,k)=>b.classList.toggle('on',k===i));pins.forEach((p,k)=>p.classList.toggle('on',k===i));
   if(i!==hiNow){hiNow=i;mat.uniforms.uHiA.value=0;if(i>=0)mat.uniforms.uHi.value=i;outlines.forEach((o,k)=>o.visible=k===i);lineMat.opacity=0}};
 /* hover on the globe itself: find the country under the cursor */
 const ray=new THREE.Raycaster(), ndc=new THREE.Vector2(), sph=new THREE.Sphere(new THREE.Vector3(),1), hit=new THREE.Vector3(), invG=new THREE.Matrix4();
