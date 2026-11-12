@@ -1549,6 +1549,9 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 }
 /* the block after the first CTA slides up over its pinned photo (as the old About did) */
 #contact+section{position:relative;z-index:2;margin-top:-100vh;margin-top:-100svh;box-shadow:0 -30px 80px rgba(0,0,0,.12)}
+/* to-top: clearly see-through glass on light blocks; dark with a light outline on dark ones */
+.totop:not(.dark){background:rgba(255,255,255,.22)!important;border:1px solid rgba(255,255,255,.75)!important;-webkit-backdrop-filter:blur(14px) saturate(140%)!important;backdrop-filter:blur(14px) saturate(140%)!important;box-shadow:0 6px 24px rgba(29,22,22,.12),inset 0 1px 0 rgba(255,255,255,.6)!important}
+.totop.dark{background:rgba(29,22,22,.85)!important;border:1px solid rgba(255,255,255,.45)!important;color:#fff!important}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
