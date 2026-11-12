@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600&family=Montserrat:wght@400;500;600&family=Mrs+Saint+Delafield&family=Great+Vibes&subset=cyrillic&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#000000; --brown:#000000; --blue:#000000; --blue2:#5B7183; --script:#84B7DB;
+  --ink:#1D1616; --brown:#1D1616; --blue:#1D1616; --blue2:#5B7183; --script:#84B7DB;
   --sand:#E9EEF2; --bg2:#E9EEF2; --line:#dfdddd;
   --serif:'Cormorant',serif; --sans:'Montserrat',sans-serif;
   --pad:40px; --ease:cubic-bezier(.22,.61,.36,1);
@@ -212,8 +212,8 @@ img{display:block;max-width:100%}
 .menu__nav a sup{display:block;font-size:inherit;line-height:1;margin-top:.235em;letter-spacing:0;color:#7A90A0;transition:color .4s}
 .menu__nav a sup span{display:block;font:500 max(12px,.14em)/1 var(--sans);margin-top:-.16em}
 .menu__nav:hover a{color:#C9D4DC}
-.menu__nav a:hover{color:#000000;transform:translateX(.4em)}
-.menu__nav a:hover sup{color:#000000}
+.menu__nav a:hover{color:#1D1616;transform:translateX(.4em)}
+.menu__nav a:hover sup{color:#1D1616}
 .menu__nav li,.menu__side>*{opacity:0;transform:translateY(40px);transition:opacity .5s,transform .5s}
 .menu.open .menu__nav li,.menu.open .menu__side>*{opacity:1;transform:none;transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(.35s + var(--i) * .06s)}
 .menu__side{display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-height:0}
@@ -226,7 +226,7 @@ img{display:block;max-width:100%}
 .menu__contacts{display:flex;flex-direction:column;gap:10px}
 .socials{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
 .socials a{display:flex;align-items:center;justify-content:center;aspect-ratio:1;background:#fff;color:var(--ink);transition:background .35s,color .35s}
-.socials a:hover{background:#000000;color:#fff}
+.socials a:hover{background:#1D1616;color:#fff}
 .socials svg{width:34%;max-width:40px;height:auto}
 body.menu-open{overflow:hidden}
 body.menu-open .header{background:#E9EEF2;box-shadow:inset 0 -1px 0 rgba(0,0,0,.06);-webkit-backdrop-filter:none;backdrop-filter:none}
@@ -561,7 +561,7 @@ html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!
 @media (max-width:480px){.header__loc{max-width:92px;font-size:13px;line-height:1.15}.lang a,.menu-btn{font-size:14px}.header__right{gap:12px}.lang{gap:5px}.lang i{height:12px}.header__logo{width:78px}}
 
 /* ---------- project locations: dotted globe on a pinned full-screen stage ---------- */
-.loc{--u:calc(100vw / 1920);position:relative;z-index:2;background:#000000;color:#fff}
+.loc{--u:calc(100vw / 1920);position:relative;z-index:2;background:#1D1616;color:#fff}
 .loc__track{height:260vh}
 .loc__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;align-items:center;
   padding:max(calc(var(--u) * 120),84px) 0 clamp(24px,4vh,48px)}
@@ -1482,7 +1482,7 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 /* awards pagination ends before the back-to-top button and sits on its centre line */
 @media (min-width:901px){.awx__foot{right:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) + 32px)!important;bottom:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) / 2 - 6px)!important}}
 /* header logo: pure black on light blocks, white on dark ones (matches the preloader hand-off) */
-.header:not(.dark) .header__logo{filter:brightness(0)!important}
+.header:not(.dark) .header__logo{filter:brightness(0) invert(8%) sepia(16%) saturate(1200%) hue-rotate(315deg) brightness(92%)!important}
 .header.dark .header__logo{filter:brightness(0) invert(1)!important}
 /* chocolate: Awards, Locations (globe) and footer */
 .awx,.loc,.ftr{background:#1D1616!important}
@@ -1515,18 +1515,18 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 .awx__pic::after{background:rgba(10,10,10,.36)}
 @media (max-width:900px){.awx__t{font-size:clamp(34px,10.5vw,52px)!important;white-space:normal!important}.awx__m,.awx__m>*{white-space:normal;text-align:center;max-width:calc(100vw - 32px)}.awx__slide{max-width:calc(100vw - 32px)!important}}
 /* ---------- About me (Figma 1321:2487): fills one screen, adapts in width and height ---------- */
-.abx{--u:calc(100vw / 1920);position:relative;z-index:2;background:#fff;color:#2c1e13;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(48px,7vh,110px);
+.abx{--u:calc(100vw / 1920);position:relative;z-index:2;background:#fff;color:#1D1616;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(48px,7vh,110px);
   min-height:100vh;min-height:100svh;padding:100px var(--pad)}
 .abx__top,.abx__stats,.abx__foot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:20px}
 .abx__label{grid-column:1/3;margin:0;font:700 clamp(14px,calc(var(--u) * 18),18px)/1.33 var(--sans);text-transform:uppercase;letter-spacing:0;color:#695845}
-.abx__lead{grid-column:3/5;margin:0;max-width:908px;font:400 clamp(18px,calc(var(--u) * 32),32px)/1.25 var(--sans);color:#171717}
-.abx__stat b{position:relative;display:inline-block;font:500 clamp(84px,calc(var(--u) * 180),180px)/1 var(--serif)!important;letter-spacing:-.04em!important;color:#2c1e13!important;margin:0!important;font-feature-settings:"lnum" 1,"pnum" 1}
+.abx__lead{grid-column:3/5;margin:0;max-width:908px;font:400 clamp(18px,calc(var(--u) * 32),32px)/1.25 var(--sans);color:#1D1616}
+.abx__stat b{position:relative;display:inline-block;font:500 clamp(84px,calc(var(--u) * 180),180px)/1 var(--serif)!important;letter-spacing:-.04em!important;color:#1D1616!important;margin:0!important;font-feature-settings:"lnum" 1,"pnum" 1}
 .abx__stat sup{position:absolute!important;left:100%!important;top:.02em!important;margin-left:.04em!important;font:500 .53em/1 var(--serif)!important;color:#b0d3eb!important;letter-spacing:0!important;vertical-align:baseline!important}
 .abx__stat p{margin:clamp(14px,calc(var(--u) * 26),26px) 0 0!important;font:500 clamp(12px,calc(var(--u) * 18),18px)/1.33 var(--sans)!important;text-transform:uppercase!important;letter-spacing:0!important;color:#695845!important;white-space:normal!important}
 .abx__foot{align-items:end;row-gap:28px}
 .abx__item span{display:block;margin-bottom:10px;font:600 clamp(14px,calc(var(--u) * 20),20px)/1.4 var(--sans);opacity:.3}
 .abx__item p{margin:0;max-width:none;text-wrap:balance;font:600 clamp(14px,calc(var(--u) * 20),20px)/1.4 var(--sans)}
-.abx__cv{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1.5px solid #2c1e13;font:600 clamp(13px,calc(var(--u) * 16),16px)/1.5 var(--sans);text-transform:uppercase;color:#2c1e13;text-decoration:none}
+.abx__cv{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1.5px solid #1D1616;font:600 clamp(13px,calc(var(--u) * 16),16px)/1.5 var(--sans);text-transform:uppercase;color:#1D1616;text-decoration:none}
 .abx__cv i{font:400 clamp(40px,calc(var(--u) * 64),64px)/.5 var(--serif);font-style:normal;transition:transform .5s var(--ease)}
 .abx__cv:hover i{transform:rotate(90deg)}
 /* short desktop screens: everything still fits one screen */
@@ -2370,7 +2370,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
 (()=>{const b=document.getElementById('toTop'), c=document.getElementById('about');
   const name=document.getElementById('ftrName'), by=document.querySelector('.ftr__by'), copy=document.querySelector('.ftr__copy');
   const hit=(a,r)=>a.left<r.right&&a.right>r.left&&a.top<r.bottom&&a.bottom>r.top;
-  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',innerWidth<=900?ftr.getBoundingClientRect().top<innerHeight*.8:c.getBoundingClientRect().top<innerHeight*.6);
+  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',innerWidth<=900?ftr.getBoundingClientRect().top<innerHeight*.8:c.getBoundingClientRect().bottom<0);   // desktop: appears once About (with its Download CV) is scrolled past
     // never cover the footer name or the credits: if the resting spot would touch them, sit just above the name
     b.style.bottom='';if(innerWidth<=900){const y=by.getBoundingClientRect();if(y.bottom<innerHeight-16){b.style.bottom=(innerHeight-y.bottom)+'px'};return}
     const r=b.getBoundingClientRect(), pad=10, box={left:r.left-pad,right:r.right+pad,top:r.top-pad,bottom:r.bottom+pad};
