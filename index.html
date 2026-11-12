@@ -1492,6 +1492,9 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 @media (max-width:900px){.awx__echo p{font-size:clamp(18px,6.4vw,30px)!important}}
 /* all dark buttons: same chocolate as the dark blocks */
 .btn--ink,.btn--dark,.header.light .btn--light,.header.light .burger,.cta__btn,.about__cv,.svc__btn:not(.svc__btn2),.arrow:hover:not(:disabled),.socials a:hover,.cts__social a:hover,.cta__chips input:checked+span{background:#1D1616!important}
+.cta__fields label.invalid input{border-bottom-color:#C8443B!important}.cta__fields label.invalid>span{color:#C8443B!important}
+.cta__err{position:absolute;right:12px;top:22px;font:400 12px/1 var(--sans);font-style:normal;color:#C8443B;pointer-events:none}
+.cta__status.err{color:#C8443B!important}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1787,7 +1790,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       </div>
       <div class="cta__fields">
         <label><span>Name</span><input type="text" name="name" autocomplete="name" placeholder=" " required></label>
-        <label><span>Phone number</span><input type="tel" name="phone" autocomplete="tel" placeholder=" "></label>
+        <label><span>Phone number</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
       <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design<i class="cta__long"> &amp; Renovation</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
@@ -1886,7 +1889,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       </div>
       <div class="cta__fields">
         <label><span>Name</span><input type="text" name="name" autocomplete="name" placeholder=" " required></label>
-        <label><span>Phone number</span><input type="tel" name="phone" autocomplete="tel" placeholder=" "></label>
+        <label><span>Phone number</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
       <fieldset class="cta__svc"><legend>What can I help with?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Concept</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Design<i class="cta__long"> &amp; Renovation</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Consultation</span></label><label><input type="radio" name="service" value="Rebranding"><span>Rebranding</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Not sure yet</span></label></div></fieldset>
@@ -2532,9 +2535,11 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 const REQUEST_URL='https://panteleyko-requests.doroshenko-design-ux.workers.dev';
 document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   const st=f.querySelector('.cta__status'),btn=f.querySelector('.cta__btn');
+  f.querySelectorAll('.cta__fields input').forEach(i=>i.addEventListener('input',()=>{const l=i.closest('label');if(l.classList.contains('invalid')){l.classList.remove('invalid');const m=l.querySelector('.cta__err');if(m)m.textContent='';if(!f.querySelector('label.invalid'))st.textContent=''}}));
   f.addEventListener('submit',async e=>{e.preventDefault();st.className='cta__status';
     const v=n=>(f.elements[n]&&f.elements[n].value||'').trim();
-    if(!v('name')||!/^\S+@\S+\.\S+$/.test(v('email'))){st.classList.add('err');st.textContent='Please add your name and a valid email.';return}
+    const bad=[['name',v('name').length>1,'Required field'],['phone',v('phone').replace(/\D/g,'').length>=7,v('phone')?'Enter a valid phone number':'Required field'],['email',/^\S+@\S+\.\S+$/.test(v('email')),v('email')?'Enter a valid email':'Required field']].filter(([n,ok,msg])=>{const l=f.elements[n].closest('label');let m=l.querySelector('.cta__err');if(!m){m=document.createElement('em');m.className='cta__err';l.append(m)}m.textContent=ok?'':msg;l.classList.toggle('invalid',!ok);return!ok});
+    if(bad.length){st.classList.add('err');st.textContent='Please fill in the required fields: name, phone number and email.';f.elements[bad[0][0]].focus();return}
     if(!REQUEST_URL){st.classList.add('err');st.textContent='The form is not connected yet — please write to hello@panteleyko.com.';return}
     const sel=f.querySelector('.cta__chips input:checked');
     btn.disabled=true;st.textContent='Sending…';
