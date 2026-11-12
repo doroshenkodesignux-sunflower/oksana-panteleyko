@@ -70,7 +70,7 @@ T = [
  # ---------- projects ----------
  ('<h2>Selected<br>Projects</h2>', '<h2>Вибрані<br>проєкти</h2>', 0),
  ('View all projects <i>', 'Дивитися всі проєкти <i>', 0),
- ('Explore project <i>', 'Детальніше <i>', 0),
+ ('Explore project <i>', 'Дивитися проєкт <i>', 0),
  ('<h3>Aparthotel “Alberti”</h3>', '<h3>Апартготель «Alberti»</h3>', 1),
  ('alt="Aparthotel “Alberti”"', 'alt="Апартготель «Alberti»"', 1),
  ('<h3>Cafe “Avec toi”</h3>', '<h3>Кафе «Avec toi»</h3>', 1),

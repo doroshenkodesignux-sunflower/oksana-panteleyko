@@ -1586,7 +1586,7 @@ p,li,blockquote,figcaption{text-wrap:pretty}
 .pcard__meta p{display:none!important}
 /* Ukrainian version: Cyrillic capitals run a little wider */
 html[lang^="uk"] .hero__name{letter-spacing:-.04em!important}
-html[lang^="uk"] .prj__all{min-width:max-content}
+html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-content}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1852,17 +1852,17 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="#portfolio">Дивитися всі проєкти <i></i></a></div>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-alberti.jpg" alt="Апартготель «Alberti»" loading="lazy"></div>
-        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартготель «Alberti»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Детальніше <i></i></a></span></div>
+        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартготель «Alberti»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></span><span class="ln" style="--d:.72s"><p>Кожні апартаменти мають власну колірну гаму й філософію. Кожен простір дарує інші емоції.</p></span></div>
       </article>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-avectoi.jpg" alt="Кафе «Avec toi»" loading="lazy"></div>
-        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Кафе «Avec toi»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Детальніше <i></i></a></span></div>
+        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Кафе «Avec toi»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></span><span class="ln" style="--d:.72s"><p>Кожні апартаменти мають власну колірну гаму й філософію. Кожен простір дарує інші емоції.</p></span></div>
       </article>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-azur.jpg" alt="Апартаменти «Azur Cap d’Ail»" loading="lazy" style="object-position:center 65%"></div>
-        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартаменти «Azur Cap d’Ail»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Детальніше <i></i></a></span></div>
+        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартаменти «Azur Cap d’Ail»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></span><span class="ln" style="--d:.72s"><p>Кожні апартаменти мають власну колірну гаму й філософію. Кожен простір дарує інші емоції.</p></span></div>
       </article>
       <div class="prj__screen prj__screen--dark prj__screen--end"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="#portfolio">Дивитися всі проєкти <i></i></a></div>
@@ -2347,7 +2347,7 @@ const AWX=[
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
-    <div class="awx__sub"><span>${esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Детальніше <i></i></a>':''}</div></div>`).join('');
+    <div class="awx__sub"><span>${esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Дивитися проєкт <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
