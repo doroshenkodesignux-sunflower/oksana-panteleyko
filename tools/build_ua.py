@@ -231,6 +231,7 @@ T = [
  ('<p class="cts__k">Address</p>', '<p class="cts__k">Адреса</p>', 1),
  ('<span class="nw">06000, Nice, France</span>', '<span class="nw">06000, Ніцца, Франція</span>', 1),
  ('<p class="cts__k">For collaborations</p>', '<p class="cts__k">Для співпраці</p>', 1),
+ ('&amp;z=15&amp;hl=en&amp;output=embed', '&amp;z=15&amp;hl=uk&amp;output=embed', 1),
  ('title="Map: Promenade des Anglais, Nice"', 'title="Мапа: Promenade des Anglais, Ніцца"', 1),
 
  # ---------- footer & misc ----------

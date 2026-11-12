@@ -2083,7 +2083,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div><p class="cts__k">Address</p><p class="cts__v"><span class="nw">37 Promenade des Anglais,</span><br><span class="nw">06000, Nice, France</span></p></div>
       <div class="cts__wide"><p class="cts__k">For collaborations</p><a class="cts__v" href="mailto:oksanadidi@icloud.com">oksanadidi@icloud.com</a></div>
     </div>
-    <div class="cts__map"><iframe title="Map: Promenade des Anglais, Nice" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=7.2350%2C43.6820%2C7.2950%2C43.7080&amp;layer=mapnik&amp;marker=43.6945%2C7.2650"></iframe></div>
+    <div class="cts__map"><iframe title="Map: Promenade des Anglais, Nice" loading="lazy" src="https://maps.google.com/maps?q=37%20Promenade%20des%20Anglais%2C%2006000%20Nice%2C%20France&amp;z=15&amp;hl=en&amp;output=embed" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
   </div>
 </section>
 
@@ -2502,7 +2502,13 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
     const t=Math.max(0,innerHeight-next.getBoundingClientRect().top), lead=.15*t*t/(t+.4*innerHeight);card.style.transform=lead?`translate3d(0,${(-lead).toFixed(1)}px,0)`:''};
   addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});new ResizeObserver(layout).observe(card);addEventListener('resize',layout);layout();on();
   sec.querySelectorAll('.cta__fields input').forEach(inp=>inp.addEventListener('input',()=>inp.parentNode.classList.toggle('filled',!!inp.value)));
-  const n=document.getElementById('ftrName');const fit=()=>{n.style.fontSize='100px';n.style.width='max-content';const cs=getComputedStyle(n.parentNode), w=n.parentNode.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight), rg=document.createRange();rg.selectNodeContents(n);const tw=rg.getBoundingClientRect().width;n.style.width='';n.style.fontSize=(100*w/tw)+'px'};   // measure the text itself, not the block
+  const n=document.getElementById('ftrName');const fit=()=>{n.style.fontSize='100px';n.style.width='max-content';const cs=getComputedStyle(n.parentNode), w=n.parentNode.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight), rg=document.createRange();rg.selectNodeContents(n);let tw=rg.getBoundingClientRect().width;n.style.width='';
+    if(innerWidth<=900){   /* phones: two lines — size by the longest word so it never leaves the footer */
+      let fs=72;const pr=n.parentNode.getBoundingClientRect(), L=pr.left+parseFloat(cs.paddingLeft), R=pr.right-parseFloat(cs.paddingRight);
+      const out=()=>{const r=document.createRange();r.selectNodeContents(n);return [...r.getClientRects()].some(x=>x.left<L-1||x.right>R+1)};
+      n.style.setProperty('max-width','none','important');
+      do{n.style.setProperty('font-size',fs+'px','important');fs-=1}while(out()&&fs>24);return}
+    n.style.fontSize=(100*w/tw)+'px'};   // measure the text itself, not the block
   document.fonts.ready.then(fit);addEventListener('resize',fit);addEventListener('load',fit);new ResizeObserver(fit).observe(n.parentNode);fit()})();
 </script>
 <button class="totop" id="toTop" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
