@@ -2539,7 +2539,7 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   f.addEventListener('submit',async e=>{e.preventDefault();st.className='cta__status';
     const v=n=>(f.elements[n]&&f.elements[n].value||'').trim();
     const bad=[['name',v('name').length>1,'Required field'],['phone',v('phone').replace(/\D/g,'').length>=7,v('phone')?'Enter a valid phone number':'Required field'],['email',/^\S+@\S+\.\S+$/.test(v('email')),v('email')?'Enter a valid email':'Required field']].filter(([n,ok,msg])=>{const l=f.elements[n].closest('label');let m=l.querySelector('.cta__err');if(!m){m=document.createElement('em');m.className='cta__err';l.append(m)}m.textContent=ok?'':msg;l.classList.toggle('invalid',!ok);return!ok});
-    if(bad.length){st.classList.add('err');st.textContent='Please fill in the required fields: name, phone number and email.';f.elements[bad[0][0]].focus();return}
+    if(bad.length){st.textContent='';f.elements[bad[0][0]].focus();return}
     if(!REQUEST_URL){st.classList.add('err');st.textContent='The form is not connected yet — please write to hello@panteleyko.com.';return}
     const sel=f.querySelector('.cta__chips input:checked');
     btn.disabled=true;st.textContent='Sending…';
