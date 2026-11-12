@@ -1630,22 +1630,24 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.who .wcard.open::before{display:none!important}}   /* phones: no progress line on top of each card */
 /* phones: "Services" is a big Cormorant heading like the other section titles */
 @media (max-width:900px){.svc__title{font:600 var(--h2)/1.05 var(--serif)!important;text-transform:uppercase!important;letter-spacing:-.01em!important;color:var(--ink)!important;white-space:normal}}
+/* phones: card titles in Who I work with are smaller than the section heading */
+@media (max-width:900px){.wcard__title{font-size:calc(var(--h2) * .78)!important;line-height:1.08!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
-  .awx{--top:calc(var(--hdrH,72px) + 20px);--pagerH:44px;--copyH:150px;--linkH:86px}
+  .awx{--top:calc(var(--hdrH,72px) + 20px);--pagerH:40px;--copyH:128px;--linkH:78px}
   .awx__foot{top:var(--top)!important;bottom:auto!important;left:var(--pad)!important;right:var(--pad)!important}
-  .awx__pics{top:calc(var(--top) + var(--pagerH))!important;bottom:calc(var(--linkH) + var(--copyH) + 24px)!important;left:0!important;right:0!important}
+  .awx__pics{top:calc(var(--top) + var(--pagerH) + var(--copyH) + 8px)!important;bottom:calc(var(--linkH) + 8px)!important;left:0!important;right:0!important}
   .awx__pic{--avail:calc(100svh - var(--top) - var(--pagerH) - var(--linkH) - var(--copyH) - 56px);width:min(66vw,calc(var(--avail) / 1.25))!important}
   .awx__pic--doc{width:min(80vw,calc(var(--avail) * 1.3))!important}
-  .awx__pic--tall{width:min(56vw,calc(var(--avail) / 1.43))!important}
-  .awx__copy{position:absolute!important;left:var(--pad)!important;right:var(--pad)!important;bottom:var(--linkH)!important;top:auto!important;max-width:none!important;align-items:end}
+  .awx__pic--tall{width:min(56vw,calc(var(--avail) / 1.62))!important}
+  .awx__copy{position:absolute!important;left:var(--pad)!important;right:var(--pad)!important;top:calc(var(--top) + var(--pagerH))!important;bottom:auto!important;max-width:none!important;align-items:start}
   .awx__slide{width:100%!important;max-width:none!important}
-  .awx__t{font-size:clamp(28px,8.4vw,38px)!important;line-height:1.02!important;gap:0!important}
+  .awx__t{font-size:clamp(24px,7.6vw,36px)!important;line-height:1.02!important;gap:0!important}
   .awx__t .awx__dash{display:none}
   .awx__sub{margin-top:12px!important;gap:0!important}
-  .awx__sub span{font-size:11.5px!important;letter-spacing:.12em!important;line-height:1.5!important;color:rgba(255,255,255,.62)!important}
-  .awx__link{bottom:calc(24px - var(--linkH))!important;left:0!important;right:0!important}
+  .awx__sub span{font-size:11px!important;letter-spacing:.08em!important;line-height:1.55!important;color:rgba(255,255,255,.62)!important;white-space:nowrap!important}
+  .awx__link{position:absolute!important;bottom:auto!important;top:calc(100svh - var(--top) - var(--pagerH) - 58px)!important;left:0!important;right:0!important}
   .awx__pic::after{background:rgba(10,10,10,.12)!important}
 }
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
@@ -2769,5 +2771,8 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   const measure=()=>{const m=new Map();W.forEach(w=>{const k=Math.round(w.offsetTop);if(!m.has(k))m.set(k,[]);m.get(k).push(w)});lines=[...m.keys()].sort((a,b)=>a-b).map(k=>m.get(k))};
   const on=()=>{const r=p.getBoundingClientRect(),vh=innerHeight;const k=Math.min(1,Math.max(0,(vh*.8-r.top)/(vh*.6)));/* starts low on the screen, done near the top */const lit=Math.round(k*lines.length);lines.forEach((l,i)=>l.forEach(w=>w.classList.toggle('on',i<lit)))};
   measure();on();addEventListener('scroll',on,{passive:true});addEventListener('resize',()=>{measure();on()});document.fonts&&document.fonts.ready.then(()=>{measure();on()})})();</script>
+<script>/* phones: each line of an award caption stays on one line — shrink the text just enough if a line is too long */
+(()=>{const fit=()=>{document.querySelectorAll('.awx__sub span').forEach(sp=>{sp.style.fontSize='';if(innerWidth>900)return;const max=sp.parentNode.clientWidth;if(!max)return;let fs=parseFloat(getComputedStyle(sp).fontSize);while(sp.scrollWidth>max+1&&fs>8.5){fs-=.25;sp.style.setProperty('font-size',fs+'px','important')}})};
+  addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,400)})();</script>
 </body>
 </html>
