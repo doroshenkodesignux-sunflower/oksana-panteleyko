@@ -95,7 +95,7 @@ T = [
  ("tags:['Independent Assessment','Second Opinion','Risk Check','Design Audit','Project Review','Layout Review','Renovation Strategy']",
   "tags:['Незалежна оцінка','Друга думка','Аналіз ризиків','Дизайн-аудит','Рев’ю проєкту','Аналіз планування','Стратегія ремонту']", 1),
  ("[['hotel','Hospitality & Hotels'],['lotus','Wellness & Beauty'],['health','Healthcare Spaces'],['restaurant','Restaurants & Cafés']]",
-  "[['hotel','Готелі'],['lotus','Здоров’я та краса'],['health','Медичні простори'],['restaurant','Ресторани й кафе']]", 1),
+  "[['hotel','Готелі'],['lotus','Б’юті та SPA'],['health','Медичні простори'],['restaurant','Ресторани й кафе']]", 1),
  ("tags:['Brand Space','Customer Journey','Zoning','Functionality','Renovation Plan','Budget Control']",
   "tags:['Простір бренду','Шлях клієнта','Зонування','Функціональність','План ремонту','Контроль бюджету']", 1),
  ("[['villa','Villas'],['apartment','Apartments'],['residence','Residences'],['penthouse','Penthouses']]",
