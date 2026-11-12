@@ -2684,9 +2684,10 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
 </script>
 <script>/* project cards (desktop): the location line sits on the same line as "View all projects" */
 (()=>{const btn=document.querySelector('.prj__screen--intro .prj__all');if(!btn)return;
-  const fit=()=>{const locs=[...document.querySelectorAll('.pcard__loc')];locs.forEach(l=>l.style.translate='');if(innerWidth<=900)return;
+  const fit=()=>{const locs=[...document.querySelectorAll('.pcard__loc')].map(l=>l.closest('.ln')||l);   // move the whole masked line, so nothing gets clippedlocs.forEach(l=>l.style.translate='');if(innerWidth<=900)return;
     const t=(btn.querySelector('.roll')||btn).getBoundingClientRect(), c=t.top+t.height/2;
-    locs.forEach(l=>{const r=l.getBoundingClientRect();l.style.translate='0 '+(c-(r.top+r.height/2)).toFixed(1)+'px'})};
+    locs.forEach(l=>{const r=l.getBoundingClientRect(), mid=r.top+2+(r.height-6)/2;   // the mask line itself (its text may still be mid-reveal)
+      l.style.translate='0 '+(c-mid).toFixed(1)+'px'})};
   addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,500)})();</script>
 </body>
 </html>
