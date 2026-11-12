@@ -1581,6 +1581,8 @@ p,li,blockquote,figcaption{text-wrap:pretty}
 .loc__stage.focus .loc__list button:not(.on){color:rgba(255,255,255,.4)!important}
 .loc__stage.focus .loc__list button.on{color:#fff!important}
 .hero__lead,.hero__lead span{color:var(--ink)!important;opacity:1!important}
+/* project cards: location only, no description */
+.pcard__meta p{display:none!important}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2680,5 +2682,11 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
     catch(_){st.classList.add('err');st.textContent='Something went wrong — please try again or write to hello@panteleyko.com.'}
     finally{btn.disabled=false}})});
 </script>
+<script>/* project cards (desktop): the location line sits on the same line as "View all projects" */
+(()=>{const btn=document.querySelector('.prj__screen--intro .prj__all');if(!btn)return;
+  const fit=()=>{const locs=[...document.querySelectorAll('.pcard__loc')];locs.forEach(l=>l.style.translate='');if(innerWidth<=900)return;
+    const t=(btn.querySelector('.roll')||btn).getBoundingClientRect(), c=t.top+t.height/2;
+    locs.forEach(l=>{const r=l.getBoundingClientRect();l.style.translate='0 '+(c-(r.top+r.height/2)).toFixed(1)+'px'})};
+  addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,500)})();</script>
 </body>
 </html>
