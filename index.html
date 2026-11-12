@@ -1425,6 +1425,53 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 .cta__status{margin:12px 0 0;min-height:0;font:400 14px/1.4 var(--sans);color:var(--ink);text-align:left}
 .cta__status:empty{display:none}
 .cta__status.err{color:#B3261E}
+/* ============ AWARDS & CREDENTIALS (7 slides: tilted photo + big title) ============ */
+.awx{position:relative;z-index:2;background:#141414;color:#fff}
+.awx__track{height:calc(7 * 100vh + 100vh)}
+.awx__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:grid;place-items:center}
+.awx__echo{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:12vh 0;pointer-events:none}
+.awx__echo p{margin:0;white-space:nowrap;text-align:center;font:600 clamp(36px,6vw,110px)/1 var(--sans);text-transform:uppercase;color:rgba(255,255,255,.07);filter:blur(3px);will-change:transform}
+.awx__echo p:nth-child(2),.awx__echo p:nth-child(3){color:rgba(255,255,255,.1);filter:blur(2px)}
+.awx__pics{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.awx__pic{grid-area:1/1;margin:0;width:min(34vw,52vh);aspect-ratio:4/5;box-shadow:0 30px 80px rgba(0,0,0,.45);opacity:0;
+  transform:translateY(18%) rotate(calc(var(--r) * 2)) scale(.9);transition:opacity .8s var(--ease),transform 1.1s cubic-bezier(.76,0,.24,1)}
+.awx__pic img{width:100%;height:100%;object-fit:cover;display:block}
+.awx__pic{position:relative}
+.awx__pic::after{content:"";position:absolute;inset:0;background:rgba(10,10,10,.28);pointer-events:none}
+.awx__pic--doc::after{background:rgba(10,10,10,.58)}
+.awx__pic--doc{width:min(30vw,46vh);aspect-ratio:auto;background:#fff}
+.awx__pic--doc img{height:auto;object-fit:contain}
+.awx__pic.on{opacity:1;transform:rotate(var(--r))}
+.awx__pic.past{transform:translateY(-14%) rotate(calc(var(--r) * -1)) scale(.92)}
+.awx__copy{position:relative;z-index:2;width:min(1400px,calc(100% - 2 * clamp(16px,6vw,120px)));display:grid}
+.awx__slide{grid-area:1/1;pointer-events:none}
+.awx__slide.on{pointer-events:auto}
+.awx__t{margin:0;display:flex;justify-content:center;align-items:baseline;gap:.35em;flex-wrap:wrap;font:600 clamp(30px,4.6vw,88px)/1.05 var(--sans);text-transform:uppercase;letter-spacing:-.01em;
+  text-align:center;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.awx__m{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.06em}
+.awx__m>*{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.76,0,.24,1)}
+.awx__t i{font-style:normal;font-weight:300}
+.awx__slide.on .awx__m>*{transform:none}
+.awx__slide.past .awx__m>*{transform:translateY(-110%)}
+.awx__slide .awx__m:nth-child(2)>*{transition-delay:.05s}.awx__slide .awx__m:nth-child(3)>*{transition-delay:.1s}
+.awx__sub{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:clamp(14px,1.6vw,28px);font:400 14px/1.4 var(--sans);letter-spacing:.06em;text-transform:uppercase;
+  color:rgba(255,255,255,.85);opacity:0;transition:opacity .6s var(--ease)}
+.awx__slide.on .awx__sub{opacity:1;transition-delay:.35s}
+.awx__link{color:#fff!important;flex:0 0 auto}
+.awx__link::after{background:#fff!important}
+.awx__foot{position:absolute;left:clamp(16px,6vw,120px);right:clamp(16px,6vw,120px);bottom:clamp(24px,5vh,48px);display:flex;align-items:center;gap:20px;
+  font:500 13px/1 var(--sans);letter-spacing:.1em;color:rgba(255,255,255,.7);font-variant-numeric:lining-nums tabular-nums}
+.awx__bar{flex:1;height:1px;background:rgba(255,255,255,.2)}
+.awx__bar i{display:block;height:100%;width:14%;background:#fff;transition:width .6s var(--ease)}
+@media (max-width:900px){
+ .awx__pic{width:min(72vw,46vh)}
+ .awx__pic--doc{width:min(78vw,44vh)}
+ .awx__t{flex-direction:column;align-items:center;gap:0;font-size:clamp(30px,9vw,44px)}
+ .awx__t .awx__dash{display:none}
+ .awx__sub{flex-direction:column;gap:16px;text-align:center;font-size:12px}
+ .awx__link{width:100%}
+ .awx__echo p{font-size:clamp(28px,11vw,56px)}
+}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1756,18 +1803,13 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 </section>
 
 <!-- ============ 7. AWARDS: giant word, a tiny photo grows over it to full screen ============ -->
-<section class="aw" id="awards">
-  <div class="aw__track">
-    <div class="aw__stick" id="awStick">
-      <h2 class="aw__word" id="awWord">Awards</h2>
-      <div class="aw__bar" aria-hidden="true"><i id="awBar"></i></div>
-      <div class="aw__photo" id="awPhoto"></div>
-      <div class="aw__info" id="awInfo">
-        <div class="aw__card">
-          <img class="aw__badge" id="awBadge" src="assets/badge-2022.png" alt="SBID International Design Awards Finalist">
-          <div class="aw__name"><h3 class="aw__line" id="awName">Beauty Salon “SPA &amp; Beauty”</h3><i class="aw__sign" role="img" aria-label="Signed by Oksana Panteleyko"></i><a class="lnk aw__link" href="#projects">Explore project <i></i></a></div>
-        </div>
-      </div>
+<section class="awx" id="awards" aria-label="Awards and credentials">
+  <div class="awx__track" id="awxTrack">
+    <div class="awx__stage" id="awxStage">
+      <div class="awx__echo" aria-hidden="true"><p></p><p></p><p></p><p></p></div>
+      <div class="awx__pics" id="awxPics"></div>
+      <div class="awx__copy" id="awxCopy"></div>
+      <div class="awx__foot"><span class="awx__num" id="awxNum">01 / 07</span><div class="awx__bar"><i id="awxBar"></i></div></div>
     </div>
   </div>
 </section>
@@ -2146,109 +2188,40 @@ document.querySelectorAll('.stat [data-to]').forEach(el=>countIO.observe(el));
 function onAbout(){const r=aboutVis.getBoundingClientRect(),k=clamp((innerHeight-r.top)/(innerHeight+r.height));aboutImg.style.scale=(1.06-k*.06).toFixed(4)}
 addEventListener('scroll',()=>requestAnimationFrame(onAbout),{passive:true});onAbout();
 
-/* awards: "AWARDS" fills the screen; a tiny photo in its middle grows to a portrait over the word,
-   then to the full screen. Then the four awards follow as full-screen slides (soft cross-fade). */
-const AWARDS=[
-  {y:'2022',name:'Beauty Salon “SPA & Beauty”',img:'award-1.jpg'},
-  {y:'2022',name:'Residence “French House”',img:'award-2.jpg'},
-  {y:'2025',name:'Aparthotel “Alberti”',img:'award-3.jpg'},
-  {y:'2025',name:'Beauty Salon “So. Shell”',img:'award-4.jpg'}];
-const awTrack=document.querySelector('.aw__track'), awStick=document.getElementById('awStick'), awWord=document.getElementById('awWord');
-const awPhoto=document.getElementById('awPhoto'), awInfo=document.getElementById('awInfo'), awName=document.getElementById('awName'), awBadge=document.getElementById('awBadge');
-awPhoto.innerHTML=AWARDS.map(a=>`<img src="assets/${a.img}" alt="">`).join('');
-const awImgs=[...awPhoto.children];
-const sm=t=>t*t*(3-2*t), lerp=(a,b,t)=>a+(b-a)*t;
-function fitWord(){awWord.style.fontSize='100px';awWord.style.fontSize=(100*awStick.clientWidth*1.02/awWord.scrollWidth)+'px'}
-let awActive=-1, awTop=null, awT1=0, awT2=0;
-/* project change (awwwards-style "slide-over"): the next photo is revealed from the bottom edge while it settles
-   from a slight zoom; the current one drifts up, swells a touch and dims — like turning a page in a printed book.
-   Scrolling back plays it in reverse. The card stays still and simply updates halfway through. */
-const AW_NATIVE=true;   // phones: plain native scroll, the award follows the scroll position
-const AW_EASE='cubic-bezier(.76,0,.24,1)', AW_T=1200;
-function showAward(i,instant,dir=1){const A=AWARDS[i], im=awImgs[i];const bar=document.getElementById('awBar');if(bar)bar.style.width=((i+1)/AWARDS.length*100)+'%';
-  clearTimeout(awT1);clearTimeout(awT2);
-  const reset=x=>{x.style.transition='none';x.style.clipPath='';x.style.filter='';x.style.translate='';x.style.scale=''};
-  if(instant||!awTop){awImgs.forEach(x=>{reset(x);x.style.opacity=x===im?1:0;x.style.zIndex=x===im?1:0});awTop=im;
-    awName.textContent=A.name;awBadge.src=`assets/badge-${A.y}.png`;return}
-  if(im===awTop)return;
-  const prev=awTop;awTop=im;
-  awImgs.forEach(x=>{if(x!==prev&&x!==im){reset(x);x.style.opacity=0;x.style.zIndex=0}});
-  reset(im);im.style.opacity=1;im.style.zIndex=2;im.style.clipPath=dir>0?'inset(100% 0 0 0)':'inset(0 0 100% 0)';im.style.scale='1.18';
-  reset(prev);prev.style.opacity=1;prev.style.zIndex=1;
-  im.offsetWidth;
-  im.style.transition=`clip-path ${AW_T}ms ${AW_EASE}, scale ${AW_T+300}ms ${AW_EASE}`;im.style.clipPath='inset(0 0 0 0)';im.style.scale='1';
-  prev.style.transition=`translate ${AW_T}ms ${AW_EASE}, scale ${AW_T}ms ${AW_EASE}, filter ${AW_T}ms ${AW_EASE}`;
-  prev.style.translate=`0 ${dir>0?-14:14}%`;prev.style.scale='1.06';prev.style.filter='brightness(.45)';
-  awT2=setTimeout(()=>{reset(prev);prev.style.opacity=0;prev.style.zIndex=0;im.style.zIndex=1},AW_T+320);
-  awT1=setTimeout(()=>{awName.textContent=A.name;awBadge.src=`assets/badge-${A.y}.png`},AW_T*.45)}
-function onAwards(){
-  const r=awTrack.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight)return;
-  const W=awStick.clientWidth, H=awStick.clientHeight, mob=W<=900;
-  const f=clamp(-r.top/Math.max(1,r.height-innerHeight))*6;          // 0-1 dot→portrait, 1-2 portrait→full, 2-6 four awards
-  // frame size in px: dot → portrait → full screen
-  const dot=[W*.02,W*.02*1.37], por=mob?[W*.62,H*.62]:[Math.min(W*.3,H*.62),H*.86];
-  let w,h;
-  if(f<1){const t=sm(clamp(f));w=lerp(dot[0],por[0],t);h=lerp(dot[1],por[1],t)}
-  else{const t=sm(clamp(f-1));w=lerp(por[0],W,t);h=lerp(por[1],H,t)}
-  const ix=Math.max(0,(W-w)/2), iy=Math.max(0,(H-h)/2);
-  awPhoto.style.clipPath=mob?'none':`inset(${iy.toFixed(1)}px ${ix.toFixed(1)}px ${iy.toFixed(1)}px ${ix.toFixed(1)}px)`;
-  awWord.style.transform=`scale(${(1+clamp(f-1)*.12).toFixed(4)})`;
-  // which award, with a short cross-fade around each boundary
-  const act=mob&&AW_NATIVE?Math.max(0,Math.min(3,Math.floor(f/1.5))):Math.max(0,Math.min(3,Math.round(f-2)));                 // nearest award stop
-  awImgs[0].style.transform=f<2?`scale(${(1.18-.18*sm(clamp(f/2))).toFixed(4)})`:'';     // zoom only while the first photo opens
-  {const k=sm(clamp((f-1.75)/.3)), c=awInfo.firstElementChild;c.style.setProperty('--in',k.toFixed(3));0}  // frosted glass card fades in, blur grows
-  if(act!==awActive){const first=awActive<0, dir=act>awActive?1:-1;awActive=act;showAward(act,first,dir)}
-}
-addEventListener('scroll',()=>requestAnimationFrame(onAwards),{passive:true});
-addEventListener('resize',()=>{fitWord();onAwards()});
-/* one wheel / swipe = one award: inside the award stops the scroll is taken over and glides to the next stop */
-const awStopY=i=>{const r=awTrack.getBoundingClientRect();return r.top+scrollY+(2+i)/6*(r.height-innerHeight)};
-let awLock=0;
-function awF(){const r=awTrack.getBoundingClientRect();return clamp(-r.top/Math.max(1,r.height-innerHeight))*6}
-const awPhoneMove=(y,dur)=>{const H=document.documentElement,y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-  awLock=t0+dur+80;let done=0;
-  const fin=()=>{if(done)return;done=1;scrollTo(0,y);if(window.lenis)lenis.scrollTo(y,{immediate:true,force:true})};
-  const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(done)return;if(k<1)requestAnimationFrame(st);else fin()};requestAnimationFrame(st);
-  setTimeout(fin,dur+400)};
-function awStep(dir){const f=awF(), cur=Math.max(0,Math.min(3,Math.round(f-2)));
-  if(f<1.5||f>5.5)return false;                                      // outside the award stops: normal scroll
-  const at=2+cur;let next=dir>0?(f<at-.05?cur:cur+1):(f>at+.05?cur:cur-1);   // first settle on the nearest stop, then move
-  if(next<0||next>3)return false;                                    // past the first/last award: let the page move on
-  awLock=performance.now()+AW_T+80;
-  const y=awStopY(Math.max(0,Math.min(3,next)));
-  innerWidth<=900?awPhoneMove(y,AW_T):window.lenis?lenis.scrollTo(y,{duration:AW_T/1000,easing:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,lock:true,force:true}):scrollTo({top:y,behavior:'smooth'});
-  return true}
-/* wheel: every new gesture (a mouse-wheel notch or a fresh trackpad swipe) = exactly one award.
-   Trackpad inertia is a stream of events <~60ms apart, so it never counts as a new gesture. */
-let awLastWheel=0, awLastAbs=0, awQueued=0, awStepStart=0;
-addEventListener('wheel',e=>{const now=performance.now(), gap=now-awLastWheel, abs=Math.abs(e.deltaY);
-  const fresh=gap>140||abs>awLastAbs*1.6+6;awLastWheel=now;awLastAbs=abs;
-  if(abs<1)return;const f=awF(), dir=e.deltaY>0?1:-1;
-  if(f<(dir>0?1.5:1.85)||f>(dir>0?5.15:5.5))return;                   // outside the award stops: normal scroll
-  const cur=Math.round(f-2);
-  if((dir>0&&cur>=3&&Math.abs(f-5)<.05)||(dir<0&&cur<=0&&Math.abs(f-2)<.05))return;   // leave the block normally at the ends
-  e.preventDefault();e.stopImmediatePropagation();
-  if(!fresh)return;
-  if(now<awLock){if(now-awStepStart>160)awQueued=dir;return}         // a new notch during a change: do it right after
-  awStepStart=now;awStep(dir)},{passive:false,capture:true});
-setInterval(()=>{if(awQueued&&performance.now()>=awLock){const d=awQueued;awQueued=0;awStepStart=performance.now();awStep(d)}},60);
-let awTY=null;
-let awGest=0;addEventListener('touchstart',e=>{awTY=e.touches[0].clientY;awGest=0},{passive:true});
-/* phone: the opening plays by itself — one swipe into the block glides to the first award (the photo grows on its own),
-   one swipe up from the first award glides back to the start; after that, one swipe = one award */
-const awGlide=(y,dur)=>{if(innerWidth<=900){awPhoneMove(y,dur);return}const y0=scrollY,t0=performance.now(),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;awLock=t0+dur+80;
-  if(window.lenis){lenis.scrollTo(y,{duration:dur/1000,easing:ease,lock:true,force:true});return}
-  const st=now=>{const k=Math.min(1,(now-t0)/dur);scrollTo(0,y0+(y-y0)*ease(k));if(k<1)requestAnimationFrame(st)};requestAnimationFrame(st)};
-addEventListener('touchmove',e=>{if(awTY===null||innerWidth>900||AW_NATIVE)return;const r=awTrack.getBoundingClientRect(),f=awF(),dy=awTY-e.touches[0].clientY,dir=dy>0?1:-1;
-  const inIntro=r.top<=2&&f<1.85;if(!inIntro&&!(dir<0&&Math.abs(f-2)<.05))return;
-  if(dir<0&&f<.05)return;                                             // at the very start going up: leave normally
-  e.preventDefault();if(performance.now()<awLock||Math.abs(dy)<24)return;
-  const y=dir>0?awStopY(0):r.top+scrollY;awGlide(y,dir>0?1800:1200);awTY=e.touches[0].clientY},{passive:false});
-addEventListener('touchmove',e=>{if(awTY===null||(AW_NATIVE&&innerWidth<=900))return;const f=awF();if(f<1.85||f>5.15)return;
-  const dy=awTY-e.touches[0].clientY, cur=Math.round(f-2), dir=dy>0?1:-1;
-  if((dir>0&&cur>=3&&Math.abs(f-5)<.05)||(dir<0&&cur<=0&&Math.abs(f-2)<.05))return;
-  e.preventDefault();if(Math.abs(dy)<24||awGest)return;awGest=1;awTY=e.touches[0].clientY;if(performance.now()>=awLock){awStepStart=performance.now();awStep(dir)}else awQueued=dir},{passive:false});
-addEventListener('touchend',()=>{awTY=null},{passive:true});document.fonts.ready.then(()=>{fitWord();onAwards()});fitWord();onAwards();
+/* awards & credentials: seven full-screen slides — a tilted photo with a big title over it.
+   The slide follows the scroll position (native scroll, no take-over), the title rolls in, the photo swaps with a tilt. */
+const AWX=[
+  {img:'award-3.jpg',t:'SBID Awards Finalist',y:'2025',s:'Alberti ApartHotel · Hotel Bedroom & Suites Design',link:true,r:-7},
+  {img:'award-4.jpg',t:'SBID Awards Finalist',y:'2025',s:'Beauty Salon So. Shell · Healthcare & Wellness Design',link:true,r:6},
+  {img:'award-1.jpg',t:'SBID Awards Finalist',y:'2022',s:'SPA & Beauty, Kharkiv Palace Hotel · Healthcare & Wellness Design',link:true,r:-6},
+  {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence French House · Interior Design',link:true,r:7},
+  {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,r:-5},
+  {img:'dipl-master.jpg',t:'Master of Architecture',s:'O.M. Beketov National University · Architecture & Town Planning',doc:true,r:5},
+  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa Workshop · Project Design & Marketing',doc:true,r:-6}];
+(()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
+  const echo=[...stage.querySelectorAll('.awx__echo p')],num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
+  const esc=s=>s.replace(/&/g,'&amp;');
+  pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}" style="--r:${a.r}deg"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
+  copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
+    <div class="awx__sub"><span>${esc(a.s)}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <span class="plus"></span></a>':''}</div></div>`).join('');
+  const P=[...pics.children],S=[...copy.children];let cur=-1;
+  const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
+    P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
+    S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('past',k<i)});
+    const a=AWX[i],line=a.y?`${a.t} — ${a.y}`:a.t;echo.forEach(e=>e.textContent=line);
+    num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
+  const on=()=>{const r=track.getBoundingClientRect();if(r.bottom<-innerHeight||r.top>innerHeight*2)return;
+    const p=clamp(-r.top/Math.max(1,r.height-innerHeight));show(Math.min(AWX.length-1,Math.floor(p*AWX.length)));
+    echo.forEach((e,k)=>e.style.transform=`translateX(${((k%2?1:-1)*(p-.5)*18).toFixed(2)}vw)`)};
+  addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
+  /* desktop: one wheel gesture = one slide */
+  let lock=0,last=0;addEventListener('wheel',e=>{if(innerWidth<=900)return;const r=track.getBoundingClientRect();if(r.top>1||r.bottom<innerHeight-1)return;
+    const now=performance.now(),fresh=now-last>220;last=now;const dir=e.deltaY>0?1:-1;
+    if((dir>0&&cur>=AWX.length-1)||(dir<0&&cur<=0))return;
+    e.preventDefault();e.stopPropagation();if(!fresh||now<lock)return;lock=now+900;
+    const span=r.height-innerHeight,y=scrollY+r.top+(cur+dir+.5)/AWX.length*span;
+    window.lenis?lenis.scrollTo(y,{duration:.9,force:true}):scrollTo({top:y,behavior:'smooth'})},{passive:false,capture:true});
+})();
 
 /* approach slider + testimonials: arrows step one item; content changes softly (same quiet motion as the rest of the site) */
 const APPROACH=[
