@@ -2231,19 +2231,19 @@ addEventListener('scroll',()=>requestAnimationFrame(onAbout),{passive:true});onA
 /* awards & credentials: seven full-screen slides — a tilted photo with a big title over it.
    The slide follows the scroll position (native scroll, no take-over), the title rolls in, the photo swaps with a tilt. */
 const AWX=[
-  {img:'award-3.jpg',t:'SBID Awards Finalist',y:'2025',s:'Alberti ApartHotel',link:true,r:-7},
-  {img:'award-4.jpg',t:'SBID Awards Finalist',y:'2025',s:'Beauty Salon So. Shell',link:true,r:6},
-  {img:'award-1.jpg',t:'SBID Awards Finalist',y:'2022',s:'SPA & Beauty, Kharkiv Palace Hotel',link:true,r:-6},
-  {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence French House',link:true,r:7},
-  {img:'dipl-master.jpg',t:'Master of Architecture',s:'O.M. Beketov National University, Kharkiv, Ukraine',doc:true,ny:.335,r:-4},
-  {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,tall:true,ny:.395,r:4},
-  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,ny:.545,under:true,r:-4}];
+  {img:'award-3.jpg',t:'SBID Awards Finalist',y:'2025',s:'ApartHotel "Alberti"',link:true,r:-7},
+  {img:'award-4.jpg',t:'SBID Awards Finalist',y:'2025',s:'Beauty Salon "So. Shell"',link:true,r:6},
+  {img:'award-1.jpg',t:'SBID Awards Finalist',y:'2022',s:'Beauty Salon "SPA & Beauty"',link:true,r:-6},
+  {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence "French House"',link:true,r:7},
+  {img:'dipl-master.jpg',t:'Master of Architecture',s:'National University O.M. Beketov|Kharkiv, Ukraine',doc:true,ny:.335,r:-4},
+  {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design|London, UK',doc:true,tall:true,ny:.395,r:4},
+  {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing|Milan, Italy',doc:true,ny:.545,under:true,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
   const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
-    <div class="awx__sub"><span>${esc(a.s)}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <i></i></a>':''}</div></div>`).join('');
+    <div class="awx__sub"><span>${esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
