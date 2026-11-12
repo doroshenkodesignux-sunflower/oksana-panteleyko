@@ -1514,6 +1514,39 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 .awx__echo p:nth-child(n){font-family:var(--serif)!important;font-weight:600!important;letter-spacing:0!important}
 .awx__pic::after{background:rgba(10,10,10,.36)}
 @media (max-width:900px){.awx__t{font-size:clamp(34px,10.5vw,52px)!important;white-space:normal!important}.awx__m,.awx__m>*{white-space:normal;text-align:center;max-width:calc(100vw - 32px)}.awx__slide{max-width:calc(100vw - 32px)!important}}
+/* ---------- About me (Figma 1321:2487): fills one screen, adapts in width and height ---------- */
+.abx{--u:calc(100vw / 1920);position:relative;z-index:2;background:#fff;color:#2c1e13;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(48px,7vh,110px);
+  min-height:100vh;min-height:100svh;padding:100px var(--pad)}
+.abx__top,.abx__stats,.abx__foot{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));column-gap:20px}
+.abx__label{grid-column:1/3;margin:0;font:700 clamp(14px,calc(var(--u) * 18),18px)/1.33 var(--sans);text-transform:uppercase;letter-spacing:0;color:#695845}
+.abx__lead{grid-column:3/5;margin:0;max-width:908px;font:400 clamp(18px,calc(var(--u) * 32),32px)/1.25 var(--sans);color:#171717}
+.abx__stat b{position:relative;display:inline-block;font:500 clamp(84px,calc(var(--u) * 180),180px)/1 var(--serif)!important;letter-spacing:-.04em!important;color:#2c1e13!important;margin:0!important;font-feature-settings:"lnum" 1,"pnum" 1}
+.abx__stat sup{position:absolute!important;left:100%!important;top:.02em!important;margin-left:.04em!important;font:500 .53em/1 var(--serif)!important;color:#b0d3eb!important;letter-spacing:0!important;vertical-align:baseline!important}
+.abx__stat p{margin:clamp(14px,calc(var(--u) * 26),26px) 0 0!important;font:500 clamp(12px,calc(var(--u) * 18),18px)/1.33 var(--sans)!important;text-transform:uppercase!important;letter-spacing:0!important;color:#695845!important;white-space:normal!important}
+.abx__foot{align-items:end;row-gap:28px}
+.abx__item span{display:block;margin-bottom:10px;font:600 clamp(14px,calc(var(--u) * 20),20px)/1.4 var(--sans);opacity:.3}
+.abx__item p{margin:0;max-width:340px;font:600 clamp(14px,calc(var(--u) * 20),20px)/1.4 var(--sans)}
+.abx__cv{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1.5px solid #2c1e13;font:600 clamp(13px,calc(var(--u) * 16),16px)/1.5 var(--sans);text-transform:uppercase;color:#2c1e13;text-decoration:none}
+.abx__cv i{font:400 clamp(40px,calc(var(--u) * 64),64px)/.5 var(--serif);font-style:normal;transition:transform .5s var(--ease)}
+.abx__cv:hover i{transform:rotate(90deg)}
+/* short desktop screens: everything still fits one screen */
+@media (min-width:901px) and (max-height:820px){.abx{padding-block:72px}.abx__stat b{font-size:clamp(64px,17vh,150px)!important}.abx{gap:clamp(32px,5vh,80px)}}
+/* tablets */
+@media (max-width:900px){
+  .abx__stat b{font-size:clamp(72px,12vw,120px)!important}
+  .abx{min-height:0;justify-content:flex-start;gap:72px;padding-block:100px}
+  .abx__top{grid-template-columns:1fr;row-gap:24px}.abx__label,.abx__lead{grid-column:auto}
+  .abx__stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:48px}
+  .abx__foot{grid-template-columns:repeat(3,minmax(0,1fr))}.abx__cv{grid-column:1/-1;margin-top:12px}
+}
+/* phones */
+@media (max-width:600px){
+  .abx{gap:60px;padding-block:100px 0}
+  .abx__stat b{font-size:clamp(64px,19vw,96px)!important}
+  .abx__stats{column-gap:16px;row-gap:36px}
+  .abx__foot{grid-template-columns:1fr;row-gap:24px}.abx__item p{max-width:none}
+  .abx__cv{margin-top:16px}
+}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1748,6 +1781,27 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   </div>
 </section>
 
+<!-- ============ 2. ABOUT ME (Figma 1321:2487) ============ -->
+<section class="abx" id="about">
+  <div class="abx__top">
+    <h2 class="abx__label rv">About me</h2>
+    <p class="abx__lead rv" style="--d:.1s">I combine interior architecture with business strategy to create spaces that work for people, brands, and businesses. From property assessment and concept development to design and implementation, I lead projects from the first decision to the finished space.</p>
+  </div>
+  <div class="abx__stats">
+    <div class="stat abx__stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p>Years of experience</p></div>
+    <div class="stat abx__stat rv" style="--d:.15s"><b><span data-to="4">0</span></b><p>Finalist SBID</p></div>
+    <div class="stat abx__stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p>Countries worldwide</p></div>
+    <div class="stat abx__stat rv" style="--d:.35s"><b><span data-to="150">0</span><sup>+</sup></b><p>Completed projects</p></div>
+  </div>
+  <div class="abx__foot">
+    <div class="abx__item rv" style="--d:.05s"><span>02</span><p>SBID Accredited Design Professional, London</p></div>
+    <div class="abx__item rv" style="--d:.15s"><span>01</span><p>Finalist of the SBID London Awards 2022 &amp; 2025.</p></div>
+    <div class="abx__item rv" style="--d:.25s"><span>03</span><p>Milano Business School — HoReCa Segment.</p></div>
+    <a class="abx__cv rv" style="--d:.35s" href="#" download>Download CV <i aria-hidden="true">+</i></a>
+  </div>
+</section>
+
+
 <!-- ============ 4. SELECTED PROJECTS (horizontal scroll) ============ -->
 <section class="prj" id="projects">
   <div class="prj__track">
@@ -1821,29 +1875,6 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   </div>
 </section>
 
-<!-- ============ 6. ABOUT ME ============ -->
-<section class="about ab2" id="about">
-  <div class="ab2__media about__visual">
-    <img class="ab2__photo" src="assets/about-photo-2.jpg" alt="Oksana Panteleyko laughing with hydrangeas in a blue kitchen she designed" id="aboutImg">
-    <div class="ab2__head"><h2 class="ab2__name">Oksana Panteleyko</h2><p class="ab2__roles"><span>Interior architect</span><i>•</i><span>Strategist</span><i>•</i><span>Consultant</span></p></div>
-    <i class="ab2__sign" role="img" aria-label="Panteleyko"></i>
-  </div>
-  <div class="ab2__body">
-    <h3 class="ab2__title rv">About me</h3>
-    <p class="about__text ab2__text rv">I combine interior architecture with business strategy to create spaces that work for people, brands, and businesses. From property assessment and concept development to design and implementation, I lead projects from the first decision to the finished space.</p>
-    <ul class="ab2__list rv">
-      <li>Finalist of the SBID London Awards 2022 &amp; 2025.</li>
-      <li>Accredited Professional — SBID International Design Professional, London.</li>
-      <li>Milano Business School — HoReCa Segment.</li>
-    </ul>
-    <a class="lnk about__cv ab2__cv rv" href="#" download>Download CV <i></i></a>
-    <div class="ab2__stats">
-      <div class="stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p><span>Years of</span> <span>experience</span></p></div>
-      <i class="ab2__sep" aria-hidden="true"></i><div class="stat rv" style="--d:.15s"><b><span data-to="150">0</span><sup>+</sup></b><p><span>Completed</span> <span>projects</span></p></div>
-      <i class="ab2__sep" aria-hidden="true"></i><div class="stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p><span>Countries</span> <span>worldwide</span></p></div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ 7. AWARDS: giant word, a tiny photo grows over it to full screen ============ -->
 <section class="awx" id="awards" aria-label="Awards and credentials" data-dark>
@@ -2225,12 +2256,12 @@ new ResizeObserver(ctaLayout).observe(ctaCard);addEventListener('resize',ctaLayo
 
 /* about: photo reveal + signature, count-up numbers, photo parallax */
 const aboutVis=document.querySelector('.about__visual'), aboutImg=document.getElementById('aboutImg');
-new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){aboutVis.classList.add('in');o.disconnect()}}),{threshold:.25}).observe(aboutVis);
+if(aboutVis)new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){aboutVis.classList.add('in');o.disconnect()}}),{threshold:.25}).observe(aboutVis);
 const countIO=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;countIO.unobserve(e.target);
   const el=e.target,to=+el.dataset.to,t0=performance.now(),d=1800;
   (function tick(t){const k=Math.min(1,(t-t0)/d),v=1-Math.pow(1-k,4);el.textContent=Math.round(to*v);if(k<1)requestAnimationFrame(tick)})(t0)}),{threshold:.6});
 document.querySelectorAll('.stat [data-to]').forEach(el=>countIO.observe(el));
-function onAbout(){const r=aboutVis.getBoundingClientRect(),k=clamp((innerHeight-r.top)/(innerHeight+r.height));aboutImg.style.scale=(1.06-k*.06).toFixed(4)}
+function onAbout(){if(!aboutVis)return;const r=aboutVis.getBoundingClientRect(),k=clamp((innerHeight-r.top)/(innerHeight+r.height));aboutImg.style.scale=(1.06-k*.06).toFixed(4)}
 addEventListener('scroll',()=>requestAnimationFrame(onAbout),{passive:true});onAbout();
 
 /* awards & credentials: seven full-screen slides — a tilted photo with a big title over it.
@@ -2560,13 +2591,7 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
 </script>
 <script>
 /* About (desktop): the block fits the screen below the header; "About me" sits on the same top line as the name */
-(()=>{const sec=document.getElementById('about'),hd=document.querySelector('.header'),name=document.querySelector('.ab2__head').firstElementChild,ttl=document.querySelector('.ab2__title'),body=document.querySelector('.ab2__body');if(!sec||!ttl)return;
-  const cap=e=>{let y=0,n=e;while(n&&n!==sec){y+=n.offsetTop;n=n.offsetParent}const c=getComputedStyle(e),fs=parseFloat(c.fontSize),lh=parseFloat(c.lineHeight)||fs*1.2;const x=(cap.cx||(cap.cx=document.createElement('canvas').getContext('2d')));x.font=c.fontStyle+' '+c.fontWeight+' '+c.fontSize+' '+c.fontFamily;const m=x.measureText('H');const fa=m.fontBoundingBoxAscent,fd=m.fontBoundingBoxDescent;return y+parseFloat(c.paddingTop)+(lh-(fa+fd))/2+fa-m.actualBoundingBoxAscent};  // exact top of the capitals  // layout position, unaffected by reveal transforms
-  const fit=()=>{document.documentElement.style.setProperty('--hdrH',hd.offsetHeight+'px');if(innerWidth<=900){sec.style.removeProperty('--hdr');body.style.paddingTop='';return}
-    sec.style.setProperty('--hdr',hd.offsetHeight+'px');body.style.setProperty('padding-top','40px','important');
-    const d=cap(name)-cap(ttl);
-    body.style.setProperty('padding-top',Math.max(0,40+d)+'px','important')};
-  addEventListener('resize',fit);document.fonts.ready.then(fit);fit()})();
+(()=>{const hd=document.querySelector('.header');const fit=()=>document.documentElement.style.setProperty('--hdrH',hd.offsetHeight+'px');addEventListener('resize',fit);fit()})();
 </script>
 <script>
 /* service buttons pre-select the matching chip in the request forms (the visitor can still change it) */
