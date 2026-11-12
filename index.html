@@ -1587,6 +1587,10 @@ p,li,blockquote,figcaption{text-wrap:pretty}
 /* Ukrainian version: Cyrillic capitals run a little wider */
 html[lang^="uk"] .hero__name{letter-spacing:-.04em!important}
 html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-content}
+/* designers' offer badge hugs its text (both languages); wraps only if it would leave the card */
+.offer{width:max-content!important;max-width:none!important}
+.offer b,.offer span{white-space:nowrap!important}
+@media (max-width:900px){.offer{max-width:100%!important}.offer b{white-space:normal!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){

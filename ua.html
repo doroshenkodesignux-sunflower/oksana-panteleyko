@@ -1587,6 +1587,10 @@ p,li,blockquote,figcaption{text-wrap:pretty}
 /* Ukrainian version: Cyrillic capitals run a little wider */
 html[lang^="uk"] .hero__name{letter-spacing:-.04em!important}
 html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-content}
+/* designers' offer badge hugs its text (both languages); wraps only if it would leave the card */
+.offer{width:max-content!important;max-width:none!important}
+.offer b,.offer span{white-space:nowrap!important}
+@media (max-width:900px){.offer{max-width:100%!important}.offer b{white-space:normal!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -1908,7 +1912,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Номер телефону</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
-      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і ремонт</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
+      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Надіслати заявку <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
@@ -1985,7 +1989,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Номер телефону</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
-      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і ремонт</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
+      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Надіслати заявку <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
@@ -2043,7 +2047,7 @@ const WHO = [
    tags:['Персональна концепція','Продумане планування','Спокійна атмосфера','Натуральні матеріали','Сценарії освітлення','Меблі на замовлення','Розумне зберігання','Контроль бюджету'],
    ch:'Ви будуєте новий дім або оновлюєте наявний і хочете, щоб він був по-справжньому Вашим, — але не знаєте, з чого почати і як упоратися з підрядниками.',
    get:'Від концепції до повного супроводу ремонту я створю дім саме для Вас — дім, до якого хочеться повертатися.'},
-  {t:'Дизайнери<br>інтер’єру', cta:'Дізнатися більше', offer:['Станьте магнітом для клієнтів','3 стратегічні сесії'],
+  {t:'Дизайнери<br>інтер’єру', cta:'Дізнатися більше', offer:['Магніт для клієнтів','3 стратегічні сесії'],
    numbered:true, tags:['Портфоліо й резюме','Соцмережі','Пошук клієнтів'],
    ch:'Ви талановитий дизайнер, але клієнти приходять нерегулярно — здебільшого за рекомендаціями, — і Вам складно підняти ціни чи почати заново в новій країні.',
    get:'За три стратегічні сесії ми перетворимо Ваше портфоліо й соцмережі на інструменти, що приводять клієнтів, визначимо ціни, у яких Ви впевнені, і складемо чіткий план, як здобувати клієнтів — удома чи за кордоном.'}
@@ -2051,7 +2055,7 @@ const WHO = [
 const SERV = [
   {img:'services.jpg', tc:'#efe6dc', t:'Концепція<br>і планування', p:'Отримайте чіткий план ще до старту. Я формую концепцію, планування й логіку простору навколо Ваших цілей — щоб кожне рішення щодо дизайну й бюджету мало впевнений напрям.',
    tags:['Розробка концепції','Планування простору','Функція','Атмосфера','Бізнес-цілі','Бренд через простір'], b:'Почати з концепції'},
-  {img:'renovation.webp', tc:'#e2eaf4', t:'Дизайн інтер’єру<br>і ремонт', p:'Я проєктую нові інтер’єри й оновлюю наявні — житло, готелі, ресторани, салони та інше — від концепції до завершення, з таким супроводом, який Вам потрібен.',
+  {img:'renovation.webp', tc:'#e2eaf4', t:'Дизайн інтер’єру<br>і реновація', p:'Я проєктую нові інтер’єри й оновлюю наявні — житло, готелі, ресторани, салони та інше — від концепції до реалізації, із супроводом на Ваш запит.',
    tags:['Повний дизайн-проєкт','Робочі креслення','Матеріали й оздоблення','Освітлення','Меблі й декор','Авторський нагляд'], b:'Обговорити проєкт'},
   {img:'consult-cafe.jpg', tc:'#fae3e6', t:'Експертні<br>консультації', p:'Вагаєтеся щодо важливого рішення в дизайні чи нерухомості? Обговорімо його. Я чесно покажу ризики й можливості, щоб Ви ухвалили рішення впевнено.',
    tags:['Друга думка','Дизайн-аудит','Рев’ю проєкту','Аналіз планування','Перевірка інвестиції','План ремонту'], b:'Записатися на консультацію'},
