@@ -1570,6 +1570,9 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 /* small section labels like 'About me': Services, Testimonials */
 .svc__title,.tst__label{font:700 clamp(14px,calc(100vw / 1920 * 18),18px)/1.33 var(--sans)!important;text-transform:uppercase!important;letter-spacing:0!important;color:#695845!important;white-space:nowrap}
 .svc__title::before,.svc__title::after,.tst__label::before,.tst__label::after{display:none!important}
+@media (min-width:901px){.svc__title{margin:0 0 80px!important}}
+@media (min-width:901px) and (max-height:860px){.svc__title{margin-bottom:clamp(28px,calc(100vh - 780px),80px)!important}}
+@media (max-width:900px){.svc__title{margin-bottom:80px!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2036,7 +2039,7 @@ const SERV = [
    groups:[['For Business',['Hospitality & Hotels','Wellness & Beauty','Healthcare Spaces','Restaurants & Cafés']],['For Private Clients',['Villas','Apartments','Residences','Penthouses']]], b:'Discuss my project'},
   {img:'consult-cafe.jpg', tc:'#fae3e6', t:'Expert<br>Consultations', p:'Not sure about a big design or property decision? Let’s talk it through. I’ll give you an honest take on the risks and the options, so you can move forward with confidence.',
    tags:['Second Opinion','Design Audit','Project Review','Layout Review','Investment Property Review','Renovation Strategy'], b:'Book a consultation'},
-  {img:'brand-alberti.webp', gal:['brand-alberti.webp','brand-1.jpg','brand-2.jpg','brand-3.jpg','brand-4.jpg'], tc:'#dfe4ee', t:'Brand & Space<br>Transformation', p:'When your business needs a complete refresh — not just a renovation or a new logo — I assemble a team of specialists to run the entire process turnkey.<span class="svc__para"></span>You get one cohesive result where your space, visual identity and digital presence speak the same language — without having to coordinate multiple contractors yourself.',
+  {img:'brand-alberti.webp', gal:['brand-alberti.webp','brand-1.jpg','brand-2.jpg','brand-3.jpg','brand-4.jpg'], tc:'#dfe4ee', t:'Brand & Space<br>Transformation', p:'A complete refresh, run turnkey: interior, brand identity and website — created together, so your space and brand speak one language.<span class="svc__para"></span>More branding work at DiDi Brand Atelier.',
    tags:['Interior Renovation','Branding','Website Design'], b2:'Explore Didi Brand Atelier', b2h:'https://didibrandatelier.com/work', b:'Transform my brand'}
 ];
 
@@ -2175,6 +2178,20 @@ const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p c
   const onS=()=>{if(innerWidth>900){const r=track.getBoundingClientRect();const p=Math.min(1,Math.max(0,-r.top/Math.max(1,r.height-innerHeight)));open(Math.min(3,Math.floor(p*4)))}
     };
   addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);open(0);onS();
+  /* desktop: the gap under "Services" is sized so that, with the last service open, its last button ends on the
+     line of the photo's progress bar — and the whole block always fits one screen */
+  const ttl=document.querySelector('.svc__title'), stick=document.querySelector('.svc__stick'), bar=media.querySelector('.gal__bar');
+  const fitGap=()=>{if(innerWidth<=900){ttl.style.removeProperty('margin-bottom');return}
+    // measure the real layout with service 04 open (instantly, invisibly), then restore the current state
+    ttl.style.setProperty('margin-bottom','0px','important');
+    const bodies=items.map(it=>it.querySelector('.svc__body'));bodies.forEach(b=>b.style.transition='none');
+    const was=items.map(it=>it.classList.contains('on'));items.forEach((it,k)=>it.classList.toggle('on',k===3));
+    const sr=stick.getBoundingClientRect(), lb=[...items[3].querySelectorAll('.btn')].pop().getBoundingClientRect(), br=bar.getBoundingClientRect();
+    const mr=media.getBoundingClientRect(), barY=mr.bottom-(parseFloat(getComputedStyle(bar).bottom)+bar.offsetHeight/2);   // untransformed (the photo slot may be mid-zoom)
+    const gap=Math.max(16,barY-lb.bottom);
+    items.forEach((it,k)=>it.classList.toggle('on',was[k]));void list.offsetHeight;bodies.forEach(b=>b.style.transition='');
+    ttl.style.setProperty('margin-bottom',gap.toFixed(1)+'px','important')};
+  addEventListener('resize',fitGap);document.fonts&&document.fonts.ready.then(fitGap);addEventListener('load',fitGap);setTimeout(fitGap,300);
   /* galleries run only while visible (desktop: only while their service is open) */
   document.querySelectorAll('.svc .gal').forEach(g=>{const ph=[...g.querySelectorAll('img')], seg=[...g.querySelectorAll('.gal__bar i')], D=2000;let k=0,t0=0,run=false,raf=0;
     const paint=()=>seg.forEach((s,j)=>{s.classList.toggle('done',j<k);s.classList.toggle('now',j===k);s.firstChild.style.transform=j===k?'':''});
