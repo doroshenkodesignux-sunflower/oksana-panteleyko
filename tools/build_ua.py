@@ -172,7 +172,6 @@ T = [
 
  # ---------- awards ----------
  ('aria-label="Awards and credentials"', 'aria-label="Нагороди й дипломи"', 1),
- ("t:'SBID Awards Finalist'", "t:'Фіналіст SBID Awards'", 4),
  ("s:'ApartHotel \"Alberti\"'", "s:'Апартготель «Alberti»'", 1),
  ("s:'Beauty Salon \"So. Shell\"'", "s:'Б’юті-салон «So. Shell»'", 1),
  ("s:'Beauty Salon \"SPA & Beauty\"'", "s:'Б’юті-салон «SPA & Beauty»'", 1),
