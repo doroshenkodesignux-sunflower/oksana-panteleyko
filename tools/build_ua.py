@@ -114,7 +114,7 @@ T = [
  ("ch:'You’re building a new home or refreshing the one you have, and you want it to feel truly yours — but don’t know where to start, or how to handle all the contractors along the way.'",
   "ch:'Ви будуєте новий дім або оновлюєте наявний і хочете, щоб він був по-справжньому Вашим, — але не знаєте, з чого почати і як упоратися з підрядниками.'", 1),
  ("get:'I’ll create a home made just for you — from a first concept to full support through the renovation, whatever you need — one you’ll love coming back to.'",
-  "get:'Я створю дім саме для Вас — від концепції до повного супроводу ремонту, як Вам зручно, — дім, до якого хочеться повертатися.'", 1),
+  "get:'Я створю дім саме для Вас — від концепції до повного супроводу ремонту, залежно від Вашого запиту, — дім, до якого хочеться повертатися.'", 1),
  ("ch:'You’re a talented designer, but clients come irregularly — mostly by word of mouth — and it’s hard to raise your fees or start over in a new country.'",
   "ch:'Ви талановитий дизайнер, але клієнти приходять нерегулярно — здебільшого за рекомендаціями, — і Вам складно підняти ціни чи почати заново в новій країні.'", 1),
  ("get:'In three strategy sessions, we’ll turn your portfolio and social media into tools that bring clients, set prices you feel confident about, and build a clear plan to win clients — at home or abroad.'",
