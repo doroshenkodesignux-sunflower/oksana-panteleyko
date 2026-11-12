@@ -1635,6 +1635,9 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* awards title line break: hidden on desktop; on phones "SBID AWARDS / FINALIST 2025", centred */
 .awx__br{display:none}
 @media (max-width:900px){.awx__copy{grid-template-columns:minmax(0,1fr)!important}.awx__t{display:block!important;text-align:center!important;width:100%}.awx__t .awx__br{display:block}.awx__t .awx__m{margin:0 .12em}.awx__slide{text-align:center}.awx__echo{display:none!important}}
+/* awards captions with a phone-specific line break (desktop: name / city; phone: two balanced lines) */
+.awx__mbr,.awx__mcm{display:none}.awx__sub i{font-style:normal}
+@media (max-width:900px){.awx__mbr{display:inline}.awx__dsp,.awx__dbr{display:none}.awx__mcm{display:inline}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -2406,14 +2409,14 @@ const AWX=[
   {img:'award-1.jpg',t:'SBID Awards Finalist',y:'2022',s:'Б’юті-салон «SPA & Beauty»',link:true,r:-6},
   {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Резиденція «French House»',link:true,r:7},
   {img:'dipl-master.jpg',t:'Магістр архітектури',s:'ХНУМГ ім. О.М. Бекетова|Харків, Україна',doc:true,ny:.335,r:-4},
-  {img:'dipl-sbid.jpg',t:'Акредитований дизайнер SBID',s:'The Society of British & International Interior Design|Лондон, Велика Британія',doc:true,tall:true,ny:.395,r:4},
+  {img:'dipl-sbid.jpg',t:'Акредитований дизайнер SBID',s:'The Society of British & International^Interior Design|Лондон, Велика Британія',doc:true,tall:true,ny:.395,r:4},
   {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · дизайн і маркетинг|Мілан, Італія',doc:true,ny:.545,under:true,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
   const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' Finalist','</span></span><br class="awx__br"><span class="awx__m"><span>Finalist'):esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
-    <div class="awx__sub"><span>${esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Дивитися проєкт <i></i></a>':''}</div></div>`).join('');
+    <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Дивитися проєкт <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
