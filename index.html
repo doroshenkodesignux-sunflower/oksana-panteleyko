@@ -1442,6 +1442,7 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 .awx__pic--doc::after{background:rgba(10,10,10,.58)}
 .awx__pic--doc{width:calc(min(25vw,38vh) * 1.25);aspect-ratio:auto;background:#fff}
 .awx__pic--tall{width:calc(min(25vw,38vh) * .9)}
+.awx__pic--up{top:-13vh}.awx__pic--up::after{background:rgba(10,10,10,.4)}
 .awx__pic--doc img{height:auto;object-fit:contain}
 .awx__pic.on{opacity:1;transform:rotate(var(--r))}
 .awx__pic.past{transform:translateY(-14%) rotate(calc(var(--r) * -1)) scale(.92)}
@@ -2211,13 +2212,13 @@ const AWX=[
   {img:'award-4.jpg',t:'SBID Awards Finalist',y:'2025',s:'Beauty Salon So. Shell',link:true,r:6},
   {img:'award-1.jpg',t:'SBID Awards Finalist',y:'2022',s:'SPA & Beauty, Kharkiv Palace Hotel',link:true,r:-6},
   {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence French House',link:true,r:7},
-  {img:'dipl-master.jpg',t:'Master of Architecture',s:'O.M. Beketov National University, Kharkiv, Ukraine',doc:true,r:-5},
+  {img:'dipl-master.jpg',t:'Master of Architecture',s:'O.M. Beketov National University, Kharkiv, Ukraine',doc:true,up:true,r:-4},
   {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International Interior Design',doc:true,tall:true,r:5},
   {img:'dipl-horeca.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing',doc:true,r:-6}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
   const echo=[...stage.querySelectorAll('.awx__echo p')],num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
-  pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
+  pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}${a.up?' awx__pic--up':''}" style="--r:${a.r}deg"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
     <div class="awx__sub"><span>${esc(a.s)}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
