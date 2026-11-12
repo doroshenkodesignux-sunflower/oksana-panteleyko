@@ -1574,7 +1574,8 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 @media (min-width:901px) and (max-height:860px){.svc__title{margin-bottom:clamp(28px,calc(100vh - 780px),80px)!important}}
 @media (max-width:900px){.svc__title{margin-bottom:80px!important}}
 /* no hanging words: service texts use the full column and balanced lines; all other paragraphs avoid lone last words */
-.svc__inner>p{max-width:none!important;text-wrap:balance!important}
+.svc__inner>p{max-width:none!important;width:100%;text-wrap:pretty!important}
+.svc__head:focus:not(:focus-visible){outline:none}
 p,li,blockquote,figcaption{text-wrap:pretty}
 /* globe: one focus look whether you hover a country name or a place on the planet */
 .loc__list:hover button:not(:hover){color:rgba(255,255,255,.92)}
@@ -2166,7 +2167,7 @@ const wcards=[...row.children];
 
 /* services faces */
 const _unusedCover=(s,i)=>`<div class="face__cover"><p class="face__kicker">Services<small>0${i+1} / 04</small></p><div><h3>${s.t}</h3><p class="face__hint">Scroll to discover</p></div></div>`;
-const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p class="face__kicker">0${i+1} / 04</p><h3>${s.t}</h3><p>${s.p}</p></div>
+const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p class="face__kicker">0${i+1} / 04</p><h3>${s.t}</h3><p>${s.p.split('<span class="svc__para"></span>').map(t=>t.replace(/ (\S+ \S+)$/,(m,w)=>' '+w.replace(' ','\u00a0'))).join('<span class="svc__para"></span>')}</p></div>
   ${s.groups?`<div class="groups">${s.groups.map(([g,ts])=>`<div><p class="group__t">${g}</p><div class="tags">${ts.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`).join('')}</div>`:`<div class="tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`}
   <a class="btn btn--ink" href="#contact">${s.b} <span class="plus"></span></a></div>`;
 /* services: accordion — one service open at a time, its photo shown on the right */
@@ -2176,7 +2177,7 @@ const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p c
   /* a soft slideshow with a thin progress line (used by the Brand & Space service) */
   const galHTML=g=>`<div class="gal">${g.map((f,k)=>`<img src="assets/${f}" alt="" loading="lazy"${k?'':' class="cur"'}>`).join('')}<div class="gal__bar">${g.map(()=>'<i><b></b></i>').join('')}</div></div>`;
   list.innerHTML=SERV.map((s,i)=>`<li class="svc__item"><button class="svc__head" aria-expanded="false"><span class="svc__num">0${i+1}</span><span class="svc__name">${s.t.replace('<br>',' ')}</span><i class="svc__plus"></i></button>
-    <div class="svc__body"><div class="svc__inner">${s.gal?`<div class="svc__mphoto svc__mgal">${galHTML(s.gal)}</div>`:`<img class="svc__mphoto" src="assets/${s.img}" alt="" loading="lazy">`}<p>${s.p}</p>${tagsHTML(s)}<a class="btn btn--dark svc__btn" href="#contact">${s.b} <span class="plus"></span></a>${s.b2?`<a class="btn svc__btn svc__btn2" href="${s.b2h}" target="_blank" rel="noopener">${s.b2} <span class="plus"></span></a>`:''}</div></div></li>`).join('');
+    <div class="svc__body"><div class="svc__inner">${s.gal?`<div class="svc__mphoto svc__mgal">${galHTML(s.gal)}</div>`:`<img class="svc__mphoto" src="assets/${s.img}" alt="" loading="lazy">`}<p>${s.p.split('<span class="svc__para"></span>').map(t=>t.replace(/ (\S+ \S+)$/,(m,w)=>' '+w.replace(' ','\u00a0'))).join('<span class="svc__para"></span>')}</p>${tagsHTML(s)}<a class="btn btn--dark svc__btn" href="#contact">${s.b} <span class="plus"></span></a>${s.b2?`<a class="btn svc__btn svc__btn2" href="${s.b2h}" target="_blank" rel="noopener">${s.b2} <span class="plus"></span></a>`:''}</div></div></li>`).join('');
   media.innerHTML=SERV.map(s=>s.gal?`<div class="svc__slot">${galHTML(s.gal)}</div>`:`<img src="assets/${s.img}" alt="">`).join('');
   const items=[...list.children], imgs=[...media.children];let cur=-1;
   const open=i=>{if(i===cur)return;const prev=cur;cur=i;items.forEach((it,k)=>{it.classList.toggle('on',k===i);it.firstElementChild.setAttribute('aria-expanded',k===i)});imgs.forEach((im,k)=>{im.classList.toggle('was',k===prev);im.classList.toggle('on',k===i)})};
