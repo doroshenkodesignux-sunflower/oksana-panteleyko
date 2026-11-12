@@ -1479,9 +1479,9 @@ form.cta__card .cta__svc,form.cta__card .cta__svc~.cta__btn{margin-top:0!importa
 /* awards pagination ends before the back-to-top button and sits on its centre line */
 @media (min-width:901px){.awx__foot{right:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) + 32px)!important;bottom:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) / 2 - 6px)!important}}
 /* chocolate: Awards, Locations (globe) and footer */
-.awx,.loc,.ftr{background:#281E1D!important}
-.header.dark.glass{background:rgba(40,30,29,.35)!important}
-.totop.dark{background:rgba(40,30,29,.7)!important}
+.awx,.loc,.ftr{background:#1D1616!important}
+.header.dark.glass{background:rgba(29,22,22,.35)!important}
+.totop.dark{background:rgba(29,22,22,.7)!important}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
@@ -2372,7 +2372,7 @@ const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,
       gl_PointSize=uSize*(1.+aRnd*.9+vH*.6)*(3./-mv.z)*mix(1.7,1.,e);}`,
   fragmentShader:`varying float vA;varying float vH;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;gl_FragColor=vec4(mix(vec3(.93,.89,.83),vec3(.52,.72,.86),vH),vA*smoothstep(.5,.15,d));}`});
 const dots=new THREE.Points(geo,mat), globe=new THREE.Group();globe.add(dots);
-const core=new THREE.Mesh(new THREE.SphereGeometry(.975,64,64),new THREE.MeshBasicMaterial({color:0x281E1D,transparent:true,opacity:0,depthWrite:true}));core.renderOrder=0;dots.renderOrder=1;globe.add(core);
+const core=new THREE.Mesh(new THREE.SphereGeometry(.975,64,64),new THREE.MeshBasicMaterial({color:0x1D1616,transparent:true,opacity:0,depthWrite:true}));core.renderOrder=0;dots.renderOrder=1;globe.add(core);
 const scene=new THREE.Scene();scene.add(globe);
 /* blue outline of each country, drawn just above the dots */
 const lineMat=new THREE.LineBasicMaterial({color:0x84B7DB,transparent:true,opacity:0,depthTest:true});
