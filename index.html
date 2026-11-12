@@ -1509,6 +1509,11 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 @keyframes pinRing{from{transform:scale(1);opacity:.9}to{transform:scale(4.5);opacity:0}}
 .loc__pins.dim .pin:not(.on) i{opacity:.3;transform:scale(.75)}
 .pin.on{background:rgba(29,22,22,.92)!important}
+/* Awards titles in Cormorant, like every other heading on the site */
+.awx__t{font:600 clamp(36px,5.4vw,104px)/1.02 var(--serif)!important;letter-spacing:0!important}
+.awx__echo p:nth-child(n){font-family:var(--serif)!important;font-weight:600!important;letter-spacing:0!important}
+.awx__pic::after{background:rgba(10,10,10,.36)}
+@media (max-width:900px){.awx__t{font-size:clamp(34px,10.5vw,52px)!important;white-space:normal!important}.awx__m,.awx__m>*{white-space:normal;text-align:center;max-width:calc(100vw - 32px)}.awx__slide{max-width:calc(100vw - 32px)!important}}
 /* ---------- Awards on phones (mobile AWARDS 01–04): progress bar, photo, badge + project name, Explore project ---------- */
 .aw__bar{display:none}
 @media (max-width:900px){
