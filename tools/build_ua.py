@@ -226,8 +226,8 @@ T = [
 
  # ---------- contacts ----------
  ('<p class="cts__eyebrow">Contacts</p>', '<p class="cts__eyebrow">Контакти</p>', 1),
- ('<p class="cts__lead">Get in touch to discuss your project, ideas<br>or collaboration opportunities.</p>',
-  '<p class="cts__lead">Зв’яжіться зі мною, щоб обговорити проєкт, ідеї<br>або можливості співпраці.</p>', 1),
+ ('<p class="cts__lead">Get in touch to discuss your project, ideas <br>or collaboration opportunities.</p>',
+  '<p class="cts__lead">Зв’яжіться зі мною, щоб обговорити проєкт, ідеї <br>або можливості співпраці.</p>', 1),
  ('<p class="cts__k">Address</p>', '<p class="cts__k">Адреса</p>', 1),
  ('<span class="nw">06000, Nice, France</span>', '<span class="nw">06000, Ніцца, Франція</span>', 1),
  ('<p class="cts__k">For collaborations</p>', '<p class="cts__k">Для співпраці</p>', 1),
