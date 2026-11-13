@@ -1759,7 +1759,7 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* Request card: inner spacing tighter than outer; more room under the card */
 .cta__card .cta__head{margin-bottom:-8px!important}
 form.cta__card{padding-top:clamp(32px,5vh,56px)!important;padding-bottom:clamp(32px,5vh,56px)!important;margin-bottom:clamp(64px,10vh,120px)!important}
-@media(min-width:901px){form.cta__card{padding-left:40px!important;padding-right:40px!important}form.cta__card .cta__head{margin-bottom:-24px!important}}
+@media(min-width:901px){form.cta__card{padding-left:40px!important;padding-right:40px!important}form.cta__card .cta__head{margin-bottom:8px!important}}
 @media(max-width:900px){form.cta__card{padding:44px 28px!important;margin-bottom:64px!important}}
 @media(max-width:340px){form.cta__card{padding:36px 20px!important}}
 /* gallery track: the half-white base line is drawn by a pseudo so it is always visible; white fills animate over it */
@@ -1778,6 +1778,12 @@ form.cta__card .cta__fields label:not(.invalid):has(input:-webkit-autofill)>span
 .prj__title--sel h2{text-align:center!important}
 /* UA: handwritten «До роботи» under «Мій підхід» */
 .appr__title .lockup__img.lockup__img--ua{--src:url(assets/do-roboty-script.png)!important;--ar:1685/368!important;width:6.2em!important;margin:-.3em 0 0!important;transform:translateX(.1em)!important}
+/* Request card — one calm rhythm at every screen height (overrides the old short-screen squeezes) */
+form.cta__card.cta__card{gap:28px!important}
+form.cta__card .cta__head{margin-bottom:12px!important}
+form.cta__card .cta__fields{gap:6px!important;margin-top:0!important}
+form.cta__card .cta__svc{margin-top:4px!important}
+@media (min-width:901px) and (max-height:820px){form.cta__card.cta__card{gap:22px!important}form.cta__card .cta__head{margin-bottom:8px!important}form.cta__card .cta__head h2{font-size:clamp(30px,5.6vh,44px)!important}form.cta__card .cta__fields input{height:54px!important;padding-top:24px!important}form.cta__card .cta__fields span{top:20px!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
