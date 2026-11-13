@@ -1709,6 +1709,9 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.header{height:60px!important}}
 /* phones: button labels stay smaller than the headings they belong to */
 @media (max-width:900px){.btn{font-size:13px!important;letter-spacing:.04em!important}.btn .plus{width:12px!important;height:12px!important}}
+/* gallery progress: all segments visible from the start (half-white), readable on light photos too */
+.gal__bar{filter:drop-shadow(0 1px 2px rgba(29,22,22,.45))}
+.gal__bar i{background-color:rgba(255,255,255,.5)!important}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
