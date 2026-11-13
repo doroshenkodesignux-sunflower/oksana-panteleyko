@@ -241,7 +241,7 @@ T = [
  ('aria-label="Panteleyko — back to top"', 'aria-label="Panteleyko — нагору"', 1),
  ('<p class="ftr__name" id="ftrName">Oksana Panteleyko</p>', '<p class="ftr__name" id="ftrName">Оксана Пантелейко</p>', 1),
  ('©2026 Oksana Panteleyko. All rights reserved.', '©2026 Оксана Пантелейко. Усі права захищено.', 1),
- ('<small>Website designed by</small>', '<small>Дизайн сайту</small>', 1),
+ ('<small>Website by</small>', '<small>Створення сайту</small>', 1),
  ('aria-label="Previous"', 'aria-label="Назад"', 0),
  ('aria-label="Next"', 'aria-label="Далі"', 0),
  ('aria-label="Back to top"', 'aria-label="Нагору"', 0),
