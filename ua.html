@@ -1541,7 +1541,7 @@ form.cta__card.sent .cta__done{opacity:1;visibility:visible}
 /* phones */
 @media (max-width:600px){
   .abx{gap:60px;padding-block:100px 0}
-  .abx__stat b{font-size:clamp(64px,19vw,96px)!important}
+  .abx__stat b{font-size:clamp(72px,22vw,110px)!important}
   .abx__stats{column-gap:16px;row-gap:36px}
   .abx__foot{grid-template-columns:1fr;row-gap:24px}.abx__item p{max-width:none}
   .abx__cv{margin-top:16px}
@@ -1736,6 +1736,8 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* hero roles use the same label style as "About me" (brown Montserrat Bold caps) */
 .hero__role,.hero__role span{font:700 clamp(14px,calc(100vw / 1920 * 18),18px)/1.33 var(--sans)!important;letter-spacing:0!important;text-transform:uppercase!important;color:#695845!important}
 .mbr{display:none}@media (max-width:900px){.mbr{display:inline}}   /* line break used on phones only */
+/* "4" gets a light-blue asterisk: the same plus, doubled with a 45° turn */
+.abx__star::after{content:"+";position:absolute;inset:0;transform:rotate(45deg);transform-origin:42.7% 63.3%}   /* rotate around the glyph's own centre */
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -1998,7 +2000,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   </div>
   <div class="abx__stats">
     <div class="stat abx__stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p>Років<br class="mbr"> досвіду</p></div>
-    <div class="stat abx__stat rv" style="--d:.15s"><b><span data-to="4">0</span></b><p>Проєкти<br class="mbr"> у фіналі SBID</p></div>
+    <div class="stat abx__stat rv" style="--d:.15s"><b><span data-to="4">0</span><sup class="abx__star" aria-hidden="true">+</sup></b><p>Проєкти<br class="mbr"> у фіналі SBID</p></div>
     <div class="stat abx__stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p>Країн<br class="mbr"> із проєктами</p></div>
     <div class="stat abx__stat rv" style="--d:.35s"><b><span data-to="120">0</span><sup>+</sup></b><p>Завершених<br class="mbr"> проєктів</p></div>
   </div>
