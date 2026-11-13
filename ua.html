@@ -1661,9 +1661,11 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* phones: one spacing system — 120px between blocks, 80px from a heading to its content */
 @media (max-width:900px){
   #projects .prj__screen.prj__screen--intro{padding-top:120px!important;padding-bottom:32px!important}
-  .prj__screen--end{padding-bottom:0!important;margin-bottom:0!important}
-  .who__stick{padding-top:63px!important}   /* + the 57px the projects track leaves below "View all projects" = 120 */
-  #who .who__stick .h2{margin-bottom:25px!important}
+  .prj__screen--end{padding-bottom:64px!important;margin-bottom:0!important}   /* the blue end panel closes the block */
+  .prj__row{padding-bottom:0!important}
+  #projects,#projects .prj__track,#projects .prj__stick,#projects .prj__row{border-bottom:0!important;box-shadow:none!important}
+  .who__stick{padding-top:120px!important}
+  #who .who__stick .h2{margin-bottom:30px!important}
   #about.abx{padding-bottom:0!important}
   #approach{padding-top:19px!important}
   .appr__title{margin-bottom:10px!important}
