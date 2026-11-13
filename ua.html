@@ -1788,6 +1788,9 @@ form.cta__card .cta__svc{margin-top:4px!important}
 .cts__hand.cts__hand--ua{aspect-ratio:1752/413!important;width:6.4em!important;-webkit-mask:url(assets/na-zviazku-script.png) center/contain no-repeat!important;mask:url(assets/na-zviazku-script.png) center/contain no-repeat!important}
 .cts__lockup:has(.cts__hand--ua) .cts__serif{font-size:.75em!important;white-space:nowrap}
 @media (max-width:900px){.cts__lockup:has(.cts__hand--ua) .cts__serif{font-size:min(.75em,calc((100vw - 36px) / 7.7))!important}}
+/* Request card fills the screen under the header with equal photo margins above and below; spare height is shared between the groups */
+form.cta__card.cta__card{min-height:calc(100vh - clamp(60px,5.2vw,100px) - 2 * clamp(32px,5vh,56px));min-height:calc(100svh - clamp(60px,5.2vw,100px) - 2 * clamp(32px,5vh,56px));justify-content:space-between!important}
+@media (max-width:900px){form.cta__card.cta__card{min-height:calc(100svh - 60px - 64px)}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
