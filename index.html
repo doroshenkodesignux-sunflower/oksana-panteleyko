@@ -1646,6 +1646,13 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.menu__side,.menu__contacts,.menu .socials{width:100%!important;max-width:none!important;align-self:stretch!important}.menu .socials{grid-template-columns:repeat(4,1fr)!important}.menu .socials a{aspect-ratio:1!important;width:auto!important;height:auto!important}.menu__nav a{font-size:clamp(20px,min(7.6vw,3.3vh),30px)!important;display:inline-flex!important;align-items:center!important;min-height:40px!important;line-height:1!important;padding:0!important}.menu__nav{display:flex!important;flex-direction:column!important;gap:2px!important}.menu__nav li{margin:0!important;padding:0!important}.menu__lang{margin-bottom:28px!important}}
 /* awards link on phones: same look as the other plus-links (full white, not the dim caption colour) */
 @media (max-width:900px){.awx .awx__link{color:#fff!important;opacity:1!important}}
+/* testimonials on phones: one full screen under the header — title at the top, arrows at the bottom */
+@media (max-width:900px){
+  .tst{padding:0!important;min-height:0!important}
+  .tst__grid{display:flex!important;flex-direction:column!important;min-height:100svh!important;padding:calc(var(--hdrH,72px) + 24px) var(--pad) 32px!important;row-gap:0!important}
+  .tst__label{order:0}.tst__num{order:1;margin-top:12px!important}.tst__prev{order:2}.tst__who{order:3;margin-top:auto!important}.tst__quote{order:4;margin-top:24px!important}
+  .tst__rule{order:5}.tst__arrows{order:6;margin-top:auto!important;padding-top:32px}
+}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
