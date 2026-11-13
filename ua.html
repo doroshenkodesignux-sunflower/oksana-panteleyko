@@ -1772,7 +1772,8 @@ form.cta__card .cta__fields span{top:24px!important}
 form.cta__card .cta__fields label:focus-within span,form.cta__card .cta__fields label.filled span,form.cta__card .cta__fields label:has(input:-webkit-autofill) span,form.cta__card .cta__fields label:has(input:not(:placeholder-shown)) span{transform:translateY(-18px) scale(.8)!important}
 @media (max-width:900px){form.cta__card .cta__fields input{height:58px!important;padding-top:26px!important}form.cta__card .cta__fields span{top:22px!important}}
 /* filled / focused field: the floated label turns grey (errors stay red) */
-form.cta__card .cta__fields label:not(.invalid):focus-within>span,form.cta__card .cta__fields label.filled:not(.invalid)>span,form.cta__card .cta__fields label:not(.invalid):has(input:not(:placeholder-shown))>span,form.cta__card .cta__fields label:not(.invalid):has(input:-webkit-autofill)>span{color:#8A8484!important;transition:transform .35s var(--ease),color .3s}
+form.cta__card .cta__fields label:not(.invalid):focus-within>span,form.cta__card .cta__fields label.filled:not(.invalid)>span,form.cta__card .cta__fields label:not(.invalid):has(input:not(:placeholder-shown))>span{color:#8A8484!important;transition:transform .35s var(--ease),color .3s}
+form.cta__card .cta__fields label:not(.invalid):has(input:-webkit-autofill)>span{color:#8A8484!important}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
