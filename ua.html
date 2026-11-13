@@ -1766,6 +1766,11 @@ form.cta__card{padding-top:clamp(48px,7vh,72px)!important;padding-bottom:clamp(4
 .gal__bar i{background:none!important;height:14px!important;padding:0!important}
 .gal__bar i::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:rgba(255,255,255,.5)}
 .gal__bar b{z-index:1}
+/* form fields: more air between the floated label and the typed value */
+form.cta__card .cta__fields input{height:72px!important;padding-top:36px!important;padding-bottom:10px!important}
+form.cta__card .cta__fields span{top:30px!important}
+form.cta__card .cta__fields label:focus-within span,form.cta__card .cta__fields label.filled span,form.cta__card .cta__fields label:has(input:-webkit-autofill) span,form.cta__card .cta__fields label:has(input:not(:placeholder-shown)) span{transform:translateY(-24px) scale(.8)!important}
+@media (max-width:900px){form.cta__card .cta__fields input{height:64px!important;padding-top:32px!important}form.cta__card .cta__fields span{top:26px!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
