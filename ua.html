@@ -1739,6 +1739,12 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* "4" gets a light-blue asterisk: the same plus, doubled with a 45° turn */
 /* the asterisk is Cormorant's own "*", scaled to the plus's width and moved down to the plus's centre line */
 .abx__star span{display:inline-block;font-size:.904em;transform:translateY(.289em)}
+/* one text colour on light blocks: chocolate #1D1616 (only the blue accents stay blue) */
+.abx__label,.abx__stat p,.hero__role,.hero__role span,.svc__title,.tst__label,.cta__svc legend,.cta__fields span,.wcard .cols h4,.tag__n,.cta__head p,.tst__quote p,.tst__prev,.pcard__desc,.cts__lead,.cts__k,.cts__v,.pcard__meta p,.wcard .cols p,.offer span,.btn--glass,.btn--glass .roll span,.appr__slide p,.appr__slide h3,.tst__num,.tst__num small,.appr__count small{color:#1D1616!important}
+.tst__prev,.pcard__desc,.cts__lead,.cts__k,.pcard__meta p,.wcard .cols p,.offer span{opacity:1!important}
+.svc .svc__item:not(.on) .svc__name,.svc .svc__item:not(.on) .svc__num{color:#1D1616!important}
+/* phones: the hero text group sits a little higher (more air above the buttons on taller screens) */
+@media (max-width:900px){.hero__cta{margin-top:clamp(16px,calc((100svh - 700px) / 2),72px)!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
