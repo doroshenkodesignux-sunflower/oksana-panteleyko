@@ -1776,6 +1776,8 @@ form.cta__card .cta__fields label:not(.invalid):focus-within>span,form.cta__card
 form.cta__card .cta__fields label:not(.invalid):has(input:-webkit-autofill)>span{color:#8A8484!important}
 /* "Selected Projects" lines centred over each other (UA lines differ in width) */
 .prj__title--sel h2{text-align:center!important}
+/* UA: handwritten «До роботи» under «Мій підхід» */
+.appr__title .lockup__img.lockup__img--ua{--src:url(assets/do-roboty-script.png)!important;--ar:1685/368!important;width:6.2em!important;margin:-.3em 0 0!important;transform:translateX(.1em)!important}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -2158,7 +2160,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     <img class="appr__photo" src="assets/approach-photo.jpg" alt="Oksana Panteleyko">
   </div>
   <div class="appr__body">
-    <div class="appr__head"><h2 class="appr__title lockup"><span class="lockup__serif">Мій підхід</span><span class="lockup__script lockup__img" role="img" aria-label="To work"></span></h2></div>
+    <div class="appr__head"><h2 class="appr__title lockup"><span class="lockup__serif">Мій підхід</span><span class="lockup__script lockup__img lockup__img--ua" role="img" aria-label="До роботи"></span></h2></div>
     <div class="appr__mid"><p class="tst__num appr__count"><span id="apprNum">01</span><small>/06</small></p><div class="appr__viewport"><div class="appr__track" id="apprTrack"></div></div></div>
     <div class="appr__rule"><i id="apprBar"></i></div>
     <div class="arrows" data-for="appr"><button class="arrow arrow--prev" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="arrow arrow--next" aria-label="Далі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>

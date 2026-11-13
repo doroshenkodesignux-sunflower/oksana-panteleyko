@@ -211,6 +211,7 @@ T = [
 
  # ---------- testimonials (placeholders) ----------
  ('<span class="lockup__serif">My approach</span>', '<span class="lockup__serif">Мій підхід</span>', 1),
+ ('<span class="lockup__script lockup__img" role="img" aria-label="To work">', '<span class="lockup__script lockup__img lockup__img--ua" role="img" aria-label="До роботи">', 1),
  ('Interior concept, space planning, FF&amp;E, renovation supervision and full branding. SBID&nbsp;Awards&nbsp;2025&nbsp;Finalist (Hotel&nbsp;Bedroom&nbsp;&amp;&nbsp;Suites&nbsp;Design).', 'Концепція інтер’єру, планування, комплектація, супровід реновації, повний брендинг; фіналіст SBID&nbsp;Awards&nbsp;2025 (Hotel&nbsp;Bedroom&nbsp;&amp;&nbsp;Suites&nbsp;Design).', 1),
  ('<h2 class="tst__label">Testimonials</h2>', '<h2 class="tst__label">Відгуки</h2>', 1),
  ('<p class="tst__prev">What my clients say</p>', '<p class="tst__prev">Що кажуть клієнти</p>', 1),
