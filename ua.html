@@ -1660,7 +1660,7 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.pcard__meta{display:block!important}.pcard__loc{display:flex!important}.pcard__meta p.pcard__desc{font-size:14px!important}.pcard__img .pcard__badge{width:86px;top:0;right:0}}
 /* phones: one spacing system — 120px between blocks, 80px from a heading to its content */
 @media (max-width:900px){
-  #projects .prj__screen.prj__screen--intro{padding-top:92px!important;padding-bottom:100px!important}   /* to the letters: 120 above, 80 below the Portfolio script */
+  #projects .prj__screen.prj__screen--intro{padding-top:92px!important;padding-bottom:72px!important}   /* to the letters: 120 above, 80 below the Portfolio script */
   .prj__screen--end{padding-bottom:64px!important;margin-bottom:0!important}   /* the blue end panel closes the block */
   .prj__row{padding-bottom:0!important}
   #projects,#projects .prj__track,#projects .prj__stick,#projects .prj__row{border-bottom:0!important;box-shadow:none!important}
@@ -1715,7 +1715,24 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .gal__bar{filter:drop-shadow(0 1px 2px rgba(29,22,22,.45))}
 .gal__bar i{background-color:rgba(255,255,255,.5)!important}
 @media (max-width:900px){.svc .svc__left .svc__title{margin-top:-7px!important;margin-bottom:74px!important}}   /* Services heading: 120 / 80 to the letters */
-@media (min-width:601px) and (max-width:900px){#projects .prj__screen.prj__screen--intro{padding-top:80px!important;padding-bottom:132px!important}}   /* tablets: the Portfolio script is larger */
+@media (min-width:601px) and (max-width:900px){#projects .prj__screen.prj__screen--intro{padding-top:80px!important;padding-bottom:104px!important}}   /* tablets: the Portfolio script is larger */
+/* request form, all sizes: labels start at the field's left edge; chips share the spare space equally (balanced padding), 3 + 2 rows */
+.cta__fields span{left:0!important}
+.cta__fields input{padding-left:0!important;padding-right:0!important}
+.cta__svc legend{padding-left:0!important}
+.cta__chips{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+.cta__chips label{flex:1 1 auto!important;grid-column:auto!important}
+.cta__chips .cta__br{flex-basis:100%;height:0}
+.cta__chips span{padding:0 14px!important}
+@media (max-width:900px){
+  form.cta__card{padding:36px 24px!important;gap:24px!important}
+  .cta__fields{gap:8px!important}
+  .cta__svc legend{margin-bottom:12px!important}
+  .cta__chips{gap:6px!important}
+  .cta__chips span{padding:0 8px!important;font-size:14px!important}
+}
+@media (max-width:400px){.cta__chips span{padding:0 6px!important;font-size:13px!important}}
+@media (max-width:360px){form.cta__card{padding:28px 18px!important}.cta__chips span{padding:0 4px!important;font-size:12px!important}.cta__chips{gap:5px!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -2055,7 +2072,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Номер телефону</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
-      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
+      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><i class="cta__br" aria-hidden="true"></i><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Надіслати заявку <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
@@ -2132,7 +2149,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Номер телефону</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
-      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
+      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><i class="cta__br" aria-hidden="true"></i><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Надіслати заявку <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
