@@ -1737,7 +1737,9 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .hero__role,.hero__role span{font:700 clamp(14px,calc(100vw / 1920 * 18),18px)/1.33 var(--sans)!important;letter-spacing:0!important;text-transform:uppercase!important;color:#695845!important}
 .mbr{display:none}@media (max-width:900px){.mbr{display:inline}}   /* line break used on phones only */
 /* "4" gets a light-blue asterisk: the same plus, doubled with a 45° turn */
-.abx__star::after{content:"+";position:absolute;inset:0;transform:rotate(45deg);transform-origin:42.7% 63.3%}   /* rotate around the glyph's own centre */
+/* a regular five-arm asterisk drawn to the plus glyph: same width (0.34em), same stroke (0.05em), same centre */
+.abx__star{color:transparent!important}
+.abx__star svg{position:absolute;left:42.7%;top:63.3%;width:.34em;height:.34em;transform:translate(-50%,-50%);color:#b0d3eb;overflow:visible}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -2000,7 +2002,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   </div>
   <div class="abx__stats">
     <div class="stat abx__stat rv" style="--d:.05s"><b><span data-to="18">0</span><sup>+</sup></b><p>Років<br class="mbr"> досвіду</p></div>
-    <div class="stat abx__stat rv" style="--d:.15s"><b><span data-to="4">0</span><sup class="abx__star" aria-hidden="true">+</sup></b><p>Проєкти<br class="mbr"> у фіналі SBID</p></div>
+    <div class="stat abx__stat rv" style="--d:.15s"><b><span data-to="4">0</span><sup class="abx__star" aria-hidden="true">+<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="14.7"><line x1="50" y1="50" x2="50.00" y2="0.00"/><line x1="50" y1="50" x2="97.55" y2="34.55"/><line x1="50" y1="50" x2="79.39" y2="90.45"/><line x1="50" y1="50" x2="20.61" y2="90.45"/><line x1="50" y1="50" x2="2.45" y2="34.55"/></svg></sup></b><p>Проєкти<br class="mbr"> у фіналі SBID</p></div>
     <div class="stat abx__stat rv" style="--d:.25s"><b><span data-to="10">0</span><sup>+</sup></b><p>Країн<br class="mbr"> із проєктами</p></div>
     <div class="stat abx__stat rv" style="--d:.35s"><b><span data-to="120">0</span><sup>+</sup></b><p>Завершених<br class="mbr"> проєктів</p></div>
   </div>
