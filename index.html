@@ -1620,7 +1620,7 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
   .cta__btn{height:50px!important;margin-top:0!important}
 }
 /* phones: the hero always fits the visible screen (Safari/Chrome bars included), down to ~520px tall */
-@media (max-width:900px){.hero{min-height:520px!important}}
+@media (max-width:900px){.hero{min-height:640px!important}}   /* never shorter: on short in-app browsers (Telegram, Instagram) the text would climb onto the face */
 /* phones: "Explore project" sits just above the slide counter, not under the caption */
 @media (max-width:900px){.awx__copy{position:static!important}.awx__link{position:absolute!important;left:var(--pad);right:var(--pad);width:auto!important;bottom:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) / 2 + 40px);z-index:3}}
 /* project cards on phones: keep the link's underline inside its reveal mask */
