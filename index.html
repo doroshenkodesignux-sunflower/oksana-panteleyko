@@ -1644,15 +1644,17 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 @media (max-width:900px){.cts__lead br{display:none}.cts__lead{text-wrap:balance!important}}
 /* menu on phones: social buttons fill the width (still square), menu items a little smaller */
 @media (max-width:900px){.menu__side,.menu__contacts,.menu .socials{width:100%!important;max-width:none!important;align-self:stretch!important}.menu .socials{grid-template-columns:repeat(4,1fr)!important}.menu .socials a{aspect-ratio:1!important;width:auto!important;height:auto!important}.menu__nav a{font-size:clamp(22px,min(9vw,3.8vh),36px)!important}}
+/* awards link on phones: same look as the other plus-links (full white, not the dim caption colour) */
+@media (max-width:900px){.awx .awx__link{color:#fff!important;opacity:1!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
   .awx{--top:calc(var(--hdrH,72px) + 20px);--pagerH:40px;--copyH:128px;--linkH:78px}
   .awx__foot{top:var(--top)!important;bottom:auto!important;left:var(--pad)!important;right:var(--pad)!important}
   .awx__pics{top:calc(var(--top) + var(--pagerH) + var(--copyH) + 8px)!important;bottom:calc(var(--linkH) + 8px)!important;left:0!important;right:0!important}
-  .awx__pic{--avail:calc(100svh - var(--top) - var(--pagerH) - var(--linkH) - var(--copyH) - 56px);width:min(66vw,calc(var(--avail) / 1.25))!important}
-  .awx__pic--doc{width:min(64vw,calc(var(--avail) * 1.3))!important}
-  .awx__pic--tall{width:min(46vw,calc(var(--avail) / 1.62))!important}
+  .awx__pic{--avail:calc(100svh - var(--top) - var(--pagerH) - var(--linkH) - var(--copyH) - 56px);--P:min(60vw,calc(var(--avail) / 1.25));width:var(--P)!important}
+  .awx__pic--doc{width:min(calc(var(--P) * 1.3),calc(100vw - 32px))!important}
+  .awx__pic--tall{width:calc(var(--P) * .86)!important}
   .awx__copy{position:absolute!important;left:var(--pad)!important;right:var(--pad)!important;top:calc(var(--top) + var(--pagerH))!important;bottom:auto!important;max-width:none!important;align-items:start}
   .awx__slide{width:100%!important;max-width:none!important}
   .awx__t{font-size:clamp(24px,7.6vw,36px)!important;line-height:1.02!important;gap:0!important}
