@@ -1762,6 +1762,10 @@ form.cta__card{padding-top:clamp(48px,7vh,72px)!important;padding-bottom:clamp(4
 @media(min-width:901px){form.cta__card{padding-left:40px!important;padding-right:40px!important}form.cta__card .cta__head{margin-bottom:-24px!important}}
 @media(max-width:900px){form.cta__card{padding:44px 28px!important;margin-bottom:64px!important}}
 @media(max-width:340px){form.cta__card{padding:36px 20px!important}}
+/* gallery track: the half-white base line is drawn by a pseudo so it is always visible; white fills animate over it */
+.gal__bar i{background:none!important;height:14px!important;padding:0!important}
+.gal__bar i::before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:rgba(255,255,255,.5)}
+.gal__bar b{z-index:1}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -2636,7 +2640,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
 (()=>{const b=document.getElementById('toTop'), c=document.getElementById('about');
   const name=document.getElementById('ftrName'), by=document.querySelector('.ftr__by'), copy=document.querySelector('.ftr__copy');
   const hit=(a,r)=>a.left<r.right&&a.right>r.left&&a.top<r.bottom&&a.bottom>r.top;
-  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',scrollY>innerHeight*.6);   // as soon as the first screen is scrolled past (desktop and phones)
+  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',document.getElementById('contact').getBoundingClientRect().top<innerHeight*.6);   // from the first request block (CTA) onward, desktop and phones
     // never cover the footer name or the credits: if the resting spot would touch them, sit just above the name
     b.style.bottom='';if(innerWidth<=900){const y=by.getBoundingClientRect();if(y.bottom<innerHeight-16){b.style.bottom=(innerHeight-y.bottom)+'px'};return}
     const r=b.getBoundingClientRect(), pad=10, box={left:r.left-pad,right:r.right+pad,top:r.top-pad,bottom:r.bottom+pad};
