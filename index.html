@@ -1794,6 +1794,8 @@ form.cta__card.cta__card{min-height:calc(100vh - clamp(60px,5.2vw,100px) - 2 * c
 @media (max-width:900px){.appr__title .lockup__img.lockup__img--ua{width:4.9em!important;margin-top:-.25em!important}}
 /* phones, UA: keep the three lead lines whole (the long middle line used to break in two); shrink only on very narrow phones */
 @media (max-width:600px){html[lang="uk"] .hero__lead span{white-space:nowrap!important}html[lang="uk"] .hero__lead{font-size:min(14px,calc((100vw - 36px) / 23.3))!important}}
+/* nothing may widen the page sideways on narrow phones (the hero photo did at <=320px, pushing fixed buttons to the edge) */
+html,body{overflow-x:clip}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
