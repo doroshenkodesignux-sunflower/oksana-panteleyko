@@ -1798,6 +1798,12 @@ form.cta__card.cta__card{min-height:calc(100vh - clamp(60px,5.2vw,100px) - 2 * c
 html,body{overflow-x:clip}
 /* phones: Contacts block — less air above the label, the same air below the social buttons */
 @media (max-width:900px){.cts .cts__left{padding-top:72px!important;padding-bottom:80px!important}.cts__lockup{align-items:center!important}.cts__lockup .cts__hand{margin-left:0!important;margin-right:0!important}}
+/* phones, testimonials: content grouped in the middle with more air above and below; arrows on the left */
+@media (max-width:900px){
+  #testimonials .tst__grid{justify-content:center!important;padding-top:calc(var(--hdrH,72px) + 56px)!important;padding-bottom:72px!important}
+  #testimonials .tst__who{margin-top:48px!important}
+  #testimonials .tst__arrows{margin-top:40px!important;padding-top:0!important;align-self:flex-start!important;justify-content:flex-start!important;margin-left:0!important;margin-right:auto!important}
+}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
