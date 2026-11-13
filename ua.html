@@ -1787,7 +1787,7 @@ form.cta__card .cta__svc{margin-top:4px!important}
 /* UA: handwritten «На зв’язку» under «Залишаємось» */
 .cts__hand.cts__hand--ua{margin-top:-.32em!important;aspect-ratio:1752/413!important;width:6.4em!important;-webkit-mask:url(assets/na-zviazku-script.png) center/contain no-repeat!important;mask:url(assets/na-zviazku-script.png) center/contain no-repeat!important}
 .cts__lockup:has(.cts__hand--ua) .cts__serif{font-size:.75em!important;white-space:nowrap}
-@media (max-width:900px){.cts__lockup:has(.cts__hand--ua) .cts__serif{font-size:min(.75em,calc((100vw - 36px) / 7.7))!important}}
+@media (max-width:900px){.cts__lockup:has(.cts__hand--ua) .cts__serif{font-size:min(.9em,calc((100vw - 36px) / 7.7))!important}}
 /* Request card fills the screen under the header with equal photo margins above and below; spare height is shared between the groups */
 form.cta__card.cta__card{min-height:calc(100vh - clamp(60px,5.2vw,100px) - 2 * clamp(32px,5vh,56px));min-height:calc(100svh - clamp(60px,5.2vw,100px) - 2 * clamp(32px,5vh,56px));justify-content:space-between!important}
 @media (max-width:900px){form.cta__card.cta__card{min-height:calc(100svh - 60px - 64px)}}
@@ -1796,6 +1796,8 @@ form.cta__card.cta__card{min-height:calc(100vh - clamp(60px,5.2vw,100px) - 2 * c
 @media (max-width:600px){html[lang="uk"] .hero__lead span{white-space:nowrap!important}html[lang="uk"] .hero__lead{font-size:min(14px,calc((100vw - 36px) / 23.3))!important}}
 /* nothing may widen the page sideways on narrow phones (the hero photo did at <=320px, pushing fixed buttons to the edge) */
 html,body{overflow-x:clip}
+/* phones: Contacts block — less air above the label, the same air below the social buttons */
+@media (max-width:900px){.cts .cts__left{padding-top:72px!important;padding-bottom:80px!important}.cts__lockup{align-items:center!important}.cts__lockup .cts__hand{margin-left:0!important;margin-right:0!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
