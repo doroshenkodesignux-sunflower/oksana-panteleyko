@@ -1745,6 +1745,11 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .svc .svc__item:not(.on) .svc__name,.svc .svc__item:not(.on) .svc__num{color:#1D1616!important}
 /* phones: the hero text group sits a little higher (more air above the buttons on taller screens) */
 @media (max-width:900px){.hero__cta{margin-top:clamp(16px,calc((100svh - 700px) / 2),72px)!important}}
+/* one small-caps style: card labels (The challenge / What you'll get) = About me label = hero roles; buttons use the same size and weight on phones */
+.wcard .cols h4{font:700 clamp(14px,calc(100vw / 1920 * 18),18px)/1.33 var(--sans)!important;letter-spacing:.02em!important;text-transform:uppercase!important}
+.abx__label,.hero__role,.hero__role span,.tst__label{letter-spacing:.02em!important}
+@media (max-width:900px){.btn{font-size:14px!important;font-weight:700!important;letter-spacing:.02em!important}.wcard .cols h4,.abx__label,.hero__role,.hero__role span,.tst__label,.svc__title:not(:where(.svc .svc__title)){font-size:14px!important}}
+@media (max-width:340px){.btn{font-size:12.5px!important}}   /* only the narrowest phones: long Ukrainian labels must fit */
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
