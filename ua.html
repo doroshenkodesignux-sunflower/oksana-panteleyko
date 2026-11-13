@@ -2130,7 +2130,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Номер телефону</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
-      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><i class="cta__br" aria-hidden="true"></i><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
+      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="checkbox" name="service" value="Concept"><span>Концепція</span></label><label><input type="checkbox" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="checkbox" name="service" value="Consultation"><span>Консультація</span></label><i class="cta__br" aria-hidden="true"></i><label><input type="checkbox" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="checkbox" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Надіслати заявку <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
@@ -2207,7 +2207,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <label><span>Номер телефону</span><input type="tel" name="phone" autocomplete="tel" placeholder=" " required></label>
         <label><span>Email</span><input type="email" name="email" autocomplete="email" placeholder=" " required></label>
       </div>
-      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="radio" name="service" value="Concept"><span>Концепція</span></label><label><input type="radio" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="radio" name="service" value="Consultation"><span>Консультація</span></label><i class="cta__br" aria-hidden="true"></i><label><input type="radio" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="radio" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
+      <fieldset class="cta__svc"><legend>Чим я можу допомогти?</legend><div class="cta__chips"><label><input type="checkbox" name="service" value="Concept"><span>Концепція</span></label><label><input type="checkbox" name="service" value="Design & Renovation"><span>Дизайн<i class="cta__long"> і реновація</i></span></label><label><input type="checkbox" name="service" value="Consultation"><span>Консультація</span></label><i class="cta__br" aria-hidden="true"></i><label><input type="checkbox" name="service" value="Rebranding"><span>Ребрендинг</span></label><label><input type="checkbox" name="service" value="Not sure yet"><span>Ще не знаю</span></label></div></fieldset>
       <div class="cta__hp" aria-hidden="true"><input type="text" name="hp_x7" tabindex="-1" autocomplete="new-password" data-lpignore="true" data-1p-ignore></div>
       <button class="btn btn--dark cta__btn" type="submit">Надіслати заявку <span class="plus"></span></button>
       <p class="cta__status" role="status" aria-live="polite"></p>
@@ -2901,6 +2901,10 @@ document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>spa
   document.addEventListener('click',e=>{const b=e.target.closest('.svc__btn:not(.svc__btn2)');if(!b)return;
     const items=[...document.querySelectorAll('.svc__item')],i=items.indexOf(b.closest('.svc__item'));if(i<0||!map[i])return;
     document.querySelectorAll('.cta__chips input[value="'+map[i]+'"]').forEach(r=>r.checked=true)},true)})();
+/* several services can be picked; "Not sure yet" clears the others, and picking a service clears "Not sure yet" */
+document.addEventListener('change',e=>{const i=e.target;if(!i.matches||!i.matches('.cta__chips input')||!i.checked)return;
+  const all=[...i.closest('.cta__chips').querySelectorAll('input')],ns=i.value==='Not sure yet';
+  all.forEach(x=>{if(x!==i&&(ns||x.value==='Not sure yet'))x.checked=false})});
 </script>
 <script>
 /* request forms → Cloudflare Worker → Telegram group (+ email). Paste the worker address below once it is deployed. */
@@ -2914,10 +2918,10 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
     const bad=[['name',v('name').length>1,'Обов’язкове поле'],['phone',v('phone').replace(/\D/g,'').length>=7,v('phone')?'Введіть коректний номер':'Обов’язкове поле'],['email',/^\S+@\S+\.\S+$/.test(v('email')),v('email')?'Введіть коректний email':'Обов’язкове поле']].filter(([n,ok,msg])=>{const l=f.elements[n].closest('label');let m=l.querySelector('.cta__err');if(!m){m=document.createElement('em');m.className='cta__err';l.append(m)}m.textContent=ok?'':msg;l.classList.toggle('invalid',!ok);return!ok});
     if(bad.length){st.textContent='';f.elements[bad[0][0]].focus();return}
     if(!REQUEST_URL){st.classList.add('err');st.textContent='Форма ще не підключена — напишіть, будь ласка, на hello@panteleyko.com.';return}
-    const sel=f.querySelector('.cta__chips input:checked');
+    const sel=[...f.querySelectorAll('.cta__chips input:checked')].map(i=>i.value).join(', ');
     btn.disabled=true;st.textContent='Надсилаємо…';
     try{const r=await fetch(REQUEST_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({name:v('name'),phone:v('phone'),email:v('email'),service:sel?sel.value:'',website:v('hp_x7'),page:k?'bottom form':'top form'})});
+        body:JSON.stringify({name:v('name'),phone:v('phone'),email:v('email'),service:sel,website:v('hp_x7'),page:k?'bottom form':'top form'})});
       if(!r.ok)throw 0;f.reset();f.querySelectorAll('label.filled').forEach(l=>l.classList.remove('filled'));st.textContent='';f.classList.add('sent');f.querySelector('.cta__done .btn').focus({preventScroll:true})}
     catch(_){st.classList.add('err');st.textContent='Щось пішло не так — спробуйте ще раз або напишіть на hello@panteleyko.com.'}
     finally{btn.disabled=false}})});
