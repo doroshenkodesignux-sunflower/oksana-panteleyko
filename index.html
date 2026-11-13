@@ -1774,6 +1774,8 @@ form.cta__card .cta__fields label:focus-within span,form.cta__card .cta__fields 
 /* filled / focused field: the floated label turns grey (errors stay red) */
 form.cta__card .cta__fields label:not(.invalid):focus-within>span,form.cta__card .cta__fields label.filled:not(.invalid)>span,form.cta__card .cta__fields label:not(.invalid):has(input:not(:placeholder-shown))>span{color:#8A8484!important;transition:transform .35s var(--ease),color .3s}
 form.cta__card .cta__fields label:not(.invalid):has(input:-webkit-autofill)>span{color:#8A8484!important}
+/* "Selected Projects" lines centred over each other (UA lines differ in width) */
+.prj__title--sel h2{text-align:center!important}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
