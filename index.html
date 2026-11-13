@@ -1653,6 +1653,11 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
   .tst__label{order:0}.tst__num{order:1;margin-top:12px!important}.tst__prev{order:2}.tst__who{order:3;margin-top:auto!important}.tst__quote{order:4;margin-top:24px!important}
   .tst__rule{order:5}.tst__arrows{order:6;margin-top:auto!important;padding-top:32px}
 }
+/* project cards: a short description where there is one, and the SBID finalist badge on the photo */
+.pcard__meta p.pcard__desc{display:block!important;margin-top:10px!important;max-width:34em;font:400 14px/1.5 var(--sans)!important;opacity:.75;text-wrap:pretty}
+.pcard__img{position:relative}
+.pcard__img .pcard__badge{position:absolute;top:14px;right:14px;width:clamp(72px,7vw,110px);height:auto;padding:6px;background:#fff;box-shadow:0 6px 20px rgba(29,22,22,.18);z-index:2}
+@media (max-width:900px){.pcard__meta{display:block!important}.pcard__loc{display:flex!important}.pcard__meta p.pcard__desc{font-size:14px!important}.pcard__img .pcard__badge{width:84px;top:10px;right:10px}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -1935,9 +1940,9 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="prj__row" id="prjRow">
       <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Selected<br>Projects</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="#portfolio">View all projects <i></i></a></div>
       <article class="pcard">
-        <div class="pcard__img"><img src="assets/proj-alberti.jpg" alt="Aparthotel “Alberti”" loading="lazy"></div>
+        <div class="pcard__img"><img src="assets/proj-alberti.jpg" alt="Aparthotel “Alberti”" loading="lazy"><img class="pcard__badge" src="assets/sbid-finalist-2025.png" alt="SBID International Design Awards 2025 Finalist" loading="lazy"></div>
         <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Aparthotel “Alberti”</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Explore project <i></i></a></span></div>
-        <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></span><span class="ln" style="--d:.72s"><p>Each apartment is designed in a unique color palette and carries its own philosophy. Every space invites you to experience a different emotion.</p></span></div>
+        <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></span><span class="ln" style="--d:.72s"><p class="pcard__desc">Interior concept, space planning, FF&amp;E, renovation supervision and full branding. SBID Awards 2025 Finalist (Hotel Bedroom &amp; Suites Design).</p></span></div>
       </article>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-avectoi.jpg" alt="Cafe “Avec toi”" loading="lazy"></div>
@@ -2786,10 +2791,11 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
 </script>
 <script>/* project cards (desktop): the location line sits on the same line as "View all projects" */
 (()=>{const btn=document.querySelector('.prj__screen--intro .prj__all');if(!btn)return;
-  const fit=()=>{const locs=[...document.querySelectorAll('.pcard__loc')].map(l=>l.closest('.ln')||l);   // move the whole masked line, so nothing gets clippedlocs.forEach(l=>l.style.translate='');if(innerWidth<=900)return;
+  /* the location line (with the description under it) sits on the same line as the button; the whole meta block moves together */
+  const fit=()=>{const metas=[...document.querySelectorAll('.pcard__meta')];metas.forEach(m=>m.style.translate='');if(innerWidth<=900)return;
     const t=(btn.querySelector('.roll')||btn).getBoundingClientRect(), c=t.top+t.height/2;
-    locs.forEach(l=>{const r=l.getBoundingClientRect(), mid=r.top+2+(r.height-6)/2;   // the mask line itself (its text may still be mid-reveal)
-      l.style.translate='0 '+(c-mid).toFixed(1)+'px'})};
+    metas.forEach(m=>{const l=m.querySelector('.pcard__loc');if(!l)return;const ln=l.closest('.ln')||l, r=ln.getBoundingClientRect(), mid=r.top+2+(r.height-6)/2;
+      m.style.translate='0 '+(c-mid).toFixed(1)+'px'})};
   addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,500)})();</script>
 <script>/* About lead: each line goes from grey to dark, line after line, following the scroll */
 (()=>{const p=document.querySelector('.abx__lead');if(!p)return;
