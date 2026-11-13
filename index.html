@@ -1674,10 +1674,10 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
   .pcard{display:flex!important;flex-direction:column!important}
   .pcard__head{display:contents!important}
   .pcard__img{order:0}
-  .pcard__head>.ln:first-child{order:1;margin-top:16px!important}
-  .pcard__meta{order:2;margin-top:22px!important}
+  .pcard__head>.ln:first-child{order:1;margin-top:24px!important}
+  .pcard__meta{order:2;margin-top:14px!important}
   .pcard__meta p.pcard__desc{margin-top:8px!important}
-  .pcard__head>.ln:last-child{order:3;margin-top:28px!important}
+  .pcard__head>.ln:last-child{order:3;margin-top:22px!important}
   .prj__row{row-gap:48px!important;gap:48px!important}
   .pcard+.pcard{border-top:1px solid var(--line)!important;padding-top:48px!important}
   .svc .svc__list>.svc__item,.svc .svc__list>.svc__item.on{padding:0 0 48px!important;margin:0 0 48px!important}
@@ -1705,6 +1705,8 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 /* the plus in text links matches the bold label: same weight, cap-height size */
 .lnk i::before,.lnk i::after{height:2px!important}
 .awx__link i{width:12px!important;height:12px!important}
+/* phones: a slimmer header (60px) leaves more of the screen for content */
+@media (max-width:900px){.header{height:60px!important}}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
