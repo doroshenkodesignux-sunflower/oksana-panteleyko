@@ -1683,6 +1683,25 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
   .svc .svc__list>.svc__item,.svc .svc__list>.svc__item.on{padding:0 0 48px!important;margin:0 0 48px!important}
   .svc .svc__list>.svc__item:last-child{padding-bottom:0!important;margin-bottom:0!important;border-bottom:0!important}
 }
+/* request form: service chips look like buttons — they fill the row (3 + 2), a bit taller, with a hover state */
+.cta__chips{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:6px!important;width:100%}
+.cta__chips label{grid-column:span 6;display:block;margin:0!important}
+.cta__chips label:nth-child(1){grid-column:span 4}.cta__chips label:nth-child(2){grid-column:span 3}.cta__chips label:nth-child(3){grid-column:span 5}   /* widths follow the words */
+.cta__chips span{display:flex!important;align-items:center;justify-content:center;height:46px;padding:0 8px!important;text-align:center;white-space:nowrap;cursor:pointer;border:1px solid transparent;transition:background .3s,color .3s,border-color .3s!important}
+.cta__chips label:hover span{border-color:#1D1616}
+.cta__chips .cta__long{display:none!important}   /* chips stay one line: "Design"; the full service name is still what gets sent */
+@media (max-width:380px){.cta__chips span{font-size:13px!important;padding:0 4px!important}}@media (max-width:365px){.cta__chips span{font-size:12px!important;padding:0 2px!important}.cta__chips{gap:4px!important}}
+.cta__chips input:checked+span{border-color:#1D1616}
+/* phones: tighter fields so the whole form fits one screen under the header */
+@media (max-width:900px){
+  form.cta__card{gap:18px!important;padding-top:28px!important;padding-bottom:28px!important}
+  .cta__head p{margin-top:10px!important}
+  .cta__fields{margin-top:0!important;gap:2px!important}
+  .cta__fields input{height:50px!important;padding-top:22px!important}
+  .cta__fields span{top:18px!important}
+  .cta__chips span{height:44px;font-size:14px!important}
+  .cta__btn{height:52px!important}
+}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
