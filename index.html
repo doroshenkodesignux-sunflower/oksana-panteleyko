@@ -1658,6 +1658,31 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .pcard__img{position:relative}
 .pcard__img .pcard__badge{position:absolute;top:14px;right:14px;width:clamp(72px,7vw,110px);height:auto;padding:6px;background:#fff;box-shadow:0 6px 20px rgba(29,22,22,.18);z-index:2}
 @media (max-width:900px){.pcard__meta{display:block!important}.pcard__loc{display:flex!important}.pcard__meta p.pcard__desc{font-size:14px!important}.pcard__img .pcard__badge{width:84px;top:10px;right:10px}}
+/* phones: one spacing system — 120px between blocks, 80px from a heading to its content */
+@media (max-width:900px){
+  #projects .prj__screen.prj__screen--intro{padding-top:120px!important;padding-bottom:32px!important}
+  .prj__screen--end{padding-bottom:0!important;margin-bottom:0!important}
+  .who__stick{padding-top:63px!important}   /* + the 57px the projects track leaves below "View all projects" = 120 */
+  #who .who__stick .h2{margin-bottom:25px!important}
+  #about.abx{padding-bottom:0!important}
+  #approach{padding-top:19px!important}
+  .appr__title{margin-bottom:10px!important}
+  .cts__left{padding-top:119px!important}
+}
+/* phones: project cards read top-down — photo, title, location, description, then the link; 16-20px inside a card, 64px between cards (same as between services) */
+@media (max-width:900px){
+  .pcard{display:flex!important;flex-direction:column!important}
+  .pcard__head{display:contents!important}
+  .pcard__img{order:0}
+  .pcard__head>.ln:first-child{order:1;margin-top:16px!important}
+  .pcard__meta{order:2;margin-top:12px!important}
+  .pcard__meta p.pcard__desc{margin-top:8px!important}
+  .pcard__head>.ln:last-child{order:3;margin-top:20px!important}
+  .prj__row{row-gap:48px!important;gap:48px!important}
+  .pcard+.pcard{border-top:1px solid var(--line)!important;padding-top:48px!important}
+  .svc .svc__list>.svc__item,.svc .svc__list>.svc__item.on{padding:0 0 48px!important;margin:0 0 48px!important}
+  .svc .svc__list>.svc__item:last-child{padding-bottom:0!important;margin-bottom:0!important;border-bottom:0!important}
+}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
