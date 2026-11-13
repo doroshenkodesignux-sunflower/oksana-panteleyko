@@ -2645,7 +2645,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
 (()=>{const b=document.getElementById('toTop'), c=document.getElementById('about');
   const name=document.getElementById('ftrName'), by=document.querySelector('.ftr__by'), copy=document.querySelector('.ftr__copy');
   const hit=(a,r)=>a.left<r.right&&a.right>r.left&&a.top<r.bottom&&a.bottom>r.top;
-  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',document.getElementById('contact').getBoundingClientRect().top<innerHeight*.6);   // from the first request block (CTA) onward, desktop and phones
+  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',document.getElementById('services').getBoundingClientRect().bottom<innerHeight*.5);   // only once Services has scrolled away and the first CTA fills the screen (CTA starts under Services, so its own top is not used)
     // never cover the footer name or the credits: if the resting spot would touch them, sit just above the name
     b.style.bottom='';if(innerWidth<=900){const y=by.getBoundingClientRect();if(y.bottom<innerHeight-16){b.style.bottom=(innerHeight-y.bottom)+'px'};return}
     const r=b.getBoundingClientRect(), pad=10, box={left:r.left-pad,right:r.right+pad,top:r.top-pad,bottom:r.bottom+pad};
