@@ -92,11 +92,36 @@ CSS = '''
   .pfp__track img:first-child,.pfp__track img:nth-child(2){width:86%}
   .pfp__track img:nth-child(2){aspect-ratio:auto;object-fit:cover}
 }
+/* ---- entrance: the first screen builds itself in when the page opens ---- */
+.pfi .prj__title h2{clip-path:inset(0 0 100% 0);translate:0 .35em;transition:clip-path 1.2s var(--ease),translate 1.2s var(--ease)}
+.pfi .prj__pf{clip-path:inset(0 100% 0 0);transition:clip-path 1.6s cubic-bezier(.65,0,.35,1) .55s}
+.pfi__lead{opacity:0;translate:0 18px;transition:opacity 1s var(--ease) 1.1s,translate 1s var(--ease) 1.1s}
+.pfl>.pfp:first-child{border-top-color:transparent;background:linear-gradient(var(--line),var(--line)) 0 0/0 1px no-repeat;transition:background-size 1.4s var(--ease) 1.3s}
+.pf-in .pfi .prj__title h2{clip-path:inset(0 0 -10% 0);translate:0 0}
+.pf-in .pfi .prj__pf{clip-path:inset(-20% -5% -20% 0)}
+.pf-in .pfi__lead{opacity:1;translate:0 0}
+.pf-in .pfl>.pfp:first-child{background-size:100% 1px}
+/* ---- projects: each one rises in as it reaches the screen, its parts one after another ---- */
+.pfp>*,.pfp__body>*{opacity:0;translate:0 32px;transition:opacity .9s var(--ease),translate .9s var(--ease)}
+.pfp__n{transition-delay:0s}
+.pfp__top{transition-delay:.08s!important}.pfp__desc{transition-delay:.16s!important}.pfp__bar{transition-delay:.24s!important}
+.pfp__gal{translate:0 0!important;clip-path:inset(12% 0 0 0);transition:opacity .9s var(--ease) .3s,clip-path 1.3s var(--ease) .3s!important}
+.pfp__gal img{scale:1.08;transition:scale 1.8s var(--ease) .3s}
+.pfp .lnk{transition-delay:.5s!important}
+.pfp.in>*,.pfp.in .pfp__body>*{opacity:1;translate:0 0}
+.pfp.in .pfp__gal{clip-path:inset(0 0 0 0)}
+.pfp.in .pfp__gal img{scale:1}
+@media (prefers-reduced-motion:reduce){.pfi *,.pfp *,.pfp{transition:none!important;clip-path:none!important;opacity:1!important;translate:none!important;scale:none!important}}
 </style>
 '''
 
 JS = '''
 <script>
+/* entrance of the first screen, then projects appear one after another as they scroll in */
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('pf-in')));
+(()=>{const ps=[...document.querySelectorAll('.pfp')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  ps.forEach(p=>io.observe(p))})();
 /* portfolio: the arrows slide each project's photos */
 document.querySelectorAll('.pfp').forEach(p=>{const t=p.querySelector('.pfp__track'),[pv,nx]=p.querySelectorAll('.pfp__arr button');let i=0;
   const go=k=>{const im=[...t.children],max=Math.max(0,im.length-1);i=Math.max(0,Math.min(max,k));
@@ -115,7 +140,7 @@ def project(n, p, L):
     tags = ''.join(f'<span>{t["tags"][k]}</span>' for k in p[4])
     alt = html.escape(name, quote=True)
     return f'''
-  <article class="pfp rv">
+  <article class="pfp">
     <div class="pfp__n">{n:02d}</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>{name}</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">{place}</span></div>
