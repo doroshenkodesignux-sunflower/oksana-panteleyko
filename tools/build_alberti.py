@@ -29,7 +29,7 @@ T = {
              'r1': 'Room 1', 'cu': 'Close-up', 'mask': 'Eye mask for sleeping', 'keys': 'Room keys', 'logo': 'Logo',
              'bc': 'Business cards', 'wl': 'Welcome letter', 'sk': 'Facade sketch'},
         brtext='Each apartment is designed in a unique color palette and carries its own philosophy. Every space invites you to experience a different emotion.',
-        tst_left='Kind words', tst_k='Client review',
+        tst_k='Client review',
         me='alberti.html', other='alberti-ua.html', home='index.html',
     ),
     'ua': dict(
@@ -47,7 +47,7 @@ T = {
              'r1': 'Кімната 1', 'cu': 'Деталі', 'mask': 'Маска для сну', 'keys': 'Ключі від номера', 'logo': 'Логотип',
              'bc': 'Візитівки', 'wl': 'Вітальний лист', 'sk': 'Ескіз фасаду'},
         brtext='Кожні апартаменти мають власну колірну палітру й філософію. Кожен простір запрошує відчути іншу емоцію.',
-        tst_left='Теплі слова', tst_k='Відгук клієнта',
+        tst_k='Відгук клієнта',
         me='alberti-ua.html', other='alberti.html', home='ua.html',
     ),
 }
@@ -181,10 +181,12 @@ CSS = '''
   .alb-fig figcaption{margin-top:8px}
   .alb-brtext{position:static;width:auto}
 }
-/* one review only: no counter, progress or arrows */
-#testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots,#testimonials .tst__prev{display:none!important}
-#testimonials .tst__label{font:400 var(--h2)/1.1 var(--serif)!important;text-transform:uppercase;letter-spacing:-.01em!important}
-#testimonials .alb-tk{display:block;margin-bottom:clamp(20px,2vw,36px);font:700 16px/1.2 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+/* client review: centred — title, the quote, then who said it */
+.alb-rev{text-align:center;padding:0 var(--pad) calc(var(--u) * 180)}
+.alb-rev__q{margin:0 auto;max-width:28em;font:400 clamp(22px,1.9vw,36px)/1.4 var(--serif);text-wrap:balance;opacity:0;translate:0 24px;transition:opacity 1.2s cubic-bezier(.25,.1,.25,1),translate 1.2s cubic-bezier(.25,.1,.25,1)}
+.alb-rev__who{margin:clamp(24px,2.5vw,48px) 0 0;font:500 16px/1.4 var(--sans);text-transform:uppercase;letter-spacing:.02em;opacity:0;transition:opacity 1s ease .3s}
+.alb-rev.in .alb-rev__q{opacity:1;translate:0 0}.alb-rev.in .alb-rev__who{opacity:.7}
+@media (max-width:900px){.alb-rev{padding:0 16px 80px}}
 @media (prefers-reduced-motion:reduce){.alb-info{background:none!important;border-color:#D7E6F2!important}.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
 </style>
 '''
@@ -200,7 +202,7 @@ JS = '''
   const count=box=>box.querySelectorAll('[data-n]').forEach(s=>{const to=+s.dataset.n,fr=+(s.dataset.from||0);if(reduce){s.textContent=to;return}const t0=performance.now(),D=1600;
     const f=t=>{const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);s.textContent=Math.round(fr+(to-fr)*e);if(p<1)requestAnimationFrame(f)};s.textContent=fr;requestAnimationFrame(f)});
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');if(e.target.classList.contains('alb-info'))count(e.target);io.unobserve(e.target)}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-  const all=[...document.querySelectorAll('.alb-head,.alb-widewrap,.alb-info,.alb-h2,.alb-fig,.alb-brtext')];all.forEach(el=>io.observe(el));
+  const all=[...document.querySelectorAll('.alb-head,.alb-widewrap,.alb-info,.alb-h2,.alb-fig,.alb-brtext,.alb-rev')];all.forEach(el=>io.observe(el));
   /* safety net: anything already above the fold line (e.g. after a fast scroll or a jump) is shown at once */
   const sweep=()=>{for(const el of all){if(el.classList.contains('in'))continue;if(el.getBoundingClientRect().top<innerHeight*.94){el.classList.add('in');if(el.classList.contains('alb-info'))count(el);io.unobserve(el)}}};
   addEventListener('scroll',sweep,{passive:true});addEventListener('load',sweep);setTimeout(sweep,300);
@@ -220,9 +222,14 @@ def build(L, src, out):
     contact = re.search(r'<section class="cta" id="contact">.*?</section>', mid, re.S).group(0)
     contact = re.sub(r'(<img src=")[^"]*(" alt="" id="ctaImg">)', r'\1assets/alberti/wide.webp\2', contact)
     tst = re.search(r'<section class="tst" id="testimonials">.*?</section>', mid, re.S).group(0)
-    tst_page = re.sub(r'<h2 class="tst__label">.*?</h2>', f'<h2 class="tst__label">{t["tst_left"]}</h2>', tst, count=1, flags=re.S)
-    tst_page = tst_page.replace('<h3 class="tst__who"><span id="tstWho">', f'<h3 class="tst__who"><span class="alb-tk">{t["tst_k"]}</span><span id="tstWho">', 1)
-    stub = mid.replace(contact, '').replace(tst, '').replace('id="top"', 'id="top-main"')
+    m = re.search(r"\['(CEO,\\n[^']*Alberti[^']*)','([^']*)'\]", s)
+    who, quote = m.group(1).replace('\\n', ' '), m.group(2)
+    review = f'''<section class="alb alb-rev" id="review">
+  <h2 class="alb-h2">{t["tst_k"]}</h2>
+  <blockquote class="alb-rev__q">{quote}</blockquote>
+  <p class="alb-rev__who">{who}</p>
+</section>'''
+    stub = mid.replace(contact, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
 
@@ -252,7 +259,7 @@ def build(L, src, out):
   {gallery(BRAND, BRAND_TOP, BRAND_END, t, f'<p class="alb-brtext">{t["brtext"]}</p>')}
   <div style="height:calc(var(--u) * 160)"></div>
 </section>
-{tst_page}
+{review}
 <div class="pf-stub" hidden aria-hidden="true">{stub}</div>
 '''
     s = s[:start] + top + s[end:]
@@ -266,7 +273,7 @@ def build(L, src, out):
     # inner page: no preloader unless loading is slow (same as the portfolio page)
     s = s.replace('<body class="preloading">', '<body>', 1)
     s = s.replace("if(reduce){finish();writeTitle();return}", "if(reduce||window.__noPre){if(!window.__noPre)finish();writeTitle();return}", 1)
-    s = s.replace('<div class="pre" id="pre"', "<script>window.__noPre=true;window.__tstOnly='Alberti'</script>\n<div class=\"pre\" id=\"pre\" style=\"display:none\"", 1)
+    s = s.replace('<div class="pre" id="pre"', "<script>window.__noPre=true;</script>\n<div class=\"pre\" id=\"pre\" style=\"display:none\"", 1)
     s = s.replace('</body>', """<script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
