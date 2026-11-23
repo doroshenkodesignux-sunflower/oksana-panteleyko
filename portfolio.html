@@ -1590,7 +1590,7 @@ html[lang^="uk"] .prj__all,html[lang^="uk"] .pcard__head .lnk{min-width:max-cont
 .offer{width:max-content!important;max-width:none!important}
 .offer b,.offer span{white-space:nowrap!important}
 @media (max-width:900px){.offer{max-width:100%!important;width:100%!important;align-self:stretch!important}.offer b{white-space:normal!important}}
-#jumpVeil{position:fixed;inset:0;z-index:250;background:#fff;opacity:0;pointer-events:none;transition:opacity .22s ease}
+#jumpVeil{position:fixed;inset:0;z-index:250;background:#fff;opacity:0;pointer-events:none;transition:opacity .3s ease}
 #jumpVeil.on{opacity:1}
 .abx__foot .rv{transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
 .abx__foot .rv.in{transform:none}
@@ -2889,7 +2889,7 @@ if(window.Lenis&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
 
 <script>/* every CTA button lands on the form card of the nearest request block, fully revealed */
 document.addEventListener('click',e=>{const a=e.target.closest('a[href="index.html#contact"],a[href="#request"]');if(!a||a.closest('.menu__nav'))return;
-  e.preventDefault();e.stopPropagation();const sec=document.querySelector(a.getAttribute('href')), f=sec.querySelector('form');
+  e.preventDefault();e.stopPropagation();const sec=document.querySelector(a.getAttribute('href')), f=sec.querySelector('form');window.__jumpForm=f;
   // a quick soft fade instead of scrolling through every block: fade out, jump straight to the form, fade in
   const hd=document.querySelector('.header'), gapTop=()=>{const H=(hd?hd.offsetHeight:0), r=f.getBoundingClientRect();return r.height>innerHeight-H-16?H+8:Math.max(H+8,(innerHeight-r.height)/2)};   // taller than the screen: start just below the header
   const jump=()=>{const r=f.getBoundingClientRect(), y=Math.max(0,scrollY+r.top-gapTop());
@@ -2897,7 +2897,12 @@ document.addEventListener('click',e=>{const a=e.target.closest('a[href="index.ht
   let v=document.getElementById('jumpVeil');if(!v){v=document.createElement('div');v.id='jumpVeil';document.body.append(v)}
   v.classList.add('on');
   const off=()=>Math.abs(f.getBoundingClientRect().top-gapTop());
-  setTimeout(()=>{let n=0;const settle=()=>{jump();dispatchEvent(new Event('scroll'));if(++n<12&&off()>3)setTimeout(settle,50);else setTimeout(()=>v.classList.remove('on'),40)};settle()},220)},true);</script>
+  setTimeout(()=>{let n=0;const settle=()=>{jump();dispatchEvent(new Event('scroll'));if(++n<12&&off()>3)setTimeout(settle,50);else setTimeout(()=>{v.classList.remove('on');reveal()},40)};settle()},300)},true);
+/* after the jump the form card arrives on its own: it rises in softly, then its rows follow one by one, so it is clear where you landed */
+function reveal(){const f=document.querySelector('.cta form.__last')||window.__jumpForm;if(!f||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const E='cubic-bezier(.22,1,.36,1)';
+  f.animate([{opacity:0,transform:'translateY(56px) scale(.97)'},{opacity:1,transform:'none'}],{duration:1100,easing:E});
+  [...f.children].filter(c=>!c.matches('.cta__done,.cta__hp,.cta__status')).forEach((c,i)=>c.animate([{opacity:0,transform:'translateY(18px)'},{opacity:1,transform:'none'}],{duration:800,delay:260+i*110,easing:E,fill:'backwards'}))}</script>
 <script>/* wrap each button label so it can roll like MENU */
 document.querySelectorAll('.btn,.lnk,.aw__link,.ftr__cv,.ftr__nav a,.ftr__by>span').forEach(b=>{const t=[...b.childNodes].find(n=>n.nodeType===3&&n.textContent.trim());if(!t)return;
   const w=t.textContent.trim(),r=document.createElement('span');r.className='roll';r.innerHTML='<span></span><span aria-hidden="true"></span>';r.children[0].textContent=w;r.children[1].textContent=w;
