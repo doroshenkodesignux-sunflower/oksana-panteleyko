@@ -93,12 +93,14 @@ CSS = '''
   .pfp__track img:nth-child(2){aspect-ratio:auto;object-fit:cover}
 }
 /* ---- entrance: the first screen builds itself in when the page opens ---- */
-.pfi .prj__title h2{clip-path:inset(0 0 100% 0);translate:0 .35em;transition:clip-path 1.2s var(--ease),translate 1.2s var(--ease)}
-.pfi .prj__pf{clip-path:inset(0 100% 0 0);transition:clip-path 1.6s cubic-bezier(.65,0,.35,1) .55s}
-.pfi__lead{opacity:0;translate:0 18px;transition:opacity 1s var(--ease) 1.1s,translate 1s var(--ease) 1.1s}
-.pfl>.pfp:first-child{border-top-color:transparent;background:linear-gradient(var(--line),var(--line)) 0 0/0 1px no-repeat;transition:background-size 1.4s var(--ease) 1.3s}
-.pf-in .pfi .prj__title h2{clip-path:inset(0 0 -10% 0);translate:0 0}
-.pf-in .pfi .prj__pf{clip-path:inset(-20% -5% -20% 0)}
+/* like the home hero: the title's letters rise out of a blur one by one, then "Portfolio" is written left to right */
+.pfi .prj__title h2 .ch{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px)}
+.pf-in .pfi .prj__title h2 .ch{animation:ch .9s var(--ease) forwards;animation-delay:calc(.15s + var(--i) * .045s)}
+.pfi .prj__pf{-webkit-mask:linear-gradient(90deg,#000 42%,transparent 58%) 100% 0/320% 100% no-repeat,var(--m-portfolio-script) center/contain no-repeat;mask:linear-gradient(90deg,#000 42%,transparent 58%) 100% 0/320% 100% no-repeat,var(--m-portfolio-script) center/contain no-repeat;-webkit-mask-composite:source-in;mask-composite:intersect}
+.pf-in .pfi .prj__pf{animation:pfWrite 1.9s cubic-bezier(.45,.05,.35,1) .95s forwards}
+@keyframes pfWrite{to{-webkit-mask-position:0 0,center;mask-position:0 0,center}}
+.pfi__lead{opacity:0;translate:0 18px;transition:opacity 1s var(--ease) 2s,translate 1s var(--ease) 2s}
+.pfl>.pfp:first-child{border-top-color:transparent;background:linear-gradient(var(--line),var(--line)) 0 0/0 1px no-repeat;transition:background-size 1.4s var(--ease) 2.2s}
 .pf-in .pfi__lead{opacity:1;translate:0 0}
 .pf-in .pfl>.pfp:first-child{background-size:100% 1px}
 /* ---- projects: each one rises in as it reaches the screen, its parts one after another ---- */
@@ -118,6 +120,8 @@ CSS = '''
 JS = '''
 <script>
 /* entrance of the first screen, then projects appear one after another as they scroll in */
+/* split the title into letters, keeping the line break, as the hero name does */
+document.querySelectorAll('.pfi .prj__title h2').forEach(h=>{let i=0;h.innerHTML=h.innerHTML.split(/<br\\s*\\/?>/i).map(l=>l.trim().split(' ').map(w=>'<span style="white-space:nowrap">'+[...w].map(c=>`<span class="ch" style="--i:${i++}">${c}</span>`).join('')+'</span>').join(' ')).join('<br>')});
 requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('pf-in')));
 (()=>{const ps=[...document.querySelectorAll('.pfp')];
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
