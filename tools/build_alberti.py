@@ -121,13 +121,48 @@ CSS = '''
 .alb-fig--sketch .alb-fig__img{background:#fff;outline:1px solid #E3E3E3}
 .alb-fig--sketch img{object-fit:contain}
 .alb-brtext{position:absolute;left:calc(var(--u) * 1272);top:calc(var(--u) * 2030);width:calc(var(--u) * 560);margin:0;font:400 16px/1.5 var(--sans)}
-/* reveal */
-.alb-fig,.alb-info>div,.alb-h2,.alb-brtext{opacity:0;translate:0 40px;transition:opacity 1s var(--ease),translate 1s var(--ease)}
-.alb-fig.in,.alb-info>div.in,.alb-h2.in,.alb-brtext.in{opacity:1;translate:0 0}
+/* ===== motion ===== */
+/* hero: letters rise out of a blur, the photo opens from the bottom; on scroll the word drifts and the photo floats */
 .alb-hero__big .ch{display:inline-block;opacity:0;transform:translateY(.25em);filter:blur(8px)}
 .alb-in .alb-hero__big .ch{animation:ch 1s var(--ease) forwards;animation-delay:calc(.2s + var(--i) * .06s)}
-.alb-hero__img{clip-path:inset(100% 0 0 0);transition:clip-path 1.4s cubic-bezier(.65,0,.35,1) .1s}
+.alb-hero__big{will-change:translate}
+.alb-hero__img{clip-path:inset(100% 0 0 0);transition:clip-path 1.4s cubic-bezier(.65,0,.35,1) .1s;will-change:transform}
 .alb-in .alb-hero__img{clip-path:inset(0 0 0 0)}
+/* title block: lines rise from under a mask, the script is written left to right, the rest follows */
+.alb-head h1 .ln2{display:block;overflow:hidden;padding-bottom:.06em}
+.alb-head h1 .ln2>span{display:block;translate:0 105%;transition:translate 1.2s var(--ease)}
+.alb-head h1 .ln2:nth-child(2)>span{transition-delay:.12s}
+.alb-head.in h1 .ln2>span{translate:0 0}
+.alb-head__script{-webkit-mask:linear-gradient(90deg,#000 42%,transparent 58%) 100% 0/320% 100% no-repeat,url(assets/alberti/script-interior-design.png) center/contain no-repeat!important;mask:linear-gradient(90deg,#000 42%,transparent 58%) 100% 0/320% 100% no-repeat,url(assets/alberti/script-interior-design.png) center/contain no-repeat!important;-webkit-mask-composite:source-in;mask-composite:intersect}
+.alb-head.in .alb-head__script{animation:albWrite 1.9s cubic-bezier(.45,.05,.35,1) .5s forwards}
+@keyframes albWrite{to{-webkit-mask-position:0 0,center;mask-position:0 0,center}}
+.alb-head__desc,.alb-head__place{opacity:0;translate:0 20px;transition:opacity 1s var(--ease),translate 1s var(--ease)}
+.alb-head.in .alb-head__desc{opacity:1;translate:0 0;transition-delay:1.4s}
+.alb-head.in .alb-head__place{opacity:1;translate:0 0;transition-delay:1.6s}
+/* wide photo: opens from the middle, then slowly settles while scrolling */
+.alb-widewrap{overflow:hidden;clip-path:inset(12% 8% 12% 8%);transition:clip-path 1.6s cubic-bezier(.65,0,.35,1)}
+.alb-widewrap.in{clip-path:inset(0 0 0 0)}
+.alb-widewrap .alb-wide{scale:1.18;will-change:transform}
+/* info grid: the hairlines draw in, the cells follow one by one, numbers count up */
+.alb-info{border-color:transparent!important;background:linear-gradient(#D7E6F2,#D7E6F2) 0 0/0 1px no-repeat,linear-gradient(#D7E6F2,#D7E6F2) 100% 100%/0 1px no-repeat;transition:background-size 1.4s var(--ease)}
+.alb-info.in{background-size:100% 1px,100% 1px}
+.alb-info>div{opacity:0;translate:0 30px;transition:opacity 1s var(--ease),translate 1s var(--ease)}
+.alb-info.in>div{opacity:1;translate:0 0}
+.alb-info.in>div:nth-child(2){transition-delay:.12s}.alb-info.in>div:nth-child(3){transition-delay:.24s}.alb-info.in>div:nth-child(4){transition-delay:.36s}
+/* section titles: letters rise one by one */
+.alb-h2 .ch{display:inline-block;opacity:0;transform:translateY(.5em);filter:blur(4px)}
+.alb-h2.in .ch{animation:ch .9s var(--ease) forwards;animation-delay:calc(var(--i) * .035s)}
+/* photos: each opens upward with a slow zoom-out; neighbours in a row follow a beat later */
+.alb-fig{--dl:calc(var(--x) / 1920 * .35s)}
+.alb-fig__img{clip-path:inset(100% 0 0 0);transition:clip-path 1.3s cubic-bezier(.65,0,.35,1) var(--dl)}
+.alb-fig__img img{scale:1.2;transition:scale 2s var(--ease) var(--dl)}
+.alb-fig figcaption{opacity:0;translate:0 10px;transition:opacity .8s var(--ease) calc(var(--dl) + .7s),translate .8s var(--ease) calc(var(--dl) + .7s)}
+.alb-fig.in .alb-fig__img{clip-path:inset(0 0 0 0)}
+.alb-fig.in .alb-fig__img img{scale:1}
+.alb-fig.in figcaption{opacity:.8;translate:0 0}
+.alb-fig.in:hover .alb-fig__img img{scale:1.03;transition-delay:0s}
+.alb-brtext{opacity:0;translate:0 24px;transition:opacity 1s var(--ease) .4s,translate 1s var(--ease) .4s}
+.alb-brtext.in{opacity:1;translate:0 0}
 @media (max-width:900px){
   .alb{--u:calc(100vw / 390)}
   .alb-hero{height:calc(60px + var(--u) * 370)}
@@ -155,17 +190,32 @@ CSS = '''
 }
 /* one review only: no counter, progress or arrows */
 #testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots{display:none!important}
-@media (prefers-reduced-motion:reduce){.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
+@media (prefers-reduced-motion:reduce){.alb-info{background:none!important;border-color:#D7E6F2!important}.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
 </style>
 '''
 
 JS = '''
 <script>
-/* Alberti page: hero letters + photo reveal on open, then blocks rise in as they scroll into view */
-document.querySelectorAll('.alb-hero__big').forEach(h=>{let i=0;h.innerHTML=[...h.textContent].map(c=>`<span class="ch" style="--i:${i++}">${c}</span>`).join('')});
-requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('alb-in')));
-(()=>{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.08,rootMargin:'0px 0px -6% 0px'});
-  document.querySelectorAll('.alb-fig,.alb-info>div,.alb-h2,.alb-brtext').forEach(el=>io.observe(el))})();
+/* Alberti page motion */
+(()=>{const split=(el,step)=>{let i=0;el.innerHTML=el.textContent.split(' ').map(w=>'<span style="white-space:nowrap">'+[...w].map(c=>`<span class="ch" style="--i:${i++}">${c}</span>`).join('')+'</span>').join(' ')};
+  document.querySelectorAll('.alb-hero__big,.alb-h2').forEach(split);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('alb-in')));
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  /* numbers count up once */
+  const count=box=>box.querySelectorAll('[data-n]').forEach(s=>{const to=+s.dataset.n,fr=+(s.dataset.from||0);if(reduce){s.textContent=to;return}const t0=performance.now(),D=1600;
+    const f=t=>{const p=Math.min(1,(t-t0)/D),e=1-Math.pow(1-p,3);s.textContent=Math.round(fr+(to-fr)*e);if(p<1)requestAnimationFrame(f)};s.textContent=fr;requestAnimationFrame(f)});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');if(e.target.classList.contains('alb-info'))count(e.target);io.unobserve(e.target)}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  const all=[...document.querySelectorAll('.alb-head,.alb-widewrap,.alb-info,.alb-h2,.alb-fig,.alb-brtext')];all.forEach(el=>io.observe(el));
+  /* safety net: anything already above the fold line (e.g. after a fast scroll or a jump) is shown at once */
+  const sweep=()=>{for(const el of all){if(el.classList.contains('in'))continue;if(el.getBoundingClientRect().top<innerHeight*.94){el.classList.add('in');if(el.classList.contains('alb-info'))count(el);io.unobserve(el)}}};
+  addEventListener('scroll',sweep,{passive:true});addEventListener('load',sweep);setTimeout(sweep,300);
+  if(reduce)return;
+  /* scroll: the big word drifts sideways, the hero photo floats up, the wide photo settles */
+  const big=document.querySelector('.alb-hero__big'),hi=document.querySelector('.alb-hero__img'),wide=document.querySelector('.alb-widewrap');
+  const onS=()=>{const y=scrollY,H=innerHeight;
+    if(big&&y<H*1.5){big.style.translate=`calc(-50% - ${y*.25}px) 0`;hi.style.transform=`translateY(${-y*.12}px)`}
+    if(wide){const r=wide.getBoundingClientRect();if(r.bottom>0&&r.top<H){const p=Math.min(1,Math.max(0,(H-r.top)/(H+r.height)));wide.firstElementChild.style.scale=(1.18-p*.18).toFixed(4)}}};
+  addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});onS()})();
 </script>
 '''
 
@@ -188,16 +238,16 @@ def build(L, src, out):
 <section class="alb" id="top">
   <div class="alb-hero"><p class="alb-hero__big" aria-hidden="true">{t["big"]}</p><img class="alb-hero__img" src="assets/alberti/hero.webp" alt="{t["t1"]}"></div>
   <div class="alb-head">
-    <h1>{t["t1"]}<br>{t["t2"]}</h1>
+    <h1><span class="ln2"><span>{t["t1"]}</span></span><span class="ln2"><span>{t["t2"]}</span></span></h1>
     <span class="alb-head__script" role="img" aria-label="Interior Design"></span>
     <p class="alb-head__desc">{t["desc"]}</p>
     <p class="alb-head__place">{t["place"]}</p>
   </div>
-  <img class="alb-wide" src="assets/alberti/wide.webp" alt="{t["t1"]}">
+  <div class="alb-widewrap"><img class="alb-wide" src="assets/alberti/wide.webp" alt="{t["t1"]}"></div>
   <div class="alb-info">
     <div><p class="alb-k">{t["role_k"]}</p><p class="alb-v">{t["role"]}</p></div>
     <div><p class="alb-k">{t["task_k"]}</p><p class="alb-v">{t["task"]}</p></div>
-    <div><div class="alb-stats"><div><b>328m<sup>2</sup></b><span>{t["area"]}</span></div><div><b>5</b><span>{t["rooms"]}</span></div><div><b>2024</b><span>{t["year"]}</span></div></div></div>
+    <div><div class="alb-stats"><div><b><span data-n="328">328</span>m<sup>2</sup></b><span>{t["area"]}</span></div><div><b><span data-n="5">5</span></b><span>{t["rooms"]}</span></div><div><b><span data-n="2024" data-from="2000">2024</span></b><span>{t["year"]}</span></div></div></div>
     <div><p class="alb-k">{t["res_k"]}</p><p class="alb-v">{t["res"]}</p></div>
   </div>
   <h2 class="alb-h2">{t["h_int"]}</h2>
