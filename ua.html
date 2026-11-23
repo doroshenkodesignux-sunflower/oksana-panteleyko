@@ -2086,7 +2086,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   <div class="prj__track">
     <div class="prj__stick">
       <div class="prj__row" id="prjRow">
-      <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="#portfolio">Дивитися всі проєкти <i></i></a></div>
+      <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html">Дивитися всі проєкти <i></i></a></div>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-alberti.jpg" alt="Апартготель «Alberti»" loading="lazy"><img class="pcard__badge" src="assets/sbid-finalist-2025.png" alt="SBID International Design Awards 2025 Finalist" loading="lazy"></div>
         <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартготель «Alberti»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
@@ -2102,7 +2102,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартаменти «Azur Cap d’Ail»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></span><span class="ln" style="--d:.72s"><p>Кожні апартаменти мають власну колірну гаму й філософію. Кожен простір дарує інші емоції.</p></span></div>
       </article>
-      <div class="prj__screen prj__screen--dark prj__screen--end"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="#portfolio">Дивитися всі проєкти <i></i></a></div>
+      <div class="prj__screen prj__screen--dark prj__screen--end"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html">Дивитися всі проєкти <i></i></a></div>
       </div>
     </div>
   </div>
@@ -2393,7 +2393,7 @@ document.querySelectorAll('[data-split]').forEach(el=>{
 });
 
 /* build who cards */
-const row = document.getElementById('whoRow');
+const row = document.getElementById('whoRow')||document.createElement('div');   /* pages without the Who block (portfolio) */
 row.innerHTML = WHO.map((c,i)=>`
   <article class="wcard rv${i===0?' open':''}" style="--d:${.1+i*.12}s">
     <h3 class="wcard__title">${c.t}</h3>
@@ -2413,7 +2413,7 @@ const faceHTML = (s,i)=>`<div class="face__body" style="--tag:${s.tc}"><div><p c
   ${s.groups?`<div class="groups">${s.groups.map(([g,ts])=>`<div><p class="group__t">${g}</p><div class="tags">${ts.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`).join('')}</div>`:`<div class="tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`}
   <a class="btn btn--ink" href="#contact">${s.b} <span class="plus"></span></a></div>`;
 /* services: accordion — one service open at a time, its photo shown on the right */
-(()=>{const list=document.getElementById('svcList'), media=document.getElementById('svcMedia');
+(()=>{const list=document.getElementById('svcList'), media=document.getElementById('svcMedia');if(!list)return;
   const tagsHTML=s=>s.groups?'<div class="svc__groups">'+s.groups.map(([g,ts])=>`<div class="svc__group"><p class="svc__gt">${g}</p><div class="svc__tags">${ts.map(t=>`<span>${t}</span>`).join('')}</div></div>`).join('')+'</div>'
     :`<div class="svc__tags">${s.tags.map(t=>`<span>${t}</span>`).join('')}</div>`;
   /* a soft slideshow with a thin progress line (used by the Brand & Space service) */
@@ -2465,7 +2465,7 @@ const mq=matchMedia('(max-width:900px)');
 const whoTrack=document.querySelector('.who__track');
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-const progress=el=>{const r=el.getBoundingClientRect();return clamp(-r.top/(r.height-innerHeight))};
+const progress=el=>{if(!el)return 0;const r=el.getBoundingClientRect();return clamp(-r.top/(r.height-innerHeight))};
 
 function setOpen(i){wcards.forEach((c,k)=>c.classList.toggle('open',k===i))}
 /* a click on a card opens it too: we scroll to that card's step, so scrolling and clicking always agree */
@@ -2680,7 +2680,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
 (()=>{const b=document.getElementById('toTop'), c=document.getElementById('about');
   const name=document.getElementById('ftrName'), by=document.querySelector('.ftr__by'), copy=document.querySelector('.ftr__copy');
   const hit=(a,r)=>a.left<r.right&&a.right>r.left&&a.top<r.bottom&&a.bottom>r.top;
-  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',document.getElementById('services').getBoundingClientRect().bottom<=0);   // only once Services has scrolled away and the first CTA fills the screen (CTA starts under Services, so its own top is not used)
+  const ftr=document.querySelector('footer.ftr');const on=()=>{b.classList.toggle('on',(()=>{const s=document.getElementById('services');return s?s.getBoundingClientRect().bottom<=0:scrollY>innerHeight})());   // only once Services has scrolled away and the first CTA fills the screen (CTA starts under Services, so its own top is not used)
     // never cover the footer name or the credits: if the resting spot would touch them, sit just above the name
     b.style.bottom='';if(innerWidth<=900){const y=by.getBoundingClientRect();if(y.bottom<innerHeight-16){b.style.bottom=(innerHeight-y.bottom)+'px'};return}
     const r=b.getBoundingClientRect(), pad=10, box={left:r.left-pad,right:r.right+pad,top:r.top-pad,bottom:r.bottom+pad};
