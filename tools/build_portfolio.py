@@ -88,9 +88,7 @@ CSS = '''
   .pfp__tags span{padding:10px 16px}
   .pfp__arr button{width:46px;height:46px}
   .pfp__gal{margin-top:24px;margin-right:calc(var(--pad) * -1)}
-  .pfp__track img{height:auto;aspect-ratio:4/3}
-  .pfp__track img:first-child,.pfp__track img:nth-child(2){width:86%}
-  .pfp__track img:nth-child(2){aspect-ratio:auto;object-fit:cover}
+  .pfp__track img,.pfp__track img:first-child,.pfp__track img:nth-child(2){width:min(86%,560px);height:min(62vw,420px);aspect-ratio:auto;object-fit:cover}
 }
 /* ---- entrance: the first screen builds itself in when the page opens ---- */
 /* like the home hero: the title's letters rise out of a blur one by one, then "Portfolio" is written left to right */
