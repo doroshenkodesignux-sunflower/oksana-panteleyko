@@ -161,6 +161,18 @@ def build(L, src, out):
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="en"', lambda m: f'<a href="portfolio.html"{m.group(2) or ""} lang="en"', s)
     keep = {'#top', '#request', '#contacts', '#portfolio'}
     s = re.sub(r'href="(#[a-z][\w-]*)"', lambda m: m.group(0) if m.group(1) in keep else f'href="{t["home"]}{m.group(1)}"', s)
+    # inner page: no preloader on a normal visit; a quiet dark screen with the logo only if loading takes long
+    s = s.replace('<body class="preloading">', '<body>', 1)
+    s = s.replace("if(reduce){finish();writeTitle();return}", "if(reduce||window.__noPre){if(!window.__noPre)finish();writeTitle();return}", 1)
+    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true</script>\n<div class="pre" id="pre" style="display:none"', 1)
+    s = s.replace('</body>', """<script>
+/* slow connection only: show the dark logo screen after 0.7 s, fade it out when the page has loaded */
+(()=>{const pre=document.getElementById('pre');if(!pre)return;
+  const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
+  const done=()=>{clearTimeout(t);if(pre.style.display==='none'){pre.remove();return}pre.animate([{opacity:1},{opacity:0}],{duration:500,easing:'ease',fill:'forwards'}).onfinish=()=>pre.remove()};
+  document.readyState==='complete'?done():addEventListener('load',done)})();
+</script>
+</body>""", 1)
     s = re.sub(r'<title>.*?</title>', f'<title>{t["title"]}</title>', s, count=1, flags=re.S)
     s = s.replace('</head>', CSS + '</head>', 1)
     s = s.replace('</body>', JS + '</body>', 1)
