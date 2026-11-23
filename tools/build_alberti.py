@@ -112,7 +112,7 @@ CSS = '''
 .alb-stats{display:grid;grid-template-columns:repeat(2,max-content);gap:calc(var(--u) * 40) calc(var(--u) * 80)}
 .alb-stats b{display:block;font:400 calc(var(--u) * 150)/1 var(--serif);color:#7FB0D8;font-variant-numeric:lining-nums}
 .alb-stats b sup{font-size:.45em;vertical-align:.9em}
-.alb-stats span{display:block;margin-top:12px;font:400 16px/1.2 var(--sans);opacity:.7}
+.alb-stats>div>span{display:block;margin-top:12px;font:400 16px/1.2 var(--sans);opacity:.7}
 .alb-h2{margin:0;padding:calc(var(--u) * 160) var(--pad) calc(var(--u) * 110);text-align:center;font:400 var(--h2)/1.1 var(--serif);text-transform:uppercase;letter-spacing:-.01em}
 .alb-gal{position:relative;height:calc(var(--u) * var(--H))}
 .alb-fig{position:absolute;margin:0;left:calc(var(--u) * var(--x));top:calc(var(--u) * var(--y));width:calc(var(--u) * var(--w))}
