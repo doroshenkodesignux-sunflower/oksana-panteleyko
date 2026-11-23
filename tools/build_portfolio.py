@@ -48,7 +48,7 @@ T = {
 CSS = '''
 <style id="pf-css">
 /* ===== Portfolio page ===== */
-.pfx{--u:min(calc(100vw / 1920),calc(100vh / 1080));background:#fff;color:var(--ink)}   /* the header sizes itself from --u, as in the hero */
+.pfx{--u:min(calc(100vw / 1920),calc(100vh / 1080));position:relative;z-index:2;background:#fff;color:var(--ink)}   /* the header sizes itself from --u, as in the hero */
 .pfi{padding:calc(100px + clamp(48px,6.25vw,120px)) var(--pad) clamp(64px,6.25vw,120px);text-align:center}
 .pfi .prj__title{position:relative!important;left:auto!important;top:auto!important;margin:0 auto calc(var(--u) * 150)}   /* the Portfolio script hangs below the box */
 .pfi .prj__title{--u:calc(min(100vw - 32px,520px) / 700)}
