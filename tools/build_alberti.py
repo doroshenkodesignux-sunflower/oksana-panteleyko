@@ -151,6 +151,8 @@ CSS = '''
   .alb-fig figcaption{margin-top:8px}
   .alb-brtext{position:static;width:auto}
 }
+/* one review only: no counter, progress or arrows */
+#testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots{display:none!important}
 @media (prefers-reduced-motion:reduce){.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
 </style>
 '''
@@ -210,6 +212,8 @@ def build(L, src, out):
 <div class="pf-stub" hidden aria-hidden="true">{stub}</div>
 '''
     s = s[:start] + top + s[end:]
+    # both request blocks use the same project photo
+    s = re.sub(r'(<img src=")[^"]*(" alt="" id="cta2Img">)', r'\1assets/alberti/wide.webp\2', s, count=1)
     s = re.sub(r'<script type="module">\s*/\* Project locations:.*?</script>', '', s, count=1, flags=re.S)
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="uk"', lambda m: f'<a href="alberti-ua.html"{m.group(2) or ""} lang="uk"', s)
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="en"', lambda m: f'<a href="alberti.html"{m.group(2) or ""} lang="en"', s)
@@ -218,7 +222,7 @@ def build(L, src, out):
     # inner page: no preloader unless loading is slow (same as the portfolio page)
     s = s.replace('<body class="preloading">', '<body>', 1)
     s = s.replace("if(reduce){finish();writeTitle();return}", "if(reduce||window.__noPre){if(!window.__noPre)finish();writeTitle();return}", 1)
-    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true</script>\n<div class="pre" id="pre" style="display:none"', 1)
+    s = s.replace('<div class="pre" id="pre"', "<script>window.__noPre=true;window.__tstOnly='Alberti'</script>\n<div class=\"pre\" id=\"pre\" style=\"display:none\"", 1)
     s = s.replace('</body>', """<script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
