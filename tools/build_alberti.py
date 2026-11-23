@@ -182,11 +182,12 @@ CSS = '''
   .alb-brtext{position:static;width:auto}
 }
 /* client review: centred — title, the quote, then who said it */
-.alb-rev{text-align:center;padding:0 var(--pad) calc(var(--u) * 180)}
+.alb-sp{height:calc(var(--u) * 160)}
+.alb-rev{text-align:center;padding:0 var(--pad) calc(var(--u) * 264)}   /* bottom air = top air (spacer + title padding) */
 .alb-rev__q{margin:0 auto;max-width:28em;font:400 clamp(22px,1.9vw,36px)/1.4 var(--serif);text-wrap:balance;opacity:0;translate:0 24px;transition:opacity 1.2s cubic-bezier(.25,.1,.25,1),translate 1.2s cubic-bezier(.25,.1,.25,1)}
 .alb-rev__who{margin:clamp(24px,2.5vw,48px) 0 0;font:500 16px/1.4 var(--sans);text-transform:uppercase;letter-spacing:.02em;opacity:0;transition:opacity 1s ease .3s}
 .alb-rev.in .alb-rev__q{opacity:1;translate:0 0}.alb-rev.in .alb-rev__who{opacity:.7}
-@media (max-width:900px){.alb-rev{padding:0 16px 80px}}
+@media (max-width:900px){.alb-sp{height:48px}.alb-rev{padding:0 16px 184px}.alb-rev__who{margin-bottom:0}}
 @media (prefers-reduced-motion:reduce){.alb-info{background:none!important;border-color:#D7E6F2!important}.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
 </style>
 '''
@@ -251,13 +252,13 @@ def build(L, src, out):
   </div>
   <h2 class="alb-h2">{t["h_int"]}</h2>
   {gallery(INTERIOR, INTERIOR_TOP, INTERIOR_END, t)}
-  <div style="height:calc(var(--u) * 160)"></div>
+  <div class="alb-sp"></div>
 </section>
 {contact}
 <section class="alb alb--br">
   <h2 class="alb-h2">{t["h_br"]}</h2>
   {gallery(BRAND, BRAND_TOP, BRAND_END, t, f'<p class="alb-brtext">{t["brtext"]}</p>')}
-  <div style="height:calc(var(--u) * 160)"></div>
+  <div class="alb-sp"></div>
 </section>
 {review}
 <div class="pf-stub" hidden aria-hidden="true">{stub}</div>
