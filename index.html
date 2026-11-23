@@ -2091,7 +2091,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Selected<br>Projects</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio.html" data-pf>View all projects <i></i></a></div>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-alberti.jpg" alt="Aparthotel “Alberti”" loading="lazy"><img class="pcard__badge" src="assets/sbid-finalist-2025.png" alt="SBID International Design Awards 2025 Finalist" loading="lazy"></div>
-        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Aparthotel “Alberti”</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Explore project <i></i></a></span></div>
+        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Aparthotel “Alberti”</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="alberti.html" data-alb>Explore project <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></span><span class="ln" style="--d:.72s"><p class="pcard__desc">Interior concept, space planning, FF&amp;E, renovation supervision and full branding. SBID&nbsp;Awards&nbsp;2025&nbsp;Finalist (Hotel&nbsp;Bedroom&nbsp;&amp;&nbsp;Suites&nbsp;Design).</p></span></div>
       </article>
       <article class="pcard">
@@ -2586,7 +2586,7 @@ const AWX=[
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' Finalist','</span></span><i class="awx__br"></i><span class="awx__m"><span>Finalist'):esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
-    <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="#projects">Explore project <i></i></a>':''}</div></div>`).join('');
+    <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="alberti.html" data-alb>Explore project <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});

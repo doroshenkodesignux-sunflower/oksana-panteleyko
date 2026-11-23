@@ -2007,7 +2007,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <p class="pfp__desc">Кожні апартаменти мають власну колірну палітру й філософію. Кожен простір запрошує відчути іншу емоцію.</p>
       <div class="pfp__bar"><div class="pfp__tags"><span>Дизайн інтер’єру</span><span>Брендинг</span></div><div class="pfp__arr"><button type="button" aria-label="Попереднє фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button><button type="button" aria-label="Наступне фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div></div>
       <div class="pfp__gal"><div class="pfp__track"><img src="assets/pf/01a.webp" alt="Апартготель «Alberti»" loading="lazy"><img src="assets/pf/01b.webp" alt="Апартготель «Alberti»" loading="lazy"></div></div>
-      <a class="lnk" href="#">Дивитися проєкт <i></i></a>
+      <a class="lnk" href="alberti-ua.html">Дивитися проєкт <i></i></a>
     </div>
   </article>
   <article class="pfp">
@@ -2271,7 +2271,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html" data-pf>Дивитися всі проєкти <i></i></a></div>
       <article class="pcard">
         <div class="pcard__img"><img alt="Апартготель «Alberti»" loading="lazy"><img class="pcard__badge" alt="SBID International Design Awards 2025 Finalist" loading="lazy"></div>
-        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартготель «Alberti»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
+        <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартготель «Alberti»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="alberti-ua.html" data-alb>Дивитися проєкт <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img alt="">Ніцца, Франція</span></span><span class="ln" style="--d:.72s"><p class="pcard__desc">Концепція інтер’єру, планування, комплектація, супровід реновації, повний брендинг; фіналіст SBID&nbsp;Awards&nbsp;2025 (Hotel&nbsp;Bedroom&nbsp;&amp;&nbsp;Suites&nbsp;Design).</p></span></div>
       </article>
       <article class="pcard">
@@ -2767,7 +2767,7 @@ const AWX=[
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' Finalist','</span></span><i class="awx__br"></i><span class="awx__m"><span>Finalist'):esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
-    <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="ua.html#projects">Дивитися проєкт <i></i></a>':''}</div></div>`).join('');
+    <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="alberti-ua.html" data-alb>Дивитися проєкт <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});

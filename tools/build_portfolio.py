@@ -150,7 +150,7 @@ def project(n, p, L):
       <p class="pfp__desc">{t["desc"]}</p>
       <div class="pfp__bar"><div class="pfp__tags">{tags}</div><div class="pfp__arr"><button type="button" aria-label="{t["prev"]}">{ARROW.format(a="13 8H3M7 4L3 8l4 4")}</button><button type="button" aria-label="{t["next"]}">{ARROW.format(a="3 8h10M9 4l4 4-4 4")}</button></div></div>
       <div class="pfp__gal"><div class="pfp__track"><img src="assets/pf/{n:02d}a.webp" alt="{alt}" loading="lazy"><img src="assets/pf/{n:02d}b.webp" alt="{alt}" loading="lazy"></div></div>
-      <a class="lnk" href="#">{t["explore"]} <i></i></a>
+      <a class="lnk" href="{(("alberti.html" if L=="en" else "alberti-ua.html") if n==1 else "#")}">{t["explore"]} <i></i></a>
     </div>
   </article>'''
 

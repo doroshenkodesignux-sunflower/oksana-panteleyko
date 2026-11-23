@@ -25,6 +25,7 @@ T = [
  ('aria-label="Language"', 'aria-label="Мова"', 0),
  ('href="index.html" data-home', 'href="ua.html" data-home', 0),
  ('href="portfolio.html" data-pf', 'href="portfolio-ua.html" data-pf', 0),
+ ('href="alberti.html" data-alb', 'href="alberti-ua.html" data-alb', 0),
  ('aria-label="Home"', 'aria-label="Головна"', 0),
 
  # ---------- header / menu ----------
