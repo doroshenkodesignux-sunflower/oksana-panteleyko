@@ -23,6 +23,9 @@ T = [
  ('<a href="ua.html" class="lang__on" lang="uk">UA</a><i></i><a href="index.html" lang="en" aria-current="true">EN</a>',
   '<a href="ua.html" lang="uk" aria-current="true">UA</a><i></i><a href="index.html" class="lang__on" lang="en">EN</a>', 0),
  ('aria-label="Language"', 'aria-label="Мова"', 0),
+ ('href="index.html" data-home', 'href="ua.html" data-home', 0),
+ ('href="portfolio.html" data-pf', 'href="portfolio-ua.html" data-pf', 0),
+ ('aria-label="Home"', 'aria-label="Головна"', 0),
 
  # ---------- header / menu ----------
  ('>Based in Nice, France<', '>Ніцца, Франція<', 1),

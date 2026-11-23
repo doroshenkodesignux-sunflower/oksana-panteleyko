@@ -1806,6 +1806,8 @@ html,body{overflow-x:clip}
 }
 /* "My approach" heading: same weight as the other section headings (Locations, Services, Who) */
 .appr__title .lockup__serif{font-weight:600!important}
+/* header location and logo are links to the home page */
+a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -1899,7 +1901,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
 <!-- ============ MENU ============ -->
 <div class="menu" id="menu" aria-hidden="true">
   <div class="lang menu__lang" role="group" aria-label="Мова"><a href="ua.html" lang="uk" aria-current="true">UA</a><i></i><a href="index.html" class="lang__on" lang="en">EN</a></div>
-  <ul class="menu__nav"><li style="--i:0"><a href="#top">Головна<sup><span>01</span></sup></a></li><li style="--i:1"><a href="#projects">Портфоліо<sup><span>02</span></sup></a></li><li style="--i:2"><a href="#services">Послуги<sup><span>03</span></sup></a></li><li style="--i:3"><a href="#about">Про мене<sup><span>04</span></sup></a></li><li style="--i:4"><a href="#contact">Консультація<sup><span>05</span></sup></a></li><li style="--i:5"><a href="#awards">Нагороди<sup><span>06</span></sup></a></li><li style="--i:6"><a href="#testimonials">Відгуки<sup><span>07</span></sup></a></li><li style="--i:7"><a href="#contacts">Контакти<sup><span>08</span></sup></a></li></ul>
+  <ul class="menu__nav"><li style="--i:0"><a href="ua.html" data-home>Головна<sup><span>01</span></sup></a></li><li style="--i:1"><a href="portfolio-ua.html" data-pf>Портфоліо<sup><span>02</span></sup></a></li><li style="--i:2"><a href="#services">Послуги<sup><span>03</span></sup></a></li><li style="--i:3"><a href="#about">Про мене<sup><span>04</span></sup></a></li><li style="--i:4"><a href="#contact">Консультація<sup><span>05</span></sup></a></li><li style="--i:5"><a href="#awards">Нагороди<sup><span>06</span></sup></a></li><li style="--i:6"><a href="#testimonials">Відгуки<sup><span>07</span></sup></a></li><li style="--i:7"><a href="#contacts">Контакти<sup><span>08</span></sup></a></li></ul>
   <aside class="menu__side">
     <div style="--i:2">
       <img class="menu__photo" src="assets/menu-photo.jpg?v=2" alt="Оксана Пантелейко на SBID Design Awards 2025">
@@ -1917,8 +1919,8 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
 <section class="hero" id="top">
   <img class="hero__bg" src="assets/hero.jpg" alt="Оксана Пантелейко на терасі в Ніцці">
   <header class="header">
-    <span class="header__loc load" style="--d:.3s">Ніцца, Франція</span>
-    <img class="header__logo" style="--d:.4s" src="assets/logo.svg" alt="Panteleyko">
+    <a class="header__loc load" style="--d:.3s" href="ua.html" data-home>Ніцца, Франція</a>
+    <a href="ua.html" data-home aria-label="Головна"><img class="header__logo" style="--d:.4s" src="assets/logo.svg" alt="Panteleyko"></a>
     <div class="header__right load" style="--d:.5s">
       <div class="lang" role="group" aria-label="Мова"><a href="ua.html" lang="uk" aria-current="true">UA</a><i></i><a href="index.html" class="lang__on" lang="en">EN</a></div>
       <button class="menu-btn" aria-label="Меню" aria-expanded="false"><span class="menu-btn__t"><b>Меню</b><b>Закрити</b></span></button>
@@ -2055,7 +2057,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     <p class="hero__lead load" style="--d:2.65s"><span>Простори, у яких хочеться бути, —</span> <span>створені з турботою, сплановані під бюджет</span> <span>і перевірені на ризики ще до інвестиції.</span></p>
     <div class="hero__cta">
       <a class="btn btn--dark load" style="--d:2.85s" href="#contact">Почати співпрацю <span class="plus"></span></a>
-      <a class="btn btn--glass load" style="--d:3s" href="#projects">Переглянути проєкти <span class="plus"></span></a>
+      <a class="btn btn--glass load" style="--d:3s" href="portfolio-ua.html" data-pf>Переглянути проєкти <span class="plus"></span></a>
     </div>
   </div>
 </section>
@@ -2086,7 +2088,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   <div class="prj__track">
     <div class="prj__stick">
       <div class="prj__row" id="prjRow">
-      <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html">Дивитися всі проєкти <i></i></a></div>
+      <div class="prj__screen prj__screen--intro"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html" data-pf>Дивитися всі проєкти <i></i></a></div>
       <article class="pcard">
         <div class="pcard__img"><img src="assets/proj-alberti.jpg" alt="Апартготель «Alberti»" loading="lazy"><img class="pcard__badge" src="assets/sbid-finalist-2025.png" alt="SBID International Design Awards 2025 Finalist" loading="lazy"></div>
         <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартготель «Alberti»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
@@ -2102,7 +2104,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
         <div class="pcard__head"><span class="ln" style="--d:.35s"><h3>Апартаменти «Azur Cap d’Ail»</h3></span><span class="ln" style="--d:.5s"><a class="lnk" href="#">Дивитися проєкт <i></i></a></span></div>
         <div class="pcard__meta"><span class="ln" style="--d:.6s"><span class="pcard__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></span><span class="ln" style="--d:.72s"><p>Кожні апартаменти мають власну колірну гаму й філософію. Кожен простір дарує інші емоції.</p></span></div>
       </article>
-      <div class="prj__screen prj__screen--dark prj__screen--end"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html">Дивитися всі проєкти <i></i></a></div>
+      <div class="prj__screen prj__screen--dark prj__screen--end"><div class="prj__title prj__title--sel"><h2>Вибрані<br>проєкти</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div><a class="lnk prj__all" href="portfolio-ua.html" data-pf>Дивитися всі проєкти <i></i></a></div>
       </div>
     </div>
   </div>
@@ -2255,7 +2257,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 <footer class="ftr" data-dark>
   <div class="ftr__top">
     <a href="#top" class="ftr__logo" aria-label="Panteleyko — нагору"><img src="assets/logo.svg" alt="Panteleyko"></a>
-    <nav class="ftr__nav"><a href="#top">Головна</a><a href="#projects">Портфоліо</a><a href="#services">Послуги</a><a href="#about">Про мене</a><a href="#contact">Консультація</a><a href="#awards">Нагороди</a><a href="#testimonials">Відгуки</a><a href="#contacts">Контакти</a></nav>
+    <nav class="ftr__nav"><a href="ua.html" data-home>Головна</a><a href="portfolio-ua.html" data-pf>Портфоліо</a><a href="#services">Послуги</a><a href="#about">Про мене</a><a href="#contact">Консультація</a><a href="#awards">Нагороди</a><a href="#testimonials">Відгуки</a><a href="#contacts">Контакти</a></nav>
     <div class="ftr__right"><a href="#" class="ftr__cv" download>Завантажити CV</a></div>
   </div>
   <div class="ftr__bottom">
