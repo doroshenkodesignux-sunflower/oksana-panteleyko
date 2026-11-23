@@ -237,7 +237,7 @@ def build(L, src, out):
 <section class="alb" id="top">
   <div class="alb-hero"><p class="alb-hero__big" aria-hidden="true">{t["big"]}</p><img class="alb-hero__img" src="assets/alberti/hero.webp" alt="{t["t1"]}"></div>
   <div class="alb-head">
-    <h1><span class="ln2"><span>{t["t1"]}</span></span><span class="ln2"><span>{t["t2"]}</span></span></h1>
+    <h1>{t["t1"]}<br>{t["t2"]}</h1>
     <span class="alb-head__script" role="img" aria-label="Interior Design"></span>
     <p class="alb-head__desc">{t["desc"]}</p>
     <p class="alb-head__place">{t["place"]}</p>
