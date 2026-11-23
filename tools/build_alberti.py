@@ -185,7 +185,12 @@ CSS = '''
 .alb-sp{height:calc(var(--u) * 160)}
 .alb-rev{text-align:center;padding:0 var(--pad) calc(var(--u) * 264)}   /* bottom air = top air (spacer + title padding) */
 .alb-rev__q{margin:0 auto;max-width:28em;font:400 clamp(18px,1.35vw,26px)/1.55 var(--sans);text-wrap:balance;opacity:0;translate:0 24px;transition:opacity 1.2s cubic-bezier(.25,.1,.25,1),translate 1.2s cubic-bezier(.25,.1,.25,1)}
-.alb-rev__who{margin:clamp(24px,2.5vw,48px) 0 0;font:500 16px/1.4 var(--sans);text-transform:uppercase;letter-spacing:.02em;opacity:0;transition:opacity 1s ease .3s}
+.alb-rev__who{margin:16px 0 0;font:500 16px/1.4 var(--sans);text-transform:uppercase;letter-spacing:.02em;opacity:0;transition:opacity 1s ease .3s}
+.alb-rev__rate{display:flex;align-items:center;justify-content:center;gap:10px;margin:clamp(28px,2.6vw,48px) 0 0;font:600 20px/1 var(--sans);opacity:0;transition:opacity 1s ease .2s}
+.alb-rev__rate span{font-weight:500;opacity:.4}
+.alb-rev__rate i{display:flex;gap:4px;margin-left:8px}
+.alb-rev__rate svg{width:22px;height:22px;fill:#7FB0D8;stroke:#7FB0D8;stroke-width:1.5}
+.alb-rev.in .alb-rev__rate{opacity:1}
 .alb-rev.in .alb-rev__q{opacity:1;translate:0 0}.alb-rev.in .alb-rev__who{opacity:.7}
 @media (max-width:900px){.alb-sp{height:48px}.alb-rev{padding:0 16px 184px}.alb-rev__who{margin-bottom:0}}
 @media (prefers-reduced-motion:reduce){.alb-info{background:none!important;border-color:#D7E6F2!important}.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
@@ -228,6 +233,7 @@ def build(L, src, out):
     review = f'''<section class="alb alb-rev" id="review">
   <h2 class="alb-h2">{t["tst_k"]}</h2>
   <blockquote class="alb-rev__q">{quote}</blockquote>
+  <p class="alb-rev__rate" aria-label="5 / 5"><b>5.0</b><span>/ 5</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 16.8 6.3 20l1.3-6.35-4.8-4.4 6.45-.75z" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 16.8 6.3 20l1.3-6.35-4.8-4.4 6.45-.75z" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 16.8 6.3 20l1.3-6.35-4.8-4.4 6.45-.75z" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 16.8 6.3 20l1.3-6.35-4.8-4.4 6.45-.75z" stroke-linejoin="round"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.75 5.9 6.45.75-4.8 4.4 1.3 6.35L12 16.8 6.3 20l1.3-6.35-4.8-4.4 6.45-.75z" stroke-linejoin="round"/></svg></i></p>
   <p class="alb-rev__who">{who}</p>
 </section>'''
     stub = mid.replace(contact, '').replace('id="top"', 'id="top-main"')
