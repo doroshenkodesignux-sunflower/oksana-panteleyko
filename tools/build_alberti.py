@@ -29,6 +29,7 @@ T = {
              'r1': 'Room 1', 'cu': 'Close-up', 'mask': 'Eye mask for sleeping', 'keys': 'Room keys', 'logo': 'Logo',
              'bc': 'Business cards', 'wl': 'Welcome letter', 'sk': 'Facade sketch'},
         brtext='Each apartment is designed in a unique color palette and carries its own philosophy. Every space invites you to experience a different emotion.',
+        tst_left='Kind words', tst_k='Client review',
         me='alberti.html', other='alberti-ua.html', home='index.html',
     ),
     'ua': dict(
@@ -46,6 +47,7 @@ T = {
              'r1': 'Кімната 1', 'cu': 'Деталі', 'mask': 'Маска для сну', 'keys': 'Ключі від номера', 'logo': 'Логотип',
              'bc': 'Візитівки', 'wl': 'Вітальний лист', 'sk': 'Ескіз фасаду'},
         brtext='Кожні апартаменти мають власну колірну палітру й філософію. Кожен простір запрошує відчути іншу емоцію.',
+        tst_left='Теплі слова', tst_k='Відгук клієнта',
         me='alberti-ua.html', other='alberti.html', home='ua.html',
     ),
 }
@@ -180,7 +182,9 @@ CSS = '''
   .alb-brtext{position:static;width:auto}
 }
 /* one review only: no counter, progress or arrows */
-#testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots{display:none!important}
+#testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots,#testimonials .tst__prev{display:none!important}
+#testimonials .tst__label{font:400 var(--h2)/1.1 var(--serif)!important;text-transform:uppercase;letter-spacing:-.01em!important}
+#testimonials .alb-tk{display:block;margin-bottom:clamp(20px,2vw,36px);font:700 16px/1.2 var(--sans);text-transform:uppercase;letter-spacing:.02em}
 @media (prefers-reduced-motion:reduce){.alb-info{background:none!important;border-color:#D7E6F2!important}.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
 </style>
 '''
@@ -216,6 +220,8 @@ def build(L, src, out):
     contact = re.search(r'<section class="cta" id="contact">.*?</section>', mid, re.S).group(0)
     contact = re.sub(r'(<img src=")[^"]*(" alt="" id="ctaImg">)', r'\1assets/alberti/wide.webp\2', contact)
     tst = re.search(r'<section class="tst" id="testimonials">.*?</section>', mid, re.S).group(0)
+    tst_page = re.sub(r'<h2 class="tst__label">.*?</h2>', f'<h2 class="tst__label">{t["tst_left"]}</h2>', tst, count=1, flags=re.S)
+    tst_page = tst_page.replace('<h3 class="tst__who"><span id="tstWho">', f'<h3 class="tst__who"><span class="alb-tk">{t["tst_k"]}</span><span id="tstWho">', 1)
     stub = mid.replace(contact, '').replace(tst, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
@@ -246,7 +252,7 @@ def build(L, src, out):
   {gallery(BRAND, BRAND_TOP, BRAND_END, t, f'<p class="alb-brtext">{t["brtext"]}</p>')}
   <div style="height:calc(var(--u) * 160)"></div>
 </section>
-{tst}
+{tst_page}
 <div class="pf-stub" hidden aria-hidden="true">{stub}</div>
 '''
     s = s[:start] + top + s[end:]

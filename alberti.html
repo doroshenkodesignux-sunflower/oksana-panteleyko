@@ -1942,7 +1942,9 @@ a.header__loc{text-decoration:none;color:inherit}
   .alb-brtext{position:static;width:auto}
 }
 /* one review only: no counter, progress or arrows */
-#testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots{display:none!important}
+#testimonials .tst__num,#testimonials .tst__arrows,#testimonials #tstDots,#testimonials .tst__prev{display:none!important}
+#testimonials .tst__label{font:400 var(--h2)/1.1 var(--serif)!important;text-transform:uppercase;letter-spacing:-.01em!important}
+#testimonials .alb-tk{display:block;margin-bottom:clamp(20px,2vw,36px);font:700 16px/1.2 var(--sans);text-transform:uppercase;letter-spacing:.02em}
 @media (prefers-reduced-motion:reduce){.alb-info{background:none!important;border-color:#D7E6F2!important}.alb *{transition:none!important;animation:none!important;opacity:1!important;translate:none!important;clip-path:none!important;filter:none!important;transform:none!important}}
 </style>
 </head>
@@ -2069,10 +2071,10 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
 </section>
 <section class="tst" id="testimonials">
   <div class="tst__grid">
-    <h2 class="tst__label">Testimonials</h2>
+    <h2 class="tst__label">Kind words</h2>
     <p class="tst__num"><span id="tstNum">01</span><small>/05</small></p>
     <p class="tst__prev">What my clients say</p>
-    <h3 class="tst__who"><span id="tstWho"></span></h3>
+    <h3 class="tst__who"><span class="alb-tk">Client review</span><span id="tstWho"></span></h3>
     <div class="tst__rule" id="tstDots" aria-hidden="true"></div>
     <div class="arrows tst__arrows" data-for="tst"><button class="arrow arrow--prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="arrow arrow--next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
     <blockquote class="tst__quote"><p id="tstQuote"></p></blockquote>
