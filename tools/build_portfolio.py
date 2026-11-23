@@ -46,6 +46,8 @@ T = {
 }
 
 CSS = '''
+<style>/* the header sits outside the page blocks so nothing scrolls over it; it keeps the hero's scale unit */
+.header{--u:min(calc(100vw / 1920),calc(100vh / 1080));z-index:60!important}</style>
 <style id="pf-css">
 /* ===== Portfolio page ===== */
 .pfx{--u:min(calc(100vw / 1920),calc(100vh / 1080));position:relative;z-index:2;background:#fff;color:var(--ink)}   /* the header sizes itself from --u, as in the hero */
@@ -164,8 +166,8 @@ def build(L, src, out):
     end = s.index('<section class="cta cta2" id="request">')
     # keep a comment marker so the CSS/JS stay in place
     lockup = re.search(r'<div class="prj__title prj__title--sel">.*?</span></div>', s, re.S).group(0)
-    body = f'''<section class="pfx" id="top">
-  {hdr}
+    body = f'''{hdr}
+<section class="pfx" id="top">
   <div class="pfi" id="portfolio">
     {lockup}
     <p class="pfi__lead">{t["intro"]}</p>

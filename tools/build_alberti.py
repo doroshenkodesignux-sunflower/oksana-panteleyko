@@ -87,6 +87,8 @@ def gallery(items, top, end, t, extra=''):
 
 
 CSS = '''
+<style>/* the header sits outside the page blocks so nothing scrolls over it; it keeps the hero's scale unit */
+.header{--u:min(calc(100vw / 1920),calc(100vh / 1080));z-index:60!important}</style>
 <style id="alb-css">
 /* ===== Alberti project page — 1920 Figma frame, scaled by --u on desktop ===== */
 .alb{--u:calc(100vw / 1920);background:#fff;color:var(--ink);position:relative;z-index:2}
@@ -182,8 +184,8 @@ def build(L, src, out):
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
 
-    top = f'''<section class="alb" id="top">
-  {hdr}
+    top = f'''{hdr}
+<section class="alb" id="top">
   <div class="alb-hero"><p class="alb-hero__big" aria-hidden="true">{t["big"]}</p><img class="alb-hero__img" src="assets/alberti/hero.webp" alt="{t["t1"]}"></div>
   <div class="alb-head">
     <h1>{t["t1"]}<br>{t["t2"]}</h1>

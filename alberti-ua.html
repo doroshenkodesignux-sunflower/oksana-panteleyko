@@ -1849,6 +1849,8 @@ a.header__loc{text-decoration:none;color:inherit}
 <link rel="alternate" hreflang="en" href="index.html">
 <link rel="alternate" hreflang="uk" href="ua.html">
 
+<style>/* the header sits outside the page blocks so nothing scrolls over it; it keeps the hero's scale unit */
+.header{--u:min(calc(100vw / 1920),calc(100vh / 1080));z-index:60!important}</style>
 <style id="alb-css">
 /* ===== Alberti project page — 1920 Figma frame, scaled by --u on desktop ===== */
 .alb{--u:calc(100vw / 1920);background:#fff;color:var(--ink);position:relative;z-index:2}
@@ -1986,8 +1988,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
 </div>
 
 <!-- ============ 1. HERO ============ -->
-<section class="alb" id="top">
-  <header class="header">
+<header class="header">
     <a class="header__loc load" style="--d:.3s" href="ua.html" data-home>Ніцца, Франція</a>
     <a href="ua.html" data-home aria-label="Головна"><img class="header__logo" style="--d:.4s" src="assets/logo.svg" alt="Panteleyko"></a>
     <div class="header__right load" style="--d:.5s">
@@ -1995,6 +1996,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <button class="menu-btn" aria-label="Меню" aria-expanded="false"><span class="menu-btn__t"><b>Меню</b><b>Закрити</b></span></button>
     </div>
   </header>
+<section class="alb" id="top">
   <div class="alb-hero"><p class="alb-hero__big" aria-hidden="true">Alberti</p><img class="alb-hero__img" src="assets/alberti/hero.webp" alt="«Alberti»"></div>
   <div class="alb-head">
     <h1>«Alberti»<br>Апарт-готель</h1>
