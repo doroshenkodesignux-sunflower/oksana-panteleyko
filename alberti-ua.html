@@ -2853,6 +2853,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
   ['Приватний клієнт,\nРезиденція «French House»','Будівництво будинку — це стрес, але Оксана спокійно й зрозуміло провела нас через кожне рішення. Вона чесно казала, що варте грошей, а що ні. Результат гарний, практичний і завершений вчасно — ми досі не віримо.'],
   ['Засновниця,\nSPA & Beauty, Kharkiv Palace','Ми прийшли по інтер’єр, а отримали цілісну нову айдентику: логотип, стиль і простір рівня п’ятизіркового готелю. Оксана сама працювала з дизайнерами, постачальниками й підрядниками. Команда любить там працювати, а гості питають, хто це створив.'],
   ['Інвестор,\nАпартаменти на Лазурному березі','Перед купівлею я попросив Оксану подивитися об’єкт разом зі мною. За один візит вона показала ризики, реальний потенціал і вартість ремонту. Ця порада зберегла мені гроші й допомогла обрати правильні апартаменти.']];
+if(window.__tstSet)TESTIMONIALS.splice(0,TESTIMONIALS.length,...window.__tstSet);
 if(window.__tstOnly){const k=TESTIMONIALS.findIndex(r=>r[0].includes(window.__tstOnly));if(k>-1)TESTIMONIALS.splice(0,TESTIMONIALS.length,TESTIMONIALS[k])}   /* project pages show only that project's review */   // placeholders: 5 reviews, real texts to come
 (()=>{const track=document.getElementById('apprTrack');
   track.innerHTML=APPROACH.map(([t,d])=>`<article class="appr__slide"><h3>${t}</h3><p>${d}</p></article>`).join('');

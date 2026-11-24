@@ -54,8 +54,8 @@ T = {
   fmt=[('Online', 'WhatsApp, Zoom, Google Meet'), ('In person in Nice, France', '37 Promenade des Anglais, 06000 Nice'), ('On-site visit', 'Anywhere in the world. The client covers airfare.')],
   note=['Every project differs in size and depth, so we set the format and price after the Diagnostic Session.', 'The one exception is the designer package at $500.', 'The Diagnostic Session is free and comes with no obligation.'],
   ext_k='For business', ext_h='Additional services',
-  ext=[dict(k='Turnkey rebranding', t='“Full transformation”', p='When a business needs a full refresh — not a single renovation or a new logo — I bring together a team of specialists who run the whole process turnkey:',
-            l=['Interior renovation', 'Branding', 'Website development'], p2='You get one coherent result where the space, the visual identity and the online presence speak the same language — without coordinating several contractors yourself.'),
+  ext=[dict(k='Turnkey rebranding', t='“Full transformation”', p='A full business refresh, run turnkey by one team:',
+            l=['Interior renovation', 'Branding', 'Website development'], p2=''),
        dict(k='Business consulting', t='Team building and management', p='For businesses opening or growing a hotel, restaurant or other venue:',
             l=['Selecting specialists for your team', 'Hotel launch consulting', 'How to run a hotel or restaurant', 'Working with the venue’s manager'], p2='')],
   ext_b='Discuss collaboration',
@@ -107,8 +107,8 @@ T = {
   fmt=[('Онлайн', 'WhatsApp, Zoom, Google Meet'), ('Особисто в Ніцці, Франція', '37 Promenade des Anglais, 06000 Nice'), ('Виїзд на об’єкт', 'Будь-де у світі. Переліт оплачує клієнт.')],
   note=['Кожен проєкт різний за масштабом і глибиною, тому формат і ціну визначаємо після діагностичної сесії.', 'Єдиний виняток — пакет для дизайнерів за $500.', 'Діагностична сесія безкоштовна й ні до чого не зобов’язує.'],
   ext_k='Для бізнесу', ext_h='Додаткові послуги',
-  ext=[dict(k='Ребрендинг під ключ', t='«Повна трансформація»', p='Якщо бізнесу потрібне повне оновлення — а не окремий ремонт чи новий логотип — я збираю команду фахівців, яка проведе весь процес під ключ:',
-            l=['Реновація інтер’єру', 'Брендинг', 'Розробка сайту'], p2='Ви отримуєте цілісний результат, де простір, візуальна ідентичність і цифрова присутність говорять однією мовою — без потреби самостійно координувати кількох підрядників.'),
+  ext=[dict(k='Ребрендинг під ключ', t='«Повна трансформація»', p='Повне оновлення бізнесу під ключ однією командою:',
+            l=['Реновація інтер’єру', 'Брендинг', 'Розробка сайту'], p2=''),
        dict(k='Консультування бізнесу', t='Підбір команди та управління', p='Для бізнесу, який відкриває або розвиває готель, ресторан чи інший об’єкт:',
             l=['Підбір спеціалістів у команду', 'Консультації із запуску готелю', 'Як управляти готелем чи рестораном', 'Робота з керуючим об’єкта'], p2='')],
   ext_b='Обговорити співпрацю',
@@ -275,7 +275,7 @@ CSS = '''
 .cn-note{margin:clamp(40px,3.1vw,60px) 0 0;padding-left:20px;border-left:2px solid #1D1616;font:400 clamp(16px,1.05vw,20px)/1.5 var(--sans)}
 .cn-note p{margin:0 0 10px}
 /* extra services */
-.cn-ext{display:flex;flex-direction:column;gap:18px;padding:clamp(28px,2.6vw,48px);background:rgba(255,255,255,.06)}
+.cn-ext{display:flex;flex-direction:column;gap:18px;padding:clamp(28px,2.6vw,48px);background:#3A2A22}
 .cn-ext__k{margin:0;font:500 16px/1 var(--sans);text-transform:uppercase;letter-spacing:.04em;opacity:.7}
 .cn-ext p{margin:0;font:400 16px/1.55 var(--sans);opacity:.85}
 .cn-dash{margin:0;padding:0;list-style:none;font:400 clamp(16px,1.05vw,20px)/1.6 var(--sans)}
@@ -814,7 +814,17 @@ def build(L, src, out):
     s = re.sub(r'href="(#[a-z][\w-]*)"', lambda m: m.group(0) if m.group(1) in keep else f'href="{t["home"]}{m.group(1)}"', s)
     s = s.replace('<body class="preloading">', '<body>', 1)
     s = s.replace("if(reduce){finish();writeTitle();return}", "if(reduce||window.__noPre){if(!window.__noPre)finish();writeTitle();return}", 1)
-    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true;window.__toTopFrom="investors"</script>\n<div class="pre" id="pre" style="display:none"', 1)
+    import json as _j
+    _ts = {'en':[['Investor,\nApartment in Nice','Before buying, I booked a consultation to look at the property with Oksana. In one visit she showed me the hidden risks, the real potential and an honest renovation budget. That advice saved me money and helped me choose the right apartment.'],
+      ['Owner,\nRestaurant on the Riviera','We were about to start a renovation without a clear plan. In two sessions Oksana defined the concept, the zoning and the priorities for our budget. The contractors finally knew exactly what to do, and we opened on time.'],
+      ['Homeowner,\nVilla near Cannes','I had dozens of ideas and no idea how to put them together. Oksana listened, asked the right questions and gave me a clear direction for every room. Now I make decisions with confidence instead of doubts.'],
+      ['Interior designer,\nParis','I came to Oksana for a review of my own project. She pointed out what to simplify, where the budget was leaking and how to present the concept to my client. A very practical, generous session — I use her advice every day.']],
+      'uk':[['Інвестор,\nКвартира в Ніцці','Перед покупкою я записався на консультацію, щоб оглянути обʼєкт разом з Оксаною. За один візит вона показала приховані ризики, реальний потенціал і чесний бюджет ремонту. Ця порада зберегла мені гроші й допомогла обрати правильну квартиру.'],
+      ['Власник,\nРесторан на Рівʼєрі','Ми збиралися почати ремонт без чіткого плану. За дві сесії Оксана визначила концепцію, зонування і пріоритети бюджету. Підрядники нарешті знали, що робити, і ми відкрилися вчасно.'],
+      ['Власниця житла,\nВіла біля Канн','У мене були десятки ідей і жодного розуміння, як їх поєднати. Оксана вислухала, поставила правильні питання і дала чіткий напрям для кожної кімнати. Тепер я ухвалюю рішення впевнено, без сумнівів.'],
+      ['Дизайнерка інтерʼєру,\nПариж','Я прийшла до Оксани з аудитом власного проєкту. Вона показала, що спростити, де „витікає“ бюджет і як презентувати концепцію клієнту. Дуже практична і щедра сесія — я користуюся її порадами щодня.']]}
+    _tj = _j.dumps(_ts['uk' if L=='uk' else 'en'], ensure_ascii=False)
+    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true;window.__tstSet='+_tj+';window.__toTopFrom="investors"</script>\n<div class="pre" id="pre" style="display:none"', 1)
     s = s.replace('</body>', """<script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);

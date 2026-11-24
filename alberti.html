@@ -2853,6 +2853,7 @@ const TESTIMONIALS=[   // placeholders — real reviews to come
   ['Private client,\nResidence “French House”','Building a house is stressful, but she guided us through every decision with calm and clarity. She was honest about what was worth the money and what wasn’t. The result is beautiful, practical and was finished on time — we still can’t believe it.'],
   ['Founder,\nSPA & Beauty, Kharkiv Palace','We came for an interior and got a whole new identity: logo, style and a space that fits a five-star hotel. Oksana handled designers, suppliers and contractors so we didn’t have to. Our team loves working there, and guests ask who designed it.'],
   ['Investor,\nCôte d’Azur apartment','Before buying, I asked Oksana to look at the property with me. In one visit she showed me the risks, the real potential and what the renovation would cost. That advice saved me money and helped me choose the right apartment.']];
+if(window.__tstSet)TESTIMONIALS.splice(0,TESTIMONIALS.length,...window.__tstSet);
 if(window.__tstOnly){const k=TESTIMONIALS.findIndex(r=>r[0].includes(window.__tstOnly));if(k>-1)TESTIMONIALS.splice(0,TESTIMONIALS.length,TESTIMONIALS[k])}   /* project pages show only that project's review */   // placeholders: 5 reviews, real texts to come
 (()=>{const track=document.getElementById('apprTrack');
   track.innerHTML=APPROACH.map(([t,d])=>`<article class="appr__slide"><h3>${t}</h3><p>${d}</p></article>`).join('');
