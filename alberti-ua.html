@@ -1814,7 +1814,10 @@ a.header__loc{text-decoration:none;color:inherit}
 .abx__item .abx__vc span{margin:0!important;opacity:1!important;font:inherit!important}   /* the item's number style must not reach the link's label */
 .abx__item .abx__vc .roll{display:inline-grid!important}
 .abx__vc{display:inline-flex!important;width:auto!important;min-width:0!important;margin-top:16px;padding-top:0!important;background:none;border:0;cursor:pointer;color:inherit;gap:12px}
-.abx__cv.btn{grid-column:3/-1;justify-self:stretch;width:100%!important;max-width:none;margin-top:clamp(24px,2.6vw,48px)}   /* spans the last two columns, from the 3rd credential's edge */   /* CV on its own row under the four credentials */
+.abx__cv.btn{grid-column:3/-1;justify-self:stretch;width:100%!important;max-width:none;margin-top:clamp(48px,5vw,96px)}   /* spans the last two columns, from the 3rd credential's edge */
+.abx__foot{margin-top:clamp(32px,3.6vw,72px)}
+.abx__item .abx__ilogo{transition:filter .5s ease,opacity .5s ease}
+.abx__item:hover .abx__ilogo{filter:none;opacity:1}   /* the logo takes its colours when you hover its credential */   /* more air between the stat labels and the credentials */   /* CV on its own row under the four credentials */
 .abx__ilogo--round{height:clamp(46px,3.4vw,62px)}
 .abx__ilogo--mbs{height:clamp(26px,1.95vw,36px);margin-top:clamp(7px,.5vw,9px);margin-bottom:clamp(23px,2vw,33px)!important}   /* wide wordmark: smaller so it weighs the same */
 .abx__ilogo--fin{height:clamp(44px,3.3vw,60px)}
