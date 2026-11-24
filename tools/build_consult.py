@@ -189,6 +189,10 @@ def page_html(t):
 '''
 
 
+def _price(pr):
+    return re.sub(r'^(from|від) ', r'<small>\1</small> ', pr)
+
+
 def page_html_after(t):
     ext = ''.join(f'''<div class="cn-ext rv"><p class="cn-ext__k">{e['k']}</p><h3 class="cn-h3">{e['t']}</h3><p>{e['p']}</p>
       <ul class="cn-dash">{''.join(f'<li>{x}</li>' for x in e['l'])}</ul>{f'<p>{e["p2"]}</p>' if e['p2'] else ''}
@@ -425,7 +429,7 @@ def page_html(t, L='en'):
                   for i, (w, a) in enumerate(zip(t['who'], ids)))
     how = ''.join(f'<div class="cn-step rv" style="--d:{i*.1:.1f}s"><span class="cn-step__n">{i+1}</span><h3>{h}</h3><p>{p}</p></div>' for i, (h, p) in enumerate(t['how']))
     auds = ''.join(audience(i + 1, a, t, i % 2 == 1, L) for i, a in enumerate(t['aud']))
-    menu = ''.join(f'<li class="rv"><span class="cn-menu__t">{h}</span><span class="cn-menu__d">{d}</span><span class="cn-menu__dots"></span><span class="cn-menu__p">{pr}</span></li>' for h, d, pr in x['menu'])
+    menu = ''.join(f'<li class="rv"><span class="cn-menu__t">{h}</span><span class="cn-menu__d">{d}</span><span class="cn-menu__dots"></span><span class="cn-menu__p">{_price(pr)}</span></li>' for h, d, pr in x['menu'])
     trust = ''.join(f'<li>{s}</li>' for s in x['trust'])
     return f'''<section class="cn cn-hero2" id="top-c">
   <div class="cn-hero2__txt">
@@ -527,8 +531,9 @@ CSS += '''
 .cn-menu{max-width:1100px;margin:clamp(40px,4.2vw,80px) auto 0;padding:0;list-style:none;border-top:1px solid var(--ink)}
 .cn-menu li{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"t dots p" "d d d";gap:6px 16px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line)}
 .cn-menu__t{grid-area:t;font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase}
-.cn-menu__dots{grid-area:dots;border-bottom:1px dotted rgba(29,22,22,.35);transform:translateY(-6px)}
-.cn-menu__p{grid-area:p;font:600 clamp(16px,1.15vw,22px)/1 var(--sans);white-space:nowrap}
+.cn-menu__dots{grid-area:dots}
+.cn-menu__p{grid-area:p;font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase;white-space:nowrap}
+.cn-menu__p small{font:400 16px/1.5 var(--sans);text-transform:none;opacity:.7;margin-right:4px}
 .cn-menu__d{grid-area:d;font:400 16px/1.5 var(--sans);opacity:.7}
 .cn-menu li:first-child .cn-menu__p{color:#5B8DB8}
 .cn-where{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 32px;max-width:1100px;margin:32px auto 0;padding:0;list-style:none;font:400 16px/1.5 var(--sans)}
@@ -563,8 +568,8 @@ CSS += '''
   .cn-sessions li{grid-template-columns:1fr}
   .cn-sessions .cn-ses__k{grid-row:auto}
   .cn-pack .btn{min-width:0;width:100%}
-  .cn-menu li{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"t p" "d d"}
-  .cn-menu__t{font-size:clamp(20px,6vw,26px)}
+  .cn-menu li{grid-template-columns:1fr;grid-template-areas:"t" "p" "d";gap:6px}
+  .cn-menu__t,.cn-menu__p{font-size:clamp(20px,6vw,26px)}
   .cn-menu__dots{display:none}
   .cn-where{flex-direction:column;align-items:center;gap:6px}
   .cn-bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;left:12px;right:12px;bottom:12px;z-index:70;transform:translateY(140%);transition:transform .5s var(--ease)}
