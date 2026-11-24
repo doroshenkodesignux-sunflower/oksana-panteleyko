@@ -25,7 +25,6 @@ T = [
  ('aria-label="Language"', 'aria-label="Мова"', 0),
  ('View certificate <i>', 'Дивитися сертифікат <i>', 0),
  ('aria-label="Certificates"', 'aria-label="Сертифікати"', 0),
- ('<span class="abx__mbs">Milano<br>Business School</span>', '<span class="abx__mbs">Milano<br>Business School</span>', 0),
  ('href="index.html" data-home', 'href="ua.html" data-home', 0),
  ('href="portfolio.html" data-pf', 'href="portfolio-ua.html" data-pf', 0),
  ('href="alberti.html" data-alb', 'href="alberti-ua.html" data-alb', 0),
