@@ -1808,6 +1808,31 @@ html,body{overflow-x:clip}
 .appr__title .lockup__serif{font-weight:600!important}
 /* header location and logo are links to the home page */
 a.header__loc{text-decoration:none;color:inherit}
+/* About: a quiet row of award logos + a link that opens the certificates full screen */
+.abx__proof{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:clamp(40px,3.6vw,64px);padding-top:clamp(24px,2vw,36px);border-top:1px solid var(--line)}
+.abx__logos{display:flex;align-items:center;gap:clamp(20px,2.2vw,40px)}
+.abx__logos img{height:clamp(44px,3.4vw,60px);width:auto;filter:grayscale(1) contrast(1.1);opacity:.7;transition:opacity .4s,filter .4s}
+.abx__logos img:hover{filter:none;opacity:1}
+.abx__mbs{font:600 clamp(11px,.75vw,13px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.12em;opacity:.6;padding-left:clamp(20px,2.2vw,40px);border-left:1px solid var(--line)}
+.abx__certs{background:none;border:0;cursor:pointer;color:inherit;width:auto!important;min-width:240px}
+.certs{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(56px,5vw,96px) var(--pad);background:rgba(29,22,22,.94);opacity:0;transition:opacity .35s ease}
+.certs.on{opacity:1}
+.certs[hidden]{display:none}
+.certs__row{display:flex;gap:clamp(16px,2vw,40px);align-items:center;justify-content:center;max-width:1600px;width:100%;height:100%;overflow-x:auto;scroll-snap-type:x mandatory}
+.certs figure{margin:0;flex:0 1 auto;height:100%;max-height:78vh;display:flex;align-items:center;scroll-snap-align:center}
+.certs img{max-height:78vh;max-width:min(30vw,560px);width:auto;height:auto;box-shadow:0 20px 60px rgba(0,0,0,.45);translate:0 20px;transition:translate .6s var(--ease)}
+.certs.on img{translate:0 0}
+.certs__x{position:absolute;top:clamp(16px,2vw,32px);right:clamp(16px,2vw,32px);width:48px;height:48px;border:1px solid rgba(255,255,255,.4);background:none;cursor:pointer}
+.certs__x::before,.certs__x::after{content:"";position:absolute;left:12px;right:12px;top:50%;border-top:1.5px solid #fff;rotate:45deg}
+.certs__x::after{rotate:-45deg}
+@media (max-width:900px){
+  .abx__proof{flex-direction:column;align-items:flex-start}
+  .abx__certs{min-width:0;width:100%!important}
+  .certs{padding:72px 0 24px}
+  .certs__row{justify-content:flex-start;padding:0 16px}
+  .certs figure{flex:0 0 82vw;justify-content:center}
+  .certs img{max-width:82vw;max-height:70vh}
+}
 /* ---------- Awards on phones (premium editorial stack): counter at the top, photo in the middle,
    title + caption below it, "Explore project" at the very bottom — nothing overlaps ---------- */
 @media (max-width:900px){
@@ -2287,7 +2312,23 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
     <div class="abx__item rv" style="--d:.6s"><span>03</span><p>Milano Business School — <br>HoReCa Segment.</p></div>
     <a class="btn btn--ink abx__cv cn-cv rv" style="--d:.9s" href="#" download>Download CV <span class="plus"></span></a>
   </div>
+  <div class="abx__proof rv" style="--d:.2s">
+    <div class="abx__logos" aria-label="Recognised by">
+      <img src="assets/sbid-finalist-2022.png" alt="SBID International Design Awards 2022 Finalist" loading="lazy">
+      <img src="assets/sbid-finalist-2025.png" alt="SBID International Design Awards 2025 Finalist" loading="lazy">
+      <span class="abx__mbs">Milano<br>Business School</span>
+    </div>
+    <button type="button" class="lnk abx__certs" data-certs>View certificates <i></i></button>
+  </div>
 </section>
+<div class="certs" id="certs" role="dialog" aria-modal="true" aria-label="Certificates" hidden>
+  <button type="button" class="certs__x" aria-label="Close"></button>
+  <div class="certs__row">
+    <figure><img src="assets/dipl-master.jpg" alt="Accredited Design Professional certificate" loading="lazy"></figure>
+    <figure><img src="assets/dipl-sbid.jpg" alt="SBID Awards finalist certificate" loading="lazy"></figure>
+    <figure><img src="assets/dipl-horeca-2.jpg" alt="Milano Business School certificate" loading="lazy"></figure>
+  </div>
+</div>
 <section class="tst" id="testimonials">
   <div class="tst__grid">
     <h2 class="tst__label">Testimonials</h2>
@@ -2445,6 +2486,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 </section>
 
 <!-- ============ 2. ABOUT ME (Figma 1321:2487) ============ -->
+
 
 
 
@@ -3157,6 +3199,15 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
 <script>/* phones: each line of an award caption stays on one line — shrink the text just enough if a line is too long */
 (()=>{const fit=()=>{document.querySelectorAll('.awx__sub span').forEach(sp=>{sp.style.fontSize='';if(innerWidth>900)return;const max=sp.parentNode.clientWidth;if(!max)return;let fs=parseFloat(getComputedStyle(sp).fontSize);while(sp.scrollWidth>max+1&&fs>8.5){fs-=.25;sp.style.setProperty('font-size',fs+'px','important')}})};
   addEventListener('resize',fit);addEventListener('load',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,400)})();</script>
+<script>
+/* certificates: open full screen from About, close by button, backdrop or Esc */
+(()=>{const box=document.getElementById('certs');if(!box)return;const x=box.querySelector('.certs__x');
+  const open=()=>{box.hidden=false;requestAnimationFrame(()=>box.classList.add('on'));document.documentElement.style.overflow='hidden';window.lenis&&lenis.stop();x.focus()};
+  const close=()=>{box.classList.remove('on');document.documentElement.style.overflow='';window.lenis&&lenis.start();setTimeout(()=>box.hidden=true,350)};
+  document.addEventListener('click',e=>{if(e.target.closest('[data-certs]'))open()});
+  x.addEventListener('click',close);box.addEventListener('click',e=>{if(e.target===box||e.target.classList.contains('certs__row'))close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close()})})();
+</script>
 <script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);

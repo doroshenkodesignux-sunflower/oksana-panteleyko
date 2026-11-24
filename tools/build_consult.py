@@ -587,6 +587,10 @@ def build(L, src, out):
     about = re.search(r'<section class="abx" id="about">.*?</section>', mid, re.S).group(0)
     tst = re.search(r'<section class="tst" id="testimonials">.*?</section>', mid, re.S).group(0)
     about_src = about
+    certs_m = re.search(r'<div class="certs" id="certs".*?</figure>\s*</div>\s*</div>', mid, re.S)
+    if certs_m:   # the certificates viewer belongs to About; keep it outside the hidden stub
+        mid = mid.replace(certs_m.group(0), '')
+        about = about + '\n' + certs_m.group(0)
     about = re.sub(r'<a class="lnk abx__cv rv"([^>]*)>([^<]*?)\s*<i></i></a>', r'<a class="btn btn--ink abx__cv cn-cv rv"\1>\2 <span class="plus"></span></a>', about)
     stub = mid.replace(about_src, '').replace(tst, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
