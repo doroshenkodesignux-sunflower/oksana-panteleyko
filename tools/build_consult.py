@@ -59,7 +59,7 @@ T = {
        dict(k='Business consulting', t='Team building and management', p='For businesses opening or growing a hotel, restaurant or other venue:',
             l=['Selecting specialists for your team', 'Hotel launch consulting', 'How to run a hotel or restaurant', 'Working with the venue’s manager'], p2='')],
   ext_b='Discuss collaboration',
-  faq_h='FAQ',
+  faq_h='Frequently asked<br>questions',
   faq=[('How much does a consultation cost?', 'The price depends on the scope and depth of your request. We set the format and price after a short, free diagnostic session.'),
        ('How long does a consultation take?', 'The diagnostic session takes about 20 minutes. A full consultation usually lasts 60–90 minutes, depending on the format.'),
        ('Online or in person?', 'Both. Online via WhatsApp, Zoom or Google Meet; in person in Nice; or an on-site visit anywhere in the world.'),
