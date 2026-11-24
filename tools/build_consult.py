@@ -300,6 +300,7 @@ CSS = '''
 .cn-me{padding:0;height:clamp(420px,46vw,880px);overflow:hidden}
 .cn-me img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0%}
 @media (max-width:900px){.cn-me{height:auto;aspect-ratio:4/5}.cn-me img{object-position:50% 0%}}
+@media (max-width:600px){.cn.cn-me{padding-bottom:0!important}.cn-me+.abx{padding-top:56px!important}}   /* phones: photo sits close to About  */
 /* light buttons keep the home page's soft light-blue glow under the cursor (no override) */
 /* white buttons on dark blocks: the home page's light-blue fill spreading from the cursor */
 .cn--dark .btn--light::before,.cn-hero .btn--light::before{display:block!important;opacity:1!important;background:#84B7DB!important;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)}
