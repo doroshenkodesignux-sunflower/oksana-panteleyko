@@ -328,7 +328,7 @@ CSS = '''
 
 # ===================== v2: editorial redesign (placeholders until Oksana sends materials) =====================
 X = {
- 'en': dict(cta='Book a free diagnostic', trust=['18 years of practice', '120+ projects', 'SBID Awards finalist'],
+ 'en': dict(cta='Book a Free Diagnostic Session', trust=['18 years of practice', '120+ projects', 'SBID Awards finalist'],
             kicker='Interior consultations', reply='I reply within 24 hours · SBID Awards finalist',
             wa='Write on WhatsApp', before='Today', after='After the consultation',
             menu_h='Formats and pricing', menu_note='Prices are indicative; the final format and price are set after the free diagnostic.',
