@@ -2023,9 +2023,9 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-k{margin:0;font:600 16px/1.2 var(--sans);text-transform:uppercase;letter-spacing:.06em;color:#695845}
 .cn--dark .cn-k{color:#B0D3EB}
 /* hero: text left, portrait right */
-.cn-hero2{display:grid;grid-template-columns:1.1fr .9fr;min-height:100vh;min-height:100svh;padding:0}
+.cn-hero2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0!important;min-height:100vh;min-height:100svh;padding:0!important}   /* exactly half and half */
 .cn-hero2__txt{display:flex;flex-direction:column;justify-content:flex-end;gap:24px;padding:calc(110px + 4vw) var(--pad) clamp(48px,5vw,96px)}
-.cn-hero2__h{margin:0;font:400 clamp(52px,6.4vw,124px)/.95 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
+.cn-hero2__h{margin:0;font:400 clamp(44px,5vw,100px)/.95 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
 .cn-hero2__h .ch{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px);animation:ch .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i) * .035s)}
 .cn-hero2__sign{display:block;width:clamp(220px,20vw,380px);aspect-ratio:1024/720;margin:-1.2em 0 -.6em 30%;background:#8FB8D2;-webkit-mask:url(assets/about-signature.png) center/contain no-repeat;mask:url(assets/about-signature.png) center/contain no-repeat;clip-path:inset(0 100% 0 0);animation:cnSign 1.6s cubic-bezier(.65,0,.35,1) .7s forwards}
 @keyframes cnSign{to{clip-path:inset(0 0 0 0)}}
@@ -2034,7 +2034,7 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-trust{display:flex;flex-wrap:wrap;gap:8px 28px;margin:8px 0 0;padding:0;list-style:none;font:500 16px/1.3 var(--sans);opacity:.75}
 .cn-trust li{display:flex;align-items:center;gap:10px}
 .cn-trust li+li::before{content:"";width:5px;height:5px;border-radius:50%;background:#8FB8D2;margin-left:-18px}
-.cn-hero2__img{position:relative;overflow:hidden}
+.cn-hero2__img{position:relative;overflow:hidden;margin:0!important;width:auto!important;justify-self:stretch;align-self:stretch;min-height:100%}
 .cn-hero2__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;scale:1.08;animation:cnZoom 2.4s cubic-bezier(.25,.1,.25,1) forwards}
 @keyframes cnZoom{to{scale:1}}
 /* who it's for: big editorial rows, a photo follows the cursor */
@@ -2274,7 +2274,6 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
   <div class="cn-hero2__txt">
     <p class="cn-k load" style="--d:.2s">Консультації дизайнера інтер’єру</p>
     <h1 class="cn-hero2__h">Індивідуальні<br>консультації</h1>
-    <span class="cn-hero2__sign" role="img" aria-label="Oksana Panteleyko"></span>
     <p class="cn-hero2__lead load" style="--d:.9s">Консультації дизайнера інтер’єру для тих, хто купує, відкриває, будує чи живе у просторі. Почніть з безкоштовної діагностичної сесії.</p>
     <div class="cn-hero2__act load" style="--d:1.05s"><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
     <ul class="cn-trust load" style="--d:1.2s"><li>18 років практики</li><li>120+ проєктів</li><li>Фіналіст SBID Awards</li></ul>
