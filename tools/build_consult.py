@@ -428,6 +428,7 @@ def page_html(t, L='en'):
 {auds}
 {designers(t, L)}
 <section class="cn cn-menusec"><h2 class="cn-h2 rv">{x['menu_h']}</h2>
+  <ul class="cn-menu">{menu}</ul>
   <div class="cn-fbox">{''.join(f'<div class="cn-fbox__i rv" style="--d:{k*.08:.2f}s"><h3>{h}</h3><p>{p}</p></div>' for k, (h, p) in enumerate(t['fmt']))}</div>
   <div class="cn-fnote rv"><p>{t['note'][0]}</p><p class="cn-fnote__acc">{t['note'][1]}</p><p>{t['note'][2]}</p></div>
   <div class="cn-cta rv">{cta_btn(L)}</div>
