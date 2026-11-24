@@ -300,6 +300,10 @@ CSS = '''
 .cn-me{padding:0;height:clamp(420px,46vw,880px);overflow:hidden}
 .cn-me img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0%}
 @media (max-width:900px){.cn-me{height:auto;aspect-ratio:4/5}.cn-me img{object-position:50% 0%}}
+/* handwritten "Interior Architect" under the hero title, like on the home page */
+.cn-hero2__title{position:relative}
+.cn-hero2 .hero__script{position:relative;width:min(100%,1040px);aspect-ratio:1383/461;margin:-8% 0 0 -4%;pointer-events:none;-webkit-mask:none;mask:none}
+@media (max-width:900px){.cn-hero2 .hero__script{width:100%;margin:-9% 0 0 -2%}}
 @media (max-width:600px){.cn.cn-me{padding-bottom:0!important}.cn-me+.abx{padding-top:56px!important}}   /* phones: photo sits close to About  */
 @media (max-width:600px){.cta2 .cta__head h2{font-size:28px!important;line-height:1.1!important}.cta2 .cta__head p{line-height:1.35!important}.cta2 .cta__card{padding-top:36px!important;gap:20px!important;justify-content:flex-start!important}}   /* phones: compact form heading */
 /* light buttons keep the home page's soft light-blue glow under the cursor (no override) */
@@ -803,12 +807,16 @@ def build(L, src, out):
         mid = mid.replace(certs_m.group(0), '')
         about = about + '\n' + certs_m.group(0)
     about = re.sub(r'<a class="lnk abx__cv rv"([^>]*)>([^<]*?)\s*<i></i></a>', r'<a class="btn btn--ink abx__cv cn-cv rv"\1>\2 <span class="plus"></span></a>', about)
+    scr = re.search(r'<div class="hero__script".*?</svg>\s*</div>', mid, re.S).group(0)
+    mid = mid.replace(scr, '')   # the handwritten "Interior Architect" moves into the consultations hero
     stub = mid.replace(about_src, '').replace(tst, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
     body = (hdr + '\n<div id="top"></div>\n' + page_html(t, L) + f'<section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>\n' + about + '\n' + tst + '\n' + page_html_after(t)
             + '<div class="pf-stub" hidden aria-hidden="true">' + stub + '</div>\n')
     s = s[:start] + body + s[end:]
+    s = s.replace('<h1 class="cn-hero2__h">', '<div class="cn-hero2__title"><h1 class="cn-hero2__h">', 1)
+    s = re.sub(r'(<h1 class="cn-hero2__h">.*?</h1>)', lambda m: m.group(1) + scr + '</div>', s, count=1, flags=re.S)
     # request forms: the consultation wording from the design's closing block
     s = s.replace('Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.', 'I’ll look into your situation and suggest a solution.')
     # the form heading becomes the offer itself, so heading and line don't repeat each other
