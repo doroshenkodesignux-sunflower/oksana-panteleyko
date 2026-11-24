@@ -2142,7 +2142,20 @@ a.header__loc{text-decoration:none;color:inherit}
   body:has(.cn-bar.on) .totop{bottom:76px!important}
 }
 </style>
-
+<style id="cn-fbox">
+/* formats and pricing: three soft containers + a note with a left rule */
+.cn-fbox{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1600px;margin:clamp(40px,4.2vw,80px) auto 0}
+.cn-fbox__i{padding:clamp(28px,2.4vw,44px) clamp(24px,2.2vw,40px);background:#EEF2F5}
+.cn-fbox__i h3{margin:0;font:600 clamp(16px,1.15vw,22px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.cn-fbox__i p{margin:16px 0 0;font:400 16px/1.5 var(--sans)}
+.cn-fnote{max-width:1600px;margin:clamp(40px,3.6vw,64px) auto 0;padding:4px 0 4px clamp(18px,1.4vw,24px);border-left:2px solid #1D1616;font:400 clamp(16px,1.15vw,22px)/1.5 var(--sans)}
+.cn-fnote p{margin:0}
+.cn-fnote p+p{margin-top:6px}
+.cn-fnote p:last-child{margin-top:clamp(16px,1.4vw,24px)}
+.cn-fnote__acc{color:#5B8DB8;font-weight:600}
+.cn-menusec .cn-cta{margin-top:clamp(48px,4.2vw,80px)}
+@media (max-width:900px){.cn-fbox{grid-template-columns:1fr;gap:8px}}
+</style>
 <style id="cn-v3">
 /* ===== v3: each audience is an editorial spread ===== */
 .cn-sp{display:block;padding-top:clamp(100px,9vw,170px);padding-bottom:clamp(100px,9vw,170px)}
@@ -2361,9 +2374,8 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
   <div class="cn-info rv"><div class="cn-info__c"><p class="cn-info__k">Today</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>You don’t have clients in Europe yet.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>You don’t know how to get noticed in a new country.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>You can’t raise your rates and keep taking projects you don’t enjoy.</span></li></ul></div><div class="cn-info__c"><p class="cn-info__k">After the consultation</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>A strong portfolio.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>A steady stream of clients.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Rates that match your experience.</span></li></ul></div><div class="cn-info__c"><p class="cn-info__k">Formats</p><ul class="cn-info__fmt"><li><b>Portfolio and resume</b><span>Session 1 — Made appealing to the European market.</span></li><li><b>Social media</b><span>Session 2 — Adapted to what European clients expect.</span></li><li><b>Finding clients</b><span>Session 3 — Who to contact, what to write, where to find projects.</span></li></ul></div><div class="cn-info__c"><p class="cn-info__k">For the 3-session package</p><p class="cn-info__price">$500</p><p class="cn-info__note">Online · Payment plan available</p><a class="btn btn--light" href="#request">Book a Free Diagnostic Session <span class="plus"></span></a></div><i class="cn-info__x" aria-hidden="true"></i></div>
 </section>
 <section class="cn cn-menusec"><h2 class="cn-h2 rv">Formats and pricing</h2>
-  <ul class="cn-menu"><li class="rv"><span class="cn-menu__t">Free Diagnostic Session</span><span class="cn-menu__d">20 minutes · online</span><span class="cn-menu__dots"></span><span class="cn-menu__p">Free</span></li><li class="rv"><span class="cn-menu__t">One-time consultation</span><span class="cn-menu__d">60–90 minutes · online or in Nice</span><span class="cn-menu__dots"></span><span class="cn-menu__p">from €250</span></li><li class="rv"><span class="cn-menu__t">Project audit</span><span class="cn-menu__d">Plans, estimate and contractors reviewed</span><span class="cn-menu__dots"></span><span class="cn-menu__p">from €600</span></li><li class="rv"><span class="cn-menu__t">Personal guidance</span><span class="cn-menu__d">From evaluation to the finished space</span><span class="cn-menu__dots"></span><span class="cn-menu__p">on request</span></li><li class="rv"><span class="cn-menu__t">Designer package</span><span class="cn-menu__d">3 strategy sessions · online</span><span class="cn-menu__dots"></span><span class="cn-menu__p">$500</span></li></ul>
-  <ul class="cn-where rv"><li>Online — WhatsApp, Zoom, Google Meet</li><li>In person — 37 Promenade des Anglais, Nice</li><li>On site — anywhere in the world</li></ul>
-  <p class="cn-menu__note rv">Prices are indicative; the final format and price are set after the free diagnostic.</p>
+  <div class="cn-fbox"><div class="cn-fbox__i rv" style="--d:0.00s"><h3>Online</h3><p>WhatsApp, Zoom, Google Meet</p></div><div class="cn-fbox__i rv" style="--d:0.08s"><h3>In person in Nice, France</h3><p>37 Promenade des Anglais, 06000 Nice</p></div><div class="cn-fbox__i rv" style="--d:0.16s"><h3>On-site visit</h3><p>Anywhere in the world. The client covers airfare.</p></div></div>
+  <div class="cn-fnote rv"><p>Every project differs in size and depth, so we set the format and price after the Diagnostic Session.</p><p class="cn-fnote__acc">The one exception is the designer package at $500.</p><p>The Diagnostic Session is free and comes with no obligation.</p></div>
   <div class="cn-cta rv"><a class="btn btn--ink" href="#request">Book a Free Diagnostic Session <span class="plus"></span></a></div>
 </section>
 <section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>

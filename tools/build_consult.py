@@ -427,9 +427,8 @@ def page_html(t, L='en'):
 {auds}
 {designers(t, L)}
 <section class="cn cn-menusec"><h2 class="cn-h2 rv">{x['menu_h']}</h2>
-  <ul class="cn-menu">{menu}</ul>
-  <ul class="cn-where rv">{''.join(f'<li>{w}</li>' for w in x['where'])}</ul>
-  <p class="cn-menu__note rv">{x['menu_note']}</p>
+  <div class="cn-fbox">{''.join(f'<div class="cn-fbox__i rv" style="--d:{k*.08:.2f}s"><h3>{h}</h3><p>{p}</p></div>' for k, (h, p) in enumerate(t['fmt']))}</div>
+  <div class="cn-fnote rv"><p>{t['note'][0]}</p><p class="cn-fnote__acc">{t['note'][1]}</p><p>{t['note'][2]}</p></div>
   <div class="cn-cta rv">{cta_btn(L)}</div>
 </section>
 '''
@@ -561,6 +560,21 @@ CSS += '''
 }
 </style>
 '''
+
+CSS += '''<style id="cn-fbox">
+/* formats and pricing: three soft containers + a note with a left rule */
+.cn-fbox{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1600px;margin:clamp(40px,4.2vw,80px) auto 0}
+.cn-fbox__i{padding:clamp(28px,2.4vw,44px) clamp(24px,2.2vw,40px);background:#EEF2F5}
+.cn-fbox__i h3{margin:0;font:600 clamp(16px,1.15vw,22px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.02em}
+.cn-fbox__i p{margin:16px 0 0;font:400 16px/1.5 var(--sans)}
+.cn-fnote{max-width:1600px;margin:clamp(40px,3.6vw,64px) auto 0;padding:4px 0 4px clamp(18px,1.4vw,24px);border-left:2px solid #1D1616;font:400 clamp(16px,1.15vw,22px)/1.5 var(--sans)}
+.cn-fnote p{margin:0}
+.cn-fnote p+p{margin-top:6px}
+.cn-fnote p:last-child{margin-top:clamp(16px,1.4vw,24px)}
+.cn-fnote__acc{color:#5B8DB8;font-weight:600}
+.cn-menusec .cn-cta{margin-top:clamp(48px,4.2vw,80px)}
+@media (max-width:900px){.cn-fbox{grid-template-columns:1fr;gap:8px}}
+</style>'''
 
 V2_JS = '''<script>
 /* v2: hero letters, cursor photo on the rows, step line drawn by scroll, sticky phone bar */
