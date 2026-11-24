@@ -1929,7 +1929,9 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-faq{display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .cn-faq .cn-h2{text-align:left}
 .cn-faq__list{display:grid;gap:8px}
-.cn-faq__i{background:#EEF2F5}
+.cn-faq__i{background:#EEF2F5;transition:background .3s ease}
+.cn-faq__i[open]{background:#D6E6F2}   /* the open question stands out in the site's light blue */
+.cn-faq__i p{overflow:hidden}
 .cn-faq__i summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 24px;cursor:pointer;font:500 clamp(16px,1.05vw,20px)/1.35 var(--sans)}
 .cn-faq__i summary::-webkit-details-marker{display:none}
 .cn-faq__i summary i{position:relative;flex:none;width:16px;height:16px}
@@ -2994,7 +2996,10 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
 /* on this page the request forms start with «Consultation» picked */
 document.querySelectorAll('.cta__chips input[value="Consultation"]').forEach(i=>{i.checked=true;i.dispatchEvent(new Event('change',{bubbles:true}))});
 /* FAQ: one answer open at a time */
-document.querySelectorAll('.cn-faq__i').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('.cn-faq__i').forEach(o=>{if(o!==d)o.open=false})}));
+(()=>{const items=[...document.querySelectorAll('.cn-faq__i')],D=280,E='cubic-bezier(.25,.1,.25,1)';
+  const close=d=>{const p=d.querySelector('p'),h=p.offsetHeight;p.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0}],{duration:D,easing:E,fill:'forwards'});setTimeout(()=>{d.open=false;p.getAnimations().forEach(x=>x.cancel())},D)};
+  const open=d=>{d.open=true;const p=d.querySelector('p'),h=p.offsetHeight;p.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:D,easing:E})};
+  items.forEach(d=>d.querySelector('summary').addEventListener('click',e=>{e.preventDefault();if(d.open){close(d)}else{items.forEach(o=>{if(o!==d&&o.open)close(o)});open(d)}}))})();
 /* anything already scrolled past is shown (safety for the shared reveal) */
 addEventListener('scroll',()=>document.querySelectorAll('.cn .rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.94)el.classList.add('in')}),{passive:true});
 </script>
