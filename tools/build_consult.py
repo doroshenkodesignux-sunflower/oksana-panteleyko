@@ -464,6 +464,7 @@ CSS += '''
 .cn-hero2__lead{margin-top:auto!important}.cn-trust{margin-top:clamp(64px,14vh,180px)!important}   /* lead + CTA a bit below the middle, trust at the bottom */
 .cn-hero2__h{margin:0;font:400 clamp(44px,5vw,100px)/.95 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
 .cn-hero2__h .ch{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px);animation:ch .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i) * .035s)}
+body.preloading .cn-hero2,body.preloading .cn-hero2 *{animation-play-state:paused!important}body.preloading .cn-hero2__txt{visibility:hidden}   /* hero starts after the preloader, like the home page */
 .cn-hero2__sign{display:block;width:clamp(220px,20vw,380px);aspect-ratio:1024/720;margin:-1.2em 0 -.6em 30%;background:#8FB8D2;-webkit-mask:url(assets/about-signature.png) center/contain no-repeat;mask:url(assets/about-signature.png) center/contain no-repeat;clip-path:inset(0 100% 0 0);animation:cnSign 1.6s cubic-bezier(.65,0,.35,1) .7s forwards}
 @keyframes cnSign{to{clip-path:inset(0 0 0 0)}}
 .cn-hero2__lead{margin:0;max-width:30em;font:400 clamp(16px,1.15vw,22px)/1.5 var(--sans)}
@@ -843,7 +844,6 @@ def build(L, src, out):
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="en"', lambda m: f'<a href="consultations.html"{m.group(2) or ""} lang="en"', s)
     keep = {'#top', '#request', '#contacts', '#about', '#testimonials', '#investors', '#business', '#homeowners', '#designers'}
     s = re.sub(r'href="(#[a-z][\w-]*)"', lambda m: m.group(0) if m.group(1) in keep else f'href="{t["home"]}{m.group(1)}"', s)
-    s = s.replace('<body class="preloading">', '<body>', 1)
     s = s.replace("if(reduce){finish();writeTitle();return}", "if(reduce||window.__noPre){if(!window.__noPre)finish();writeTitle();return}", 1)
     import json as _j
     _ts = {'en':[['Investor,\nApartment in Nice','Before buying, I booked a consultation to look at the property with Oksana. In one visit she showed me the hidden risks, the real potential and an honest renovation budget. That advice saved me money and helped me choose the right apartment.'],
