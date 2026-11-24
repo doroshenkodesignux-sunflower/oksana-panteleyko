@@ -292,9 +292,7 @@ CSS = '''
 .cn-me{padding:0;height:clamp(420px,46vw,880px);overflow:hidden}
 .cn-me img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
 @media (max-width:900px){.cn-me{height:auto;aspect-ratio:4/5}.cn-me img{object-position:50% 30%}}
-/* light buttons: the same blue fill from the cursor as the home page's buttons */
-.cn .btn--light::before{display:block!important;opacity:1;background:#84B7DB;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)}
-.cn .btn--light:hover::before{clip-path:circle(150% at var(--ex,50%) var(--ey,50%))}
+/* light buttons keep the home page's soft light-blue glow under the cursor (no override) */
 @media (max-width:900px){
   .cn{padding:80px 16px}
   .cn-hero{padding:0}
