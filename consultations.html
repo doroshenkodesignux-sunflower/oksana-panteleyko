@@ -1943,8 +1943,8 @@ a.header__loc{text-decoration:none;color:inherit}
 @media (max-width:900px){.cn-me{height:auto;aspect-ratio:4/5}.cn-me img{object-position:50% 30%}}
 /* light buttons keep the home page's soft light-blue glow under the cursor (no override) */
 /* white buttons on dark blocks: the home page's light-blue fill spreading from the cursor */
-.cn--dark .btn--light::before{display:block!important;opacity:1!important;background:#84B7DB!important;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)}
-.cn--dark .btn--light:hover::before{clip-path:circle(150% at var(--ex,50%) var(--ey,50%))}
+.cn--dark .btn--light::before,.cn-hero .btn--light::before{display:block!important;opacity:1!important;background:#84B7DB!important;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)}
+.cn--dark .btn--light:hover::before,.cn-hero .btn--light:hover::before{clip-path:circle(150% at var(--ex,50%) var(--ey,50%))}
 @media (max-width:900px){
   .cn{padding:80px 16px}
   .cn-hero{padding:0}
