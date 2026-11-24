@@ -2024,7 +2024,8 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn--dark .cn-k{color:#B0D3EB}
 /* hero: text left, portrait right */
 .cn-hero2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0!important;min-height:100vh;min-height:100svh;padding:0!important}   /* exactly half and half */
-.cn-hero2__txt{display:flex;flex-direction:column;justify-content:center;gap:24px;padding:calc(100px + 2vw) var(--pad) clamp(48px,5vw,96px)}   /* the group sits in the middle of the screen */
+.cn-hero2__txt{--air:clamp(48px,5vw,96px);display:flex;flex-direction:column;justify-content:flex-start;gap:24px;padding:calc(var(--hdrH,clamp(60px,5.2vw,100px)) + var(--air) - 14px) var(--pad) var(--air)}   /* equal air under the header and at the bottom */
+.cn-hero2__lead{margin-top:auto!important}   /* title at the top, the rest settles to the bottom */
 .cn-hero2__h{margin:0;font:400 clamp(44px,5vw,100px)/.95 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
 .cn-hero2__h .ch{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px);animation:ch .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i) * .035s)}
 .cn-hero2__sign{display:block;width:clamp(220px,20vw,380px);aspect-ratio:1024/720;margin:-1.2em 0 -.6em 30%;background:#8FB8D2;-webkit-mask:url(assets/about-signature.png) center/contain no-repeat;mask:url(assets/about-signature.png) center/contain no-repeat;clip-path:inset(0 100% 0 0);animation:cnSign 1.6s cubic-bezier(.65,0,.35,1) .7s forwards}
