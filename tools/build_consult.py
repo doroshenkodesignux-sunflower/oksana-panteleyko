@@ -28,7 +28,7 @@ T = {
   aud=[
    dict(id='investors', t='Real estate investors', s='Know if a property will pay off before you invest.',
         f=['You’re looking at a property and aren’t sure it’s worth buying;', 'You’re afraid of wasting your budget on a renovation that won’t pay off;', 'You can’t see the hidden risks, like layout, utilities, or restrictions.'],
-        g=['An assessment of the property’s potential as a hotel, restaurant, spa, or cafe;', 'A list of hidden risks;', 'A plan: what to change and what to leave alone.'],
+        g=['An assessment of the property’s commercial potential;', 'A list of hidden risks;', 'A plan: what to change and what to leave alone.'],
         r='Confidence that your money will come back, and a higher property value with minimal spending.',
         w=[('One-time consultation', 'Property review and answers.'), ('Consultation package', 'Support up to your purchase decision.'), ('Personal guidance', 'From evaluation to finished project.')],
         b='Evaluate my property'),
@@ -81,7 +81,7 @@ T = {
   aud=[
    dict(id='investors', t='Інвесторам у нерухомість', s='Дізнайтеся, чи окупиться об’єкт, ще до інвестиції.',
         f=['Ви розглядаєте об’єкт і не впевнені, що його варто купувати;', 'Боїтеся витратити бюджет на ремонт, який не окупиться;', 'Не бачите прихованих ризиків: планування, комунікацій чи обмежень.'],
-        g=['Оцінку потенціалу об’єкта як готелю, ресторану, SPA чи кафе;', 'Перелік прихованих ризиків;', 'План: що змінити, а що лишити як є.'],
+        g=['Оцінку комерційного потенціалу об’єкта;', 'Перелік прихованих ризиків;', 'План: що змінити, а що лишити як є.'],
         r='Впевненість, що гроші повернуться, і вища вартість об’єкта за мінімальних витрат.',
         w=[('Разова консультація', 'Огляд об’єкта і відповіді.'), ('Пакет консультацій', 'Супровід до рішення про купівлю.'), ('Персональний супровід', 'Від оцінки до готового проєкту.')],
         b='Оцінити мій об’єкт'),
