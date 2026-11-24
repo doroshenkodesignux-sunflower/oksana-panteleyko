@@ -1814,7 +1814,9 @@ a.header__loc{text-decoration:none;color:inherit}
 .abx__item .abx__vc span{margin:0!important;opacity:1!important;font:inherit!important}   /* the item's number style must not reach the link's label */
 .abx__item .abx__vc .roll{display:inline-grid!important}
 .abx__vc{display:inline-flex!important;width:auto!important;min-width:0!important;margin-top:16px;padding-top:0!important;background:none;border:0;cursor:pointer;color:inherit;gap:12px}
-.abx__cv.btn{align-self:end;width:100%!important;max-width:420px}
+.abx__cv.btn{grid-column:1/-1;justify-self:end;width:100%!important;max-width:420px;margin-top:clamp(16px,2vw,32px)}   /* CV on its own row under the four credentials */
+.abx__ilogo--round{height:clamp(52px,3.9vw,70px)}
+.abx__foot{align-items:start!important}   /* credentials line up at the top (logos in one row) */
 .abx__mbs{font:600 clamp(11px,.75vw,13px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.12em;opacity:.6}
 .certs{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(56px,5vw,96px) var(--pad);background:rgba(29,22,22,.94);opacity:0;transition:opacity .35s ease}
 .certs.on{opacity:1}
@@ -2309,9 +2311,10 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
   </div>
   <div class="abx__foot">
     <div class="abx__item rv" style="--d:.1s"><img class="abx__ilogo" src="assets/logo-sbid-accredited.png" alt="SBID Accredited Designer" loading="lazy"><p>SBID Accredited Design <br>Professional, London</p><button type="button" class="lnk abx__vc" data-certs="1">View certificate <i></i></button></div>
-    <div class="abx__item rv" style="--d:.35s"><img class="abx__ilogo" src="assets/sbid-finalist-2025.png" alt="SBID Awards Finalist" loading="lazy"><p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p><button type="button" class="lnk abx__vc" data-certs="0">View certificate <i></i></button></div>
+    <div class="abx__item rv" style="--d:.35s"><img class="abx__ilogo" src="assets/sbid-finalist-2025.png" alt="SBID Awards Finalist" loading="lazy"><p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p></div>
     <div class="abx__item rv" style="--d:.6s"><img class="abx__ilogo" src="assets/logo-milano-bs.png" alt="Milano Business School" loading="lazy"><p>Architect, Milano Business School — <br>HoReCa Segment.</p><button type="button" class="lnk abx__vc" data-certs="2">View certificate <i></i></button></div>
-    <a class="btn btn--dark abx__cv rv" style="--d:.9s" href="#" download>Download CV <span class="plus"></span></a>
+    <div class="abx__item rv" style="--d:.85s"><img class="abx__ilogo abx__ilogo--round" src="assets/logo-beketov.png" alt="O. M. Beketov National University of Urban Economy in Kharkiv" loading="lazy"><p>Master of Architecture, <br>O. M. Beketov University, Kharkiv</p><button type="button" class="lnk abx__vc" data-certs="0">View diploma <i></i></button></div>
+    <a class="btn btn--dark abx__cv rv" style="--d:1s" href="#" download>Download CV <span class="plus"></span></a>
   </div>
 </section>
 <div class="certs" id="certs" role="dialog" aria-modal="true" aria-label="Certificates" hidden>
