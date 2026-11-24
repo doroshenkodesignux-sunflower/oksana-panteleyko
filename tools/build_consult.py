@@ -533,7 +533,7 @@ body.preloading .cn-hero2,body.preloading .cn-hero2 *{animation-play-state:pause
 .cn-menu li{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"t dots p" "d d d";gap:6px 16px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line)}
 .cn-menu__t{grid-area:t;font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase}
 .cn-menu__dots{grid-area:dots}
-.cn-menu__p{grid-area:p;font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase;white-space:nowrap}
+.cn-menu__p{grid-area:p;font:600 clamp(28px,2.3vw,44px)/1.1 var(--serif);text-transform:uppercase;white-space:nowrap}
 .cn-menu__p small{font:400 16px/1.5 var(--sans);text-transform:none;opacity:.7;margin-right:4px}
 .cn-menu__d{grid-area:d;font:400 16px/1.5 var(--sans);opacity:.7}
 .cn-menu li:first-child .cn-menu__p{color:#5B8DB8}
@@ -570,7 +570,7 @@ body.preloading .cn-hero2,body.preloading .cn-hero2 *{animation-play-state:pause
   .cn-sessions .cn-ses__k{grid-row:auto}
   .cn-pack .btn{min-width:0;width:100%}
   .cn-menu li{grid-template-columns:1fr;grid-template-areas:"t" "p" "d";gap:6px}
-  .cn-menu__t,.cn-menu__p{font-size:clamp(20px,6vw,26px)}
+  .cn-menu__t{font-size:clamp(20px,6vw,26px)}.cn-menu__p{font-size:clamp(24px,7vw,30px)}
   .cn-menu__dots{display:none}
   .cn-where{flex-direction:column;align-items:center;gap:6px}
   .cn-bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;left:12px;right:12px;bottom:12px;z-index:70;transform:translateY(140%);transition:transform .5s var(--ease)}
