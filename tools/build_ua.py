@@ -74,7 +74,7 @@ T = [
  ('<p>Completed<br class="mbr"> projects</p>', '<p>Завершених<br class="mbr"> проєктів</p>', 1),
  ('<p>SBID Accredited Design <br>Professional, London</p>', '<p>Акредитований спеціаліст <br>SBID, Лондон</p>', 1),
  ('<p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p>', '<p>Фіналіст SBID London <br>Awards 2022 і 2025.</p>', 1),
- ('<p>Architect, Milano Business School — <br>HoReCa Segment.</p>', '<p>Архітектор, Milano Business School — <br>сегмент HoReCa.</p>', 1),
+ ('<p>Milano Business School — <br>HoReCa Segment.</p>', '<p>Milano Business School — <br>сегмент HoReCa.</p>', 1),
  ('Download CV <span class="plus"></span>', 'Завантажити CV <span class="plus"></span>', 1),
  ('>Download CV<', '>Завантажити CV<', 1),
 
