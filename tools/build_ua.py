@@ -25,6 +25,7 @@ T = [
  ('aria-label="Language"', 'aria-label="Мова"', 0),
  ('View certificate <i>', 'Дивитися сертифікат <i>', 0),
  ('View diploma <i>', 'Дивитися диплом <i>', 0),
+ ('View certificates <i>', 'Дивитися сертифікати <i>', 0),
  ('<p>Master of Architecture, <br>O. M. Beketov University, Kharkiv</p>', '<p>Магістр архітектури, <br>ХНУМГ ім. О. М. Бекетова</p>', 1),
  ('alt="O. M. Beketov National University of Urban Economy in Kharkiv"', 'alt="Харківський національний університет міського господарства імені О. М. Бекетова"', 1),
  ('aria-label="Certificates"', 'aria-label="Сертифікати"', 0),

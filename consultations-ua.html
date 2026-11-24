@@ -1814,9 +1814,20 @@ a.header__loc{text-decoration:none;color:inherit}
 .abx__item .abx__vc span{margin:0!important;opacity:1!important;font:inherit!important}   /* the item's number style must not reach the link's label */
 .abx__item .abx__vc .roll{display:inline-grid!important}
 .abx__vc{display:inline-flex!important;width:auto!important;min-width:0!important;margin-top:16px;padding-top:0!important;background:none;border:0;cursor:pointer;color:inherit;gap:12px}
-.abx__cv.btn{grid-column:1/-1;justify-self:end;width:100%!important;max-width:420px;margin-top:clamp(16px,2vw,32px)}   /* CV on its own row under the four credentials */
-.abx__ilogo--round{height:clamp(52px,3.9vw,70px)}
-.abx__foot{align-items:start!important}   /* credentials line up at the top (logos in one row) */
+.abx__cv.btn{grid-column:3/-1;justify-self:stretch;width:100%!important;max-width:none;margin-top:clamp(24px,2.6vw,48px)}   /* spans the last two columns, from the 3rd credential's edge */   /* CV on its own row under the four credentials */
+.abx__ilogo--round{height:clamp(46px,3.4vw,62px)}
+.abx__ilogo--mbs{height:clamp(26px,1.95vw,36px);margin-top:clamp(7px,.5vw,9px);margin-bottom:clamp(23px,2vw,33px)!important}   /* wide wordmark: smaller so it weighs the same */
+.abx__ilogo--fin{height:clamp(44px,3.3vw,60px)}
+/* each credential: logo row, text, then the link pinned to one baseline across all four */
+.abx__foot{align-items:stretch!important}
+.abx__item{display:flex;flex-direction:column;align-items:flex-start}
+.abx__item .abx__ilogo,.abx__item>img{flex:none}
+.abx__item p{flex:1}
+.abx__item .abx__vc{margin-top:auto;padding-top:16px!important}
+.abx__item>img{height:clamp(46px,3.4vw,62px);object-fit:contain;object-position:left center;width:auto;margin-bottom:16px}
+.abx__item>img.abx__ilogo--mbs{height:clamp(26px,1.95vw,36px)}
+.abx__item>img[data-l="sbid"]{height:clamp(38px,2.8vw,52px);margin-top:clamp(4px,.3vw,5px);margin-bottom:clamp(20px,1.6vw,26px)}   /* solid black block reads heavier: a touch smaller */
+@media (max-width:900px){.abx__cv.btn{grid-column:1/-1}}
 .abx__mbs{font:600 clamp(11px,.75vw,13px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.12em;opacity:.6}
 .certs{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(56px,5vw,96px) var(--pad);background:rgba(29,22,22,.94);opacity:0;transition:opacity .35s ease}
 .certs.on{opacity:1}
@@ -1825,7 +1836,10 @@ a.header__loc{text-decoration:none;color:inherit}
 .certs figure{margin:0;flex:0 1 auto;height:100%;max-height:78vh;display:flex;align-items:center;scroll-snap-align:center}
 .certs img{max-height:78vh;max-width:min(30vw,560px);width:auto;height:auto;box-shadow:0 20px 60px rgba(0,0,0,.45);translate:0 20px;transition:translate .6s var(--ease)}
 .certs.on img{translate:0 0}
-.certs figure{opacity:.45;transition:opacity .4s}.certs figure.cur{opacity:1}
+.certs figure[hidden]{display:none}
+.certs:not(.all) img{max-width:min(70vw,900px);max-height:84vh}   /* a single certificate, large */
+.certs.all .certs__row{flex-wrap:nowrap}
+.certs.all img{max-width:min(22vw,420px)}
 .certs__x{position:absolute;top:clamp(16px,2vw,32px);right:clamp(16px,2vw,32px);width:48px;height:48px;border:1px solid rgba(255,255,255,.4);background:none;cursor:pointer}
 .certs__x::before,.certs__x::after{content:"";position:absolute;left:12px;right:12px;top:50%;border-top:1.5px solid #fff;rotate:45deg}
 .certs__x::after{rotate:-45deg}
@@ -2310,9 +2324,9 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
     <div class="stat abx__stat rv" style="--d:.35s"><b><span data-to="120">0</span><sup>+</sup></b><p>Завершених<br class="mbr"> проєктів</p></div>
   </div>
   <div class="abx__foot">
-    <div class="abx__item rv" style="--d:.1s"><img class="abx__ilogo" src="assets/logo-sbid-accredited.png" alt="SBID Accredited Designer" loading="lazy"><p>Акредитований спеціаліст <br>SBID, Лондон</p><button type="button" class="lnk abx__vc" data-certs="1">Дивитися сертифікат <i></i></button></div>
-    <div class="abx__item rv" style="--d:.35s"><img class="abx__ilogo" src="assets/sbid-finalist-2025.png" alt="SBID Awards Finalist" loading="lazy"><p>Фіналіст SBID London <br>Awards 2022 і 2025.</p></div>
-    <div class="abx__item rv" style="--d:.6s"><img class="abx__ilogo" src="assets/logo-milano-bs.png" alt="Milano Business School" loading="lazy"><p>Архітектор, Milano Business School — <br>сегмент HoReCa.</p><button type="button" class="lnk abx__vc" data-certs="2">Дивитися сертифікат <i></i></button></div>
+    <div class="abx__item rv" style="--d:.1s"><img class="abx__ilogo" src="assets/logo-sbid-accredited.png" data-l="sbid" alt="SBID Accredited Designer" loading="lazy"><p>Акредитований спеціаліст <br>SBID, Лондон</p><button type="button" class="lnk abx__vc" data-certs="1">Дивитися сертифікат <i></i></button></div>
+    <div class="abx__item rv" style="--d:.35s"><img class="abx__ilogo abx__ilogo--fin" src="assets/sbid-finalist-2025.png" alt="SBID Awards Finalist" loading="lazy"><p>Фіналіст SBID London <br>Awards 2022 і 2025.</p><button type="button" class="lnk abx__vc" data-certs="all">Дивитися сертифікати <i></i></button></div>
+    <div class="abx__item rv" style="--d:.6s"><img class="abx__ilogo abx__ilogo--mbs" src="assets/logo-milano-bs.png" alt="Milano Business School" loading="lazy"><p>Архітектор, Milano Business School — <br>сегмент HoReCa.</p><button type="button" class="lnk abx__vc" data-certs="2">Дивитися сертифікат <i></i></button></div>
     <div class="abx__item rv" style="--d:.85s"><img class="abx__ilogo abx__ilogo--round" src="assets/logo-beketov.png" alt="Харківський національний університет міського господарства імені О. М. Бекетова" loading="lazy"><p>Магістр архітектури, <br>ХНУМГ ім. О. М. Бекетова</p><button type="button" class="lnk abx__vc" data-certs="0">Дивитися диплом <i></i></button></div>
     <a class="btn btn--dark abx__cv rv" style="--d:1s" href="#" download>Завантажити CV <span class="plus"></span></a>
   </div>
@@ -3200,7 +3214,7 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
 (()=>{const box=document.getElementById('certs');if(!box)return;const x=box.querySelector('.certs__x');
   const open=()=>{box.hidden=false;requestAnimationFrame(()=>box.classList.add('on'));document.documentElement.style.overflow='hidden';window.lenis&&lenis.stop();x.focus()};
   const close=()=>{box.classList.remove('on');document.documentElement.style.overflow='';window.lenis&&lenis.start();setTimeout(()=>box.hidden=true,350)};
-  document.addEventListener('click',e=>{const b=e.target.closest('[data-certs]');if(!b)return;open();const k=+b.dataset.certs||0,f=box.querySelectorAll('figure')[k];if(f)setTimeout(()=>f.scrollIntoView({inline:'center',block:'nearest'}),40);box.querySelectorAll('figure').forEach((g,j)=>g.classList.toggle('cur',j===k))});
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-certs]');if(!b)return;const all=b.dataset.certs==='all',k=+b.dataset.certs||0;box.classList.toggle('all',all);box.querySelectorAll('figure').forEach((g,j)=>{g.hidden=!all&&j!==k});open()});
   x.addEventListener('click',close);box.addEventListener('click',e=>{if(e.target===box||e.target.classList.contains('certs__row'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close()})})();
 </script>
