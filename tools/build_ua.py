@@ -102,7 +102,7 @@ T = [
  ("t:'Home<br>Owners'", "t:'Власники<br>житла'", 1),
  ("t:'Interior<br>Designers'", "t:'Дизайнери<br>інтер’єру'", 1),
  ("cta:'Learn more'", "cta:'Дізнатися більше'", 1),
- ("offer:['A growth strategy for your studio','3 strategy sessions']", "offer:['Стратегія зростання вашої студії','3 стратегічні сесії']", 1),
+ ("offer:['A growth strategy for designers','3 strategy sessions']", "offer:['Стратегія розвитку для дизайнерів','3 стратегічні сесії']", 1),
  ("tags:['Independent Assessment','Second Opinion','Risk Check','Design Audit','Project Review','Layout Review','Renovation Strategy']",
   "tags:['Незалежна оцінка','Друга думка','Аналіз ризиків','Дизайн-аудит','Рев’ю проєкту','Аналіз планування','Стратегія ремонту']", 1),
  ("[['hotel','Hospitality & Hotels'],['lotus','Wellness & Beauty'],['health','Healthcare Spaces'],['restaurant','Restaurants & Cafés']]",
