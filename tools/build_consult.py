@@ -164,7 +164,7 @@ def designers(t):
 
 
 def page_html(t):
-    who = ''.join(f'<a class="cn-who rv" style="--d:{i*.08:.2f}s" href="#{a}"><h3>{w}</h3><span class="cn-who__more">{t["see"]}<i>→</i></span></a>'
+    who = ''.join(f'<a class="cn-who rv" style="--d:{i*.08:.2f}s" href="#{a}"><h3>{w}</h3><span class="lnk cn-who__lnk">{t["see"]} <i></i></span></a>'
                   for i, (w, a) in enumerate(zip(t['who'], ['investors', 'business', 'homeowners', 'designers'])))
     how = ''.join(f'<div class="cn-step rv" style="--d:{i*.1:.1f}s"><span class="cn-step__n">{i+1}</span><h3>{h}</h3><p>{p}</p></div>' for i, (h, p) in enumerate(t['how']))
     fmt = ''.join(f'<div class="cn-way"><h4>{h}</h4><p>{p}</p></div>' for h, p in t['fmt'])
@@ -226,8 +226,12 @@ CSS = '''
 .cn-who{display:flex;flex-direction:column;justify-content:space-between;gap:48px;min-height:clamp(200px,13vw,250px);padding:clamp(20px,1.6vw,32px);background:#EEF2F5;color:var(--ink);text-decoration:none;transition:background .4s}
 .cn-who:hover{background:#E1EBF4}
 .cn-who h3{margin:0;font:400 clamp(24px,1.7vw,32px)/1.15 var(--serif);text-transform:uppercase}
-.cn-who__more{display:flex;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid var(--ink);font:500 16px/1 var(--sans)}
-.cn-who__more i{font-style:normal;transition:translate .4s var(--ease)}.cn-who:hover .cn-who__more i{translate:6px 0}
+/* the card's link is the site's plus-link; hovering the whole card plays its hover */
+.cn-who__lnk{align-self:stretch}
+.cn-who:hover .lnk i{transform:rotate(90deg)}
+.cn-who:hover .lnk .roll>span:first-child{transform:translateY(-110%)}
+.cn-who:hover .lnk .roll>span+span{transform:none}
+.cn-who:hover .lnk::after{animation:lineRedraw .9s cubic-bezier(.77,0,.18,1)}
 /* how */
 .cn-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:clamp(40px,4.2vw,80px);position:relative}
 .cn-steps::before{content:"";position:absolute;left:20px;right:12%;top:20px;border-top:1px dashed #8FB8D2}
