@@ -325,6 +325,256 @@ CSS = '''
 '''
 
 
+
+# ===================== v2: editorial redesign (placeholders until Oksana sends materials) =====================
+X = {
+ 'en': dict(cta='Book a free diagnostic', trust=['18 years of practice', '120+ projects', 'SBID Awards finalist'],
+            kicker='Interior consultations', reply='I reply within 24 hours · SBID Awards finalist',
+            wa='Write on WhatsApp', before='Today', after='After the consultation',
+            menu_h='Formats and pricing', menu_note='Prices are indicative; the final format and price are set after the free diagnostic.',
+            menu=[('Free Diagnostic Session', '20 minutes · online', 'Free'), ('One-time consultation', '60–90 minutes · online or in Nice', 'from €250'),
+                  ('Project audit', 'Plans, estimate and contractors reviewed', 'from €600'), ('Personal guidance', 'From evaluation to the finished space', 'on request'),
+                  ('Designer package', '3 strategy sessions · online', '$500')],
+            where=['Online — WhatsApp, Zoom, Google Meet', 'In person — 37 Promenade des Anglais, Nice', 'On site — anywhere in the world'],
+            ways_short='Formats'),
+ 'ua': dict(cta='Записатися на безкоштовну діагностику', trust=['18 років практики', '120+ проєктів', 'Фіналіст SBID Awards'],
+            kicker='Консультації дизайнера інтер’єру', reply='Відповім протягом 24 годин · Фіналіст SBID Awards',
+            wa='Написати у WhatsApp', before='Зараз', after='Після консультації',
+            menu_h='Формати та вартість', menu_note='Ціни орієнтовні; остаточний формат і вартість визначаємо після безкоштовної діагностики.',
+            menu=[('Безкоштовна діагностична сесія', '20 хвилин · онлайн', 'Безкоштовно'), ('Разова консультація', '60–90 хвилин · онлайн або в Ніцці', 'від €250'),
+                  ('Аудит проєкту', 'Перевірка планів, кошторису й підрядників', 'від €600'), ('Персональний супровід', 'Від оцінки до готового простору', 'за запитом'),
+                  ('Пакет для дизайнерів', '3 стратегічні сесії · онлайн', '$500')],
+            where=['Онлайн — WhatsApp, Zoom, Google Meet', 'Особисто — 37 Promenade des Anglais, Ніцца', 'Виїзд на об’єкт — будь-де у світі'],
+            ways_short='Формати'),
+}
+PHOTOS = {'investors': 'pf/05a.webp', 'business': 'pf/06a.webp', 'homeowners': 'renovation.webp', 'designers': 'services.jpg'}
+ARROW = '<svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>'
+
+
+def cta_btn(L, cls='btn--ink'):
+    return f'<a class="btn {cls}" href="#request">{X[L]["cta"]}{PLUS}</a>'
+
+
+def audience(n, a, t, tint, L='en'):
+    x = X[L]
+    ways = ''.join(f'<li><b>{h}</b><span>{p}</span></li>' for h, p in a['w'])
+    return f'''<section class="cn cn-aud{' cn--tint' if tint else ''}" id="{a['id']}">
+  <div class="cn-aud__side">
+    <div class="cn-aud__stick">
+      <p class="cn-aud__n rv">{n:02d}</p>
+      <h2 class="cn-aud__t rv">{a['t']}</h2>
+      <p class="cn-sub rv">{a['s']}</p>
+      <div class="cn-aud__img rv"><img src="assets/{PHOTOS[a['id']]}" alt="" loading="lazy"></div>
+    </div>
+  </div>
+  <div class="cn-aud__main">
+    <div class="cn-ba rv">
+      <div class="cn-ba__col"><p class="cn-k">{x['before']}</p>{ul(a['f'])}</div>
+      {ARROW}
+      <div class="cn-ba__col cn-ba__col--after"><p class="cn-k">{x['after']}</p>{ul(a['g'])}</div>
+    </div>
+    <p class="cn-quote rv">{a['r']}</p>
+    <div class="cn-formats rv"><p class="cn-k">{x['ways_short']}</p><ul>{ways}</ul></div>
+    <div class="cn-cta rv">{cta_btn(L)}</div>
+  </div>
+</section>'''
+
+
+def designers(t, L='en'):
+    d, x = t['des'], X[L]
+    ses = ''.join(f'<li class="rv"><span class="cn-ses__k">{k}</span><b>{h}</b><span>{p}</span></li>' for k, h, p in d['ses'])
+    return f'''<section class="cn cn-aud cn--dark" id="{d['id']}" data-dark>
+  <div class="cn-aud__side">
+    <div class="cn-aud__stick">
+      <p class="cn-aud__n rv">04</p>
+      <h2 class="cn-aud__t rv">{d['t']}</h2>
+      <p class="cn-sub rv">{d['s']}</p>
+      <div class="cn-aud__img rv"><img src="assets/{PHOTOS['designers']}" alt="" loading="lazy"></div>
+    </div>
+  </div>
+  <div class="cn-aud__main">
+    <div class="cn-ba rv">
+      <div class="cn-ba__col"><p class="cn-k">{x['before']}</p>{ul(d['f'])}</div>
+      {ARROW}
+      <div class="cn-ba__col cn-ba__col--after"><p class="cn-k">{x['after']}</p>{ul(d['r'])}</div>
+    </div>
+    <ol class="cn-sessions">{ses}</ol>
+    <div class="cn-pack rv"><div><b>{d['price']}</b><span>{d['price_s']} · {d['online']} · {d['plan']}</span></div>{cta_btn(L, 'btn--light')}</div>
+  </div>
+</section>'''
+
+
+def page_html(t, L='en'):
+    x = X[L]
+    ids = ['investors', 'business', 'homeowners', 'designers']
+    who = ''.join(f'<a class="cn-row rv" href="#{a}" data-img="assets/{PHOTOS[a]}"><span class="cn-row__n">{i+1:02d}</span><span class="cn-row__t">{w.replace("<br>", " ")}</span><span class="cn-row__go">{ARROW}</span></a>'
+                  for i, (w, a) in enumerate(zip(t['who'], ids)))
+    how = ''.join(f'<div class="cn-step rv" style="--d:{i*.1:.1f}s"><span class="cn-step__n">{i+1}</span><h3>{h}</h3><p>{p}</p></div>' for i, (h, p) in enumerate(t['how']))
+    auds = ''.join(audience(i + 1, a, t, i % 2 == 1, L) for i, a in enumerate(t['aud']))
+    menu = ''.join(f'<li class="rv"><span class="cn-menu__t">{h}</span><span class="cn-menu__d">{d}</span><span class="cn-menu__dots"></span><span class="cn-menu__p">{pr}</span></li>' for h, d, pr in x['menu'])
+    trust = ''.join(f'<li>{s}</li>' for s in x['trust'])
+    return f'''<section class="cn cn-hero2" id="top-c">
+  <div class="cn-hero2__txt">
+    <p class="cn-k load" style="--d:.2s">{x['kicker']}</p>
+    <h1 class="cn-hero2__h">{t['h1']}</h1>
+    <span class="cn-hero2__sign" role="img" aria-label="Oksana Panteleyko"></span>
+    <p class="cn-hero2__lead load" style="--d:.9s">{t['lead']}</p>
+    <div class="cn-hero2__act load" style="--d:1.05s">{cta_btn(L)}</div>
+    <ul class="cn-trust load" style="--d:1.2s">{trust}</ul>
+  </div>
+  <div class="cn-hero2__img"><img src="assets/consult-cafe.jpg" alt=""></div>
+</section>
+<section class="cn cn-whosec"><h2 class="cn-h2 rv">{t['who_h']}</h2><nav class="cn-rows">{who}</nav><img class="cn-float" alt="" aria-hidden="true"></section>
+<section class="cn cn--tint cn-howsec"><h2 class="cn-h2 rv">{t['how_h']}</h2><div class="cn-steps">{how}</div></section>
+{auds}
+{designers(t, L)}
+<section class="cn cn-menusec"><h2 class="cn-h2 rv">{x['menu_h']}</h2>
+  <ul class="cn-menu">{menu}</ul>
+  <ul class="cn-where rv">{''.join(f'<li>{w}</li>' for w in x['where'])}</ul>
+  <p class="cn-menu__note rv">{x['menu_note']}</p>
+  <div class="cn-cta rv">{cta_btn(L)}</div>
+</section>
+'''
+
+
+CSS += '''
+<style id="cn-v2">
+/* ===== v2 editorial layer ===== */
+.cn-k{margin:0;font:600 16px/1.2 var(--sans);text-transform:uppercase;letter-spacing:.06em;color:#695845}
+.cn--dark .cn-k{color:#B0D3EB}
+/* hero: text left, portrait right */
+.cn-hero2{display:grid;grid-template-columns:1.1fr .9fr;min-height:100vh;min-height:100svh;padding:0}
+.cn-hero2__txt{display:flex;flex-direction:column;justify-content:flex-end;gap:24px;padding:calc(110px + 4vw) var(--pad) clamp(48px,5vw,96px)}
+.cn-hero2__h{margin:0;font:400 clamp(52px,6.4vw,124px)/.95 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
+.cn-hero2__h .ch{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px);animation:ch .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i) * .035s)}
+.cn-hero2__sign{display:block;width:clamp(220px,20vw,380px);aspect-ratio:1024/720;margin:-1.2em 0 -.6em 30%;background:#8FB8D2;-webkit-mask:url(assets/about-signature.png) center/contain no-repeat;mask:url(assets/about-signature.png) center/contain no-repeat;clip-path:inset(0 100% 0 0);animation:cnSign 1.6s cubic-bezier(.65,0,.35,1) .7s forwards}
+@keyframes cnSign{to{clip-path:inset(0 0 0 0)}}
+.cn-hero2__lead{margin:0;max-width:30em;font:400 clamp(16px,1.15vw,22px)/1.5 var(--sans)}
+.cn-hero2__act .btn{width:auto;min-width:340px}
+.cn-trust{display:flex;flex-wrap:wrap;gap:8px 28px;margin:8px 0 0;padding:0;list-style:none;font:500 16px/1.3 var(--sans);opacity:.75}
+.cn-trust li{display:flex;align-items:center;gap:10px}
+.cn-trust li+li::before{content:"";width:5px;height:5px;border-radius:50%;background:#8FB8D2;margin-left:-18px}
+.cn-hero2__img{position:relative;overflow:hidden}
+.cn-hero2__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;scale:1.08;animation:cnZoom 2.4s cubic-bezier(.25,.1,.25,1) forwards}
+@keyframes cnZoom{to{scale:1}}
+/* who it's for: big editorial rows, a photo follows the cursor */
+.cn-rows{margin-top:clamp(40px,4.2vw,80px);border-top:1px solid var(--line)}
+.cn-row{display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:24px;padding:clamp(22px,2.2vw,40px) 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;transition:padding .5s var(--ease),color .4s}
+.cn-row__n{font:500 16px/1 var(--sans);opacity:.45}
+.cn-row__t{font:400 clamp(30px,3.4vw,64px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.01em}
+.cn-row__go .cn-arr{width:44px;transition:translate .5s var(--ease)}
+.cn-row:hover{padding-left:24px;color:#695845}
+.cn-row:hover .cn-arr{translate:10px 0}
+.cn-float{position:fixed;left:0;top:0;z-index:5;width:clamp(220px,18vw,340px);aspect-ratio:4/5;object-fit:cover;pointer-events:none;opacity:0;scale:.9;transition:opacity .35s ease,scale .45s var(--ease);will-change:transform}
+.cn-float.on{opacity:1;scale:1}
+/* how it works: the line draws as you scroll, circles light up in turn */
+.cn-steps::before{transform-origin:0 50%;transform:scaleX(var(--p,0));border-top-style:solid!important;border-top-color:#1D1616!important}
+.cn-steps::after{content:"";position:absolute;left:20px;right:var(--lineR,20px);top:20px;border-top:1px dashed #8FB8D2;z-index:-1}
+.cn-step__n{background:#fff;color:#1D1616;box-shadow:inset 0 0 0 1px #1D1616;transition:background .4s,color .4s}
+.cn-step.on .cn-step__n{background:#1D1616;color:#fff}
+/* audiences: sticky side with number + photo, content on the right */
+.cn-aud{display:grid;grid-template-columns:5fr 7fr;gap:clamp(40px,5vw,120px);align-items:start}
+.cn-aud__stick{position:sticky;top:110px}
+.cn-aud__n{margin:0;font:400 clamp(64px,7vw,140px)/.85 var(--serif);color:#8FB8D2}
+.cn--dark .cn-aud__n{color:#B0D3EB}
+.cn-aud__t{margin:16px 0 0;font:400 clamp(36px,3.4vw,64px)/1 var(--serif);text-transform:uppercase;letter-spacing:-.01em}
+.cn-aud .cn-sub{margin:16px 0 0;text-align:left}
+.cn-aud__img{margin-top:clamp(28px,2.6vw,48px);aspect-ratio:4/3;overflow:hidden}
+.cn-aud__img img{width:100%;height:100%;object-fit:cover;scale:1.06;transition:scale 2.4s cubic-bezier(.25,.1,.25,1)}
+.cn-aud__img.in img{scale:1}
+.cn-aud__main{padding-top:clamp(8px,1vw,20px)}
+.cn-ba{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(20px,2vw,40px);align-items:start}
+.cn-ba .cn-arr{width:48px;margin-top:44px;color:#8FB8D2}
+.cn-ba__col .cn-list{margin-top:20px}
+.cn-ba__col:first-child .cn-list li{opacity:.7}
+.cn-ba__col--after .cn-k{color:#1D1616}
+.cn--dark .cn-ba__col--after .cn-k{color:#fff}
+.cn-quote{margin:clamp(48px,4.2vw,80px) 0 0;padding-top:clamp(28px,2.6vw,48px);border-top:1px solid var(--line);font:400 clamp(28px,2.4vw,46px)/1.15 var(--serif);text-wrap:balance}
+.cn--dark .cn-quote{border-color:rgba(255,255,255,.2)}
+.cn-quote::before{content:"“";color:#8FB8D2}
+.cn-quote::after{content:"”";color:#8FB8D2}
+.cn-formats{margin-top:clamp(40px,3.6vw,64px)}
+.cn-formats ul{margin:16px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.cn-formats li{display:grid;grid-template-columns:minmax(180px,.8fr) 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--line);font:400 16px/1.5 var(--sans)}
+.cn-formats li b{font-weight:600;text-transform:uppercase;letter-spacing:.02em}
+.cn-formats li span{opacity:.75}
+.cn-aud .cn-cta{justify-content:flex-start}
+/* designers */
+.cn-sessions{margin:clamp(40px,3.6vw,64px) 0 0;padding:0;list-style:none;border-top:1px solid rgba(255,255,255,.2)}
+.cn-sessions li{display:grid;grid-template-columns:110px 1fr;gap:6px 24px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.2)}
+.cn-sessions .cn-ses__k{grid-row:span 2;font:500 16px/1.3 var(--sans);color:#B0D3EB}
+.cn-sessions b{font:400 clamp(24px,1.9vw,34px)/1.1 var(--serif);text-transform:uppercase}
+.cn-sessions li>span:last-child{font:400 16px/1.5 var(--sans);opacity:.8}
+.cn-pack{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:clamp(32px,3vw,56px)}
+.cn-pack b{display:block;font:400 clamp(56px,4.6vw,88px)/1 var(--serif)}
+.cn-pack span{font:400 16px/1.5 var(--sans);opacity:.8}
+.cn-pack .btn{width:auto;min-width:340px}
+/* pricing as a menu card */
+.cn-menu{max-width:1100px;margin:clamp(40px,4.2vw,80px) auto 0;padding:0;list-style:none;border-top:1px solid var(--ink)}
+.cn-menu li{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"t dots p" "d d d";gap:6px 16px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line)}
+.cn-menu__t{grid-area:t;font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase}
+.cn-menu__dots{grid-area:dots;border-bottom:1px dotted rgba(29,22,22,.35);transform:translateY(-6px)}
+.cn-menu__p{grid-area:p;font:600 clamp(16px,1.15vw,22px)/1 var(--sans);white-space:nowrap}
+.cn-menu__d{grid-area:d;font:400 16px/1.5 var(--sans);opacity:.7}
+.cn-menu li:first-child .cn-menu__p{color:#5B8DB8}
+.cn-where{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 32px;max-width:1100px;margin:32px auto 0;padding:0;list-style:none;font:400 16px/1.5 var(--sans)}
+.cn-menu__note{max-width:1100px;margin:20px auto 0;text-align:center;font:400 16px/1.5 var(--sans);opacity:.6}
+/* trust line inside the request card; sticky bar on phones */
+.cn-reply{margin:14px 0 0;font:500 14px/1.4 var(--sans);letter-spacing:.02em;color:#5B8DB8;text-align:center}
+.cn-bar{display:none}
+@media (max-width:900px){
+  .cn-hero2{grid-template-columns:minmax(0,1fr);min-height:0}
+  .cn-hero2__txt,.cn-aud__main,.cn-aud__side{min-width:0}
+  .cn .btn{white-space:normal;height:auto;min-height:56px;padding-top:14px;padding-bottom:14px;text-align:left}
+  .cn .btn .roll{line-height:1.3}
+  .cn-trust li+li::before{display:none}
+  .cn-hero2__img{order:-1;height:62svh;min-height:360px}
+  .cn-hero2__txt{padding:32px 16px 56px;gap:18px}
+  .cn-hero2__h{font-size:clamp(30px,9.6vw,56px)}
+  .cn-hero2__sign{width:min(200px,52vw);margin:-.8em 0 -.4em 30%}
+  .cn-hero2__act .btn{min-width:0;width:100%}
+  .cn-trust{gap:6px 24px}
+  .cn-row{grid-template-columns:36px 1fr auto;gap:12px}
+  .cn-row__t{font-size:clamp(22px,6.4vw,32px)}
+  .cn-row__go .cn-arr{width:28px}
+  .cn-float{display:none}
+  .cn-aud{grid-template-columns:1fr;gap:32px}
+  .cn-aud__stick{position:static}
+  .cn-aud__n{font-size:64px}
+  .cn-ba{grid-template-columns:1fr;gap:28px}
+  .cn-ba .cn-arr{margin:0;rotate:90deg;width:36px}
+  .cn-formats li{grid-template-columns:1fr;gap:4px}
+  .cn-sessions li{grid-template-columns:1fr}
+  .cn-sessions .cn-ses__k{grid-row:auto}
+  .cn-pack .btn{min-width:0;width:100%}
+  .cn-menu li{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"t p" "d d"}
+  .cn-menu__t{font-size:clamp(20px,6vw,26px)}
+  .cn-menu__dots{display:none}
+  .cn-where{flex-direction:column;align-items:center;gap:6px}
+  .cn-bar{display:grid;grid-template-columns:1fr auto;gap:8px;position:fixed;left:12px;right:12px;bottom:12px;z-index:70;transform:translateY(140%);transition:transform .5s var(--ease)}
+  .cn-bar.on{transform:none}
+  .cn-bar a{display:flex;text-align:center;line-height:1.2;align-items:center;justify-content:center;height:52px;padding:0 18px;font:600 14px/1 var(--sans);text-transform:uppercase;letter-spacing:.02em;text-decoration:none}
+  .cn-bar__go{background:#1D1616;color:#fff}
+  .cn-bar__wa{background:#fff;color:#1D1616;box-shadow:0 6px 24px rgba(29,22,22,.18)}
+  body:has(.cn-bar.on) .totop{bottom:76px!important}
+}
+</style>
+'''
+
+V2_JS = '''<script>
+/* v2: hero letters, cursor photo on the rows, step line drawn by scroll, sticky phone bar */
+(()=>{const h=document.querySelector('.cn-hero2__h');if(h){let i=0;h.innerHTML=h.innerHTML.split(/<br\\s*\\/?>/i).map(l=>l.trim().split(' ').map(w=>'<span style="white-space:nowrap">'+[...w].map(c=>`<span class="ch" style="--i:${i++}">${c}</span>`).join('')+'</span>').join(' ')).join('<br>')}
+  const fl=document.querySelector('.cn-float');let tx=0,ty=0,cx=0,cy=0,raf=0;
+  const loop=()=>{cx+=(tx-cx)*.14;cy+=(ty-cy)*.14;fl.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-55%)`;raf=requestAnimationFrame(loop)};
+  document.querySelectorAll('.cn-row').forEach(r=>{r.addEventListener('mouseenter',e=>{fl.src=r.dataset.img;fl.classList.add('on');tx=cx=e.clientX;ty=cy=e.clientY;if(!raf)raf=requestAnimationFrame(loop)});
+    r.addEventListener('mousemove',e=>{tx=e.clientX;ty=e.clientY});r.addEventListener('mouseleave',()=>{fl.classList.remove('on')})});
+  const st=document.querySelector('.cn-steps'),steps=[...document.querySelectorAll('.cn-step')],bar=document.querySelector('.cn-bar'),inv=document.getElementById('investors'),req=document.getElementById('request');
+  const onS=()=>{if(st){const r=st.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.75-r.top)/(r.height+innerHeight*.25)));st.style.setProperty('--p',p.toFixed(3));
+      const c=st.querySelectorAll('.cn-step__n'),L=r.width-parseFloat(getComputedStyle(st).getPropertyValue('--lineR')||20)-20;steps.forEach((s,k)=>{const x=c[k].getBoundingClientRect().left-r.left;s.classList.toggle('on',p*L+30>=x)})}
+    if(bar&&inv&&req){const a=inv.getBoundingClientRect().top<innerHeight,b=req.getBoundingClientRect().top<innerHeight*.6;bar.classList.toggle('on',a&&!b)}};
+  addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);onS()})();
+</script>'''
+
 def build(L, src, out):
     t = T[L]
     s = (ROOT / src).read_text(encoding='utf-8')
@@ -337,7 +587,7 @@ def build(L, src, out):
     stub = mid.replace(about, '').replace(tst, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
-    body = (hdr + '\n<div id="top"></div>\n' + page_html(t) + f'<section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>\n' + about + '\n' + tst + '\n' + page_html_after(t)
+    body = (hdr + '\n<div id="top"></div>\n' + page_html(t, L) + f'<section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>\n' + about + '\n' + tst + '\n' + page_html_after(t)
             + '<div class="pf-stub" hidden aria-hidden="true">' + stub + '</div>\n')
     s = s[:start] + body + s[end:]
     # request forms: the consultation wording from the design's closing block
@@ -375,6 +625,9 @@ addEventListener('scroll',()=>document.querySelectorAll('.cn .rv:not(.in)').forE
 </body>""", 1)
     s = re.sub(r'<title>.*?</title>', f'<title>{t["title"]}</title>', s, count=1, flags=re.S)
     s = s.replace('</head>', CSS + '</head>', 1)
+    wa = (re.search(r'https://wa\.me/\d+', s) or [None])[0] or '#contacts'
+    s = s.replace('</body>', f'<div class="cn-bar"><a class="cn-bar__go" href="#request">{X[L]["cta"]}</a><a class="cn-bar__wa" href="{wa}" target="_blank" rel="noopener">WhatsApp</a></div>\n' + V2_JS + '\n</body>', 1)
+    s = re.sub(r'(<section class="cta cta2" id="request">.*?<div class="cta__head">\s*<h2>.*?</h2>\s*<p>.*?</p>)', lambda m: m.group(1) + f'<p class="cn-reply">{X[L]["reply"]}</p>', s, count=1, flags=re.S)
     (ROOT / out).write_text(s, encoding='utf-8')
     print(out, 'written')
 
