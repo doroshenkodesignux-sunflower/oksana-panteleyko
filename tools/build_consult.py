@@ -659,8 +659,8 @@ CSS += """
 /* ===== v3: each audience is an editorial spread ===== */
 .cn-sp{display:block;padding-top:clamp(100px,9vw,170px);padding-bottom:clamp(100px,9vw,170px)}
 .cn-sp__head{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:clamp(20px,3vw,56px);margin-bottom:clamp(36px,3.6vw,64px)}
-.cn-sp__n{font:300 clamp(120px,15vw,290px)/.72 var(--serif);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px #8FB8D2}
-.cn--dark .cn-sp__n{-webkit-text-stroke-color:#B0D3EB}
+.cn-sp__n{font:300 clamp(120px,15vw,290px)/.72 var(--serif);letter-spacing:-.04em;color:rgba(29,22,22,.08);-webkit-text-stroke:0}   /* solid, faint — like the dark block */
+.cn--dark .cn-sp__n{-webkit-text-stroke:0}
 .cn-sp__t{margin:0;font:400 clamp(44px,5.4vw,104px)/.92 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
 .cn-sp__sub{margin:18px 0 0;max-width:none;font:400 clamp(16px,1.15vw,22px)/1.45 var(--sans);opacity:.75}
 @media (min-width:1101px){.cn-sp__sub{white-space:nowrap}}   /* desktop: one line  */
