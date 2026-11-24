@@ -415,7 +415,6 @@ def page_html(t, L='en'):
     trust = ''.join(f'<li>{s}</li>' for s in x['trust'])
     return f'''<section class="cn cn-hero2" id="top-c">
   <div class="cn-hero2__txt">
-    <p class="cn-k load" style="--d:.2s">{x['kicker']}</p>
     <h1 class="cn-hero2__h">{t['h1']}</h1>
     <p class="cn-hero2__lead load" style="--d:.9s">{t['lead']}</p>
     <div class="cn-hero2__act load" style="--d:1.05s">{cta_btn(L)}</div>
@@ -443,7 +442,7 @@ CSS += '''
 .cn--dark .cn-k{color:#B0D3EB}
 /* hero: text left, portrait right */
 .cn-hero2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0!important;min-height:100vh;min-height:100svh;padding:0!important}   /* exactly half and half */
-.cn-hero2__txt{display:flex;flex-direction:column;justify-content:flex-end;gap:24px;padding:calc(110px + 4vw) var(--pad) clamp(48px,5vw,96px)}
+.cn-hero2__txt{display:flex;flex-direction:column;justify-content:center;gap:24px;padding:calc(100px + 2vw) var(--pad) clamp(48px,5vw,96px)}   /* the group sits in the middle of the screen */
 .cn-hero2__h{margin:0;font:400 clamp(44px,5vw,100px)/.95 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
 .cn-hero2__h .ch{display:inline-block;opacity:0;transform:translateY(.4em);filter:blur(6px);animation:ch .9s var(--ease) forwards;animation-delay:calc(.25s + var(--i) * .035s)}
 .cn-hero2__sign{display:block;width:clamp(220px,20vw,380px);aspect-ratio:1024/720;margin:-1.2em 0 -.6em 30%;background:#8FB8D2;-webkit-mask:url(assets/about-signature.png) center/contain no-repeat;mask:url(assets/about-signature.png) center/contain no-repeat;clip-path:inset(0 100% 0 0);animation:cnSign 1.6s cubic-bezier(.65,0,.35,1) .7s forwards}
@@ -674,6 +673,82 @@ V2_JS += """<script>
   const onS=()=>{const H=innerHeight;ims.forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>H)return;const p=(r.top+r.height/2-H/2)/H;im.style.transform=`translateY(${(p*-7).toFixed(2)}%)`})};
   addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);onS()})();
 </script>"""
+
+
+# ===================== v4: description as the Alberti info grid (2×2, hairlines, blue labels) =====================
+def _info(cells):
+    return '<div class="cn-info rv">' + ''.join(f'<div class="cn-info__c"><p class="cn-info__k">{k}</p>{v}</div>' for k, v in cells) + '<i class="cn-info__x" aria-hidden="true"></i></div>'
+
+
+def _fmt_list(items):
+    return '<ul class="cn-info__fmt">' + ''.join(f'<li><b>{h}</b><span>{p}</span></li>' for h, p in items) + '</ul>'
+
+
+def audience(n, a, t, tint, L='en'):
+    x = X[L]
+    flip = ' cn-sp--flip' if n % 2 == 0 else ''
+    cells = [(x['before'], ul(a['f'])), (x['after'], ul(a['g'])),
+             (x['ways_short'], _fmt_list(a['w'])), (t['res_h'].rstrip(':'), f'<p class="cn-info__q">{a["r"]}</p>{cta_btn(L)}')]
+    return f"""<section class="cn cn-sp{flip}{' cn--tint' if tint else ''}" id="{a['id']}">
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">{n:02d}</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">{a['t']}</h2><p class="cn-sp__sub rv">{a['s']}</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/{PHOTOS[a['id']]}" alt="" loading="lazy"></div>
+  {_info(cells)}
+</section>"""
+
+
+def designers(t, L='en'):
+    d, x = t['des'], X[L]
+    ses = [(h, f'{s} — {p}') for s, h, p in d['ses']]
+    cells = [(x['before'], ul(d['f'])), (x['after'], ul(d['r'])),
+             (x['ways_short'], _fmt_list(ses)), (d['price_s'], f'<p class="cn-info__price">{d["price"]}</p><p class="cn-info__note">{d["online"]} · {d["plan"]}</p>{cta_btn(L, "btn--light")}')]
+    return f"""<section class="cn cn-sp cn--dark" id="{d['id']}" data-dark>
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">04</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">{d['t']}</h2><p class="cn-sp__sub rv">{d['s']}</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/{PHOTOS['designers']}" alt="" loading="lazy"></div>
+  {_info(cells)}
+</section>"""
+
+
+CSS += """
+<style id="cn-v4">
+.cn-info{position:relative;display:grid;grid-template-columns:1fr 1fr;margin-top:clamp(40px,4.2vw,80px);border-top:1px solid #D7E6F2;border-bottom:1px solid #D7E6F2}
+.cn--dark .cn-info{border-color:rgba(255,255,255,.18)}
+.cn-info__c{padding:clamp(36px,3.2vw,60px) clamp(24px,2.6vw,50px) clamp(48px,5vw,96px) 0}
+.cn-info__c:nth-child(2n){padding-left:clamp(24px,2.6vw,50px);padding-right:0;border-left:1px solid #D7E6F2}
+.cn-info__c:nth-child(n+3){border-top:1px solid #D7E6F2}
+.cn--dark .cn-info__c{border-color:rgba(255,255,255,.18)!important}
+.cn-info__k{margin:0 0 clamp(24px,2.1vw,40px);font:700 16px/1.2 var(--sans);text-transform:uppercase;letter-spacing:.04em;color:#5B8DB8}
+.cn--dark .cn-info__k{color:#B0D3EB}
+.cn-info .cn-list{margin:0;gap:16px}
+.cn-info .cn-list li{font-size:clamp(16px,1.25vw,24px);line-height:1.4}
+.cn-info__c:first-child .cn-list li{opacity:.7}
+.cn-info__fmt{margin:0;padding:0;list-style:none;display:grid;gap:22px}
+.cn-info__fmt b{display:block;font:400 clamp(26px,2.2vw,42px)/1.05 var(--serif);text-transform:uppercase;color:#7FB0D8}
+.cn--dark .cn-info__fmt b{color:#B0D3EB}
+.cn-info__fmt span{display:block;margin-top:6px;font:400 16px/1.5 var(--sans);opacity:.75}
+.cn-info__q{margin:0 0 clamp(28px,2.6vw,48px);font:400 clamp(16px,1.25vw,24px)/1.45 var(--sans)}
+.cn-info__price{margin:0;font:400 clamp(72px,6vw,120px)/.9 var(--serif);color:#7FB0D8}
+.cn--dark .cn-info__price{color:#B0D3EB}
+.cn-info__note{margin:12px 0 clamp(28px,2.6vw,48px);font:400 16px/1.5 var(--sans);opacity:.75}
+.cn-info__c .btn{width:100%;min-width:0;max-width:440px}
+/* the little crosses where the hairlines meet, as on the Alberti page */
+.cn-info__x,.cn-info::before,.cn-info::after{position:absolute;left:50%;width:13px;height:13px;translate:-50% -50%;pointer-events:none;background:linear-gradient(#D7E6F2,#D7E6F2) center/1px 100% no-repeat,linear-gradient(#D7E6F2,#D7E6F2) center/100% 1px no-repeat}
+.cn-info::before{content:"";top:0}.cn-info::after{content:"";top:100%}.cn-info__x{top:50%}
+.cn--dark .cn-info__x,.cn--dark .cn-info::before,.cn--dark .cn-info::after{background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)) center/1px 100% no-repeat,linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)) center/100% 1px no-repeat}
+@media (max-width:900px){
+  .cn-info{grid-template-columns:1fr}
+  .cn-info__c,.cn-info__c:nth-child(2n){padding:28px 0 36px;border-left:0}
+  .cn-info__c+.cn-info__c{border-top:1px solid #D7E6F2}
+  .cn-info__x,.cn-info::before,.cn-info::after{display:none}
+  .cn-info__c .btn{max-width:none}
+}
+</style>
+"""
 
 def build(L, src, out):
     t = T[L]
