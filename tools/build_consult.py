@@ -578,6 +578,7 @@ CSS += '''<style id="cn-fbox">
 @media (max-width:900px){.cn-fbox{grid-template-columns:1fr;gap:8px}}
 /* phones/tablets: nothing under 16px on this page */
 @media (max-width:1100px){.cn .btn,.cn .btn span,.abx p,.abx__foot span,.abx__label,.tst p,.tst__label,.cta2 p,.cta2 span,.cta2 legend,.cts p,.ftr span,.ftr small,.cn-bar a,.cn-trust,.cn-trust *{font-size:16px!important}}
+@media (max-width:600px){.cn-trust{margin-top:32px!important;padding-top:20px;border-top:1px solid rgba(29,22,22,.15);flex-direction:column;gap:10px}.cn-trust li::before,.cn-trust li+li::before{content:"";display:block!important;width:5px;height:5px;border-radius:50%;background:#8FB8D2;margin:0}}   /* phones: trust as a tidy list right under the CTA */
 </style>'''
 
 V2_JS = '''<script>
