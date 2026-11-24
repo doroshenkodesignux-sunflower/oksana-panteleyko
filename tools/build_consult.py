@@ -521,6 +521,7 @@ CSS += '''
 .cn-menu__note{max-width:1100px;margin:20px auto 0;text-align:center;font:400 16px/1.5 var(--sans);opacity:.6}
 /* trust line inside the request card; sticky bar on phones */
 .cta__head p.cn-reply{margin-top:4px!important}
+.cn-cv{width:100%!important;max-width:420px;justify-self:start}
 .cn-reply{margin:4px 0 0;font:500 14px/1.4 var(--sans);letter-spacing:.02em;color:#5B8DB8;text-align:center}
 .cn-bar{display:none}
 @media (max-width:900px){
@@ -585,7 +586,9 @@ def build(L, src, out):
     mid = s[start:end]
     about = re.search(r'<section class="abx" id="about">.*?</section>', mid, re.S).group(0)
     tst = re.search(r'<section class="tst" id="testimonials">.*?</section>', mid, re.S).group(0)
-    stub = mid.replace(about, '').replace(tst, '').replace('id="top"', 'id="top-main"')
+    about_src = about
+    about = re.sub(r'<a class="lnk abx__cv rv"([^>]*)>([^<]*?)\s*<i></i></a>', r'<a class="btn btn--ink abx__cv cn-cv rv"\1>\2 <span class="plus"></span></a>', about)
+    stub = mid.replace(about_src, '').replace(tst, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
     body = (hdr + '\n<div id="top"></div>\n' + page_html(t, L) + f'<section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>\n' + about + '\n' + tst + '\n' + page_html_after(t)
