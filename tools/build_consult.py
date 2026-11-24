@@ -336,7 +336,7 @@ def build(L, src, out):
     s = re.sub(r'href="(#[a-z][\w-]*)"', lambda m: m.group(0) if m.group(1) in keep else f'href="{t["home"]}{m.group(1)}"', s)
     s = s.replace('<body class="preloading">', '<body>', 1)
     s = s.replace("if(reduce){finish();writeTitle();return}", "if(reduce||window.__noPre){if(!window.__noPre)finish();writeTitle();return}", 1)
-    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true</script>\n<div class="pre" id="pre" style="display:none"', 1)
+    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true;window.__toTopFrom="investors"</script>\n<div class="pre" id="pre" style="display:none"', 1)
     s = s.replace('</body>', """<script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
