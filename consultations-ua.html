@@ -1883,11 +1883,11 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-who:hover .lnk::after{animation:lineRedraw .9s cubic-bezier(.77,0,.18,1)}
 /* how */
 .cn-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:clamp(40px,4.2vw,80px);position:relative}
-.cn-steps::before{content:"";position:absolute;left:20px;right:12%;top:20px;border-top:1px dashed #8FB8D2}
+.cn-steps::before{content:"";position:absolute;left:20px;right:calc((100% - 72px) / 4 - 20px);top:20px;border-top:1px dashed #8FB8D2}   /* ends at the 4th circle */
 .cn-step{position:relative}
 .cn-step__n{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#1D1616;color:#fff;font:600 16px/1 var(--sans)}
 .cn-step h3{margin:28px 0 12px;font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase}
-.cn-step p{margin:0;max-width:16em;font:400 16px/1.5 var(--sans);opacity:.8}
+.cn-step p{margin:0;max-width:16em;font:400 16px/1.5 var(--sans);opacity:.8;text-wrap:balance}
 /* audience blocks */
 .cn-photo{height:clamp(260px,28vw,540px);overflow:hidden}
 .cn-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
