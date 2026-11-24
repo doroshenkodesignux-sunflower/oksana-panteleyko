@@ -1809,7 +1809,7 @@ html,body{overflow-x:clip}
 /* header location and logo are links to the home page */
 a.header__loc{text-decoration:none;color:inherit}
 /* About: a quiet row of award logos + a link that opens the certificates full screen */
-.abx__ilogo{display:block;height:clamp(40px,3vw,54px);width:auto;margin-bottom:16px;filter:grayscale(1) contrast(1.1);opacity:.75}
+.abx__ilogo{display:block;height:clamp(40px,3vw,54px);width:auto;margin-bottom:16px;filter:grayscale(1) contrast(1.1);opacity:.55}
 .abx__item .abx__mbs{display:flex;align-items:center;height:clamp(40px,3vw,54px);margin-bottom:16px;padding-left:0;border-left:0}
 .abx__item .abx__vc span{margin:0!important;opacity:1!important;font:inherit!important}   /* the item's number style must not reach the link's label */
 .abx__item .abx__vc .roll{display:inline-grid!important}
@@ -1827,9 +1827,9 @@ a.header__loc{text-decoration:none;color:inherit}
 .abx__item .abx__ilogo,.abx__item>img{flex:none}
 .abx__item p{flex:1}
 .abx__item .abx__vc{margin-top:auto;padding-top:16px!important}
-.abx__item>img{height:clamp(46px,3.4vw,62px);object-fit:contain;object-position:left center;width:auto;margin-bottom:16px}
-.abx__item>img.abx__ilogo--mbs{height:clamp(26px,1.95vw,36px)}
-.abx__item>img[data-l="sbid"]{height:clamp(38px,2.8vw,52px);margin-top:clamp(4px,.3vw,5px);margin-bottom:clamp(20px,1.6vw,26px)}   /* solid black block reads heavier: a touch smaller */
+.abx__item>img{height:clamp(32px,2.4vw,44px);object-fit:contain;object-position:left center;width:auto;margin-bottom:16px}
+.abx__item>img.abx__ilogo--mbs{height:clamp(19px,1.4vw,26px);margin-top:clamp(6px,.5vw,9px)}
+.abx__item>img[data-l="sbid"]{height:clamp(26px,2vw,37px);margin-top:clamp(4px,.3vw,5px);margin-bottom:clamp(20px,1.6vw,26px)}   /* solid black block reads heavier: a touch smaller */
 @media (max-width:900px){.abx__cv.btn{grid-column:1/-1}}
 .abx__mbs{font:600 clamp(11px,.75vw,13px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.12em;opacity:.6}
 .certs{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(56px,5vw,96px) var(--pad);background:rgba(29,22,22,.94);opacity:0;transition:opacity .35s ease}
