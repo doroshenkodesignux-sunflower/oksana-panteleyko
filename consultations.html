@@ -2256,6 +2256,7 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-info__x,.cn-info::before,.cn-info::after{display:none!important}   /* no cross marks */
 .cn-info__c{display:flex;flex-direction:column}
 .cn-info__c .btn{margin-top:auto}   /* the button sits at the bottom of its cell */
+.cn-info__c:has(.btn){padding-bottom:clamp(24px,2.6vw,50px)!important}   /* button: same gap to the bottom as to the left edge  */
 .cn-info .cn-list li,.cn-info__fmt span,.cn-info__q,.cn-info__note{opacity:1!important;color:inherit}   /* all body text full ink, no grey */
 .cn-info__q,.cn-info__note{margin-bottom:32px!important}
 .cn-info__fmt{counter-reset:fmt}
