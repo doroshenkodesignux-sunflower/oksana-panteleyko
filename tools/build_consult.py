@@ -329,7 +329,7 @@ CSS = '''
 # ===================== v2: editorial redesign (placeholders until Oksana sends materials) =====================
 X = {
  'en': dict(cta='Book a Free Diagnostic Session', trust=['18 years of practice', '120+ projects', 'SBID Awards finalist'],
-            kicker='Interior consultations', reply='I reply within 24 hours · SBID Awards finalist',
+            kicker='Interior consultations', reply='I reply within 24 hours',
             wa='Write on WhatsApp', before='Today', after='After the consultation',
             menu_h='Formats and pricing', menu_note='Prices are indicative; the final format and price are set after the free diagnostic.',
             menu=[('Free Diagnostic Session', '20 minutes · online', 'Free'), ('One-time consultation', '60–90 minutes · online or in Nice', 'from €250'),
@@ -338,7 +338,7 @@ X = {
             where=['Online — WhatsApp, Zoom, Google Meet', 'In person — 37 Promenade des Anglais, Nice', 'On site — anywhere in the world'],
             ways_short='Formats'),
  'ua': dict(cta='Записатися на безкоштовну діагностику', trust=['18 років практики', '120+ проєктів', 'Фіналіст SBID Awards'],
-            kicker='Консультації дизайнера інтер’єру', reply='Відповім протягом 24 годин · Фіналіст SBID Awards',
+            kicker='Консультації дизайнера інтер’єру', reply='Відповім протягом 24 годин',
             wa='Написати у WhatsApp', before='Зараз', after='Після консультації',
             menu_h='Формати та вартість', menu_note='Ціни орієнтовні; остаточний формат і вартість визначаємо після безкоштовної діагностики.',
             menu=[('Безкоштовна діагностична сесія', '20 хвилин · онлайн', 'Безкоштовно'), ('Разова консультація', '60–90 хвилин · онлайн або в Ніцці', 'від €250'),
@@ -591,11 +591,11 @@ def build(L, src, out):
             + '<div class="pf-stub" hidden aria-hidden="true">' + stub + '</div>\n')
     s = s[:start] + body + s[end:]
     # request forms: the consultation wording from the design's closing block
-    s = s.replace('Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.', 'It’s free: I’ll look into your situation and suggest a solution.')
+    s = s.replace('Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.', 'I’ll look into your situation and suggest a solution.')
     # the form heading becomes the offer itself, so heading and line don't repeat each other
-    s = s.replace('<h2>Leave a Request</h2>', '<h2>Book a Diagnostic Session</h2>')
-    s = re.sub(r'<h2>Залиште заявку</h2>', '<h2>Запишіться на діагностику</h2>', s)
-    s = re.sub(r'Залиште свої контакти,[^<]*?консультацію\.', 'Це безкоштовно: я\u00a0проаналізую Вашу ситуацію і\u00a0запропоную рішення.', s)
+    s = s.replace('<h2>Leave a Request</h2>', '<h2>Book a Free Diagnostic Session</h2>')
+    s = re.sub(r'<h2>Залиште заявку</h2>', '<h2>Запишіться на безкоштовну діагностику</h2>', s)
+    s = re.sub(r'Залиште свої контакти,[^<]*?консультацію\.', 'Я\u00a0проаналізую Вашу ситуацію і\u00a0запропоную рішення.', s)
     s = re.sub(r'(<img src=")[^"]*(" alt="" id="cta2Img">)', r'\1assets/consult/room.webp\2', s, count=1)
     s = re.sub(r'<script type="module">\s*/\* Project locations:.*?</script>', '', s, count=1, flags=re.S)
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="uk"', lambda m: f'<a href="consultations-ua.html"{m.group(2) or ""} lang="uk"', s)
