@@ -1995,10 +1995,17 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-me{padding:0;height:clamp(420px,46vw,880px);overflow:hidden}
 .cn-me img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0%}
 @media (max-width:900px){.cn-me{height:auto;aspect-ratio:4/5}.cn-me img{object-position:50% 0%}}
+/* hero text composed like the home hero: centred title, script, role-free lead, CTA, trust */
+.cn-hero2__txt{align-items:center!important;justify-content:center!important;text-align:center}
+.cn-hero2__title{display:flex;flex-direction:column;align-items:center}
+.cn-hero2 .cn-hero2__lead{margin:clamp(8px,1vw,20px) auto 0!important;max-width:26em}
+.cn-hero2__act{width:min(100%,560px);margin-top:clamp(24px,2.4vw,44px)}
+.cn-hero2__act .btn{width:100%!important;min-width:0!important}
+.cn-hero2 .cn-trust{margin-top:clamp(24px,2.4vw,44px)!important;justify-content:center}
 /* handwritten "Interior Architect" under the hero title, like on the home page */
 .cn-hero2__title{position:relative}
-.cn-hero2 .hero__script{position:relative;width:min(100%,1040px);aspect-ratio:1383/461;margin:-8% 0 0 -4%;pointer-events:none;-webkit-mask:none;mask:none}
-@media (max-width:900px){.cn-hero2 .hero__script{width:100%;margin:-9% 0 0 -2%}}
+.cn-hero2 .hero__script{position:relative;width:min(100%,1040px);aspect-ratio:1383/461;margin:-8% auto 0;pointer-events:none;-webkit-mask:none;mask:none}
+@media (max-width:900px){.cn-hero2 .hero__script{width:100%;margin:-9% auto 0}}
 @media (max-width:600px){.cn.cn-me{padding-bottom:0!important}.cn-me+.abx{padding-top:56px!important}}   /* phones: photo sits close to About  */
 @media (max-width:600px){.cta2 .cta__head h2{font-size:28px!important;line-height:1.1!important}.cta2 .cta__head p{line-height:1.35!important}.cta2 .cta__card{padding-top:36px!important;gap:20px!important;justify-content:flex-start!important}}   /* phones: compact form heading */
 /* light buttons keep the home page's soft light-blue glow under the cursor (no override) */
@@ -2164,7 +2171,7 @@ a.header__loc{text-decoration:none;color:inherit}
 @media (max-width:900px){.cn-fbox{grid-template-columns:1fr;gap:8px}}
 /* phones/tablets: nothing under 16px on this page */
 @media (max-width:1100px){.cn .btn,.cn .btn span,.abx p,.abx__foot span,.abx__label,.tst p,.tst__label,.cta2 p,.cta2 span,.cta2 legend,.cts p,.ftr span,.ftr small,.cn-bar a,.cn-trust,.cn-trust *{font-size:16px!important}}
-@media (max-width:600px){.cn-trust{margin-top:32px!important;padding-top:20px;border-top:1px solid rgba(29,22,22,.15);flex-direction:column;gap:10px}.cn-trust li::before,.cn-trust li+li::before{content:"";display:block!important;width:5px;height:5px;border-radius:50%;background:#8FB8D2;margin:0}}   /* phones: trust as a tidy list right under the CTA */
+@media (max-width:600px){.cn-hero2 .cn-trust,.cn-trust{margin-top:32px!important;padding-top:20px;border-top:1px solid rgba(29,22,22,.15);flex-direction:column;align-items:center;gap:10px;width:100%}.cn-trust li::before,.cn-trust li+li::before{content:"";display:block!important;width:5px;height:5px;border-radius:50%;background:#8FB8D2;margin:0}}   /* phones: trust as a tidy list right under the CTA */
 @media (max-width:600px){.cn-h2,.cn-head{text-align:left!important}}   /* phones: section headings on the left edge */
 </style>
 <style id="cn-v3">
