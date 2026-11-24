@@ -793,7 +793,7 @@ CSS += """
 .cn-info__fmt b,.cn-info__fmt span{grid-column:2}
 /* dark block: everything white, labels bold */
 .cn--dark .cn-info__k,.cn--dark .cn-info__fmt b,.cn--dark .cn-info__price,.cn--dark .cn-info__fmt li::before,.cn--dark .cn-sp__n{color:#fff!important}
-.cn--dark .cn-sp__n{-webkit-text-stroke-color:#fff!important;color:transparent!important}
+.cn--dark .cn-sp__n{-webkit-text-stroke:0!important;color:rgba(255,255,255,.15)!important}   /* dark block: solid number, white at 15% */
 .cn--dark .cn-info__k{font-weight:700}
 @media (max-width:900px){
   .cn-info{grid-template-columns:1fr}
