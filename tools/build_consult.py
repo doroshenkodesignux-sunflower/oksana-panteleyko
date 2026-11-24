@@ -339,6 +339,9 @@ def build(L, src, out):
     body = (hdr + '\n<div id="top"></div>\n' + page_html(t) + f'<section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>\n' + about + '\n' + tst + '\n' + page_html_after(t)
             + '<div class="pf-stub" hidden aria-hidden="true">' + stub + '</div>\n')
     s = s[:start] + body + s[end:]
+    # request forms: the consultation wording from the design's closing block
+    s = s.replace('Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.', 'Tell me about your situation, and I’ll suggest the format that suits you. Book a free Diagnostic Session.')
+    s = re.sub(r'Залиште свої контакти,[^<]*?консультацію\.', 'Розкажіть про свою ситуацію\u00a0— і\u00a0я\u00a0запропоную формат, який підійде саме Вам. Запишіться на\u00a0безкоштовну діагностичну сесію.', s)
     s = re.sub(r'(<img src=")[^"]*(" alt="" id="cta2Img">)', r'\1assets/consult/room.webp\2', s, count=1)
     s = re.sub(r'<script type="module">\s*/\* Project locations:.*?</script>', '', s, count=1, flags=re.S)
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="uk"', lambda m: f'<a href="consultations-ua.html"{m.group(2) or ""} lang="uk"', s)
