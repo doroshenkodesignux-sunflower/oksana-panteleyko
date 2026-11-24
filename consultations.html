@@ -2220,6 +2220,14 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-info::before{content:"";top:0}.cn-info::after{content:"";top:100%}.cn-info__x{top:50%}
 .cn--dark .cn-info__x,.cn--dark .cn-info::before,.cn--dark .cn-info::after{background:linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)) center/1px 100% no-repeat,linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)) center/100% 1px no-repeat}
 .cn-info__x,.cn-info::before,.cn-info::after{display:none!important}   /* no cross marks */
+.cn-info__c{display:flex;flex-direction:column}
+.cn-info__c .btn{margin-top:auto}   /* the button sits at the bottom of its cell */
+.cn-info__q,.cn-info__note{margin-bottom:32px!important}
+.cn-info__fmt{counter-reset:fmt}
+.cn-info__fmt li{counter-increment:fmt;display:grid;grid-template-columns:auto 1fr;column-gap:clamp(14px,1.2vw,22px);align-items:baseline}
+.cn-info__fmt li::before{content:counter(fmt,decimal-leading-zero);grid-row:span 2;font:500 16px/1 var(--sans);color:#5B8DB8;opacity:.8}
+.cn--dark .cn-info__fmt li::before{color:#B0D3EB}
+.cn-info__fmt b,.cn-info__fmt span{grid-column:2}
 @media (max-width:900px){
   .cn-info{grid-template-columns:1fr}
   .cn-info__c,.cn-info__c:nth-child(2n){padding:28px 0 36px;border-left:0}
