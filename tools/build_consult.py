@@ -288,6 +288,9 @@ CSS = '''
 .cn-faq__i summary i::after{rotate:90deg}
 .cn-faq__i[open] summary i::after{rotate:0deg}
 .cn-faq__i p{margin:0;padding:0 24px 24px;font:400 16px/1.55 var(--sans);opacity:.85}
+/* light buttons: the same blue fill from the cursor as the home page's buttons */
+.cn .btn--light::before{display:block!important;opacity:1;background:#84B7DB;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)}
+.cn .btn--light:hover::before{clip-path:circle(150% at var(--ex,50%) var(--ey,50%))}
 @media (max-width:900px){
   .cn{padding:80px 16px}
   .cn-hero{padding:0}
@@ -337,6 +340,8 @@ def build(L, src, out):
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
   const done=()=>{clearTimeout(t);if(pre.style.display==='none'){pre.remove();return}pre.animate([{opacity:1},{opacity:0}],{duration:500,easing:'ease',fill:'forwards'}).onfinish=()=>pre.remove()};
   document.readyState==='complete'?done():addEventListener('load',done)})();
+/* on this page the request forms start with «Consultation» picked */
+document.querySelectorAll('.cta__chips input[value="Consultation"]').forEach(i=>{i.checked=true;i.dispatchEvent(new Event('change',{bubbles:true}))});
 /* FAQ: one answer open at a time */
 document.querySelectorAll('.cn-faq__i').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('.cn-faq__i').forEach(o=>{if(o!==d)o.open=false})}));
 /* anything already scrolled past is shown (safety for the shared reveal) */
