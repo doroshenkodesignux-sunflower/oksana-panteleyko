@@ -340,8 +340,8 @@ def build(L, src, out):
             + '<div class="pf-stub" hidden aria-hidden="true">' + stub + '</div>\n')
     s = s[:start] + body + s[end:]
     # request forms: the consultation wording from the design's closing block
-    s = s.replace('Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.', 'Book a free Diagnostic Session — we’ll find the format that suits you.')
-    s = re.sub(r'Залиште свої контакти,[^<]*?консультацію\.', 'Запишіться на\u00a0безкоштовну діагностичну сесію\u00a0— підберемо формат саме для\u00a0Вас.', s)
+    s = s.replace('Leave your contact details and I’ll get back to you shortly to discuss your project or a consultation.', 'Book a free Diagnostic Session — I’ll look into your situation and suggest a solution.')
+    s = re.sub(r'Залиште свої контакти,[^<]*?консультацію\.', 'Запишіться на\u00a0безкоштовну діагностичну сесію\u00a0— я\u00a0проаналізую Вашу ситуацію і\u00a0запропоную рішення.', s)
     s = re.sub(r'(<img src=")[^"]*(" alt="" id="cta2Img">)', r'\1assets/consult/room.webp\2', s, count=1)
     s = re.sub(r'<script type="module">\s*/\* Project locations:.*?</script>', '', s, count=1, flags=re.S)
     s = re.sub(r'<a href="(ua\.html|index\.html)"( class="lang__on")? lang="uk"', lambda m: f'<a href="consultations-ua.html"{m.group(2) or ""} lang="uk"', s)
