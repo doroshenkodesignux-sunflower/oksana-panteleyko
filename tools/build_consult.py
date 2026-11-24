@@ -857,10 +857,6 @@ def build(L, src, out):
     _tj = _j.dumps(_ts['uk' if L=='uk' else 'en'], ensure_ascii=False)
     s = s.replace('<div class="pre" id="pre"', '<script>window.__tstSet='+_tj+';window.__toTopFrom="investors"</script>\n<div class="pre" id="pre"', 1)
     s = s.replace('</body>', """<script>
-(()=>{const pre=document.getElementById('pre');if(!pre)return;
-  const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
-  const done=()=>{clearTimeout(t);if(pre.style.display==='none'){pre.remove();return}pre.animate([{opacity:1},{opacity:0}],{duration:500,easing:'ease',fill:'forwards'}).onfinish=()=>pre.remove()};
-  document.readyState==='complete'?done():addEventListener('load',done)})();
 /* on this page the request forms start with «Consultation» picked */
 document.querySelectorAll('.cta__chips input[value="Consultation"]').forEach(i=>{i.checked=true;i.dispatchEvent(new Event('change',{bubbles:true}))});
 /* How it works: the dashed line stops at the centre of the last circle */
