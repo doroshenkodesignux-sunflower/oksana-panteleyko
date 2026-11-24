@@ -288,6 +288,10 @@ CSS = '''
 .cn-faq__i summary i::after{rotate:90deg}
 .cn-faq__i[open] summary i::after{rotate:0deg}
 .cn-faq__i p{margin:0;padding:0 24px 24px;font:400 16px/1.55 var(--sans);opacity:.85}
+/* photo of Oksana right before the About block */
+.cn-me{padding:0;height:clamp(420px,46vw,880px);overflow:hidden}
+.cn-me img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+@media (max-width:900px){.cn-me{height:auto;aspect-ratio:4/5}.cn-me img{object-position:50% 30%}}
 /* light buttons: the same blue fill from the cursor as the home page's buttons */
 .cn .btn--light::before{display:block!important;opacity:1;background:#84B7DB;clip-path:circle(0% at var(--ex,50%) var(--ey,50%));transition:clip-path .7s cubic-bezier(.65,0,.35,1)}
 .cn .btn--light:hover::before{clip-path:circle(150% at var(--ex,50%) var(--ey,50%))}
@@ -323,7 +327,7 @@ def build(L, src, out):
     stub = mid.replace(about, '').replace(tst, '').replace('id="top"', 'id="top-main"')
     stub = re.sub(r'(<img\b[^>]*?)\ssrc="[^"]*"', r'\1', stub)
     stub = re.sub(r'<header class="header">.*?</header>', '', stub, flags=re.S)
-    body = (hdr + '\n<div id="top"></div>\n' + page_html(t) + about + '\n' + tst + '\n' + page_html_after(t)
+    body = (hdr + '\n<div id="top"></div>\n' + page_html(t) + f'<section class="cn cn-me" aria-hidden="true"><img src="assets/consult/oksana-sbid.webp" alt="" loading="lazy"></section>\n' + about + '\n' + tst + '\n' + page_html_after(t)
             + '<div class="pf-stub" hidden aria-hidden="true">' + stub + '</div>\n')
     s = s[:start] + body + s[end:]
     s = re.sub(r'(<img src=")[^"]*(" alt="" id="cta2Img">)', r'\1assets/consult/room.webp\2', s, count=1)
