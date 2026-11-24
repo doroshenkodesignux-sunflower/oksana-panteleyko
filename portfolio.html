@@ -1809,12 +1809,13 @@ html,body{overflow-x:clip}
 /* header location and logo are links to the home page */
 a.header__loc{text-decoration:none;color:inherit}
 /* About: a quiet row of award logos + a link that opens the certificates full screen */
-.abx__proof{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:clamp(40px,3.6vw,64px);padding-top:clamp(24px,2vw,36px);border-top:1px solid var(--line)}
-.abx__logos{display:flex;align-items:center;gap:clamp(20px,2.2vw,40px)}
-.abx__logos img{height:clamp(44px,3.4vw,60px);width:auto;filter:grayscale(1) contrast(1.1);opacity:.7;transition:opacity .4s,filter .4s}
-.abx__logos img:hover{filter:none;opacity:1}
-.abx__mbs{font:600 clamp(11px,.75vw,13px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.12em;opacity:.6;padding-left:clamp(20px,2.2vw,40px);border-left:1px solid var(--line)}
-.abx__certs{background:none;border:0;cursor:pointer;color:inherit;width:auto!important;min-width:240px}
+.abx__ilogo{display:block;height:clamp(40px,3vw,54px);width:auto;margin-bottom:16px;filter:grayscale(1) contrast(1.1);opacity:.75}
+.abx__item .abx__mbs{display:flex;align-items:center;height:clamp(40px,3vw,54px);margin-bottom:16px;padding-left:0;border-left:0}
+.abx__item .abx__vc span{margin:0!important;opacity:1!important;font:inherit!important}   /* the item's number style must not reach the link's label */
+.abx__item .abx__vc .roll{display:inline-grid!important}
+.abx__vc{display:inline-flex!important;width:auto!important;min-width:0!important;margin-top:16px;padding-top:0!important;background:none;border:0;cursor:pointer;color:inherit;gap:12px}
+.abx__cv.btn{align-self:end;width:100%!important;max-width:420px}
+.abx__mbs{font:600 clamp(11px,.75vw,13px)/1.25 var(--sans);text-transform:uppercase;letter-spacing:.12em;opacity:.6}
 .certs{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(56px,5vw,96px) var(--pad);background:rgba(29,22,22,.94);opacity:0;transition:opacity .35s ease}
 .certs.on{opacity:1}
 .certs[hidden]{display:none}
@@ -1822,12 +1823,12 @@ a.header__loc{text-decoration:none;color:inherit}
 .certs figure{margin:0;flex:0 1 auto;height:100%;max-height:78vh;display:flex;align-items:center;scroll-snap-align:center}
 .certs img{max-height:78vh;max-width:min(30vw,560px);width:auto;height:auto;box-shadow:0 20px 60px rgba(0,0,0,.45);translate:0 20px;transition:translate .6s var(--ease)}
 .certs.on img{translate:0 0}
+.certs figure{opacity:.45;transition:opacity .4s}.certs figure.cur{opacity:1}
 .certs__x{position:absolute;top:clamp(16px,2vw,32px);right:clamp(16px,2vw,32px);width:48px;height:48px;border:1px solid rgba(255,255,255,.4);background:none;cursor:pointer}
 .certs__x::before,.certs__x::after{content:"";position:absolute;left:12px;right:12px;top:50%;border-top:1.5px solid #fff;rotate:45deg}
 .certs__x::after{rotate:-45deg}
 @media (max-width:900px){
-  .abx__proof{flex-direction:column;align-items:flex-start}
-  .abx__certs{min-width:0;width:100%!important}
+  .abx__cv.btn{max-width:none}
   .certs{padding:72px 0 24px}
   .certs__row{justify-content:flex-start;padding:0 16px}
   .certs figure{flex:0 0 82vw;justify-content:center}
@@ -2282,18 +2283,10 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     <div class="stat abx__stat rv" style="--d:.35s"><b><span data-to="120">0</span><sup>+</sup></b><p>Completed<br class="mbr"> projects</p></div>
   </div>
   <div class="abx__foot">
-    <div class="abx__item rv" style="--d:.1s"><span>02</span><p>SBID Accredited Design <br>Professional, London</p></div>
-    <div class="abx__item rv" style="--d:.35s"><span>01</span><p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p></div>
-    <div class="abx__item rv" style="--d:.6s"><span>03</span><p>Milano Business School — <br>HoReCa Segment.</p></div>
-    <a class="lnk abx__cv rv" style="--d:.9s" href="#" download>Download CV <i></i></a>
-  </div>
-  <div class="abx__proof rv" style="--d:.2s">
-    <div class="abx__logos" aria-label="Recognised by">
-      <img alt="SBID International Design Awards 2022 Finalist" loading="lazy">
-      <img alt="SBID International Design Awards 2025 Finalist" loading="lazy">
-      <span class="abx__mbs">Milano<br>Business School</span>
-    </div>
-    <button type="button" class="lnk abx__certs" data-certs>View certificates <i></i></button>
+    <div class="abx__item rv" style="--d:.1s"><img class="abx__ilogo" alt="SBID" loading="lazy"><p>SBID Accredited Design <br>Professional, London</p><button type="button" class="lnk abx__vc" data-certs="1">View certificate <i></i></button></div>
+    <div class="abx__item rv" style="--d:.35s"><img class="abx__ilogo" alt="SBID Awards Finalist" loading="lazy"><p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p><button type="button" class="lnk abx__vc" data-certs="0">View certificate <i></i></button></div>
+    <div class="abx__item rv" style="--d:.6s"><span class="abx__mbs">Milano<br>Business School</span><p>Architect, Milano Business School — <br>HoReCa Segment.</p><button type="button" class="lnk abx__vc" data-certs="2">View certificate <i></i></button></div>
+    <a class="btn btn--dark abx__cv rv" style="--d:.9s" href="#" download>Download CV <span class="plus"></span></a>
   </div>
 </section>
 <div class="certs" id="certs" role="dialog" aria-modal="true" aria-label="Certificates" hidden>
@@ -3030,7 +3023,7 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
 (()=>{const box=document.getElementById('certs');if(!box)return;const x=box.querySelector('.certs__x');
   const open=()=>{box.hidden=false;requestAnimationFrame(()=>box.classList.add('on'));document.documentElement.style.overflow='hidden';window.lenis&&lenis.stop();x.focus()};
   const close=()=>{box.classList.remove('on');document.documentElement.style.overflow='';window.lenis&&lenis.start();setTimeout(()=>box.hidden=true,350)};
-  document.addEventListener('click',e=>{if(e.target.closest('[data-certs]'))open()});
+  document.addEventListener('click',e=>{const b=e.target.closest('[data-certs]');if(!b)return;open();const k=+b.dataset.certs||0,f=box.querySelectorAll('figure')[k];if(f)setTimeout(()=>f.scrollIntoView({inline:'center',block:'nearest'}),40);box.querySelectorAll('figure').forEach((g,j)=>g.classList.toggle('cur',j===k))});
   x.addEventListener('click',close);box.addEventListener('click',e=>{if(e.target===box||e.target.classList.contains('certs__row'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close()})})();
 </script>

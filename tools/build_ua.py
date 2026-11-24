@@ -23,8 +23,7 @@ T = [
  ('<a href="ua.html" class="lang__on" lang="uk">UA</a><i></i><a href="index.html" lang="en" aria-current="true">EN</a>',
   '<a href="ua.html" lang="uk" aria-current="true">UA</a><i></i><a href="index.html" class="lang__on" lang="en">EN</a>', 0),
  ('aria-label="Language"', 'aria-label="Мова"', 0),
- ('View certificates <i>', 'Дивитися сертифікати <i>', 0),
- ('aria-label="Recognised by"', 'aria-label="Визнання"', 0),
+ ('View certificate <i>', 'Дивитися сертифікат <i>', 0),
  ('aria-label="Certificates"', 'aria-label="Сертифікати"', 0),
  ('<span class="abx__mbs">Milano<br>Business School</span>', '<span class="abx__mbs">Milano<br>Business School</span>', 0),
  ('href="index.html" data-home', 'href="ua.html" data-home', 0),
@@ -72,8 +71,8 @@ T = [
  ('<p>Completed<br class="mbr"> projects</p>', '<p>Завершених<br class="mbr"> проєктів</p>', 1),
  ('<p>SBID Accredited Design <br>Professional, London</p>', '<p>Акредитований спеціаліст <br>SBID, Лондон</p>', 1),
  ('<p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p>', '<p>Фіналіст SBID London <br>Awards 2022 і 2025.</p>', 1),
- ('<p>Milano Business School — <br>HoReCa Segment.</p>', '<p>Milano Business School — <br>сегмент HoReCa.</p>', 1),
- ('Download CV <i></i>', 'Завантажити CV <i></i>', 1),
+ ('<p>Architect, Milano Business School — <br>HoReCa Segment.</p>', '<p>Архітектор, Milano Business School — <br>сегмент HoReCa.</p>', 1),
+ ('Download CV <span class="plus"></span>', 'Завантажити CV <span class="plus"></span>', 1),
  ('>Download CV<', '>Завантажити CV<', 1),
 
  # ---------- projects ----------
