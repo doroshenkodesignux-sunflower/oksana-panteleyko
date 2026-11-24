@@ -2156,6 +2156,8 @@ a.header__loc{text-decoration:none;color:inherit}
 .cn-fnote__acc{color:#5B8DB8;font-weight:600}
 .cn-menusec .cn-cta{margin-top:clamp(48px,4.2vw,80px)}
 @media (max-width:900px){.cn-fbox{grid-template-columns:1fr;gap:8px}}
+/* phones/tablets: nothing under 16px on this page */
+@media (max-width:1100px){.cn .btn,.cn .btn span,.abx p,.abx span,.abx__label,.tst p,.tst__label,.cta2 p,.cta2 span,.cta2 legend,.cts p,.ftr span,.ftr small,.cn-bar a,.cn-trust,.cn-trust *{font-size:16px!important}}
 </style>
 <style id="cn-v3">
 /* ===== v3: each audience is an editorial spread ===== */
@@ -3305,7 +3307,7 @@ document.querySelectorAll('.cta__chips input[value="Consultation"]').forEach(i=>
 /* anything already scrolled past is shown (safety for the shared reveal) */
 addEventListener('scroll',()=>document.querySelectorAll('.cn .rv:not(.in)').forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*.94)el.classList.add('in')}),{passive:true});
 </script>
-<div class="cn-bar"><a class="cn-bar__go" href="#request">Записатися на безкоштовну діагностику</a><a class="cn-bar__wa" href="https://wa.me/11234567890" target="_blank" rel="noopener">WhatsApp</a></div>
+<div class="cn-bar"><a class="cn-bar__go" href="#request">Безкоштовна діагностика</a><a class="cn-bar__wa" href="https://wa.me/11234567890" target="_blank" rel="noopener">WhatsApp</a></div>
 <script>
 /* v2: hero letters, cursor photo on the rows, step line drawn by scroll, sticky phone bar */
 (()=>{const h=document.querySelector('.cn-hero2__h');if(h){let i=0;h.innerHTML=h.innerHTML.split(/<br\s*\/?>/i).map(l=>l.trim().split(' ').map(w=>'<span style="white-space:nowrap">'+[...w].map(c=>`<span class="ch" style="--i:${i++}">${c}</span>`).join('')+'</span>').join(' ')).join('<br>')}

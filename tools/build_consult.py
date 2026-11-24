@@ -576,6 +576,8 @@ CSS += '''<style id="cn-fbox">
 .cn-fnote__acc{color:#5B8DB8;font-weight:600}
 .cn-menusec .cn-cta{margin-top:clamp(48px,4.2vw,80px)}
 @media (max-width:900px){.cn-fbox{grid-template-columns:1fr;gap:8px}}
+/* phones/tablets: nothing under 16px on this page */
+@media (max-width:1100px){.cn .btn,.cn .btn span,.abx p,.abx span,.abx__label,.tst p,.tst__label,.cta2 p,.cta2 span,.cta2 legend,.cts p,.ftr span,.ftr small,.cn-bar a,.cn-trust,.cn-trust *{font-size:16px!important}}
 </style>'''
 
 V2_JS = '''<script>
@@ -848,7 +850,7 @@ addEventListener('scroll',()=>document.querySelectorAll('.cn .rv:not(.in)').forE
     s = re.sub(r'<title>.*?</title>', f'<title>{t["title"]}</title>', s, count=1, flags=re.S)
     s = s.replace('</head>', CSS + '</head>', 1)
     wa = (re.search(r'https://wa\.me/\d+', s) or [None])[0] or '#contacts'
-    s = s.replace('</body>', f'<div class="cn-bar"><a class="cn-bar__go" href="#request">{X[L]["cta"]}</a><a class="cn-bar__wa" href="{wa}" target="_blank" rel="noopener">WhatsApp</a></div>\n' + V2_JS + '\n</body>', 1)
+    s = s.replace('</body>', f'<div class="cn-bar"><a class="cn-bar__go" href="#request">{"Безкоштовна діагностика" if L!="en" else "Free diagnostic"}</a><a class="cn-bar__wa" href="{wa}" target="_blank" rel="noopener">WhatsApp</a></div>\n' + V2_JS + '\n</body>', 1)
     s = re.sub(r'(<section class="cta cta2" id="request">.*?<div class="cta__head">\s*<h2>.*?</h2>\s*<p>.*?</p>)', lambda m: m.group(1) + f'<p class="cn-reply">{X[L]["reply"]}</p>', s, count=1, flags=re.S)
     (ROOT / out).write_text(s, encoding='utf-8')
     print(out, 'written')
