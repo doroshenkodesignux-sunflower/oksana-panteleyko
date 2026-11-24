@@ -577,6 +577,105 @@ V2_JS = '''<script>
   addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);onS()})();
 </script>'''
 
+
+# ===================== v3: audience blocks as editorial spreads =====================
+def audience(n, a, t, tint, L='en'):
+    x = X[L]
+    ways = ''.join(f'<li class="rv" style="--d:{k*.08:.2f}s"><b>{h}</b><span>{p}</span></li>' for k, (h, p) in enumerate(a['w']))
+    flip = ' cn-sp--flip' if n % 2 == 0 else ''
+    return f"""<section class="cn cn-sp{flip}{' cn--tint' if tint else ''}" id="{a['id']}">
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">{n:02d}</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">{a['t']}</h2><p class="cn-sp__sub rv">{a['s']}</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/{PHOTOS[a['id']]}" alt="" loading="lazy"></div>
+  <div class="cn-sp__grid">
+    <div class="cn-sp__col rv"><p class="cn-k">{x['before']}</p>{ul(a['f'])}</div>
+    <div class="cn-sp__col cn-sp__col--after rv" style="--d:.1s"><p class="cn-k">{x['after']}</p>{ul(a['g'])}</div>
+    <div class="cn-sp__res rv" style="--d:.2s"><p class="cn-k">{t['res_h'].rstrip(':')}</p><p class="cn-sp__q">{a['r']}</p>{cta_btn(L)}</div>
+  </div>
+  <div class="cn-sp__ways"><p class="cn-k rv">{x['ways_short']}</p><ol>{ways}</ol></div>
+</section>"""
+
+
+def designers(t, L='en'):
+    d, x = t['des'], X[L]
+    ses = ''.join(f'<li class="rv" style="--d:{k*.08:.2f}s"><b>{h}</b><span>{p}</span><em>{s}</em></li>' for k, (s, h, p) in enumerate(d['ses']))
+    return f"""<section class="cn cn-sp cn--dark" id="{d['id']}" data-dark>
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">04</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">{d['t']}</h2><p class="cn-sp__sub rv">{d['s']}</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/{PHOTOS['designers']}" alt="" loading="lazy"></div>
+  <div class="cn-sp__grid">
+    <div class="cn-sp__col rv"><p class="cn-k">{x['before']}</p>{ul(d['f'])}</div>
+    <div class="cn-sp__col cn-sp__col--after rv" style="--d:.1s"><p class="cn-k">{x['after']}</p>{ul(d['r'])}</div>
+    <div class="cn-sp__res rv" style="--d:.2s"><p class="cn-k">{d['price_s']}</p><p class="cn-sp__price">{d['price']}</p><p class="cn-sp__pnote">{d['online']} · {d['plan']}</p>{cta_btn(L, 'btn--light')}</div>
+  </div>
+  <div class="cn-sp__ways"><ol>{ses}</ol></div>
+</section>"""
+
+
+CSS += """
+<style id="cn-v3">
+/* ===== v3: each audience is an editorial spread ===== */
+.cn-sp{display:block;padding-top:clamp(100px,9vw,170px);padding-bottom:clamp(100px,9vw,170px)}
+.cn-sp__head{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:clamp(20px,3vw,56px);margin-bottom:clamp(36px,3.6vw,64px)}
+.cn-sp__n{font:300 clamp(120px,15vw,290px)/.72 var(--serif);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px #8FB8D2}
+.cn--dark .cn-sp__n{-webkit-text-stroke-color:#B0D3EB}
+.cn-sp__t{margin:0;font:400 clamp(44px,5.4vw,104px)/.92 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
+.cn-sp__sub{margin:18px 0 0;max-width:30em;font:400 clamp(16px,1.15vw,22px)/1.45 var(--sans);opacity:.75}
+.cn-sp--flip .cn-sp__head{grid-template-columns:1fr auto;text-align:right}
+.cn-sp--flip .cn-sp__n{order:2}
+.cn-sp--flip .cn-sp__sub{margin-left:auto}
+.cn-sp__img{position:relative;aspect-ratio:21/9;overflow:hidden;clip-path:inset(0 0 0 0)}
+.cn-sp__img img{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;will-change:transform}
+.cn-sp__grid{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:0;margin-top:clamp(40px,4.2vw,80px);border-top:1px solid var(--line)}
+.cn--dark .cn-sp__grid,.cn--dark .cn-sp__ways li,.cn--dark .cn-sp__ways ol{border-color:rgba(255,255,255,.2)!important}
+.cn-sp__col,.cn-sp__res{padding:clamp(28px,2.6vw,48px) clamp(20px,2.2vw,44px) 0}
+.cn-sp__col:first-child{padding-left:0}
+.cn-sp__col+.cn-sp__col,.cn-sp__res{border-left:1px solid var(--line)}
+.cn--dark .cn-sp__col+.cn-sp__col,.cn--dark .cn-sp__res{border-color:rgba(255,255,255,.2)}
+.cn-sp__col:first-child .cn-list li{opacity:.65}
+.cn-sp__col--after .cn-k{color:#1D1616}
+.cn--dark .cn-sp__col--after .cn-k{color:#fff}
+.cn-sp__res{display:flex;flex-direction:column;gap:20px;padding-right:0}
+.cn-sp__q{margin:0;font:400 clamp(26px,2.1vw,40px)/1.15 var(--serif);text-wrap:balance}
+.cn-sp__res .btn{margin-top:auto;width:100%;min-width:0}
+.cn-sp__price{margin:0;font:400 clamp(72px,6vw,120px)/.9 var(--serif)}
+.cn-sp__pnote{margin:0;font:400 16px/1.5 var(--sans);opacity:.75}
+.cn-sp__ways{margin-top:clamp(56px,5vw,96px)}
+.cn-sp__ways ol{display:grid;grid-template-columns:repeat(3,1fr);margin:16px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.cn-sp__ways li{display:flex;flex-direction:column;gap:10px;padding:24px clamp(16px,2vw,36px) 0 0;counter-increment:w}
+.cn-sp__ways li+li{padding-left:clamp(16px,2vw,36px);border-left:1px solid var(--line)}
+.cn-sp__ways b{font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase}
+.cn-sp__ways span{font:400 16px/1.5 var(--sans);opacity:.75}
+.cn-sp__ways em{order:-1;font:600 16px/1 var(--sans);font-style:normal;color:#B0D3EB}
+@media (max-width:900px){
+  .cn-sp{padding-top:80px;padding-bottom:80px}
+  .cn-sp__head,.cn-sp--flip .cn-sp__head{grid-template-columns:1fr;text-align:left;gap:8px}
+  .cn-sp--flip .cn-sp__n{order:0}
+  .cn-sp__n{font-size:110px}
+  .cn-sp__t{font-size:clamp(34px,10vw,52px)}
+  .cn-sp--flip .cn-sp__sub{margin-left:0}
+  .cn-sp__img{aspect-ratio:4/3}
+  .cn-sp__grid{grid-template-columns:1fr}
+  .cn-sp__col,.cn-sp__res{padding:28px 0 0;border-left:0!important}
+  .cn-sp__col+.cn-sp__col,.cn-sp__res{margin-top:28px;border-top:1px solid var(--line)}
+  .cn--dark .cn-sp__col+.cn-sp__col,.cn--dark .cn-sp__res{border-color:rgba(255,255,255,.2)}
+  .cn-sp__ways ol{grid-template-columns:1fr}
+  .cn-sp__ways li,.cn-sp__ways li+li{padding:20px 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+</style>
+"""
+
+V2_JS += """<script>
+/* v3: the spread photos drift slightly against the scroll */
+(()=>{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const ims=[...document.querySelectorAll('.cn-sp__img img')];
+  const onS=()=>{const H=innerHeight;ims.forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>H)return;const p=(r.top+r.height/2-H/2)/H;im.style.transform=`translateY(${(p*-7).toFixed(2)}%)`})};
+  addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);onS()})();
+</script>"""
+
 def build(L, src, out):
     t = T[L]
     s = (ROOT / src).read_text(encoding='utf-8')

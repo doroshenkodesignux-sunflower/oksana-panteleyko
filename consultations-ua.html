@@ -2141,6 +2141,57 @@ a.header__loc{text-decoration:none;color:inherit}
   body:has(.cn-bar.on) .totop{bottom:76px!important}
 }
 </style>
+
+<style id="cn-v3">
+/* ===== v3: each audience is an editorial spread ===== */
+.cn-sp{display:block;padding-top:clamp(100px,9vw,170px);padding-bottom:clamp(100px,9vw,170px)}
+.cn-sp__head{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:clamp(20px,3vw,56px);margin-bottom:clamp(36px,3.6vw,64px)}
+.cn-sp__n{font:300 clamp(120px,15vw,290px)/.72 var(--serif);letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px #8FB8D2}
+.cn--dark .cn-sp__n{-webkit-text-stroke-color:#B0D3EB}
+.cn-sp__t{margin:0;font:400 clamp(44px,5.4vw,104px)/.92 var(--serif);text-transform:uppercase;letter-spacing:-.02em}
+.cn-sp__sub{margin:18px 0 0;max-width:30em;font:400 clamp(16px,1.15vw,22px)/1.45 var(--sans);opacity:.75}
+.cn-sp--flip .cn-sp__head{grid-template-columns:1fr auto;text-align:right}
+.cn-sp--flip .cn-sp__n{order:2}
+.cn-sp--flip .cn-sp__sub{margin-left:auto}
+.cn-sp__img{position:relative;aspect-ratio:21/9;overflow:hidden;clip-path:inset(0 0 0 0)}
+.cn-sp__img img{position:absolute;inset:-8% 0;width:100%;height:116%;object-fit:cover;will-change:transform}
+.cn-sp__grid{display:grid;grid-template-columns:1fr 1fr 1.15fr;gap:0;margin-top:clamp(40px,4.2vw,80px);border-top:1px solid var(--line)}
+.cn--dark .cn-sp__grid,.cn--dark .cn-sp__ways li,.cn--dark .cn-sp__ways ol{border-color:rgba(255,255,255,.2)!important}
+.cn-sp__col,.cn-sp__res{padding:clamp(28px,2.6vw,48px) clamp(20px,2.2vw,44px) 0}
+.cn-sp__col:first-child{padding-left:0}
+.cn-sp__col+.cn-sp__col,.cn-sp__res{border-left:1px solid var(--line)}
+.cn--dark .cn-sp__col+.cn-sp__col,.cn--dark .cn-sp__res{border-color:rgba(255,255,255,.2)}
+.cn-sp__col:first-child .cn-list li{opacity:.65}
+.cn-sp__col--after .cn-k{color:#1D1616}
+.cn--dark .cn-sp__col--after .cn-k{color:#fff}
+.cn-sp__res{display:flex;flex-direction:column;gap:20px;padding-right:0}
+.cn-sp__q{margin:0;font:400 clamp(26px,2.1vw,40px)/1.15 var(--serif);text-wrap:balance}
+.cn-sp__res .btn{margin-top:auto;width:100%;min-width:0}
+.cn-sp__price{margin:0;font:400 clamp(72px,6vw,120px)/.9 var(--serif)}
+.cn-sp__pnote{margin:0;font:400 16px/1.5 var(--sans);opacity:.75}
+.cn-sp__ways{margin-top:clamp(56px,5vw,96px)}
+.cn-sp__ways ol{display:grid;grid-template-columns:repeat(3,1fr);margin:16px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.cn-sp__ways li{display:flex;flex-direction:column;gap:10px;padding:24px clamp(16px,2vw,36px) 0 0;counter-increment:w}
+.cn-sp__ways li+li{padding-left:clamp(16px,2vw,36px);border-left:1px solid var(--line)}
+.cn-sp__ways b{font:400 clamp(24px,1.9vw,36px)/1.1 var(--serif);text-transform:uppercase}
+.cn-sp__ways span{font:400 16px/1.5 var(--sans);opacity:.75}
+.cn-sp__ways em{order:-1;font:600 16px/1 var(--sans);font-style:normal;color:#B0D3EB}
+@media (max-width:900px){
+  .cn-sp{padding-top:80px;padding-bottom:80px}
+  .cn-sp__head,.cn-sp--flip .cn-sp__head{grid-template-columns:1fr;text-align:left;gap:8px}
+  .cn-sp--flip .cn-sp__n{order:0}
+  .cn-sp__n{font-size:110px}
+  .cn-sp__t{font-size:clamp(34px,10vw,52px)}
+  .cn-sp--flip .cn-sp__sub{margin-left:0}
+  .cn-sp__img{aspect-ratio:4/3}
+  .cn-sp__grid{grid-template-columns:1fr}
+  .cn-sp__col,.cn-sp__res{padding:28px 0 0;border-left:0!important}
+  .cn-sp__col+.cn-sp__col,.cn-sp__res{margin-top:28px;border-top:1px solid var(--line)}
+  .cn--dark .cn-sp__col+.cn-sp__col,.cn--dark .cn-sp__res{border-color:rgba(255,255,255,.2)}
+  .cn-sp__ways ol{grid-template-columns:1fr}
+  .cn-sp__ways li,.cn-sp__ways li+li{padding:20px 0;border-left:0;border-bottom:1px solid var(--line)}
+}
+</style>
 </head>
 <body>
 <script>window.__noPre=true;window.__toTopFrom="investors"</script>
@@ -2232,82 +2283,55 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
 </section>
 <section class="cn cn-whosec"><h2 class="cn-h2 rv">Для кого</h2><nav class="cn-rows"><a class="cn-row rv" href="#investors" data-img="assets/pf/05a.webp"><span class="cn-row__n">01</span><span class="cn-row__t">Я інвестую в нерухомість</span><span class="cn-row__go"><svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="cn-row rv" href="#business" data-img="assets/pf/06a.webp"><span class="cn-row__n">02</span><span class="cn-row__t">У мене бізнес</span><span class="cn-row__go"><svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="cn-row rv" href="#homeowners" data-img="assets/renovation.webp"><span class="cn-row__n">03</span><span class="cn-row__t">Я власник житла</span><span class="cn-row__go"><svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a><a class="cn-row rv" href="#designers" data-img="assets/services.jpg"><span class="cn-row__n">04</span><span class="cn-row__t">Я дизайнер інтер’єру</span><span class="cn-row__go"><svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span></a></nav><img class="cn-float" alt="" aria-hidden="true"></section>
 <section class="cn cn--tint cn-howsec"><h2 class="cn-h2 rv">Як це працює</h2><div class="cn-steps"><div class="cn-step rv" style="--d:0.0s"><span class="cn-step__n">1</span><h3>Заявка</h3><p>Залиште заявку або напишіть мені у WhatsApp.</p></div><div class="cn-step rv" style="--d:0.1s"><span class="cn-step__n">2</span><h3>Сесія</h3><p>Безкоштовна 20-хвилинна діагностична сесія.</p></div><div class="cn-step rv" style="--d:0.2s"><span class="cn-step__n">3</span><h3>План</h3><p>План і ціна, підібрані саме під Вас.</p></div><div class="cn-step rv" style="--d:0.3s"><span class="cn-step__n">4</span><h3>Результат</h3><p>Чіткі відповіді та наступні кроки.</p></div></div></section>
-<section class="cn cn-aud" id="investors">
-  <div class="cn-aud__side">
-    <div class="cn-aud__stick">
-      <p class="cn-aud__n rv">01</p>
-      <h2 class="cn-aud__t rv">Інвесторам у нерухомість</h2>
-      <p class="cn-sub rv">Дізнайтеся, чи окупиться об’єкт, ще до інвестиції.</p>
-      <div class="cn-aud__img rv"><img src="assets/pf/05a.webp" alt="" loading="lazy"></div>
-    </div>
+<section class="cn cn-sp" id="investors">
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">01</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">Інвесторам у нерухомість</h2><p class="cn-sp__sub rv">Дізнайтеся, чи окупиться об’єкт, ще до інвестиції.</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/pf/05a.webp" alt="" loading="lazy"></div>
+  <div class="cn-sp__grid">
+    <div class="cn-sp__col rv"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ви розглядаєте об’єкт і не впевнені, що його варто купувати;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Боїтеся витратити бюджет на ремонт, який не окупиться;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Не бачите прихованих ризиків: планування, комунікацій чи обмежень.</span></li></ul></div>
+    <div class="cn-sp__col cn-sp__col--after rv" style="--d:.1s"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Оцінку комерційного потенціалу об’єкта;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Перелік прихованих ризиків;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>План: що змінити, а що лишити як є.</span></li></ul></div>
+    <div class="cn-sp__res rv" style="--d:.2s"><p class="cn-k">Результат</p><p class="cn-sp__q">Впевненість, що гроші повернуться, і вища вартість об’єкта за мінімальних витрат.</p><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
   </div>
-  <div class="cn-aud__main">
-    <div class="cn-ba rv">
-      <div class="cn-ba__col"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ви розглядаєте об’єкт і не впевнені, що його варто купувати;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Боїтеся витратити бюджет на ремонт, який не окупиться;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Не бачите прихованих ризиків: планування, комунікацій чи обмежень.</span></li></ul></div>
-      <svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
-      <div class="cn-ba__col cn-ba__col--after"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Оцінку комерційного потенціалу об’єкта;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Перелік прихованих ризиків;</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>План: що змінити, а що лишити як є.</span></li></ul></div>
-    </div>
-    <p class="cn-quote rv">Впевненість, що гроші повернуться, і вища вартість об’єкта за мінімальних витрат.</p>
-    <div class="cn-formats rv"><p class="cn-k">Формати</p><ul><li><b>Разова консультація</b><span>Огляд об’єкта і відповіді.</span></li><li><b>Пакет консультацій</b><span>Супровід до рішення про купівлю.</span></li><li><b>Персональний супровід</b><span>Від оцінки до готового проєкту.</span></li></ul></div>
-    <div class="cn-cta rv"><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
+  <div class="cn-sp__ways"><p class="cn-k rv">Формати</p><ol><li class="rv" style="--d:0.00s"><b>Разова консультація</b><span>Огляд об’єкта і відповіді.</span></li><li class="rv" style="--d:0.08s"><b>Пакет консультацій</b><span>Супровід до рішення про купівлю.</span></li><li class="rv" style="--d:0.16s"><b>Персональний супровід</b><span>Від оцінки до готового проєкту.</span></li></ol></div>
+</section><section class="cn cn-sp cn-sp--flip cn--tint" id="business">
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">02</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">Власникам бізнесу</h2><p class="cn-sp__sub rv">Простір, що підтримує Ваш бренд і приваблює саме Ваших клієнтів.</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/pf/06a.webp" alt="" loading="lazy"></div>
+  <div class="cn-sp__grid">
+    <div class="cn-sp__col rv"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ви змінили концепцію, а простір лишився тим самим.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Відкриваєте нову локацію і потрібен єдиний стиль.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ремонт уже йде, але щось не так.</span></li></ul></div>
+    <div class="cn-sp__col cn-sp__col--after rv" style="--d:.1s"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Чітке розуміння, якою має бути концепція.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Аналіз Вашого поточного проєкту.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Контроль бюджету і якості та план від ідеї до готового простору.</span></li></ul></div>
+    <div class="cn-sp__res rv" style="--d:.2s"><p class="cn-k">Результат</p><p class="cn-sp__q">Простір, який відображає Ваш бренд і повертає вкладене в ремонт.</p><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
   </div>
-</section><section class="cn cn-aud cn--tint" id="business">
-  <div class="cn-aud__side">
-    <div class="cn-aud__stick">
-      <p class="cn-aud__n rv">02</p>
-      <h2 class="cn-aud__t rv">Власникам бізнесу</h2>
-      <p class="cn-sub rv">Простір, що підтримує Ваш бренд і приваблює саме Ваших клієнтів.</p>
-      <div class="cn-aud__img rv"><img src="assets/pf/06a.webp" alt="" loading="lazy"></div>
-    </div>
+  <div class="cn-sp__ways"><p class="cn-k rv">Формати</p><ol><li class="rv" style="--d:0.00s"><b>Разова консультація</b><span>Конкретне питання чи етап.</span></li><li class="rv" style="--d:0.08s"><b>Аудит проєкту</b><span>Перевірка планів і кошторису.</span></li><li class="rv" style="--d:0.16s"><b>Супровід реновації</b><span>Від концепції до здачі.</span></li></ol></div>
+</section><section class="cn cn-sp" id="homeowners">
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">03</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">Власникам житла</h2><p class="cn-sp__sub rv">Дім, у якому комфортно жити, — без сюрпризів у бюджеті.</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/renovation.webp" alt="" loading="lazy"></div>
+  <div class="cn-sp__grid">
+    <div class="cn-sp__col rv"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ви купили квартиру чи будинок і не знаєте, з чого почати.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Боїтеся переплатити або помилитися з плануванням.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ремонт уже йде, але результат не такий, як очікували.</span></li></ul></div>
+    <div class="cn-sp__col cn-sp__col--after rv" style="--d:.1s"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Оцінку планування і потенціалу простору.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Перевірку планів, кошторису й підрядників.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>План і бюджет: де можна заощадити, а де ні.</span></li></ul></div>
+    <div class="cn-sp__res rv" style="--d:.2s"><p class="cn-k">Результат</p><p class="cn-sp__q">Простір під Ваш спосіб життя — без дорогих помилок.</p><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
   </div>
-  <div class="cn-aud__main">
-    <div class="cn-ba rv">
-      <div class="cn-ba__col"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ви змінили концепцію, а простір лишився тим самим.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Відкриваєте нову локацію і потрібен єдиний стиль.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ремонт уже йде, але щось не так.</span></li></ul></div>
-      <svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
-      <div class="cn-ba__col cn-ba__col--after"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Чітке розуміння, якою має бути концепція.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Аналіз Вашого поточного проєкту.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Контроль бюджету і якості та план від ідеї до готового простору.</span></li></ul></div>
-    </div>
-    <p class="cn-quote rv">Простір, який відображає Ваш бренд і повертає вкладене в ремонт.</p>
-    <div class="cn-formats rv"><p class="cn-k">Формати</p><ul><li><b>Разова консультація</b><span>Конкретне питання чи етап.</span></li><li><b>Аудит проєкту</b><span>Перевірка планів і кошторису.</span></li><li><b>Супровід реновації</b><span>Від концепції до здачі.</span></li></ul></div>
-    <div class="cn-cta rv"><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
-  </div>
-</section><section class="cn cn-aud" id="homeowners">
-  <div class="cn-aud__side">
-    <div class="cn-aud__stick">
-      <p class="cn-aud__n rv">03</p>
-      <h2 class="cn-aud__t rv">Власникам житла</h2>
-      <p class="cn-sub rv">Дім, у якому комфортно жити, — без сюрпризів у бюджеті.</p>
-      <div class="cn-aud__img rv"><img src="assets/renovation.webp" alt="" loading="lazy"></div>
-    </div>
-  </div>
-  <div class="cn-aud__main">
-    <div class="cn-ba rv">
-      <div class="cn-ba__col"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ви купили квартиру чи будинок і не знаєте, з чого почати.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Боїтеся переплатити або помилитися з плануванням.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ремонт уже йде, але результат не такий, як очікували.</span></li></ul></div>
-      <svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
-      <div class="cn-ba__col cn-ba__col--after"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Оцінку планування і потенціалу простору.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Перевірку планів, кошторису й підрядників.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>План і бюджет: де можна заощадити, а де ні.</span></li></ul></div>
-    </div>
-    <p class="cn-quote rv">Простір під Ваш спосіб життя — без дорогих помилок.</p>
-    <div class="cn-formats rv"><p class="cn-k">Формати</p><ul><li><b>Разова консультація</b><span>Відповіді на Ваші питання.</span></li><li><b>Аудит проєкту</b><span>Перевірка планів і кошторису.</span></li><li><b>Супровід проєкту</b><span>Контроль ключових етапів.</span></li></ul></div>
-    <div class="cn-cta rv"><a class="btn btn--ink" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
-  </div>
+  <div class="cn-sp__ways"><p class="cn-k rv">Формати</p><ol><li class="rv" style="--d:0.00s"><b>Разова консультація</b><span>Відповіді на Ваші питання.</span></li><li class="rv" style="--d:0.08s"><b>Аудит проєкту</b><span>Перевірка планів і кошторису.</span></li><li class="rv" style="--d:0.16s"><b>Супровід проєкту</b><span>Контроль ключових етапів.</span></li></ol></div>
 </section>
-<section class="cn cn-aud cn--dark" id="designers" data-dark>
-  <div class="cn-aud__side">
-    <div class="cn-aud__stick">
-      <p class="cn-aud__n rv">04</p>
-      <h2 class="cn-aud__t rv">Дизайнерам інтер’єру</h2>
-      <p class="cn-sub rv">Станьте магнітом для клієнтів: пакет із 3 стратегічних сесій.</p>
-      <div class="cn-aud__img rv"><img src="assets/services.jpg" alt="" loading="lazy"></div>
-    </div>
+<section class="cn cn-sp cn--dark" id="designers" data-dark>
+  <header class="cn-sp__head">
+    <span class="cn-sp__n rv" aria-hidden="true">04</span>
+    <div class="cn-sp__ttl"><h2 class="cn-sp__t rv">Дизайнерам інтер’єру</h2><p class="cn-sp__sub rv">Станьте магнітом для клієнтів: пакет із 3 стратегічних сесій.</p></div>
+  </header>
+  <div class="cn-sp__img rv"><img src="assets/services.jpg" alt="" loading="lazy"></div>
+  <div class="cn-sp__grid">
+    <div class="cn-sp__col rv"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>У Вас ще немає клієнтів у Європі.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Не знаєте, як заявити про себе в новій країні.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Не можете підняти ціни й берете проєкти, які не подобаються.</span></li></ul></div>
+    <div class="cn-sp__col cn-sp__col--after rv" style="--d:.1s"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Сильне портфоліо.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Стабільний потік клієнтів.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ціни, що відповідають Вашому досвіду.</span></li></ul></div>
+    <div class="cn-sp__res rv" style="--d:.2s"><p class="cn-k">За пакет із 3 сесій</p><p class="cn-sp__price">$500</p><p class="cn-sp__pnote">Онлайн · Можлива оплата частинами</p><a class="btn btn--light" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
   </div>
-  <div class="cn-aud__main">
-    <div class="cn-ba rv">
-      <div class="cn-ba__col"><p class="cn-k">Зараз</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>У Вас ще немає клієнтів у Європі.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Не знаєте, як заявити про себе в новій країні.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Не можете підняти ціни й берете проєкти, які не подобаються.</span></li></ul></div>
-      <svg class="cn-arr" viewBox="0 0 40 12" aria-hidden="true"><path d="M0 6h38M32 1l6 5-6 5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
-      <div class="cn-ba__col cn-ba__col--after"><p class="cn-k">Після консультації</p><ul class="cn-list"><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Сильне портфоліо.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Стабільний потік клієнтів.</span></li><li><svg class="cn-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1c.9 6.3 4.7 10.1 11 11-6.3.9-10.1 4.7-11 11-.9-6.3-4.7-10.1-11-11C7.3 11.1 11.1 7.3 12 1z"/></svg><span>Ціни, що відповідають Вашому досвіду.</span></li></ul></div>
-    </div>
-    <ol class="cn-sessions"><li class="rv"><span class="cn-ses__k">Сесія 1</span><b>Портфоліо і резюме</b><span>Привабливі для європейського ринку.</span></li><li class="rv"><span class="cn-ses__k">Сесія 2</span><b>Соцмережі</b><span>Під очікування європейських клієнтів.</span></li><li class="rv"><span class="cn-ses__k">Сесія 3</span><b>Пошук клієнтів</b><span>Кому писати, що писати, де шукати проєкти.</span></li></ol>
-    <div class="cn-pack rv"><div><b>$500</b><span>За пакет із 3 сесій · Онлайн · Можлива оплата частинами</span></div><a class="btn btn--light" href="#request">Записатися на безкоштовну діагностику <span class="plus"></span></a></div>
-  </div>
+  <div class="cn-sp__ways"><ol><li class="rv" style="--d:0.00s"><b>Портфоліо і резюме</b><span>Привабливі для європейського ринку.</span><em>Сесія 1</em></li><li class="rv" style="--d:0.08s"><b>Соцмережі</b><span>Під очікування європейських клієнтів.</span><em>Сесія 2</em></li><li class="rv" style="--d:0.16s"><b>Пошук клієнтів</b><span>Кому писати, що писати, де шукати проєкти.</span><em>Сесія 3</em></li></ol></div>
 </section>
 <section class="cn cn-menusec"><h2 class="cn-h2 rv">Формати та вартість</h2>
   <ul class="cn-menu"><li class="rv"><span class="cn-menu__t">Безкоштовна діагностична сесія</span><span class="cn-menu__d">20 хвилин · онлайн</span><span class="cn-menu__dots"></span><span class="cn-menu__p">Безкоштовно</span></li><li class="rv"><span class="cn-menu__t">Разова консультація</span><span class="cn-menu__d">60–90 хвилин · онлайн або в Ніцці</span><span class="cn-menu__dots"></span><span class="cn-menu__p">від €250</span></li><li class="rv"><span class="cn-menu__t">Аудит проєкту</span><span class="cn-menu__d">Перевірка планів, кошторису й підрядників</span><span class="cn-menu__dots"></span><span class="cn-menu__p">від €600</span></li><li class="rv"><span class="cn-menu__t">Персональний супровід</span><span class="cn-menu__d">Від оцінки до готового простору</span><span class="cn-menu__dots"></span><span class="cn-menu__p">за запитом</span></li><li class="rv"><span class="cn-menu__t">Пакет для дизайнерів</span><span class="cn-menu__d">3 стратегічні сесії · онлайн</span><span class="cn-menu__dots"></span><span class="cn-menu__p">$500</span></li></ul>
@@ -3251,6 +3275,11 @@ addEventListener('scroll',()=>document.querySelectorAll('.cn .rv:not(.in)').forE
   const onS=()=>{if(st){const r=st.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.75-r.top)/(r.height+innerHeight*.25)));st.style.setProperty('--p',p.toFixed(3));
       const c=st.querySelectorAll('.cn-step__n'),L=r.width-parseFloat(getComputedStyle(st).getPropertyValue('--lineR')||20)-20;steps.forEach((s,k)=>{const x=c[k].getBoundingClientRect().left-r.left;s.classList.toggle('on',p*L+30>=x)})}
     if(bar&&inv&&req){const a=inv.getBoundingClientRect().top<innerHeight,b=req.getBoundingClientRect().top<innerHeight*.6;bar.classList.toggle('on',a&&!b)}};
+  addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);onS()})();
+</script><script>
+/* v3: the spread photos drift slightly against the scroll */
+(()=>{if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;const ims=[...document.querySelectorAll('.cn-sp__img img')];
+  const onS=()=>{const H=innerHeight;ims.forEach(im=>{const r=im.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>H)return;const p=(r.top+r.height/2-H/2)/H;im.style.transform=`translateY(${(p*-7).toFixed(2)}%)`})};
   addEventListener('scroll',()=>requestAnimationFrame(onS),{passive:true});addEventListener('resize',onS);onS()})();
 </script>
 </body>
