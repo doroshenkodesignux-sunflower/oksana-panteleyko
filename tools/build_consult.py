@@ -855,7 +855,7 @@ def build(L, src, out):
       ['Власниця житла,\nВіла біля Канн','У мене були десятки ідей і жодного розуміння, як їх поєднати. Оксана вислухала, поставила правильні питання і дала чіткий напрям для кожної кімнати. Тепер я ухвалюю рішення впевнено, без сумнівів.'],
       ['Дизайнерка інтерʼєру,\nПариж','Я прийшла до Оксани з аудитом власного проєкту. Вона показала, що спростити, де „витікає“ бюджет і як презентувати концепцію клієнту. Дуже практична і щедра сесія — я користуюся її порадами щодня.']]}
     _tj = _j.dumps(_ts['uk' if L=='uk' else 'en'], ensure_ascii=False)
-    s = s.replace('<div class="pre" id="pre"', '<script>window.__noPre=true;window.__tstSet='+_tj+';window.__toTopFrom="investors"</script>\n<div class="pre" id="pre" style="display:none"', 1)
+    s = s.replace('<div class="pre" id="pre"', '<script>window.__tstSet='+_tj+';window.__toTopFrom="investors"</script>\n<div class="pre" id="pre"', 1)
     s = s.replace('</body>', """<script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
   const t=setTimeout(()=>{if(document.readyState==='complete')return;const a=pre.querySelector('.pre__art');if(a)a.removeAttribute('mask');pre.style.display=''},700);
