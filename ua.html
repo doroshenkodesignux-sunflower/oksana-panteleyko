@@ -3055,7 +3055,8 @@ function frame(){requestAnimationFrame(frame);
   // gathering spans the first ~60% of the pinned scroll; smoothed so it never snaps
   const target=Math.min(1,Math.max(0,(innerHeight*.35-r.top)/((r.height-innerHeight)*.62+innerHeight*.35)));
   /* phones: no long scroll needed — once the block is on screen the globe gathers by itself in ~1.5s */
-  if(mob){if(r.top<innerHeight*.9)mobGo=true;pSm+=((mobGo?1:0)-pSm)*.06}else pSm+=(target-pSm)*.045;
+  /* everywhere: once the block is on screen the globe gathers by itself (~1.5s), not by scroll; it never falls apart again */
+  if(r.top<innerHeight*.75)mobGo=true;pSm+=((mobGo?1:0)-pSm)*.05;
   mat.uniforms.uP.value=pSm;core.material.opacity=.6*Math.max(0,(pSm-.6)/.4);
   if(focus){yaw+=(focus.y-yaw)*.06;pitch+=(focus.p-pitch)*.06}
   else if(!dragging){vy*=.95;yaw+=vy+(performance.now()-idle>1500?.0016:0);pitch+=(.32-pitch)*.01}
@@ -3066,7 +3067,7 @@ function frame(){requestAnimationFrame(frame);
   inv.copy(globe.matrixWorld).invert();mat.uniforms.uInv.value.copy(inv);
   if(hiNow>=0){mat.uniforms.uHiA.value+=(1-mat.uniforms.uHiA.value)*.12;lineMat.opacity+=(.95-lineMat.opacity)*.12}
   ren.render(scene,cam);
-  const show=pSm>.9;
+  const show=pSm>.97;   /* locations only once the globe has fully formed */
   pins.forEach((el,i)=>{tmp.copy(pinV[i]).applyMatrix4(globe.matrixWorld);const facing=tmp.z>.32;tmp.project(cam);
     const x=(tmp.x*.5+.5)*SW, y=(-tmp.y*.5+.5)*SH, on=el.classList.contains('on');
     el.style.transform=`translate(${(x-(on?13:7)).toFixed(1)}px,${(y-el.offsetHeight/2).toFixed(1)}px)`;
