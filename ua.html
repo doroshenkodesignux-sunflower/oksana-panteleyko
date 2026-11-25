@@ -3056,7 +3056,7 @@ function frame(){requestAnimationFrame(frame);
   const target=Math.min(1,Math.max(0,(innerHeight*.35-r.top)/((r.height-innerHeight)*.62+innerHeight*.35)));
   /* phones: no long scroll needed — once the block is on screen the globe gathers by itself in ~1.5s */
   /* everywhere: once the block is on screen the globe gathers by itself (~1.5s), not by scroll; it never falls apart again */
-  if(r.top<innerHeight*.75)mobGo=true;pSm+=((mobGo?1:0)-pSm)*.05;
+  if(r.top<innerHeight*.75&&!mobGo)mobGo=performance.now();if(mobGo){const k=Math.min(1,(performance.now()-mobGo)/2600);pSm=k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2}   /* slow start so the scattered dots linger, then a smooth gather (~2.6s) */
   mat.uniforms.uP.value=pSm;core.material.opacity=.6*Math.max(0,(pSm-.6)/.4);
   if(focus){yaw+=(focus.y-yaw)*.06;pitch+=(focus.p-pitch)*.06}
   else if(!dragging){vy*=.95;yaw+=vy+(performance.now()-idle>1500?.0016:0);pitch+=(.32-pitch)*.01}
