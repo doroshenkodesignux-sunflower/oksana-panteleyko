@@ -2973,7 +2973,7 @@ const AWX=[
     const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
     eTarget=Math.min(AWX.length-.5,Math.max(-.5,f-.5));kick()};
   /* keep Oksana's name on each diploma clear of the title: smallest shift above the title or below the caption */
-  const fit=()=>{const st=stage.getBoundingClientRect();P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;if(innerWidth<=900){p.style.top='0px';return}   /* phones: diplomas stay centred */
+  const fit=()=>{const st=pics.getBoundingClientRect();   /* measured against the photo layer (it starts below the header) */P.forEach((p,k)=>{const a=AWX[k];if(!a.ny)return;if(innerWidth<=900){p.style.top='0px';return}   /* phones: diplomas stay centred */
     const lf=(-(a.lift||0)*innerHeight).toFixed(1)+'px';p.style.top=lf;
     const h=S[k].querySelector('.awx__t').getBoundingClientRect(),sb=S[k].querySelector('.awx__sub').getBoundingClientRect();
     const ph=p.offsetHeight,y0=p.offsetTop+a.ny*ph,band=ph*.035+10;
