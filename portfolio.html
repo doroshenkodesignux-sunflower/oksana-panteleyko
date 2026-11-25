@@ -2145,11 +2145,13 @@ a.header__loc{text-decoration:none;color:inherit}
 .pfo a{position:absolute;left:0;top:0;width:var(--tw);aspect-ratio:4/5;pointer-events:auto;will-change:transform,opacity,filter;opacity:0;cursor:pointer}
 .pfo a.back{z-index:-2}
 .pfo img{width:100%;height:100%;object-fit:cover;display:block;box-shadow:0 18px 40px -18px rgba(29,22,22,.45);transition:transform .5s var(--ease)}
-.pfo a span{position:absolute;left:50%;top:calc(100% + 20px);padding:8px 12px;background:#fff;box-shadow:0 6px 20px -8px rgba(29,22,22,.25);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
-.pfo a:hover img{transform:scale(1.12)}
+.pfo a span{position:absolute;left:50%;top:calc(100% + 20px);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
+.pfo a:hover img{transform:none}
+.pfo a span{scale:calc(1 / 1.12);transform-origin:50% 0}   /* hovered cards are always drawn at 1.12, so every name has the same size */
+.pfl>.pfp:first-child{border-top-color:transparent!important;background:none!important}   /* the running line closes the hero: no second line above the first project */
 .pfo a:hover span{opacity:1;translate:-50% 0}
 .pfo.back-layer{z-index:1}
-.pfm{position:absolute;left:0;right:0;bottom:clamp(24px,3vw,48px);z-index:3;overflow:hidden;pointer-events:none;border-top:1px solid var(--line);padding:14px 0;opacity:0;transition:opacity 1.2s var(--ease) 2.6s;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pfm{position:absolute;left:0;right:0;bottom:clamp(24px,3vw,48px);z-index:3;overflow:hidden;pointer-events:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;opacity:0;transition:opacity 1.2s var(--ease) 2.6s;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .pf-in .pfm{opacity:1}
 .pfm__t{display:flex;width:max-content;animation:pfm 60s linear infinite}
 .pfm__t span{display:flex;align-items:center;gap:18px;padding-right:18px;font:500 clamp(13px,.85vw,16px)/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
@@ -3396,7 +3398,7 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
       x=cx+x0*Math.cos(tilt)-y0*Math.sin(tilt),y=cy+x0*Math.sin(tilt)+y0*Math.cos(tilt),d=(z+1)/2,s=(.55+.6*d)*(.6+.4*intro),
       w=a.offsetWidth,h=a.offsetHeight,front=z>-.05||a===hov;
       if(front!==(a.parentNode===box))(front?box:back).appendChild(a);
-      a.style.transform=`translate(${(x-w/2).toFixed(1)}px,${(y-h/2).toFixed(1)}px) scale(${s.toFixed(3)})`;
+      a.style.transform=`translate(${(x-w/2).toFixed(1)}px,${(y-h/2).toFixed(1)}px) scale(${(a===hov?1.12:s).toFixed(3)})`;   /* hovered: a touch bigger, one fixed size */
       const hv=a===hov;   /* the hovered card comes forward, sharp and fully visible */
       a.style.opacity=(hv?intro*(1-sc*1.3):(.45+.55*d)*intro*(1-sc*1.3)).toFixed(3);a.style.filter=!hv&&d<.45?`blur(${((.45-d)*6).toFixed(1)}px)`:'none';a.style.zIndex=hv?200:Math.round(d*100)})};
   requestAnimationFrame(tick)})();
