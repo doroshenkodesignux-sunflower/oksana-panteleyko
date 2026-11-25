@@ -1020,6 +1020,7 @@ html,body,body *:not(#_n){font-variant-numeric:lining-nums proportional-nums!imp
 }
 /* menu: dim the other words only while a word (or the line it sits on) is hovered, not the whole empty column */
 .menu__nav li{width:max-content}
+.menu__nav{display:flex;flex-direction:column;gap:clamp(4px,1.2vh,14px)}   /* 7 items: a little more air between them */
 .menu__nav:hover a{color:var(--ink)!important}
 .menu__nav:has(li:hover) a{color:#C9D4DC!important}
 .menu__nav:has(li:hover) li:hover a{color:var(--ink)!important}
@@ -2112,7 +2113,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
 <!-- ============ MENU ============ -->
 <div class="menu" id="menu" aria-hidden="true">
   <div class="lang menu__lang" role="group" aria-label="Language"><a href="alberti-ua.html" class="lang__on" lang="uk">UA</a><i></i><a href="alberti.html" lang="en" aria-current="true">EN</a></div>
-  <ul class="menu__nav"><li style="--i:0"><a href="index.html" data-home>Home<sup><span>01</span></sup></a></li><li style="--i:1"><a href="portfolio.html" data-pf>Portfolio<sup><span>02</span></sup></a></li><li style="--i:2"><a href="index.html#services">Services<sup><span>03</span></sup></a></li><li style="--i:3"><a href="index.html#about">About me<sup><span>04</span></sup></a></li><li style="--i:4"><a href="consultations.html" data-cns>Consultation<sup><span>05</span></sup></a></li><li style="--i:5"><a href="index.html#awards">Awards<sup><span>06</span></sup></a></li><li style="--i:6"><a href="#testimonials">Testimonials<sup><span>07</span></sup></a></li><li style="--i:7"><a href="#contacts">Contact me<sup><span>08</span></sup></a></li></ul>
+  <ul class="menu__nav"><li style="--i:0"><a href="index.html" data-home>Home<sup><span>01</span></sup></a></li><li style="--i:1"><a href="portfolio.html" data-pf>Portfolio<sup><span>02</span></sup></a></li><li style="--i:2"><a href="index.html#services">Services<sup><span>03</span></sup></a></li><li style="--i:3"><a href="index.html#about">About me<sup><span>04</span></sup></a></li><li style="--i:4"><a href="consultations.html" data-cns>Consultation<sup><span>05</span></sup></a></li><li style="--i:5"><a href="#testimonials">Testimonials<sup><span>06</span></sup></a></li><li style="--i:6"><a href="#contacts">Contact me<sup><span>07</span></sup></a></li></ul>
   <aside class="menu__side">
     <div style="--i:2">
       <img class="menu__photo" src="assets/menu-photo.jpg?v=2" alt="Oksana Panteleyko at SBID Design Awards 2025">
