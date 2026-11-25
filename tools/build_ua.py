@@ -69,7 +69,7 @@ T = [
  ('For over 18 years I’ve been creating spaces where people feel at ease — and want to come back to. Each project starts with your main goal, not the decor, and is built to hold its value for years. I guide it from the first idea to the finished space.',
   'Понад 18 років я створюю простори, де людям легко й затишно — і куди хочеться повертатися. Кожен проєкт починається з Вашої головної мети, а не з декору, і створюється так, щоб зберігати цінність роками. Я веду його від першої ідеї до готового простору.', 1),
  ('<p>Years of<br class="mbr"> experience</p>', '<p>Років<br class="mbr"> досвіду</p>', 1),
- ('<p>SBID finalist<br class="mbr"> projects</p>', '<p>Проєкти<br class="mbr"> у фіналі SBID</p>', 1),
+ ('<p>Projects —<br class="mbr"> finalist SBID</p>', '<p>Проєкти —<br class="mbr"> фіналісти SBID</p>', 1),
  ('<p>Countries with<br class="mbr"> projects</p>', '<p>Країн<br class="mbr"> із проєктами</p>', 1),
  ('<p>Completed<br class="mbr"> projects</p>', '<p>Завершених<br class="mbr"> проєктів</p>', 1),
  ('<p>SBID Accredited Design <br>Professional, London</p>', '<p>Акредитований спеціаліст <br>SBID, Лондон</p>', 1),
