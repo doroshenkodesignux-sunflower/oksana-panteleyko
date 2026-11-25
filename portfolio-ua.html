@@ -1846,6 +1846,8 @@ a.header__loc{text-decoration:none;color:inherit}
 @media (min-width:601px){
   .abx__item{--lb:clamp(48px,calc(var(--u) * 100),100px)}
   .abx__item>img.abx__ilogo,.abx__item>img[data-l="sbid"]{--lh:var(--lb);margin-top:0!important;max-width:100%}
+  .abx__item>img.abx__ilogo{margin-bottom:clamp(28px,2.2vw,42px)!important}
+  .abx__item>img.abx__ilogo--round{--lh:calc(var(--lb) * 1.2);margin-top:calc(var(--lb) * -.2)!important}   /* round seal reads smaller than the wide wordmark: a touch bigger, same bottom line */
 }
 /* stats: labels closer to the numbers, more air before the credentials */
 .abx__stat p{margin-top:clamp(6px,calc(var(--u) * 10),10px)!important}
