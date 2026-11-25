@@ -196,7 +196,7 @@ T = [
  # ---------- locations ----------
  ('<h2 class="awm__h">Awards</h2>', '<h2 class="awm__h">Нагороди</h2>', 1),
  ('<h2 class="awx__h h2">Awards</h2>', '<h2 class="awx__h h2">Нагороди</h2>', 1),
- ('<h2 class="loc__h">Project Locations</h2>', '<h2 class="loc__h">Локації проєктів</h2>', 1),
+ ('<h2 class="loc__h">Project<br>Locations</h2>', '<h2 class="loc__h">Локації<br>проєктів</h2>', 1),
  ("n:\"Côte d'Azur\"", "n:'Лазурний берег'", 1),
  ("n:'Monaco'", "n:'Монако'", 1),
  ("n:'USA'", "n:'США'", 1),
