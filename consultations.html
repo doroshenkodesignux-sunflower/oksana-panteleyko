@@ -1900,7 +1900,10 @@ a.header__loc{text-decoration:none;color:inherit}
   .awx{background:#fff!important;color:var(--ink)!important}
   .awx__track{display:none!important}
   .awm{display:block;padding:80px 0}
-  .awm__bar{height:3px;margin:0 16px 32px;background:#D9D9D9}
+  .awm__foot{display:flex;align-items:center;gap:20px;margin:40px 16px 0}
+  .awm__n{margin:0;font:600 22px/1 'Cormorant',serif;font-variant-numeric:lining-nums;color:var(--ink)}
+  .awm__n small{font-size:1em;font-weight:400;color:#8a8a8a}
+  .awm__bar{flex:1;height:3px;background:#D9D9D9}
   .awm__bar i{display:block;height:100%;width:0;background:var(--ink);transition:width .5s cubic-bezier(.25,.1,.25,1)}
   .awm__row{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px;scroll-padding:0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
   .awm__row::-webkit-scrollbar{display:none}
@@ -3123,10 +3126,10 @@ const AWX=[
      const go=d?'':ex?`<a class="awm__go" href="${ex.getAttribute('href')}">${ex.textContent.trim()}<i></i></a>`:'';
      return `<article class="awm__c${d?' awm__c--doc':''}"><figure class="awm__pic"><img src="assets/${a.img}" alt="${esc(a.t)}" loading="lazy"></figure><div class="awm__id"><img class="awm__badge" src="assets/${badge}" alt="" loading="lazy"><h3 class="awm__t">${name}</h3></div>${go}</article>`};
    const m=document.createElement('div');m.className='awm';
-   m.innerHTML='<div class="awm__bar"><i></i></div><div class="awm__row">'+ord.map(card).join('')+'</div>';
+   m.innerHTML='<div class="awm__row">'+ord.map(card).join('')+'</div><div class="awm__foot"><p class="awm__n"><span>01</span><small>/'+String(ord.length).padStart(2,'0')+'</small></p><div class="awm__bar"><i></i></div></div>';
    track.after(m);
-   const row=m.querySelector('.awm__row'),fill=m.querySelector('.awm__bar i'),n=ord.length;
-   const prog=()=>{const c=row.children[0],w=c?c.offsetWidth+16:1;fill.style.width=(Math.min(n,Math.round(row.scrollLeft/w)+1)/n*100)+'%'};
+   const row=m.querySelector('.awm__row'),fill=m.querySelector('.awm__bar i'),cnt=m.querySelector('.awm__n span'),n=ord.length;
+   const prog=()=>{const c=row.children[0],w=c?c.offsetWidth+16:1;const i=Math.min(n,Math.round(row.scrollLeft/w)+1);fill.style.width=(i/n*100)+'%';cnt.textContent=String(i).padStart(2,'0')};
    row.addEventListener('scroll',()=>requestAnimationFrame(prog),{passive:true});prog();
    if(innerWidth<=900)track.closest('section').removeAttribute('data-dark')}
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
