@@ -2090,6 +2090,29 @@ a.header__loc{text-decoration:none;color:inherit}
 .pfp.in .pfp__gal{clip-path:inset(0 0 0 0)}
 .pfp.in .pfp__gal img{scale:1}
 @media (prefers-reduced-motion:reduce){.pfi *,.pfp *,.pfp{transition:none!important;clip-path:none!important;opacity:1!important;translate:none!important;scale:none!important}}
+
+/* ===== first screen: project thumbnails orbit the title, a line of project names runs along the bottom ===== */
+.pfi{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;padding-bottom:calc(clamp(64px,6.25vw,120px) + 40px)!important}
+.pfi>.prj__title,.pfi__lead{position:relative;z-index:3}
+.pfi__lead{z-index:5;text-shadow:0 0 14px #fff,0 0 6px #fff,0 0 2px #fff}   /* stays readable when a thumbnail passes behind it */
+.pfo{position:absolute;inset:0;z-index:4;pointer-events:none;--tw:clamp(74px,8.4vw,160px)}
+.pfo a{position:absolute;left:0;top:0;width:var(--tw);aspect-ratio:4/5;pointer-events:auto;will-change:transform,opacity,filter;opacity:0;cursor:pointer}
+.pfo a.back{z-index:-2}
+.pfo img{width:100%;height:100%;object-fit:cover;display:block;box-shadow:0 18px 40px -18px rgba(29,22,22,.45);transition:transform .5s var(--ease)}
+.pfo a span{position:absolute;left:50%;top:calc(100% + 10px);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
+.pfo a:hover img{transform:scale(1.12)}
+.pfo a:hover span{opacity:1;translate:-50% 0}
+.pfo.back-layer{z-index:1}
+.pfm{position:absolute;left:0;right:0;bottom:clamp(24px,3vw,48px);z-index:3;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;opacity:0;transition:opacity 1.2s var(--ease) 2.6s;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pf-in .pfm{opacity:1}
+.pfm__t{display:flex;width:max-content;animation:pfm 60s linear infinite}
+.pfm__t span{display:flex;align-items:center;gap:18px;padding-right:18px;font:500 clamp(13px,.85vw,16px)/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
+.pfm__t span i{font-style:normal;color:#8a8a8a}
+.pfm__t span b{font-weight:400;font-size:1.4em;line-height:0;color:#b0d3eb}
+.pfm:hover .pfm__t{animation-play-state:paused}
+@keyframes pfm{to{transform:translateX(-50%)}}
+@media (max-width:900px){.pfo{--tw:64px}.pfo a span{display:none}.pfi{padding-bottom:110px!important}}
+@media (prefers-reduced-motion:reduce){.pfm__t{animation:none}}
 </style>
 </head>
 <body>
@@ -2172,9 +2195,11 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
   <div class="pfi" id="portfolio">
     <div class="prj__title prj__title--sel"><h2>Selected<br>Projects</h2><span class="prj__pf" role="img" aria-label="Portfolio"></span></div>
     <p class="pfi__lead">A selection of interior and branding projects shaped with purpose and character.</p>
+    <div class="pfo" aria-hidden="true"><a href="#p01" tabindex="-1"><img src="assets/pf/o01.webp" alt=""><span>Aparthotel “Alberti”</span></a><a href="#p02" tabindex="-1"><img src="assets/pf/o02.webp" alt=""><span>Cafe “Avec toi”</span></a><a href="#p03" tabindex="-1"><img src="assets/pf/o03.webp" alt=""><span>Apartment “Azur Cap d’Ail”</span></a><a href="#p04" tabindex="-1"><img src="assets/pf/o04.webp" alt=""><span>Seaside residence “Villa Promenade”</span></a><a href="#p05" tabindex="-1"><img src="assets/pf/o05.webp" alt=""><span>Residence “French House”</span></a><a href="#p06" tabindex="-1"><img src="assets/pf/o06.webp" alt=""><span>Hotel-Restaurant “Kharkov Palace”</span></a><a href="#p07" tabindex="-1"><img src="assets/pf/o07.webp" alt=""><span>House for a large family</span></a><a href="#p08" tabindex="-1"><img src="assets/pf/o08.webp" alt=""><span>Villa Botanica</span></a><a href="#p09" tabindex="-1"><img src="assets/pf/o09.webp" alt=""><span>Framingham Dermatology</span></a><a href="#p10" tabindex="-1"><img src="assets/pf/o10.webp" alt=""><span>Atmosphere</span></a></div>
+    <div class="pfm" aria-hidden="true"><div class="pfm__t"><span>Aparthotel “Alberti” <i>Nice, France</i><b>·</b></span><span>Cafe “Avec toi” <i>Nice, France</i><b>·</b></span><span>Apartment “Azur Cap d’Ail” <i>Monaco</i><b>·</b></span><span>Seaside residence “Villa Promenade” <i>Nice, France</i><b>·</b></span><span>Residence “French House” <i>Nice, France</i><b>·</b></span><span>Hotel-Restaurant “Kharkov Palace” <i>Kharkiv, Ukraine</i><b>·</b></span><span>House for a large family <i>Riviera Village, Kyiv, Ukraine</i><b>·</b></span><span>Villa Botanica <i>Riviera Village, Kyiv, Ukraine</i><b>·</b></span><span>Framingham Dermatology <i>United States</i><b>·</b></span><span>Atmosphere <i>United States</i><b>·</b></span><span>Aparthotel “Alberti” <i>Nice, France</i><b>·</b></span><span>Cafe “Avec toi” <i>Nice, France</i><b>·</b></span><span>Apartment “Azur Cap d’Ail” <i>Monaco</i><b>·</b></span><span>Seaside residence “Villa Promenade” <i>Nice, France</i><b>·</b></span><span>Residence “French House” <i>Nice, France</i><b>·</b></span><span>Hotel-Restaurant “Kharkov Palace” <i>Kharkiv, Ukraine</i><b>·</b></span><span>House for a large family <i>Riviera Village, Kyiv, Ukraine</i><b>·</b></span><span>Villa Botanica <i>Riviera Village, Kyiv, Ukraine</i><b>·</b></span><span>Framingham Dermatology <i>United States</i><b>·</b></span><span>Atmosphere <i>United States</i><b>·</b></span></div></div>
   </div>
   <div class="pfl">
-  <article class="pfp">
+  <article class="pfp" id="p01">
     <div class="pfp__n">01</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Aparthotel “Alberti”</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></div>
@@ -2184,7 +2209,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="alberti.html">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p02">
     <div class="pfp__n">02</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Cafe “Avec toi”</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></div>
@@ -2194,7 +2219,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p03">
     <div class="pfp__n">03</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Apartment “Azur Cap d’Ail”</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Monaco</span></div>
@@ -2204,7 +2229,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p04">
     <div class="pfp__n">04</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Seaside residence “Villa Promenade”</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></div>
@@ -2214,7 +2239,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p05">
     <div class="pfp__n">05</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Residence “French House”</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Nice, France</span></div>
@@ -2224,7 +2249,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p06">
     <div class="pfp__n">06</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Hotel-Restaurant “Kharkov Palace”</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Kharkiv, Ukraine</span></div>
@@ -2234,7 +2259,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p07">
     <div class="pfp__n">07</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>House for a large family</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Riviera Village, Kyiv, Ukraine</span></div>
@@ -2244,7 +2269,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p08">
     <div class="pfp__n">08</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Villa Botanica</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Riviera Village, Kyiv, Ukraine</span></div>
@@ -2254,7 +2279,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p09">
     <div class="pfp__n">09</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Framingham Dermatology</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">United States</span></div>
@@ -2264,7 +2289,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <a class="lnk" href="#">Explore project <i></i></a>
     </div>
   </article>
-  <article class="pfp">
+  <article class="pfp" id="p10">
     <div class="pfp__n">10</div>
     <div class="pfp__body">
       <div class="pfp__top"><h2>Atmosphere</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">United States</span></div>
@@ -3231,6 +3256,30 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
 (()=>{const ps=[...document.querySelectorAll('.pfp')];
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
   ps.forEach(p=>io.observe(p))})();
+
+/* orbit: thumbnails travel a tilted ellipse round the title — near ones big and sharp in front, far ones small, soft and behind the title.
+   The mouse slows and tilts it; scrolling down flings the thumbnails outwards and fades them as the list comes up. */
+(()=>{const box=document.querySelector('.pfo'),hero=document.querySelector('.pfi');if(!box)return;
+  const back=box.cloneNode(false);back.className='pfo back-layer';hero.insertBefore(back,hero.firstChild);
+  const A=[...box.children],N=A.length,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let rot=0,spd=1,spdT=1,mx=0,my=0,tx=0,ty=0,t0=performance.now(),last=t0;
+  hero.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;spdT=.35});
+  hero.addEventListener('pointerleave',()=>{mx=my=0;spdT=1});
+  A.forEach(a=>{a.addEventListener('pointerenter',()=>spdT=0);a.addEventListener('pointerleave',()=>spdT=.35)});
+  const tick=now=>{requestAnimationFrame(tick);const r=hero.getBoundingClientRect();if(r.bottom<0)return;
+    const dt=Math.min(50,now-last);last=now;spd+=(spdT-spd)*.05;if(!reduce)rot+=dt*.00011*spd;
+    tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
+    const W=r.width,H=r.height,mob=W<=900,t=box.querySelector('h2')||hero.querySelector('.prj__title'),tr=t.getBoundingClientRect();
+    const cx=W/2,cy=tr.top-r.top+tr.height*.62,sc=Math.min(1,Math.max(0,-r.top/(H*.7)));   /* scroll progress */
+    const Rx=(mob?W*.42:Math.min(W*.4,780))*(1+sc*.9),Ry=(mob?H*.34:Math.min(H*.3,330))*(1+sc*.9),tilt=-.13+ty*.12;
+    const intro=Math.min(1,Math.max(0,(now-t0-1900)/1400));
+    A.forEach((a,i)=>{const th=rot+i*2*Math.PI/N+tx*.6,z=Math.sin(th),x0=Math.cos(th)*Rx,y0=z*Ry,
+      x=cx+x0*Math.cos(tilt)-y0*Math.sin(tilt),y=cy+x0*Math.sin(tilt)+y0*Math.cos(tilt),d=(z+1)/2,s=(.55+.6*d)*(.6+.4*intro),
+      w=a.offsetWidth,h=a.offsetHeight,front=z>-.05;
+      if(front!==(a.parentNode===box))(front?box:back).appendChild(a);
+      a.style.transform=`translate(${(x-w/2).toFixed(1)}px,${(y-h/2).toFixed(1)}px) scale(${s.toFixed(3)})`;
+      a.style.opacity=((.45+.55*d)*intro*(1-sc*1.3)).toFixed(3);a.style.filter=d<.45?`blur(${((.45-d)*6).toFixed(1)}px)`:'none';a.style.zIndex=Math.round(d*100)})};
+  requestAnimationFrame(tick)})();
 /* portfolio: the arrows slide each project's photos */
 document.querySelectorAll('.pfp').forEach(p=>{const t=p.querySelector('.pfp__track'),[pv,nx]=p.querySelectorAll('.pfp__arr button');let i=0;
   const go=k=>{const im=[...t.children],max=Math.max(0,im.length-1);i=Math.max(0,Math.min(max,k));
