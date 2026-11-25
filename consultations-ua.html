@@ -1918,6 +1918,13 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* Awards (desktop): pagination sits on the up-button's bottom line; the heading has the same gap from the header (measured to the letters) */
+@media (min-width:901px){
+  .awx{--g:clamp(16px,2.6vw,40px)}
+  .awx__foot{bottom:calc(var(--g) - 6px)!important}
+  .awx__h{top:calc(var(--hdrH,104px) + var(--g) - .16em)!important}
+}
+
 /* shared segmented pagination (same as Services) */
 .segs{display:flex!important;gap:6px;height:14px!important;background:none!important;align-items:center}
 .segs i{flex:1;position:relative!important;height:14px!important;width:auto!important;top:auto!important;left:auto!important;background:none!important;cursor:pointer;transition:none!important}
