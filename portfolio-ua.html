@@ -1918,9 +1918,9 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
-/* Awards on tablets (touch, no hover): prev / next arrows with the counter, centred at the bottom, instead of the segments */
+/* Awards on tablets (901–1366px wide, or any touch screen above 900px): prev / next arrows with the counter, centred at the bottom, instead of the segments */
 .awx__arrows{display:none}
-@media (min-width:901px) and (hover:none){
+@media (min-width:901px) and (max-width:1366px),(min-width:901px) and (hover:none){
   .awx .awx__foot .awx__bar.segs{display:none!important}
   .awx .awx__foot .awx__arrows{display:flex}
   .awx .awx__stage .awx__foot{justify-content:center!important;gap:24px!important;left:0!important;right:0!important}
