@@ -133,17 +133,16 @@ CSS = '''
 .pfo a{position:absolute;left:0;top:0;width:var(--tw);aspect-ratio:4/5;pointer-events:auto;will-change:transform,opacity,filter;opacity:0;cursor:pointer}
 .pfo a.back{z-index:-2}
 .pfo img{width:100%;height:100%;object-fit:cover;display:block;box-shadow:0 18px 40px -18px rgba(29,22,22,.45);transition:transform .5s var(--ease)}
-.pfo a span{position:absolute;left:50%;top:calc(100% + 10px);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
+.pfo a span{position:absolute;left:50%;top:calc(100% + 20px);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
 .pfo a:hover img{transform:scale(1.12)}
 .pfo a:hover span{opacity:1;translate:-50% 0}
 .pfo.back-layer{z-index:1}
-.pfm{position:absolute;left:0;right:0;bottom:clamp(24px,3vw,48px);z-index:3;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;opacity:0;transition:opacity 1.2s var(--ease) 2.6s;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pfm{position:absolute;left:0;right:0;bottom:clamp(24px,3vw,48px);z-index:3;overflow:hidden;pointer-events:none;border-top:1px solid var(--line);padding:14px 0;opacity:0;transition:opacity 1.2s var(--ease) 2.6s;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .pf-in .pfm{opacity:1}
 .pfm__t{display:flex;width:max-content;animation:pfm 60s linear infinite}
 .pfm__t span{display:flex;align-items:center;gap:18px;padding-right:18px;font:500 clamp(13px,.85vw,16px)/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
 .pfm__t span i{font-style:normal;color:#8a8a8a}
 .pfm__t span b{font-weight:400;font-size:1.4em;line-height:0;color:#b0d3eb}
-.pfm:hover .pfm__t{animation-play-state:paused}
 @keyframes pfm{to{transform:translateX(-50%)}}
 @media (max-width:900px){.pfo{--tw:64px}.pfo a span{display:none}.pfi{padding-bottom:110px!important}}
 @media (prefers-reduced-motion:reduce){.pfm__t{animation:none}}
@@ -165,10 +164,10 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
 (()=>{const box=document.querySelector('.pfo'),hero=document.querySelector('.pfi');if(!box)return;
   const back=box.cloneNode(false);back.className='pfo back-layer';hero.insertBefore(back,hero.firstChild);
   const A=[...box.children],N=A.length,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
-  let rot=0,spd=1,spdT=1,mx=0,my=0,tx=0,ty=0,t0=performance.now(),last=t0;
+  let rot=0,spd=1,spdT=1,hov=null,mx=0,my=0,tx=0,ty=0,t0=performance.now(),last=t0;
   hero.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;spdT=.35});
   hero.addEventListener('pointerleave',()=>{mx=my=0;spdT=1});
-  A.forEach(a=>{a.addEventListener('pointerenter',()=>spdT=0);a.addEventListener('pointerleave',()=>spdT=.35)});
+  A.forEach(a=>{a.addEventListener('pointerenter',()=>{hov=a;spdT=0;spd=0});a.addEventListener('pointerleave',()=>{hov=null;spdT=.35})});   /* the ring stops at once under the mouse */
   const tick=now=>{requestAnimationFrame(tick);const r=hero.getBoundingClientRect();if(r.bottom<0)return;
     const dt=Math.min(50,now-last);last=now;spd+=(spdT-spd)*.05;if(!reduce)rot+=dt*.00011*spd;
     tx+=(mx-tx)*.05;ty+=(my-ty)*.05;
@@ -178,10 +177,11 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
     const intro=Math.min(1,Math.max(0,(now-t0-1900)/1400));
     A.forEach((a,i)=>{const th=rot+i*2*Math.PI/N+tx*.6,z=Math.sin(th),x0=Math.cos(th)*Rx,y0=z*Ry,
       x=cx+x0*Math.cos(tilt)-y0*Math.sin(tilt),y=cy+x0*Math.sin(tilt)+y0*Math.cos(tilt),d=(z+1)/2,s=(.55+.6*d)*(.6+.4*intro),
-      w=a.offsetWidth,h=a.offsetHeight,front=z>-.05;
+      w=a.offsetWidth,h=a.offsetHeight,front=z>-.05||a===hov;
       if(front!==(a.parentNode===box))(front?box:back).appendChild(a);
       a.style.transform=`translate(${(x-w/2).toFixed(1)}px,${(y-h/2).toFixed(1)}px) scale(${s.toFixed(3)})`;
-      a.style.opacity=((.45+.55*d)*intro*(1-sc*1.3)).toFixed(3);a.style.filter=d<.45?`blur(${((.45-d)*6).toFixed(1)}px)`:'none';a.style.zIndex=Math.round(d*100)})};
+      const hv=a===hov;   /* the hovered card comes forward, sharp and fully visible */
+      a.style.opacity=(hv?intro*(1-sc*1.3):(.45+.55*d)*intro*(1-sc*1.3)).toFixed(3);a.style.filter=!hv&&d<.45?`blur(${((.45-d)*6).toFixed(1)}px)`:'none';a.style.zIndex=hv?200:Math.round(d*100)})};
   requestAnimationFrame(tick)})();
 /* portfolio: the arrows slide each project's photos */
 document.querySelectorAll('.pfp').forEach(p=>{const t=p.querySelector('.pfp__track'),[pv,nx]=p.querySelectorAll('.pfp__arr button');let i=0;
