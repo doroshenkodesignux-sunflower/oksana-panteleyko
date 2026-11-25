@@ -12,11 +12,12 @@ import re, pathlib, html
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-SBID = {1: '2025', 5: '2022', 6: '2022'}   # SBID finalists: Alberti 2025, French House 2022, Kharkov Palace (SPA & Beauty) 2022
+SBID = {1: '2025', 2: '2025', 6: '2022', 7: '2022'}   # SBID finalists: Alberti 2025, So. Shell 2025, French House 2022, Kharkov Palace (SPA & Beauty) 2022
 
 PROJECTS = [
     # (EN name, UA name, EN place, UA place, tags)
     ('Aparthotel “Alberti”', 'Апартготель «Alberti»', 'Nice, France', 'Ніцца, Франція', ['id', 'br']),
+    ('Beauty Salon “So. Shell”', 'Б’юті-салон «So. Shell»', 'Kharkiv, Ukraine', 'Харків, Україна', ['id']),
     ('Cafe “Avec toi”', 'Кафе «Avec toi»', 'Nice, France', 'Ніцца, Франція', ['id', 'br']),
     ('Apartment “Azur Cap d’Ail”', 'Апартаменти «Azur Cap d’Ail»', 'Monaco', 'Монако', ['id']),
     ('Seaside residence “Villa Promenade”', 'Резиденція біля моря «Villa Promenade»', 'Nice, France', 'Ніцца, Франція', ['id']),
@@ -204,7 +205,7 @@ def project(n, p, L):
       <div class="pfp__top"><h2>{name}</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">{place}</span></div>
       <p class="pfp__desc">{t["desc"]}</p>
       <div class="pfp__bar"><div class="pfp__tags">{tags}</div><div class="pfp__arr"><button type="button" aria-label="{t["prev"]}">{ARROW.format(a="13 8H3M7 4L3 8l4 4")}</button><button type="button" aria-label="{t["next"]}">{ARROW.format(a="3 8h10M9 4l4 4-4 4")}</button></div></div>
-      <div class="pfp__gal">{badge}<div class="pfp__track"><img src="assets/pf/{n:02d}a.webp" alt="{alt}" loading="lazy"><img src="assets/pf/{n:02d}b.webp" alt="{alt}" loading="lazy"></div></div>
+      <div class="pfp__gal">{badge}<div class="pfp__track"><img src="assets/pf/{n:02d}a.webp?v=2" alt="{alt}" loading="lazy"><img src="assets/pf/{n:02d}b.webp?v=2" alt="{alt}" loading="lazy"></div></div>
       <a class="lnk" href="{(("alberti.html" if L=="en" else "alberti-ua.html") if n==1 else "#")}">{t["explore"]} <i></i></a>
     </div>
   </article>'''
@@ -219,7 +220,7 @@ def build(L, src, out):
     end = s.index('<section class="cta cta2" id="request">')
     # keep a comment marker so the CSS/JS stay in place
     lockup = re.search(r'<div class="prj__title prj__title--sel">.*?</span></div>', s, re.S).group(0)
-    orbit = ''.join(f'<a href="#p{i+1:02d}" tabindex="-1"><img src="assets/pf/o{i+1:02d}.webp" alt=""><span>{html.escape(p[0] if L=="en" else p[1])}</span></a>' for i, p in enumerate(PROJECTS))
+    orbit = ''.join(f'<a href="#p{i+1:02d}" tabindex="-1"><img src="assets/pf/o{i+1:02d}.webp?v=2" alt=""><span>{html.escape(p[0] if L=="en" else p[1])}</span></a>' for i, p in enumerate(PROJECTS))
     marq = ''.join(f'<span>{html.escape(p[0] if L=="en" else p[1])} <i>{html.escape(p[2] if L=="en" else p[3])}</i><b>·</b></span>' for p in PROJECTS)
     body = f'''{hdr}
 <section class="pfx" id="top">
