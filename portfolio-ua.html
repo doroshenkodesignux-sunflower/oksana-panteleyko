@@ -1918,10 +1918,14 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
-.appr__pg{display:contents}.appr__segs{display:none!important}
+.appr__pg{display:contents}.appr__segs{display:none!important}.appr__count2{display:none}
 @media (max-width:900px){
   .appr__pg{display:flex!important;flex-direction:row!important;align-items:center;gap:20px;width:100%;box-sizing:border-box;padding:0 var(--pad,16px);margin-top:28px;order:5!important}
-  .appr__pg .appr__count{order:0!important}.appr__pg .appr__segs{order:1!important}
+  .appr__pg .appr__count{display:none!important}.appr__pg .appr__segs{order:1!important}
+  /* phones: laid out like Testimonials, centred — full-width segments, arrows bottom-left with the counter beside them */
+  .appr__pg{padding:0 16px!important;margin-top:40px}
+  .appr .arrows[data-for="appr"]{justify-content:center!important;align-items:center;align-self:center;margin-top:48px!important}
+  .appr .appr__count2{display:block;margin:0 0 0 24px!important;padding:0!important}
   .appr__pg .appr__segs{display:flex!important;flex:1}
   .appr__pg .appr__count{padding:0!important;flex:none}
 }
@@ -3141,9 +3145,10 @@ if(window.__tstOnly){const k=TESTIMONIALS.findIndex(r=>r[0].includes(window.__ts
   const slides=[...track.children], [pv,nx]=document.querySelectorAll('.arrows[data-for="appr"] .arrow');let i=0;
   /* phones: the counter sits next to a row of segments (same pagination as the rest of the site) */
   const cnt=document.querySelector('.appr__count'),pg=document.createElement('div');pg.className='appr__pg';cnt.before(pg);pg.append(cnt);const sg=document.createElement('div');sg.className='appr__segs';pg.append(sg);const aSeg=segs(sg,slides.length,k=>go(k));
+  const arr=pv.parentNode,c2=document.createElement('p');c2.className='tst__num appr__count2';arr.append(c2);
   const go=k=>{i=Math.max(0,Math.min(slides.length-1,k));const x=slides[i].offsetLeft-slides[0].offsetLeft;track.style.transform=`translateX(${-x}px)`;
     slides.forEach((s,n)=>{s.classList.toggle('on',n===i);s.classList.toggle('past',n<i)});track.style.alignItems='';track.parentElement.style.transition='';track.parentElement.style.height='';pv.disabled=i===0;nx.disabled=i===slides.length-1;
-    document.getElementById('apprNum').textContent=String(i+1).padStart(2,'0');document.getElementById('apprBar').style.width=((i+1)/slides.length*100)+'%';aSeg(i)};
+    document.getElementById('apprNum').textContent=String(i+1).padStart(2,'0');document.getElementById('apprBar').style.width=((i+1)/slides.length*100)+'%';aSeg(i);c2.innerHTML=String(i+1).padStart(2,'0')+'<small>/'+String(slides.length).padStart(2,'0')+'</small>'};
   pv.onclick=()=>go(i-1);nx.onclick=()=>go(i+1);addEventListener('resize',()=>go(i));go(0)})();
 (()=>{const sec=document.querySelector('.tst'), who=document.getElementById('tstWho'), q=document.getElementById('tstQuote'), num=document.getElementById('tstNum');
   const [pv,nx]=document.querySelectorAll('.arrows[data-for="tst"] .arrow');let i=0,t=0;
