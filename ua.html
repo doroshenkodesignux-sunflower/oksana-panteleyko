@@ -2676,7 +2676,7 @@ const AWX=[
      const badge=d?d[0]:`sbid-finalist-${a.y}.png`;
      const name=d?esc(a.t):esc(a.s).replace(/"([^"]*)"/,'<br>“$1”').replace(/[«]([^»]*)[»]/,'<br>«$1»');
      const ex=S[k].querySelector('.awx__link');
-     const go=d?`<button type="button" class="awm__go" data-certs="${d[1]}">${vc(d[1])}<i></i></button>`:ex?`<a class="awm__go" href="${ex.getAttribute('href')}">${ex.textContent.trim()}<i></i></a>`:'';
+     const go=d?'':ex?`<a class="awm__go" href="${ex.getAttribute('href')}">${ex.textContent.trim()}<i></i></a>`:'';
      return `<article class="awm__c${d?' awm__c--doc':''}"><figure class="awm__pic"><img src="assets/${a.img}" alt="${esc(a.t)}" loading="lazy"></figure><div class="awm__id"><img class="awm__badge" src="assets/${badge}" alt="" loading="lazy"><h3 class="awm__t">${name}</h3></div>${go}</article>`};
    const m=document.createElement('div');m.className='awm';
    m.innerHTML='<div class="awm__bar"><i></i></div><div class="awm__row">'+ord.map(card).join('')+'</div>';
