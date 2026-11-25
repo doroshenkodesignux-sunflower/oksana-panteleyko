@@ -1915,6 +1915,15 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* Awards (desktop): a heading on top, and a quicker change — one wheel step, one slide */
+.awx__h{position:absolute;left:0;right:0;top:calc(var(--hdrH,104px) + clamp(24px,3vh,48px));z-index:3;margin:0;color:#fff;text-align:center;pointer-events:none}
+@media (max-width:900px){.awx__h{display:none}}
+@media (min-width:901px){
+  .awx__pic{transition:opacity .45s var(--ease),transform .65s cubic-bezier(.76,0,.24,1)!important}
+  .awx__m>*{transition-duration:.55s!important}
+  .awx__slide.on .awx__sub{transition-delay:.18s!important}
+}
+
 @media (max-width:900px){
   .awx{background:#fff!important;color:var(--ink)!important}
   .awx__track{display:none!important}
@@ -2419,9 +2428,10 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 
 <!-- ============ 7. AWARDS: giant word, a tiny photo grows over it to full screen ============ -->
 <section class="awx" id="awards" aria-label="Awards and credentials" data-dark>
-  <h2 class="awm__h">Awards &amp; Credentials</h2>
+  <h2 class="awm__h">Awards</h2>
   <div class="awx__track" id="awxTrack">
     <div class="awx__stage" id="awxStage">
+      <h2 class="awx__h h2">Awards</h2>
       <div class="awx__echo" aria-hidden="true"><p></p><p></p><p></p><p></p></div>
       <div class="awx__pics" id="awxPics"></div>
       <div class="awx__copy" id="awxCopy"></div>
@@ -2846,10 +2856,10 @@ addEventListener('scroll',()=>requestAnimationFrame(onAbout),{passive:true});onA
 /* awards & credentials: seven full-screen slides — a tilted photo with a big title over it.
    The slide follows the scroll position (native scroll, no take-over), the title rolls in, the photo swaps with a tilt. */
 const AWX=[
-  {img:'award-3.jpg',t:'SBID Awards Finalist',y:'2025',s:'ApartHotel "Alberti"',link:true,r:-7},
-  {img:'award-4.jpg',t:'SBID Awards Finalist',y:'2025',s:'Beauty Salon "So. Shell"',link:true,r:6},
-  {img:'award-1.jpg',t:'SBID Awards Finalist',y:'2022',s:'Beauty Salon "SPA & Beauty"',link:true,r:-6},
-  {img:'award-2.jpg',t:'SBID Awards Finalist',y:'2022',s:'Residence "French House"',link:true,r:7},
+  {img:'award-3.jpg',t:'Finalist SBID London',y:'2025',s:'ApartHotel "Alberti"',link:true,r:-7},
+  {img:'award-4.jpg',t:'Finalist SBID London',y:'2025',s:'Beauty Salon "So. Shell"',link:true,r:6},
+  {img:'award-1.jpg',t:'Finalist SBID London',y:'2022',s:'Beauty Salon "SPA & Beauty"',link:true,r:-6},
+  {img:'award-2.jpg',t:'Finalist SBID London',y:'2022',s:'Residence "French House"',link:true,r:7},
   {img:'dipl-master.jpg',t:'Master of Architecture',s:'National University O.M. Beketov|Kharkiv, Ukraine',doc:true,ny:.335,r:-4},
   {img:'dipl-sbid.jpg',t:'SBID Accredited Designer',s:'The Society of British & International^Interior Design|London, UK',doc:true,tall:true,ny:.395,r:4},
   {img:'dipl-horeca-2.jpg',t:'Milano Business School',s:'HoReCa · Project Design & Marketing|Milan, Italy',doc:true,ny:.56,under:true,r:-4}];
@@ -2857,7 +2867,7 @@ const AWX=[
   const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
-  copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' Finalist','</span></span><i class="awx__br"></i><span class="awx__m"><span>Finalist'):esc(a.t)}</span></span>${a.y?`<span class="awx__m awx__dash"><i>—</i></span><span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
+  copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' London','</span></span><i class="awx__br"></i><span class="awx__m"><span>London'):esc(a.t)}</span></span>${a.y?`<span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
     <div class="awx__sub"><span>${esc(a.s).includes('^')?esc(a.s).replace('^','<br class="awx__mbr"><i class="awx__dsp"> </i>').replace('|','<br class="awx__dbr"><i class="awx__mcm">, </i>'):esc(a.s).replace('|','<br>')}</span>${a.link?'<a class="lnk awx__link" href="alberti.html" data-alb>Explore project <i></i></a>':''}</div></div>`).join('');
   const P=[...pics.children],S=[...copy.children];let cur=-1;
   /* phones: every award in one horizontal row (SBID Accredited first) — progress line, photo, badge + name, link */
@@ -2900,7 +2910,7 @@ const AWX=[
   P.forEach(p=>{const im=p.querySelector('img');im.complete?0:im.addEventListener('load',fit)});
   addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,50);
   /* background titles: one continuous column of all titles gliding up softly */
-  echoBox.innerHTML=AWX.map(a=>`<p>${esc(a.y?`${a.t} — ${a.y}`:a.t)}</p>`).join('');const echo=[...echoBox.children];
+  echoBox.innerHTML=AWX.map(a=>`<p>${esc(a.y?`${a.t} ${a.y}`:a.t)}</p>`).join('');const echo=[...echoBox.children];
   let eTarget=0,eCur=0,eRun=0;
   const eDraw=()=>{eCur+=(eTarget-eCur)*.06;if(Math.abs(eTarget-eCur)<.001)eCur=eTarget;
     const step=Math.max(70,Math.min(200,innerHeight*.21));
@@ -2916,9 +2926,9 @@ const AWX=[
   let lock=0,last=0;addEventListener('wheel',e=>{if(innerWidth<=900)return;const r=track.getBoundingClientRect();if(r.top>1||r.bottom<innerHeight-1)return;
     const now=performance.now(),fresh=now-last>220;last=now;const dir=e.deltaY>0?1:-1;
     if((dir>0&&cur>=AWX.length-1)||(dir<0&&cur<=0))return;
-    e.preventDefault();e.stopPropagation();if(!fresh||now<lock)return;lock=now+900;
+    e.preventDefault();e.stopPropagation();if(!fresh||now<lock)return;lock=now+560;
     const span=r.height-innerHeight,y=scrollY+r.top+(cur+dir+.5)/AWX.length*span;
-    window.lenis?lenis.scrollTo(y,{duration:.9,force:true}):scrollTo({top:y,behavior:'smooth'})},{passive:false,capture:true});
+    window.lenis?lenis.scrollTo(y,{duration:.5,force:true}):scrollTo({top:y,behavior:'smooth'})},{passive:false,capture:true});
 })();
 
 /* approach slider + testimonials: arrows step one item; content changes softly (same quiet motion as the rest of the site) */
