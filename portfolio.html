@@ -3049,7 +3049,8 @@ const AWX=[
      const ex=S[k].querySelector('.awx__link');
      const go=d?'':ex?`<a class="btn btn--glass awm__btn" href="${ex.getAttribute('href')}">${ex.textContent.trim()} <span class="plus"></span></a>`:'';
      const uk=document.documentElement.lang==='uk';
-     const title=d?esc(a.t):(uk?'Фіналіст SBID<br>London ':'Finalist SBID<br>London ')+a.y;
+     const BR={'dipl-sbid.jpg':['SBID Accredited','Designer'],'dipl-master.jpg':['Master of','Architecture'],'dipl-horeca-2.jpg':['Milano Business','School']};
+     const title=d?(BR[a.img]&&!uk?BR[a.img].join('<br>'):esc(a.t).replace(/^(\S+(?:\s\S+)?)\s(\S+)$/,'$1<br>$2')):(uk?'Фіналіст SBID<br>London ':'Finalist SBID<br>London ')+a.y;
      const proj=d?'':`<p class="awm__p">${esc(a.s)}</p>`;
      return `<article class="awm__c${d?' awm__c--doc':''}"><figure class="awm__pic"><img src="assets/${a.img}" alt="${esc(a.t)}" loading="lazy">${a.img==='dipl-sbid.jpg'?'':`<img class="awm__badge" src="assets/${badge}" alt="" loading="lazy">`}</figure><div class="awm__id"><h3 class="awm__t">${title}</h3>${proj}</div>${go}</article>`};
    const m=document.createElement('div');m.className='awm';
@@ -3059,6 +3060,9 @@ const AWX=[
    const awmSeg=segs(m.querySelector('.awm__bar'),n,k=>{const c=row.children[k];c&&row.scrollTo({left:c.offsetLeft-16,behavior:'smooth'})});
    const prog=()=>{const c=row.children[0],w=c?c.offsetWidth+16:1;const i=Math.min(n,Math.round(row.scrollLeft/w)+1);awmSeg(i-1);cnt.textContent=String(i).padStart(2,'0')};
    row.addEventListener('scroll',()=>requestAnimationFrame(prog),{passive:true});prog();
+   /* every photo on one line: the title blocks all take the height of the tallest */
+   const eq=()=>{const ids=[...row.querySelectorAll('.awm__id')];ids.forEach(x=>x.style.minHeight='');const h=Math.max(...ids.map(x=>x.offsetHeight));ids.forEach(x=>x.style.minHeight=h+'px')};
+   eq();addEventListener('resize',eq);document.fonts&&document.fonts.ready.then(eq);
    if(innerWidth<=900)track.closest('section').removeAttribute('data-dark')}
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
