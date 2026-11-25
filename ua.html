@@ -2630,6 +2630,15 @@ function onPrj(){placeIntro();if(innerWidth<=900){prjRow.style.transform='';prjM
     const k=Math.max(-1,Math.min(1,((l+w/2)-innerWidth/2)/(innerWidth/2+w/2)));
     c.querySelector('.pcard__img img').style.translate=`${(-k*9).toFixed(2)}% 0`})}
 addEventListener('scroll',()=>requestAnimationFrame(onPrj),{passive:true});addEventListener('resize',onPrj);onPrj();
+/* touch (tablets): a left/right swipe on the pinned projects row moves it, mapped onto the page scroll that drives it, with a little momentum */
+(()=>{let x0,y0,lock=null,v=0,lt=0,raf=0;const st=prjRow.parentNode;
+  const k=()=>(prjTrack.offsetHeight-innerHeight)/Math.max(1,prjRow.offsetWidth-innerWidth);
+  st.addEventListener('touchstart',e=>{if(innerWidth<=900)return;cancelAnimationFrame(raf);const t=e.touches[0];x0=t.clientX;y0=t.clientY;lock=null;v=0;lt=performance.now()},{passive:true});
+  st.addEventListener('touchmove',e=>{if(innerWidth<=900||e.touches.length>1)return;const t=e.touches[0],dx=t.clientX-x0,dy=t.clientY-y0;
+    if(lock===null){if(Math.abs(dx)<6&&Math.abs(dy)<6)return;lock=Math.abs(dx)>Math.abs(dy)}
+    if(!lock)return;e.preventDefault();const now=performance.now(),d=-dx*k();scrollBy(0,d);v=d/Math.max(1,now-lt);lt=now;x0=t.clientX;y0=t.clientY},{passive:false});
+  st.addEventListener('touchend',()=>{if(!lock)return;lock=null;let vel=v*16;const go=()=>{if(Math.abs(vel)<.5)return;scrollBy(0,vel);vel*=.92;raf=requestAnimationFrame(go)};go()},{passive:true});
+})();
 
 
 
