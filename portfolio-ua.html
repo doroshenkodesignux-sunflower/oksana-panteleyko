@@ -1918,6 +1918,17 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* Awards on tablets (touch, no hover): prev / next arrows with the counter, centred at the bottom, instead of the segments */
+.awx__arrows{display:none}
+@media (min-width:901px) and (hover:none){
+  .awx .awx__foot .awx__bar.segs{display:none!important}
+  .awx .awx__foot .awx__arrows{display:flex}
+  .awx .awx__stage .awx__foot{justify-content:center!important;gap:24px!important;left:0!important;right:0!important}
+  .awx .arrow{width:56px;height:56px;color:#fff;border-color:#fff;position:relative;z-index:4}
+  .awx .arrow svg{width:22px;height:22px}
+  .awx .arrow:disabled{opacity:.35;border-color:rgba(255,255,255,.5)}
+}
+
 /* phones: each credential gets its logo on the left, text and link beside it */
 @media (max-width:600px){
   .abx__item{display:grid!important;grid-template-columns:64px 1fr;column-gap:20px;align-items:start}
@@ -2590,7 +2601,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="awx__echo" aria-hidden="true"><p></p><p></p><p></p><p></p></div>
       <div class="awx__pics" id="awxPics"></div>
       <div class="awx__copy" id="awxCopy"></div>
-      <div class="awx__foot"><span class="awx__num" id="awxNum">01 / 07</span><div class="awx__bar"><i id="awxBar"></i></div></div>
+      <div class="awx__foot"><span class="awx__num" id="awxNum">01 / 07</span><div class="awx__bar"><i id="awxBar"></i></div><div class="arrows awx__arrows"><button class="arrow arrow--prev" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="arrow arrow--next" aria-label="Далі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
     </div>
   </div>
 </section>
@@ -3051,7 +3062,7 @@ const AWX=[
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
     S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('past',k<i)});
     
-    awxSeg(i);num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
+    awxSeg(i);{const b=stage.querySelectorAll('.awx__arrows .arrow');if(b.length){b[0].disabled=i<=0;b[1].disabled=i>=AWX.length-1}}num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
   const on=()=>{const r=track.getBoundingClientRect();if(r.bottom<-innerHeight||r.top>innerHeight*2)return;
     const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
     eTarget=Math.min(AWX.length-.5,Math.max(-.5,f-.5));kick()};
@@ -3083,6 +3094,7 @@ const AWX=[
   const stepTo=k=>{if(k<0||k>=AWX.length)return;const r=track.getBoundingClientRect(),y=scrollY+r.top+(k+.5)/AWX.length*(r.height-innerHeight);
     window.lenis?lenis.scrollTo(y,{duration:.5,force:true}):scrollTo({top:y,behavior:'smooth'})};
   const awxSeg=segs(bar.parentNode,AWX.length,stepTo);
+  const [aPrev,aNext]=stage.querySelectorAll('.awx__arrows .arrow');aPrev.addEventListener('click',()=>stepTo(cur-1));aNext.addEventListener('click',()=>stepTo(cur+1));
   addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
 
   /* desktop: one wheel gesture = one slide */
