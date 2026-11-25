@@ -1918,6 +1918,15 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* Testimonials (desktop/tablet): one full screen. Same gap above the labels (from the header) as below the segments (to the block edge) */
+@media (min-width:901px){
+  #testimonials.tst{--g:clamp(16px,2.6vw,40px);height:100vh;height:100svh;min-height:0!important;padding:0!important;align-items:stretch}
+  #testimonials .tst__grid{height:100%;grid-template-rows:auto 1fr auto auto;padding:calc(var(--hdrH,104px) + var(--g)) calc(var(--u) * 58) calc(var(--g) + 14px + clamp(40px,7vh,80px))!important}
+  #testimonials .tst__prev,#testimonials .tst__label{line-height:1!important;margin-top:0!important}
+  #testimonials .tst__who{grid-row:3;align-self:end;margin:0!important}
+  #testimonials .tst__arrows,#testimonials .tst__quote{grid-row:4;margin-top:clamp(28px,5vh,64px)!important;align-self:end}
+}
+
 /* Testimonials (desktop): the segments sit at the bottom of the block, on the up-button's bottom line */
 @media (min-width:901px){
   .tst__rule{position:absolute!important;left:calc(var(--u) * 58);right:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) + 32px);bottom:calc(clamp(16px,2.6vw,40px) - 6px);margin:0!important}
