@@ -1918,8 +1918,8 @@ a.header__loc{text-decoration:none;color:inherit}
   .awm__pic .awm__badge{position:absolute;left:50%;top:5%;transform:translateX(-50%);width:auto!important;height:44px!important;max-width:40%;object-fit:contain!important;padding:6px 8px!important;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.08)}
   .awm__c--doc .awm__pic .awm__badge{box-shadow:none}
   .awm__t{margin:0;font:400 clamp(20px,5.6vw,24px)/1.3 var(--serif);text-transform:uppercase;color:var(--ink)}
-  .awm__p{margin:20px 0 0;font:400 16px/1.5 var(--sans);color:var(--ink);opacity:.8}
-  .awm__go{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding:0 0 12px;border:0;border-bottom:1px solid var(--ink);background:none;color:var(--ink);font:600 16px/1.2 var(--sans);text-transform:uppercase;text-decoration:none;cursor:pointer;width:100%;text-align:left}
+  .awm__p{margin:8px 0 0;font:400 16px/1.5 var(--sans);color:#8a8a8a}
+  .awm__go{display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding:0 0 12px;border:0;border-bottom:1px solid var(--ink);background:none;color:var(--ink);font:600 16px/1.2 var(--sans);text-transform:uppercase;text-decoration:none;cursor:pointer;width:100%;text-align:left}
   .awm__go i{position:relative;width:14px;height:14px}
   .awm__go i::before,.awm__go i::after{content:"";position:absolute;left:0;top:50%;width:14px;height:1.5px;background:currentColor}
   .awm__go i::after{transform:rotate(90deg)}
@@ -3131,9 +3131,9 @@ const AWX=[
      const ex=S[k].querySelector('.awx__link');
      const go=d?'':ex?`<a class="awm__go" href="${ex.getAttribute('href')}">${ex.textContent.trim()}<i></i></a>`:'';
      const uk=document.documentElement.lang==='uk';
-     const title=d?esc(a.t):(uk?'Фіналіст<br>SBID London ':'Finalist<br>SBID London ')+a.y;
+     const title=d?esc(a.t):(uk?'Фіналіст SBID<br>London ':'Finalist SBID<br>London ')+a.y;
      const proj=d?'':`<p class="awm__p">${esc(a.s)}</p>`;
-     return `<article class="awm__c${d?' awm__c--doc':''}"><figure class="awm__pic"><img src="assets/${a.img}" alt="${esc(a.t)}" loading="lazy">${a.img==='dipl-sbid.jpg'?'':`<img class="awm__badge" src="assets/${badge}" alt="" loading="lazy">`}</figure><div class="awm__id"><h3 class="awm__t">${title}</h3></div>${proj}${go}</article>`};
+     return `<article class="awm__c${d?' awm__c--doc':''}"><figure class="awm__pic"><img src="assets/${a.img}" alt="${esc(a.t)}" loading="lazy">${a.img==='dipl-sbid.jpg'?'':`<img class="awm__badge" src="assets/${badge}" alt="" loading="lazy">`}</figure><div class="awm__id"><h3 class="awm__t">${title}</h3>${proj}</div>${go}</article>`};
    const m=document.createElement('div');m.className='awm';
    m.innerHTML='<div class="awm__row">'+ord.map(card).join('')+'</div><div class="awm__foot"><p class="awm__n"><span>01</span><small>/'+String(ord.length).padStart(2,'0')+'</small></p><div class="awm__bar"><i></i></div></div>';
    track.after(m);
