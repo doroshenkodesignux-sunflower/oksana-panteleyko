@@ -1918,6 +1918,14 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* Testimonials (desktop): the segments sit at the bottom of the block, on the up-button's bottom line */
+@media (min-width:901px){
+  .tst__rule{position:absolute!important;left:calc(var(--u) * 58);right:calc(clamp(16px,2.6vw,40px) + clamp(48px,3.75vw,64px) + 32px);bottom:calc(clamp(16px,2.6vw,40px) - 6px);margin:0!important}
+}
+/* up button on light blocks: an outline (stroke) instead of white-on-white */
+.totop:not(.dark){background:transparent!important;border:1px solid var(--ink)!important;color:var(--ink)!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.totop:not(.dark):hover{background:var(--ink)!important;color:#fff!important;border-color:var(--ink)!important}
+
 /* Awards (desktop): pagination sits on the up-button's bottom line; the heading has the same gap from the header (measured to the letters) */
 @media (min-width:901px){
   .awx{--g:clamp(16px,2.6vw,40px)}
