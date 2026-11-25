@@ -2991,7 +2991,7 @@ const AWX=[
     const step=Math.max(60,Math.min(150,innerHeight*.16));   /* background titles stay close around the photo */
     echo.forEach((e,k)=>{const d=k-eCur,a=Math.abs(d);
       const sm=x=>x<=0?0:x>=1?1:x*x*(3-2*x);
-      const op=sm((a-.35)/.75)*(1-.8*sm((a-1)/.8))*(1-sm((a-2)/.5));   /* one above + one below; the next ones barely there */
+      const op=sm((a-.35)/.75)*(1-sm((a-1.15)/.4));   /* only one above + one below; anything further out is invisible */
       e.style.opacity=op.toFixed(3);
       e.style.transform=`translate(-50%,-50%) translateY(${(d*step).toFixed(1)}px) scale(${(1.05-.12*Math.min(a,2.5)).toFixed(3)})`});
     if(eCur!==eTarget)eRun=requestAnimationFrame(eDraw);else eRun=0};
