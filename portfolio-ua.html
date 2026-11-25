@@ -2140,12 +2140,12 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ===== first screen: project thumbnails orbit the title, a line of project names runs along the bottom ===== */
 .pfi{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;overflow:hidden;padding-bottom:calc(clamp(64px,6.25vw,120px) + 40px)!important}
 .pfi>.prj__title,.pfi__lead{position:relative;z-index:3}
-.pfi__lead{z-index:5;text-shadow:0 0 14px #fff,0 0 6px #fff,0 0 2px #fff}   /* stays readable when a thumbnail passes behind it */
+.pfi__lead{z-index:5;isolation:isolate;text-shadow:0 0 14px #fff,0 0 6px #fff,0 0 2px #fff}   /* stays readable when a thumbnail passes behind it */
 .pfo{position:absolute;inset:0;z-index:4;pointer-events:none;--tw:clamp(74px,8.4vw,160px)}
 .pfo a{position:absolute;left:0;top:0;width:var(--tw);aspect-ratio:4/5;pointer-events:auto;will-change:transform,opacity,filter;opacity:0;cursor:pointer}
 .pfo a.back{z-index:-2}
 .pfo img{width:100%;height:100%;object-fit:cover;display:block;box-shadow:0 18px 40px -18px rgba(29,22,22,.45);transition:transform .5s var(--ease)}
-.pfo a span{position:absolute;left:50%;top:calc(100% + 20px);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
+.pfo a span{position:absolute;left:50%;top:calc(100% + 20px);padding:8px 12px;background:#fff;box-shadow:0 6px 20px -8px rgba(29,22,22,.25);translate:-50% 6px;white-space:nowrap;font:500 13px/1.2 var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--ink);opacity:0;transition:opacity .35s,translate .35s var(--ease)}
 .pfo a:hover img{transform:scale(1.12)}
 .pfo a:hover span{opacity:1;translate:-50% 0}
 .pfo.back-layer{z-index:1}
@@ -2155,6 +2155,10 @@ a.header__loc{text-decoration:none;color:inherit}
 .pfm__t span{display:flex;align-items:center;gap:18px;padding-right:18px;font:500 clamp(13px,.85vw,16px)/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:var(--ink)}
 .pfm__t span i{font-style:normal;color:#8a8a8a}
 .pfm__t span b{font-weight:400;font-size:1.4em;line-height:0;color:#b0d3eb}
+
+.pfi__lead::before{content:"";position:absolute;inset:-28px -40px;z-index:-1;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,.85) 55%,rgba(255,255,255,0));pointer-events:none}   /* a soft white glow keeps the text readable over passing photos */
+.pfi{cursor:grab}.pfi.drag{cursor:grabbing}.pfi.drag .pfo a{pointer-events:none}
+.pfo img{-webkit-user-drag:none;user-select:none}
 @keyframes pfm{to{transform:translateX(-50%)}}
 @media (max-width:900px){.pfo{--tw:64px}.pfo a span{display:none}.pfi{padding-bottom:110px!important}}
 @media (prefers-reduced-motion:reduce){.pfm__t{animation:none}}
@@ -3371,6 +3375,15 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add(
   let rot=0,spd=1,spdT=1,hov=null,mx=0,my=0,tx=0,ty=0,t0=performance.now(),last=t0;
   hero.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=hero.getBoundingClientRect();mx=(e.clientX-r.left)/r.width-.5;my=(e.clientY-r.top)/r.height-.5;spdT=.35});
   hero.addEventListener('pointerleave',()=>{mx=my=0;spdT=1});
+  /* drag with the mouse (or a finger) to spin the ring; let go and it glides back into its own slow turn */
+  let dragX=null,moved=0,vel=0,lastX=0;
+  hero.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragX=lastX=e.clientX;moved=0;vel=0});
+  addEventListener('pointermove',e=>{if(dragX===null)return;const dx=e.clientX-lastX;lastX=e.clientX;moved+=Math.abs(dx);if(moved>6){hero.classList.add('drag');hov=null}
+    if(e.pointerType==='touch'&&moved<6)return;rot+=dx*.004;vel=dx*.004});
+  const up=()=>{if(dragX===null)return;dragX=null;setTimeout(()=>hero.classList.remove('drag'),0);
+    const glide=()=>{if(dragX!==null||Math.abs(vel)<.0005)return;rot+=vel;vel*=.94;requestAnimationFrame(glide)};glide()};
+  addEventListener('pointerup',up);addEventListener('pointercancel',up);
+  hero.addEventListener('click',e=>{if(moved>6){e.preventDefault();e.stopPropagation()}},true);   /* a drag is not a click */
   A.forEach(a=>{a.addEventListener('pointerenter',()=>{hov=a;spdT=0;spd=0});a.addEventListener('pointerleave',()=>{hov=null;spdT=.35})});   /* the ring stops at once under the mouse */
   const tick=now=>{requestAnimationFrame(tick);const r=hero.getBoundingClientRect();if(r.bottom<0)return;
     const dt=Math.min(50,now-last);last=now;spd+=(spdT-spd)*.05;if(!reduce)rot+=dt*.00011*spd;
