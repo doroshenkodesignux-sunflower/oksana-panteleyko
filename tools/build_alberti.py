@@ -158,10 +158,11 @@ CSS = '''
 .alb-brtext.in{opacity:1;translate:0 0}
 @media (max-width:900px){
   .alb{--u:calc(100vw / 390)}
-  .alb-hero{height:calc(60px + var(--u) * 370)}
-  .alb-hero__big{top:calc(60px + var(--u) * 150);font-size:calc(var(--u) * 112)}
-  .alb-hero__img{left:calc(50% - var(--u) * 105);top:calc(60px + var(--u) * 40);width:calc(var(--u) * 210);height:calc(var(--u) * 300)}
-  .alb-head{padding:56px 16px 56px}
+  /* phones: two full screens — the word + photo, then the title + text — each centred in the screen below the header */
+  .alb-hero{--c:calc(60px + (100svh - 60px) / 2);height:100vh;height:100svh}
+  .alb-hero__big{top:calc(var(--c) - var(--u) * 40);font-size:calc(var(--u) * 112)}
+  .alb-hero__img{left:calc(50% - var(--u) * 105);top:calc(var(--c) - var(--u) * 150);width:calc(var(--u) * 210);height:calc(var(--u) * 300)}
+  .alb-head{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;box-sizing:border-box;padding:calc(60px + 32px) 16px 48px}
   .alb-head h1{font-size:clamp(34px,10vw,48px)}
   .alb-head__script{width:min(86vw,420px);margin-top:-14px}
   .alb-head__desc{margin-top:24px}
@@ -175,7 +176,7 @@ CSS = '''
   .alb-stats{gap:24px 48px}
   .alb-stats b{font-size:64px}
   .alb-h2{padding:72px 16px 32px}
-  .alb-gal{height:auto;display:flex;flex-direction:column;gap:28px;padding:0 16px}
+  .alb-gal{height:auto;display:flex;flex-direction:column;gap:16px!important;padding:0 16px}
   .alb-fig{position:static;width:auto}
   .alb-fig__img{height:auto;aspect-ratio:var(--w)/var(--h)}
   .alb-fig figcaption{margin-top:8px}

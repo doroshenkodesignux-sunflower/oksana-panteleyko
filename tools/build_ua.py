@@ -75,7 +75,10 @@ T = [
  ('<p>SBID Accredited Design <br>Professional, London</p>', '<p>Акредитований спеціаліст <br>SBID, Лондон</p>', 1),
  ('<p>Finalist of the SBID London <br>Awards 2022 &amp; 2025.</p>', '<p>Фіналіст SBID London <br>Awards 2022 і 2025.</p>', 1),
  ('<p>Milano Business School — <br>HoReCa Segment.</p>', '<p>Milano Business School — <br>сегмент HoReCa.</p>', 1),
- ('Download CV <span class="plus"></span>', 'Завантажити CV <span class="plus"></span>', 1),
+ ('>View CV <span class="plus"></span>', '>Переглянути CV <span class="plus"></span>', 1),
+ ('>Download CV <span class="plus"></span>', '>Завантажити CV <span class="plus"></span>', 1),
+ ('class="cvm__x" aria-label="Close"', 'class="cvm__x" aria-label="Закрити"', 1),
+ ('alt="CV, page 1"><img data-src="assets/cv-2.webp" alt="CV, page 2"><img data-src="assets/cv-3.webp" alt="CV, page 3"', 'alt="CV, сторінка 1"><img data-src="assets/cv-2.webp" alt="CV, сторінка 2"><img data-src="assets/cv-3.webp" alt="CV, сторінка 3"', 1),
  ('>Download CV<', '>Завантажити CV<', 1),
 
  # ---------- projects ----------

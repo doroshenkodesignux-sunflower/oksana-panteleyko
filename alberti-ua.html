@@ -2128,10 +2128,11 @@ a.header__loc{text-decoration:none;color:inherit}
 .alb-brtext.in{opacity:1;translate:0 0}
 @media (max-width:900px){
   .alb{--u:calc(100vw / 390)}
-  .alb-hero{height:calc(60px + var(--u) * 370)}
-  .alb-hero__big{top:calc(60px + var(--u) * 150);font-size:calc(var(--u) * 112)}
-  .alb-hero__img{left:calc(50% - var(--u) * 105);top:calc(60px + var(--u) * 40);width:calc(var(--u) * 210);height:calc(var(--u) * 300)}
-  .alb-head{padding:56px 16px 56px}
+  /* phones: two full screens — the word + photo, then the title + text — each centred in the screen below the header */
+  .alb-hero{--c:calc(60px + (100svh - 60px) / 2);height:100vh;height:100svh}
+  .alb-hero__big{top:calc(var(--c) - var(--u) * 40);font-size:calc(var(--u) * 112)}
+  .alb-hero__img{left:calc(50% - var(--u) * 105);top:calc(var(--c) - var(--u) * 150);width:calc(var(--u) * 210);height:calc(var(--u) * 300)}
+  .alb-head{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;box-sizing:border-box;padding:calc(60px + 32px) 16px 48px}
   .alb-head h1{font-size:clamp(34px,10vw,48px)}
   .alb-head__script{width:min(86vw,420px);margin-top:-14px}
   .alb-head__desc{margin-top:24px}
@@ -2145,7 +2146,7 @@ a.header__loc{text-decoration:none;color:inherit}
   .alb-stats{gap:24px 48px}
   .alb-stats b{font-size:64px}
   .alb-h2{padding:72px 16px 32px}
-  .alb-gal{height:auto;display:flex;flex-direction:column;gap:28px;padding:0 16px}
+  .alb-gal{height:auto;display:flex;flex-direction:column;gap:16px!important;padding:0 16px}
   .alb-fig{position:static;width:auto}
   .alb-fig__img{height:auto;aspect-ratio:var(--w)/var(--h)}
   .alb-fig figcaption{margin-top:8px}
@@ -2443,7 +2444,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
     <div class="abx__item rv" style="--d:.35s"><img class="abx__ilogo abx__ilogo--fin" alt="SBID Awards Finalist" loading="lazy"><p>Фіналіст SBID London <br>Awards 2022 і 2025.</p><button type="button" class="lnk abx__vc" data-certs="all">Дивитися сертифікати <i></i></button></div>
     <div class="abx__item rv" style="--d:.6s"><img class="abx__ilogo abx__ilogo--mbs" alt="Milano Business School" loading="lazy"><p>Milano Business School — <br>сегмент HoReCa.</p><button type="button" class="lnk abx__vc" data-certs="2">Дивитися сертифікат <i></i></button></div>
     <div class="abx__item rv" style="--d:.85s"><img class="abx__ilogo abx__ilogo--round" alt="Харківський національний університет міського господарства імені О. М. Бекетова" loading="lazy"><p>Магістр архітектури, <br>ХНУМГ ім. О. М. Бекетова</p><button type="button" class="lnk abx__vc" data-certs="0">Дивитися диплом <i></i></button></div>
-    <a class="btn btn--dark abx__cv rv" style="--d:.15s" href="#" download>Завантажити CV <span class="plus"></span></a>
+    <a class="btn btn--dark abx__cv rv" style="--d:.15s" href="assets/Oksana_Panteleyko_CV.pdf" data-cv>Переглянути CV <span class="plus"></span></a>
   </div>
 </section>
 <div class="certs" id="certs" role="dialog" aria-modal="true" aria-label="Сертифікати" hidden>
@@ -2633,7 +2634,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
   <div class="ftr__top">
     <a href="#top" class="ftr__logo" aria-label="Panteleyko — нагору"><img src="assets/logo.svg" alt="Panteleyko"></a>
     <nav class="ftr__nav"><a href="ua.html" data-home>Головна</a><a href="portfolio-ua.html" data-pf>Портфоліо</a><a href="ua.html#services">Послуги</a><a href="ua.html#about">Про мене</a><a href="consultations-ua.html" data-cns>Консультація</a><a href="ua.html#awards">Нагороди</a><a href="#testimonials">Відгуки</a><a href="#contacts">Контакти</a></nav>
-    <div class="ftr__right"><a href="#" class="ftr__cv" download>Завантажити CV</a></div>
+    <div class="ftr__right"><a href="assets/Oksana_Panteleyko_CV.pdf" class="ftr__cv" data-cv>Завантажити CV</a></div>
   </div>
   <div class="ftr__bottom">
     <p class="ftr__name" id="ftrName">Оксана Пантелейко</p>
@@ -3233,6 +3234,38 @@ document.querySelectorAll('form[data-request]').forEach((f,k)=>{
   document.addEventListener('click',e=>{const b=e.target.closest('[data-certs]');if(!b)return;const all=b.dataset.certs==='all',k=+b.dataset.certs||0;box.classList.toggle('all',all);box.querySelectorAll('figure').forEach((g,j)=>{g.hidden=!all&&j!==k});open()});
   x.addEventListener('click',close);box.addEventListener('click',e=>{if(e.target===box||e.target.classList.contains('certs__row'))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close()})})();
+</script>
+
+<!-- CV preview: the PDF opens over a dimmed page, with a download button and a close cross -->
+<div class="cvm" id="cvm" role="dialog" aria-modal="true" aria-label="CV" hidden data-lenis-prevent>
+  <div class="cvm__box">
+    <div class="cvm__bar"><a class="btn btn--dark cvm__dl" href="assets/Oksana_Panteleyko_CV.pdf" download="Oksana_Panteleyko_CV.pdf">Завантажити CV <span class="plus"></span></a><button type="button" class="cvm__x" aria-label="Закрити"></button></div>
+    <div class="cvm__doc" tabindex="0"><img data-src="assets/cv-1.webp" alt="CV, сторінка 1"><img data-src="assets/cv-2.webp" alt="CV, сторінка 2"><img data-src="assets/cv-3.webp" alt="CV, сторінка 3"></div>
+  </div>
+</div>
+<style>
+.cvm{position:fixed;inset:0;z-index:400;display:grid;place-items:center;padding:clamp(12px,3vw,48px);background:rgba(15,12,12,.72);opacity:0;transition:opacity .4s var(--ease)}
+.cvm[hidden]{display:none}
+.cvm.on{opacity:1}
+.cvm__box{position:relative;width:min(960px,100%);height:min(92vh,1200px);height:min(92svh,1200px);display:flex;flex-direction:column;background:#fff;transform:translateY(24px);transition:transform .5s var(--ease)}
+.cvm.on .cvm__box{transform:none}
+.cvm__bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 12px 12px 16px;border-bottom:1px solid var(--line)}
+.cvm__dl.btn{width:auto!important;min-width:0!important;height:48px!important;padding:0 18px!important;gap:28px}
+.cvm__x{position:relative;flex:none;width:48px;height:48px;border:1px solid var(--ink);background:#fff;cursor:pointer;transition:background .3s}
+.cvm__x::before,.cvm__x::after{content:"";position:absolute;left:50%;top:50%;width:20px;height:1.5px;background:var(--ink);transform:translate(-50%,-50%) rotate(45deg);transition:background .3s}
+.cvm__x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.cvm__x:hover{background:var(--ink)}.cvm__x:hover::before,.cvm__x:hover::after{background:#fff}
+.cvm__doc{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:clamp(8px,2vw,24px);background:#f1f1f1;display:flex;flex-direction:column;gap:clamp(8px,1.5vw,16px)}
+.cvm__doc img{display:block;width:100%;height:auto;aspect-ratio:1400/1980;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+body.cv-open{overflow:hidden}
+</style>
+<script>
+(()=>{const m=document.getElementById('cvm');if(!m)return;const f=m.querySelector('.cvm__doc');
+  const open=e=>{e.preventDefault();f.querySelectorAll('img[data-src]').forEach(i=>{i.src=i.dataset.src;i.removeAttribute('data-src')});f.scrollTop=0;m.hidden=false;document.body.classList.add('cv-open');window.lenis&&lenis.stop();requestAnimationFrame(()=>requestAnimationFrame(()=>m.classList.add('on')))};
+  const close=()=>{m.classList.remove('on');document.body.classList.remove('cv-open');window.lenis&&lenis.start();setTimeout(()=>m.hidden=true,400)};
+  document.addEventListener('click',e=>{const a=e.target.closest('[data-cv]');if(a)open(e)});
+  m.querySelector('.cvm__x').addEventListener('click',close);m.addEventListener('click',e=>{if(e.target===m)close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&!m.hidden)close()})})();
 </script>
 <script>
 (()=>{const pre=document.getElementById('pre');if(!pre)return;
