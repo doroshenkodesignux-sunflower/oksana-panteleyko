@@ -12,6 +12,8 @@ import re, pathlib, html
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
+SBID = {1: '2025', 5: '2022', 6: '2022'}   # SBID finalists: Alberti 2025, French House 2022, Kharkov Palace (SPA & Beauty) 2022
+
 PROJECTS = [
     # (EN name, UA name, EN place, UA place, tags)
     ('Aparthotel “Alberti”', 'Апартготель «Alberti»', 'Nice, France', 'Ніцца, Франція', ['id', 'br']),
@@ -73,7 +75,10 @@ CSS = '''
 .pfp__arr button:hover{background:var(--ink);color:#fff}
 .pfp__arr button:disabled{opacity:.3;pointer-events:none}
 .pfp__arr svg{width:16px;height:16px}
-.pfp__gal{margin-top:clamp(24px,2.3vw,44px);overflow:hidden}
+.pfp__gal{margin-top:clamp(24px,2.3vw,44px);overflow:hidden;position:relative}
+.pfp__badge{position:absolute;top:0;left:0;z-index:2;width:clamp(80px,6.6vw,124px);height:auto;padding:8px;background:#fff;box-shadow:inset 0 0 0 1px rgba(29,22,22,.18)}   /* SBID finalist badge pinned to the photo's top-left corner */
+@media (max-width:900px){.pfp__badge{width:80px}}
+.pfp__gal img.pfp__badge{scale:1!important;transform-origin:0 0}
 .pfp__track{display:flex;gap:9px;transition:transform .8s var(--ease)}
 .pfp__track img{display:block;height:clamp(300px,33.5vw,644px);width:auto;flex:none;object-fit:cover;background:#F1F1F1}
 .pfp__track img:first-child{width:calc((100% - 9px) * .675)}
@@ -191,6 +196,7 @@ def project(n, p, L):
     place = p[2] if L == 'en' else p[3]
     tags = ''.join(f'<span>{t["tags"][k]}</span>' for k in p[4])
     alt = html.escape(name, quote=True)
+    badge = f'<img class="pfp__badge" src="assets/sbid-finalist-{SBID[n]}.png" alt="SBID International Design Awards {SBID[n]} Finalist">' if n in SBID else ''
     return f'''
   <article class="pfp" id="p{n:02d}">
     <div class="pfp__n">{n:02d}</div>
@@ -198,7 +204,7 @@ def project(n, p, L):
       <div class="pfp__top"><h2>{name}</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">{place}</span></div>
       <p class="pfp__desc">{t["desc"]}</p>
       <div class="pfp__bar"><div class="pfp__tags">{tags}</div><div class="pfp__arr"><button type="button" aria-label="{t["prev"]}">{ARROW.format(a="13 8H3M7 4L3 8l4 4")}</button><button type="button" aria-label="{t["next"]}">{ARROW.format(a="3 8h10M9 4l4 4-4 4")}</button></div></div>
-      <div class="pfp__gal"><div class="pfp__track"><img src="assets/pf/{n:02d}a.webp" alt="{alt}" loading="lazy"><img src="assets/pf/{n:02d}b.webp" alt="{alt}" loading="lazy"></div></div>
+      <div class="pfp__gal">{badge}<div class="pfp__track"><img src="assets/pf/{n:02d}a.webp" alt="{alt}" loading="lazy"><img src="assets/pf/{n:02d}b.webp" alt="{alt}" loading="lazy"></div></div>
       <a class="lnk" href="{(("alberti.html" if L=="en" else "alberti-ua.html") if n==1 else "#")}">{t["explore"]} <i></i></a>
     </div>
   </article>'''

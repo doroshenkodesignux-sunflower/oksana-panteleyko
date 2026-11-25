@@ -2048,7 +2048,10 @@ a.header__loc{text-decoration:none;color:inherit}
 .pfp__arr button:hover{background:var(--ink);color:#fff}
 .pfp__arr button:disabled{opacity:.3;pointer-events:none}
 .pfp__arr svg{width:16px;height:16px}
-.pfp__gal{margin-top:clamp(24px,2.3vw,44px);overflow:hidden}
+.pfp__gal{margin-top:clamp(24px,2.3vw,44px);overflow:hidden;position:relative}
+.pfp__badge{position:absolute;top:0;left:0;z-index:2;width:clamp(80px,6.6vw,124px);height:auto;padding:8px;background:#fff;box-shadow:inset 0 0 0 1px rgba(29,22,22,.18)}   /* SBID finalist badge pinned to the photo's top-left corner */
+@media (max-width:900px){.pfp__badge{width:80px}}
+.pfp__gal img.pfp__badge{scale:1!important;transform-origin:0 0}
 .pfp__track{display:flex;gap:9px;transition:transform .8s var(--ease)}
 .pfp__track img{display:block;height:clamp(300px,33.5vw,644px);width:auto;flex:none;object-fit:cover;background:#F1F1F1}
 .pfp__track img:first-child{width:calc((100% - 9px) * .675)}
@@ -2205,7 +2208,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <div class="pfp__top"><h2>Апартготель «Alberti»</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></div>
       <p class="pfp__desc">Кожні апартаменти мають власну колірну палітру й філософію. Кожен простір запрошує відчути іншу емоцію.</p>
       <div class="pfp__bar"><div class="pfp__tags"><span>Дизайн інтер’єру</span><span>Брендинг</span></div><div class="pfp__arr"><button type="button" aria-label="Попереднє фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button><button type="button" aria-label="Наступне фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div></div>
-      <div class="pfp__gal"><div class="pfp__track"><img src="assets/pf/01a.webp" alt="Апартготель «Alberti»" loading="lazy"><img src="assets/pf/01b.webp" alt="Апартготель «Alberti»" loading="lazy"></div></div>
+      <div class="pfp__gal"><img class="pfp__badge" src="assets/sbid-finalist-2025.png" alt="SBID International Design Awards 2025 Finalist"><div class="pfp__track"><img src="assets/pf/01a.webp" alt="Апартготель «Alberti»" loading="lazy"><img src="assets/pf/01b.webp" alt="Апартготель «Alberti»" loading="lazy"></div></div>
       <a class="lnk" href="alberti-ua.html">Дивитися проєкт <i></i></a>
     </div>
   </article>
@@ -2245,7 +2248,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <div class="pfp__top"><h2>Резиденція «French House»</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Ніцца, Франція</span></div>
       <p class="pfp__desc">Кожні апартаменти мають власну колірну палітру й філософію. Кожен простір запрошує відчути іншу емоцію.</p>
       <div class="pfp__bar"><div class="pfp__tags"><span>Дизайн інтер’єру</span></div><div class="pfp__arr"><button type="button" aria-label="Попереднє фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button><button type="button" aria-label="Наступне фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div></div>
-      <div class="pfp__gal"><div class="pfp__track"><img src="assets/pf/05a.webp" alt="Резиденція «French House»" loading="lazy"><img src="assets/pf/05b.webp" alt="Резиденція «French House»" loading="lazy"></div></div>
+      <div class="pfp__gal"><img class="pfp__badge" src="assets/sbid-finalist-2022.png" alt="SBID International Design Awards 2022 Finalist"><div class="pfp__track"><img src="assets/pf/05a.webp" alt="Резиденція «French House»" loading="lazy"><img src="assets/pf/05b.webp" alt="Резиденція «French House»" loading="lazy"></div></div>
       <a class="lnk" href="#">Дивитися проєкт <i></i></a>
     </div>
   </article>
@@ -2255,7 +2258,7 @@ m-840 -361 c0 -5 -111 -81 -140 -96 l-25 -13 25 28 c36 40 100 85 122 85 10 0
       <div class="pfp__top"><h2>Готель-ресторан «Kharkov Palace»</h2><span class="pfp__loc"><img src="assets/icon-pin.svg" alt="">Харків, Україна</span></div>
       <p class="pfp__desc">Кожні апартаменти мають власну колірну палітру й філософію. Кожен простір запрошує відчути іншу емоцію.</p>
       <div class="pfp__bar"><div class="pfp__tags"><span>Дизайн інтер’єру</span></div><div class="pfp__arr"><button type="button" aria-label="Попереднє фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M13 8H3M7 4L3 8l4 4"/></svg></button><button type="button" aria-label="Наступне фото"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button></div></div>
-      <div class="pfp__gal"><div class="pfp__track"><img src="assets/pf/06a.webp" alt="Готель-ресторан «Kharkov Palace»" loading="lazy"><img src="assets/pf/06b.webp" alt="Готель-ресторан «Kharkov Palace»" loading="lazy"></div></div>
+      <div class="pfp__gal"><img class="pfp__badge" src="assets/sbid-finalist-2022.png" alt="SBID International Design Awards 2022 Finalist"><div class="pfp__track"><img src="assets/pf/06a.webp" alt="Готель-ресторан «Kharkov Palace»" loading="lazy"><img src="assets/pf/06b.webp" alt="Готель-ресторан «Kharkov Palace»" loading="lazy"></div></div>
       <a class="lnk" href="#">Дивитися проєкт <i></i></a>
     </div>
   </article>
