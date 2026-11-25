@@ -1918,6 +1918,18 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* Testimonials: "What my clients say" top left, the label above the client's name, the counter next to the arrows */
+.tst__arrows{align-items:center}
+.tst__arrows .tst__num{margin:0 0 0 clamp(20px,1.6vw,32px)!important;order:0!important;padding:0!important}
+@media (min-width:901px){
+  .tst__prev{grid-row:1;grid-column:1;align-self:start;margin-top:0!important}
+  .tst__label{grid-row:1;grid-column:2;align-self:start}
+  .tst__who{grid-row:2;grid-column:2}
+  .tst__rule{grid-row:3}
+  .tst__arrows{grid-row:4}
+  .tst__quote{grid-row:4}
+}
+
 /* Awards (desktop): arrows with the counter instead of the progress line */
 @media (min-width:901px){
   .awx__bar{display:none}
@@ -2332,11 +2344,10 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
 <section class="tst" id="testimonials">
   <div class="tst__grid">
     <h2 class="tst__label">Testimonials</h2>
-    <p class="tst__num"><span id="tstNum">01</span><small>/05</small></p>
     <p class="tst__prev">What my clients say</p>
     <h3 class="tst__who"><span id="tstWho"></span></h3>
     <div class="tst__rule" id="tstDots" aria-hidden="true"></div>
-    <div class="arrows tst__arrows" data-for="tst"><button class="arrow arrow--prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="arrow arrow--next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    <div class="arrows tst__arrows" data-for="tst"><button class="arrow arrow--prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="arrow arrow--next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><p class="tst__num"><span id="tstNum">01</span><small>/05</small></p></div>
     <blockquote class="tst__quote"><p id="tstQuote"></p></blockquote>
   </div>
 </section>
