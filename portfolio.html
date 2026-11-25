@@ -3064,7 +3064,8 @@ const AWX=[
      const uk=document.documentElement.lang==='uk';
      const BR={'dipl-sbid.jpg':['SBID Accredited','Designer'],'dipl-master.jpg':['Master of','Architecture'],'dipl-horeca-2.jpg':['Milano Business','School']};
      const title=d?(BR[a.img]&&!uk?BR[a.img].join('<br>'):esc(a.t).replace(/^(\S+(?:\s\S+)?)\s(\S+)$/,'$1<br>$2')):(uk?'Фіналіст SBID<br>London ':'Finalist SBID<br>London ')+a.y;
-     const proj=d?'':`<p class="awm__p">${esc(a.s)}</p>`;
+     const DS={'dipl-sbid.jpg':['Society of British & International Interior Design','Товариство британського та міжнародного дизайну інтер’єру'],'dipl-master.jpg':['O. M. Beketov National University, Kharkiv','ХНУМГ ім. О. М. Бекетова, Харків'],'dipl-horeca-2.jpg':['HoReCa · Project Design & Marketing, Milan','HoReCa · дизайн і маркетинг проєктів, Мілан']};
+     const proj=d?(DS[a.img]?`<p class="awm__p">${esc(DS[a.img][uk?1:0])}</p>`:''):`<p class="awm__p">${esc(a.s)}</p>`;   /* certificates get a short line too, like the projects */
      return `<article class="awm__c${d?' awm__c--doc':''}"><figure class="awm__pic"><img src="assets/${a.img}" alt="${esc(a.t)}" loading="lazy">${a.img==='dipl-sbid.jpg'?'':`<img class="awm__badge" src="assets/${badge}" alt="" loading="lazy">`}</figure><div class="awm__id"><h3 class="awm__t">${title}</h3>${proj}</div>${go}</article>`};
    const m=document.createElement('div');m.className='awm';
    m.innerHTML='<div class="awm__row">'+ord.map(card).join('')+'</div><div class="awm__foot"><p class="awm__n"><span>01</span><small>/'+String(ord.length).padStart(2,'0')+'</small></p><div class="awm__bar"><i></i></div></div>';
