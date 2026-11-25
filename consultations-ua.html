@@ -1918,6 +1918,16 @@ a.header__loc{text-decoration:none;color:inherit}
 /* ---------- Awards on phones: one horizontal swipe row ---------- */
 .awm{display:none}
 .awm__h{display:none}
+/* shared segmented pagination (same as Services) */
+.segs{display:flex!important;gap:6px;height:14px!important;background:none!important;align-items:center}
+.segs i{flex:1;position:relative!important;height:14px!important;width:auto!important;top:auto!important;left:auto!important;background:none!important;cursor:pointer;transition:none!important}
+.segs i::before,.segs b{content:"";position:absolute;left:0;right:0;top:6px;height:2px}
+.segs i::before{background:rgba(29,22,22,.18)}
+.segs b{background:var(--ink);transform:scaleX(0);transform-origin:0 50%;transition:transform .5s var(--ease)}
+.segs i.on b{transform:scaleX(1)}
+.awx__bar.segs i::before{background:rgba(255,255,255,.35)}.awx__bar.segs b{background:#fff}
+@media (min-width:901px){.awx__bar.segs{flex:1}}
+
 /* Testimonials: "What my clients say" top left, the label above the client's name, the counter next to the arrows */
 .tst__arrows{align-items:center}
 .tst__arrows .tst__num{margin:0 0 0 clamp(20px,1.6vw,32px)!important;order:0!important;padding:0!important}
@@ -1932,8 +1942,7 @@ a.header__loc{text-decoration:none;color:inherit}
 
 /* Awards (desktop): arrows with the counter instead of the progress line */
 @media (min-width:901px){
-  .awx__bar{display:none}
-  .awx__foot{justify-content:center;gap:24px;left:0!important;right:0!important}
+
   .awx .arrow{width:clamp(52px,3.75vw,64px);height:auto;color:#fff;border-color:#fff;position:relative;z-index:4;pointer-events:auto}
   .awx .arrow svg{width:24px;height:24px}
   .awx .arrow:not(:disabled):hover{background:#fff;color:var(--ink)}
@@ -2759,7 +2768,7 @@ l80 76 19 -25 c64 -86 200 -69 361 45 l80 57 0 -48 c0 -39 5 -53 28 -75 25
       <div class="awx__echo" aria-hidden="true"><p></p><p></p><p></p><p></p></div>
       <div class="awx__pics" id="awxPics"></div>
       <div class="awx__copy" id="awxCopy"></div>
-      <div class="awx__foot"><span class="awx__num" id="awxNum">01 / 07</span><div class="awx__bar"><i id="awxBar"></i></div><div class="arrows awx__arrows"><button class="arrow arrow--prev" aria-label="Назад"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button class="arrow arrow--next" aria-label="Далі"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
+      <div class="awx__foot"><span class="awx__num" id="awxNum">01 / 07</span><div class="awx__bar"><i id="awxBar"></i></div></div>
     </div>
   </div>
 </section>
@@ -3169,6 +3178,8 @@ addEventListener('scroll',()=>requestAnimationFrame(onAbout),{passive:true});onA
 
 /* awards & credentials: seven full-screen slides — a tilted photo with a big title over it.
    The slide follows the scroll position (native scroll, no take-over), the title rolls in, the photo swaps with a tilt. */
+/* one pagination for the whole site — the Services one: a row of short segments, filled up to the current slide */
+const segs=(el,n,onPick)=>{el.classList.add('segs');el.innerHTML='<i><b></b></i>'.repeat(n);const c=[...el.children];if(onPick)c.forEach((s,k)=>s.addEventListener('click',()=>onPick(k)));return i=>c.forEach((s,k)=>s.classList.toggle('on',k<=i))};
 const AWX=[
   {img:'dipl-sbid.jpg',t:'Акредитований дизайнер SBID',s:'The Society of British & International^Interior Design|Лондон, Велика Британія',doc:true,tall:true,ny:.395,down:true,r:4},
   {img:'award-3.jpg',t:'Finalist SBID London',y:'2025',s:'Апартготель «Alberti»',link:true,r:-7},
@@ -3178,7 +3189,7 @@ const AWX=[
   {img:'dipl-master.jpg',t:'Магістр архітектури',s:'ХНУМГ ім. О.М. Бекетова|Харків, Україна',doc:true,ny:.335,r:-4},
   {img:'dipl-horeca-2.jpg',t:'Milano Business School',s:'HoReCa · дизайн і маркетинг|Мілан, Італія',doc:true,ny:.56,under:true,r:-4}];
 (()=>{const track=document.getElementById('awxTrack'),stage=document.getElementById('awxStage'),pics=document.getElementById('awxPics'),copy=document.getElementById('awxCopy');
-  const [aPrev,aNext]=stage.querySelectorAll('.awx__arrows .arrow');const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
+  const echoBox=stage.querySelector('.awx__echo'),num=document.getElementById('awxNum'),bar=document.getElementById('awxBar');
   const esc=s=>s.replace(/&/g,'&amp;');
   pics.innerHTML=AWX.map((a,i)=>`<figure class="awx__pic${a.doc?' awx__pic--doc':''}${a.tall?' awx__pic--tall':''}" style="--r:${a.r}deg${a.lift?`;top:-${a.lift}vh`:''}"><img src="assets/${a.img}" alt="${esc(a.t)}" ${i?'loading="lazy"':''}></figure>`).join('');
   copy.innerHTML=AWX.map(a=>`<div class="awx__slide"><h3 class="awx__t"><span class="awx__m"><span>${a.y?esc(a.t).replace(' London','</span></span><i class="awx__br"></i><span class="awx__m"><span>London'):esc(a.t)}</span></span>${a.y?`<span class="awx__m"><span class="awx__y">${a.y}</span></span>`:''}</h3>
@@ -3201,14 +3212,15 @@ const AWX=[
    m.innerHTML='<div class="awm__row">'+ord.map(card).join('')+'</div><div class="awm__foot"><p class="awm__n"><span>01</span><small>/'+String(ord.length).padStart(2,'0')+'</small></p><div class="awm__bar"><i></i></div></div>';
    track.after(m);
    const row=m.querySelector('.awm__row'),fill=m.querySelector('.awm__bar i'),cnt=m.querySelector('.awm__n span'),n=ord.length;
-   const prog=()=>{const c=row.children[0],w=c?c.offsetWidth+16:1;const i=Math.min(n,Math.round(row.scrollLeft/w)+1);fill.style.width=(i/n*100)+'%';cnt.textContent=String(i).padStart(2,'0')};
+   const awmSeg=segs(m.querySelector('.awm__bar'),n,k=>{const c=row.children[k];c&&row.scrollTo({left:c.offsetLeft-16,behavior:'smooth'})});
+   const prog=()=>{const c=row.children[0],w=c?c.offsetWidth+16:1;const i=Math.min(n,Math.round(row.scrollLeft/w)+1);awmSeg(i-1);cnt.textContent=String(i).padStart(2,'0')};
    row.addEventListener('scroll',()=>requestAnimationFrame(prog),{passive:true});prog();
    if(innerWidth<=900)track.closest('section').removeAttribute('data-dark')}
   const show=i=>{if(i===cur)return;const dir=i>cur?1:-1;cur=i;
     P.forEach((p,k)=>{p.classList.toggle('on',k===i);p.classList.toggle('past',k<i);p.classList.toggle('next',k>i)});
     S.forEach((s,k)=>{s.classList.toggle('on',k===i);s.classList.toggle('past',k<i)});
     
-    aPrev.disabled=i<=0;aNext.disabled=i>=AWX.length-1;num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
+    awxSeg(i);num.textContent=String(i+1).padStart(2,'0')+' / '+String(AWX.length).padStart(2,'0');bar.style.width=((i+1)/AWX.length*100)+'%'};
   const on=()=>{const r=track.getBoundingClientRect();if(r.bottom<-innerHeight||r.top>innerHeight*2)return;
     const p=clamp(-r.top/Math.max(1,r.height-innerHeight));const f=p*AWX.length,ci=Math.min(AWX.length-1,Math.floor(f));show(ci);
     eTarget=Math.min(AWX.length-.5,Math.max(-.5,f-.5));kick()};
@@ -3236,11 +3248,12 @@ const AWX=[
       e.style.transform=`translate(-50%,-50%) translateY(${(d*step).toFixed(1)}px) scale(${(1.05-.12*Math.min(a,2.5)).toFixed(3)})`});
     if(eCur!==eTarget)eRun=requestAnimationFrame(eDraw);else eRun=0};
   const kick=()=>{if(!eRun)eRun=requestAnimationFrame(eDraw)};
-  addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
-  /* arrows: step to the previous / next slide's scroll position */
+  /* segments: jump to the previous / next slide's scroll position */
   const stepTo=k=>{if(k<0||k>=AWX.length)return;const r=track.getBoundingClientRect(),y=scrollY+r.top+(k+.5)/AWX.length*(r.height-innerHeight);
     window.lenis?lenis.scrollTo(y,{duration:.5,force:true}):scrollTo({top:y,behavior:'smooth'})};
-  aPrev.addEventListener('click',()=>stepTo(cur-1));aNext.addEventListener('click',()=>stepTo(cur+1));
+  const awxSeg=segs(bar.parentNode,AWX.length,stepTo);
+  addEventListener('scroll',()=>requestAnimationFrame(on),{passive:true});addEventListener('resize',on);show(0);on();
+
   /* desktop: one wheel gesture = one slide */
   let lock=0,last=0;addEventListener('wheel',e=>{if(innerWidth<=900)return;const r=track.getBoundingClientRect();if(r.top>1||r.bottom<innerHeight-1)return;
     const now=performance.now(),fresh=now-last>220;last=now;const dir=e.deltaY>0?1:-1;
@@ -3276,8 +3289,8 @@ if(window.__tstOnly){const k=TESTIMONIALS.findIndex(r=>r[0].includes(window.__ts
 (()=>{const sec=document.querySelector('.tst'), who=document.getElementById('tstWho'), q=document.getElementById('tstQuote'), num=document.getElementById('tstNum');
   const [pv,nx]=document.querySelectorAll('.arrows[data-for="tst"] .arrow');let i=0,t=0;
   const paint=()=>{who.textContent=TESTIMONIALS[i][0];q.textContent=TESTIMONIALS[i][1];num.textContent=String(i+1).padStart(2,'0')};
-  const dots=document.getElementById('tstDots');dots.innerHTML='<i></i>';const fill=dots.firstChild;
-  const mark=()=>{fill.style.width=((i+1)/TESTIMONIALS.length*100)+'%'};
+  const dots=document.getElementById('tstDots');const tSeg=segs(dots,TESTIMONIALS.length,k=>to(k));
+  const mark=()=>tSeg(i);
   const to=k=>{if(k===i)return;clearTimeout(t);sec.classList.add('swap');t=setTimeout(()=>{i=k;paint();mark();sec.classList.remove('swap')},380)};
   const go=d=>to((i+d+TESTIMONIALS.length)%TESTIMONIALS.length);mark();
   pv.onclick=()=>go(-1);nx.onclick=()=>go(1);paint()})();
