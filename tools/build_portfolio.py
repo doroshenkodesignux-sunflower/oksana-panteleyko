@@ -12,7 +12,7 @@ import re, pathlib, html
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
-SBID = {1: '2025', 2: '2025', 6: '2022', 7: '2022'}   # SBID finalists: Alberti 2025, So. Shell 2025, French House 2022, Kharkov Palace (SPA & Beauty) 2022
+SBID = {1: '2025', 2: '2025', 6: '2022'}   # SBID finalists: Alberti 2025, So. Shell 2025, French House 2022
 
 PROJECTS = [
     # (EN name, UA name, EN place, UA place, tags)
